@@ -1,0 +1,1 @@
+enum CustomDialogType { manualScanner }
