@@ -1,10 +1,11 @@
 import 'package:cheffy/core/failures/failures.dart';
 import 'package:cheffy/core/models/response/login_entity.dart';
+import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
 import 'package:cheffy/modules/auth/auth/data/remote/data_sources/auth_remote_data_source.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:cheffy/app/app.locator.dart';
-import 'package:cheffy/core/exceptions/auth_exceptions.dart';
+import 'package:cheffy/core/exceptions/custom_exceptions.dart';
 import 'package:cheffy/core/models/response/login_entity.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
 import 'package:cheffy/core/services/api/api.dart';
@@ -62,6 +63,43 @@ class AuthRepoImpl implements AuthRepo {
       print('catch (e)');
 
       return left(UnExpectedFailure());
+    }
+  }
+
+  @override
+  Future<String> register({
+    required String email,
+    required String username,
+    required String password,
+    required String firstName,
+    required String lastName,
+  }) async {
+    try {
+      final result = await _apiClient.post(
+        ApiRoutes.register,
+        data: {
+          'username': username,
+          'email': email,
+          'password': password,
+          'first_name': firstName,
+          'last_name': lastName,
+        },
+      );
+      final statusCode = result.statusCode!;
+      if (statusCode == 201) {
+        final registerMsg = result.data['message'];
+        return registerMsg;
+      } else {
+        throw UnExpectedException();
+      }
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 401) {
+        throw UnExpectedException();
+      }
+      throw UnExpectedException();
+    } catch (e) {
+      print(e);
+      throw UnExpectedException();
     }
   }
 /*

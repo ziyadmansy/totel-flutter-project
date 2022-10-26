@@ -47,14 +47,14 @@ class PostTypeSelectionView extends StatelessWidget {
 
   Widget _typeBookedButton(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: 170,
       child: Stack(
         children: [
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
-            height: 122,
+            height: 120,
             child: Container(
               decoration: BoxDecoration(
                 gradient: RadialGradient(
@@ -82,10 +82,10 @@ class PostTypeSelectionView extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 140,
+            left: 120,
             right: 0,
             bottom: 0,
-            height: 122,
+            height: 120,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Column(
@@ -112,14 +112,14 @@ class PostTypeSelectionView extends StatelessWidget {
 
   Widget _typeFindingButton(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: 170,
       child: Stack(
         children: [
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
-            height: 122,
+            height: 120,
             child: Container(
               decoration: BoxDecoration(
                 gradient: RadialGradient(
@@ -148,9 +148,9 @@ class PostTypeSelectionView extends StatelessWidget {
           ),
           Positioned(
             left: 0,
-            right: 140,
+            right: 120,
             bottom: 0,
-            height: 122,
+            height: 120,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Column(

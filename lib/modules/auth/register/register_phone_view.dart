@@ -48,9 +48,10 @@ class RegisterPhoneView extends ViewModelWidget<RegisterViewModel> {
                           field: ReactivePhoneFormField(
                             formControlName: viewModel.controls.phone,
                             decoration: InputDecoration(
-                                filled: true,
-                                fillColor: AppColors.soap,
-                                hintText: 'E.g. 64888 88245'),
+                              filled: true,
+                              fillColor: AppColors.soap,
+                              hintText: 'E.g. 64888 88245',
+                            ),
                           ),
                         ),
                         const SizedBox(height: 64),

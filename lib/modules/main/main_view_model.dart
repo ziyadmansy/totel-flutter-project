@@ -60,6 +60,19 @@ class MainViewModel extends BaseViewModel {
     });
   }
 
+  void onAddPostHandler() {
+    _bottomSheetService
+        .showCustomSheet<PostType, PostType>(
+        variant: BottomSheetType.postCreate)
+        .then((value) {
+      if (value is SheetResponse<PostType> &&
+          value.confirmed &&
+          value.data != null) {
+        _navigationService.navigateToCreatePostView(type: value.data!);
+      }
+    });
+  }
+
   void onTapChangeLocation() =>
       _navigationService.navigateToLocationChangeView();
 
@@ -69,18 +82,6 @@ class MainViewModel extends BaseViewModel {
     switch (index) {
       case 1:
         _navigationService.navigateToNestedMapView(routerId: navKey);
-        break;
-      case 2:
-        _bottomSheetService
-            .showCustomSheet<PostType, PostType>(
-                variant: BottomSheetType.postCreate)
-            .then((value) {
-          if (value is SheetResponse<PostType> &&
-              value.confirmed &&
-              value.data != null) {
-            _navigationService.navigateToCreatePostView(type: value.data!);
-          }
-        });
         break;
       case 3:
         _navigationService.navigateToNestedPostView(routerId: navKey);
@@ -97,5 +98,7 @@ class MainViewModel extends BaseViewModel {
 
   void onPressedNotifications() {}
 
-  void onTapViewProfile() => _navigationService.navigateToProfileView();
+  void onTapViewProfile() {
+    _navigationService.navigateToProfileView();
+  }
 }

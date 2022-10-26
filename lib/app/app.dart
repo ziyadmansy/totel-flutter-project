@@ -56,10 +56,10 @@ import 'firebase/firebase_options.dart';
     AdaptiveRoute(
       page: MainView,
       children: [
-        AdaptiveRoute(page: HomeView, initial: true),
-        AdaptiveRoute(page: MapView),
-        AdaptiveRoute(page: PostView),
-        AdaptiveRoute(page: ChatView),
+        AdaptiveRoute(page: HomePageView, initial: true),
+        AdaptiveRoute(page: MapPageView),
+        AdaptiveRoute(page: PostsPageView),
+        AdaptiveRoute(page: ChatPageView),
       ],
     ),
     AdaptiveRoute(page: ChatDetailView),

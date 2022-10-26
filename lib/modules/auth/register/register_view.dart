@@ -1,3 +1,5 @@
+import 'package:cheffy/app/app.locator.dart';
+import 'package:cheffy/modules/auth/auth/data/repositories/auth_repo_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -23,5 +25,8 @@ class RegisterView extends ViewModelBuilderWidget<RegisterViewModel> {
 
   @override
   RegisterViewModel viewModelBuilder(BuildContext context) =>
-      RegisterViewModel();
+      RegisterViewModel(locator.get<AuthRepoImpl>());
+
+  @override
+  bool get disposeViewModel => false;
 }

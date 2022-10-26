@@ -6,8 +6,8 @@ import 'package:cheffy/modules/theme/color.dart';
 import 'chat_listing_item_view.dart';
 import 'chat_view_model.dart';
 
-class ChatView extends ViewModelBuilderWidget<ChatViewModel> {
-  const ChatView({super.key});
+class ChatPageView extends ViewModelBuilderWidget<ChatViewModel> {
+  const ChatPageView({super.key});
 
   @override
   Widget builder(BuildContext context, ChatViewModel viewModel, Widget? child) {

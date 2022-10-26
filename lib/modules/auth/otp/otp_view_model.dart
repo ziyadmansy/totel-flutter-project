@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cheffy/app/app.router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms/reactive_forms.dart' as rf;
 import 'package:stacked/stacked.dart';
@@ -31,9 +32,9 @@ class OTPViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  //endregion
-
-  void onSubmit() {}
+  void onSubmit() {
+    _navigationService.navigateToNestedRegisterFormView();
+  }
 
   void onWrongNumber() => _navigationService.back();
 

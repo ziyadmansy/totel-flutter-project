@@ -25,12 +25,7 @@ class LoginView extends ViewModelBuilderWidget<LoginViewModel> {
       body: SafeArea(
         child: BackgroundProgress<LoginViewModel>(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(
-              42,
-              42,
-              42,
-              getValueForScreenType(context: context, mobile: 16, tablet: 36),
-            ),
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
             child: ReactiveForm(
               formGroup: viewModel.form,
               child: Column(

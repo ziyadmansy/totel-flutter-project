@@ -5,8 +5,8 @@ import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_view.
 
 import 'post_view_model.dart';
 
-class PostView extends ViewModelBuilderWidget<PostViewModel> {
-  const PostView({super.key});
+class PostsPageView extends ViewModelBuilderWidget<PostViewModel> {
+  const PostsPageView({super.key});
 
   @override
   Widget builder(BuildContext context, PostViewModel viewModel, Widget? child) {

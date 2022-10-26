@@ -106,7 +106,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.paymentOptionsView, page: PaymentOptionsView),
     RouteDef(Routes.paymentAddCartView, page: PaymentAddCartView),
     RouteDef(Routes.requestView, page: RequestView),
-    RouteDef(Routes.mapView, page: MapView),
+    RouteDef(Routes.mapView, page: MapPageView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -304,35 +304,35 @@ class MainViewRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(MainViewRoutes.homeView, page: HomeView),
-    RouteDef(MainViewRoutes.mapView, page: MapView),
-    RouteDef(MainViewRoutes.postView, page: PostView),
-    RouteDef(MainViewRoutes.chatView, page: ChatView),
+    RouteDef(MainViewRoutes.homeView, page: HomePageView),
+    RouteDef(MainViewRoutes.mapView, page: MapPageView),
+    RouteDef(MainViewRoutes.postView, page: PostsPageView),
+    RouteDef(MainViewRoutes.chatView, page: ChatPageView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
-    HomeView: (data) {
+    HomePageView: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const HomeView(),
+        builder: (context) => const HomePageView(),
         settings: data,
       );
     },
-    MapView: (data) {
+    MapPageView: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const MapView(),
+        builder: (context) => const MapPageView(),
         settings: data,
       );
     },
-    PostView: (data) {
+    PostsPageView: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const PostView(),
+        builder: (context) => const PostsPageView(),
         settings: data,
       );
     },
-    ChatView: (data) {
+    ChatPageView: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const ChatView(),
+        builder: (context) => const ChatPageView(),
         settings: data,
       );
     },
@@ -349,7 +349,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.onBoardingView,
@@ -365,7 +365,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.loginView,
@@ -381,7 +381,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.registerView,
@@ -397,7 +397,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       RegisterViewRoutes.registerPhoneView,
@@ -413,7 +413,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       RegisterViewRoutes.registerFormView,
@@ -429,7 +429,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.oTPView,
@@ -445,7 +445,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.mainView,
@@ -461,7 +461,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       MainViewRoutes.homeView,
@@ -477,7 +477,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       MainViewRoutes.mapView,
@@ -493,7 +493,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       MainViewRoutes.mapView,
@@ -509,7 +509,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       MainViewRoutes.postView,
@@ -525,7 +525,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       MainViewRoutes.chatView,
@@ -541,7 +541,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.chatDetailView,
@@ -559,7 +559,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.createPostView,
@@ -576,7 +576,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.locationChangeView,
@@ -592,7 +592,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.locationChangeMapView,
@@ -608,7 +608,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.postDetailView,
@@ -626,7 +626,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.profileView,
@@ -644,7 +644,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.editProfileView,
@@ -661,7 +661,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.walletView,
@@ -677,7 +677,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.paymentSummaryView,
@@ -693,7 +693,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.paymentOptionsView,
@@ -709,7 +709,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.paymentAddCartView,
@@ -725,7 +725,7 @@ extension NavigatorStateExtension on NavigationService {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
+    transition,
   }) async {
     return navigateTo(
       Routes.requestView,

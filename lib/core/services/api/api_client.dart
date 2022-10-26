@@ -146,7 +146,7 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
 
-      return /*getEntity<T, R>*/ (response);
+      return response;
     } on DioError catch (e) {
       rethrow;
     }
@@ -170,13 +170,13 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
 
-      return (response);
+      return response;
     } on DioError catch (e) {
       rethrow;
     }
   }
 
-  Future<R> put<T, R>(
+  Future<Response> put(
     String path, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? queryParameters,
@@ -194,13 +194,13 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
 
-      return /*getEntity<T, R>*/ (response.data);
+      return response;
     } on DioError catch (e) {
-      return Future<R>.error(_handleError(e));
+      rethrow;
     }
   }
 
-  Future<R> delete<T, R>(
+  Future<Response> delete(
     String path, {
     Map<String, dynamic>? data,
     Map<String, dynamic>? queryParameters,
@@ -216,9 +216,9 @@ class ApiClient {
         cancelToken: cancelToken,
       );
 
-      return /*getEntity<T, R>*/ (response.data);
+      return response;
     } on DioError catch (e) {
-      return Future<R>.error(_handleError(e));
+      rethrow;
     }
   }
 

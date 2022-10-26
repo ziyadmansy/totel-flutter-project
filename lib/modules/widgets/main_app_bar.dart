@@ -15,24 +15,12 @@ class MainAppBar extends ViewModelWidget<MainViewModel> {
   Widget build(BuildContext context, MainViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AppBarLocationPicker(
-            appUser: viewModel.appUser,
-            location: viewModel.location,
-            onTapViewProfile: viewModel.onTapViewProfile,
-            onTapChangeLocation: viewModel.onTapChangeLocation,
-          ),
-          OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              shape: const CircleBorder(),
-              side: BorderSide(color: AppColors.soap),
-            ),
-            onPressed: viewModel.onPressedNotifications,
-            child: Image(image: R.svg.ic_bell(width: 30, height: 30)),
-          ),
-        ],
+      child: AppBarLocationPicker(
+        appUser: viewModel.appUser,
+        location: viewModel.location,
+        onTapViewProfile: viewModel.onTapViewProfile,
+        onTapChangeLocation: viewModel.onTapChangeLocation,
+        onNotificationPressed: viewModel.onPressedNotifications,
       ),
     );
   }

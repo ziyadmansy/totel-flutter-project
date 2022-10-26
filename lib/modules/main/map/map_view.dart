@@ -7,8 +7,8 @@ import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_view.
 
 import 'map_view_model.dart';
 
-class MapView extends ViewModelBuilderWidget<MapViewModel> {
-  const MapView({super.key});
+class MapPageView extends ViewModelBuilderWidget<MapViewModel> {
+  const MapPageView({super.key});
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),

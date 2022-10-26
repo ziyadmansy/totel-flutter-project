@@ -36,10 +36,10 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => AuthenticationService());
 
   locator.registerLazySingleton<ProfileRepo>(
-      () => ProfileRepoImpl(locator.get<ApiClient>()));
+          () => ProfileRepoImpl(locator.get<ApiClient>()));
 
   locator.registerLazySingleton<AuthRepo>(
-      () => AuthRepoImpl(locator.get<ProfileRepo>()));
+          () => AuthRepoImpl(locator.get<ProfileRepo>()));
   locator.registerLazySingleton<PostRepo>(
           () => PostRepoImpl(locator.get<ApiClient>()));
 
