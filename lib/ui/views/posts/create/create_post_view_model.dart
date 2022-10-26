@@ -1,3 +1,6 @@
+import 'package:cheffy/ui/views/posts/posts/domain/entities/create_booked_post_params.dart';
+import 'package:cheffy/ui/views/posts/posts/domain/entities/create_finding_post_params.dart';
+import 'package:cheffy/ui/views/posts/posts/domain/repositories/post_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -15,6 +18,7 @@ class CreatePostViewModel extends BaseViewModel {
   final PostsService _postsService = locator.get();
   final SnackbarService _snackbarService = locator.get();
   final DialogService _dialogService = locator.get();
+  final PostRepo _postsRepo;
 
   final ImagePicker _imagePicker = ImagePicker();
   final PostType type;
@@ -27,7 +31,10 @@ class CreatePostViewModel extends BaseViewModel {
   bool _isFemalePartner = true;
   LocationEntity? _selectedLocation;
 
-  CreatePostViewModel(this.type) {
+  CreatePostViewModel(
+    this.type,
+    this._postsRepo,
+  ) {
     switch (type) {
       case PostType.booked:
         form = FormGroup({
@@ -104,46 +111,78 @@ class CreatePostViewModel extends BaseViewModel {
   void onTapFemalePartner(bool val) => isFemalePartner = !val;
 
   void onSubmit() async {
-    form.markAsUntouched();
+    // form.markAsUntouched();
+
+/*
+    print('form is valid: ${form.valid}');
+    print('form is valid: ${type}');
+
+    return;
+*/
+/*
+    print('type is $type');
+    print('type is ${form.value}');
+    return;
+*/
     if (form.valid) {
+      final attch = attachments
+          .where((element) => element != null)
+          .map((e) => e!)
+          .toList(growable: false);
       setBusy(true);
       try {
         switch (type) {
           case PostType.booked:
-            await _postsService.createPost(
-              name: form.control(controls.hotel).value,
-              gender: _getGender(),
-              location: _selectedLocation!.id,
-              notes: form.control(controls.message).value,
-              partnerAmount: form.control(controls.price).value as double,
-              rate: form.control(controls.rating).value as double,
-              attachments: attachments
-                  .where((element) => element != null)
-                  .map((e) => e!)
-                  .toList(growable: false),
-            );
+            final selectedAttachments = attachments
+                .where((element) => element != null)
+                .map((e) => e!)
+                .toList(growable: false);
+            await _postsRepo.createBookedPost(
+                CreateBookedPostParams(
+                  bidEnds: form.control(controls.date).value!.end,
+                  bidStart: form.control(controls.date).value!.start,
+                  hotel: form.control(controls.hotel).value,
+                  checkIn: 'form.control(controls.date).value!.start',
+                  checkout: 'form.control(controls.date).value!.end',
+                  lat: _selectedLocation!.latitude,
+                  long: _selectedLocation!.longitude,
+                  name: form.control(controls.hotel).value,
+                  gender: _getGender(),
+                  overview: form.control(controls.message).value,
+                  location: _selectedLocation!.id.toString(),
+                  notes: form.control(controls.message).value,
+                  partnerAmount: form.control(controls.price).value as double,
+                  rate: form.control(controls.rating).value as double,
+                  dateFrom: form.control(controls.date).value.start,
+                  dateTo: form.control(controls.date).value.end,
+                ),
+                files: selectedAttachments);
             break;
           case PostType.finding:
-            await _postsService.createPost(
-              name: 'dummy',
+            await _postsRepo.createFindingPost(CreateFindingPostParams(
               gender: _getGender(),
-              location: _selectedLocation!.id,
+              location: _selectedLocation!.id.toString(),
               notes: form.control(controls.message).value,
               partnerAmount: form.control(controls.price).value,
-            );
+              dateFrom: form.control(controls.date).value.start,
+              dateTo: form.control(controls.date).value.end,
+              isAcceptHourly: form.control(controls.hourly).value,
+            ));
+
             break;
         }
 
         await _dialogService.showDialog(
-          
             title: 'Create Post',
             description: 'Your post has been successfully created.');
 
         _navigationService.back();
       } catch (e) {
         _snackbarService.showSnackbar(message: e.toString());
+        rethrow;
+      } finally {
+        setBusy(false);
       }
-      setBusy(false);
     } else {
       form.markAllAsTouched();
     }

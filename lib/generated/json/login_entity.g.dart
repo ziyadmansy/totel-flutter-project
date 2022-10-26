@@ -25,3 +25,49 @@ Map<String, dynamic> $LoginEntityToJson(LoginEntity entity) {
   data['message'] = entity.message;
   return data;
 }
+/*
+class Test{
+
+  final String name;
+
+//<editor-fold desc="Data Methods">
+
+  const Test({
+    required this.name,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Test && runtimeType == other.runtimeType && name == other.name);
+
+  @override
+  int get hashCode => name.hashCode;
+
+  @override
+  String toString() {
+    return 'Test{' + ' name: $name,' + '}';
+  }
+
+  Test copyWith({
+    String? name,
+  }) {
+    return Test(
+      name: name ?? this.name,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': this.name,
+    };
+  }
+
+  factory Test.fromMap(Map<String, dynamic> map) {
+    return Test(
+      name: map['name'] as String,
+    );
+  }
+
+//</editor-fold>
+}*/

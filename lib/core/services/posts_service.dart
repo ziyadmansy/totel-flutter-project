@@ -1,7 +1,7 @@
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cheffy/app/app.locator.dart';
-import 'package:cheffy/core/models/request/create_post_entity.dart';
+import 'package:cheffy/ui/views/posts/posts/domain/entities/create_booked_post_params.dart';
 import 'package:cheffy/core/services/api/api.dart';
 import 'package:cheffy/core/services/api/api_provider.dart';
 
@@ -11,7 +11,7 @@ class PostsService {
 
   final Api _api = locator.get<ApiProvider>();
 
-  Future<void> createPost(
+/*  Future<void> createPost(
       {required String name,
       String? overview,
       double rate = 0,
@@ -32,9 +32,10 @@ class PostsService {
     requestBody.location = location;
     requestBody.attachments = await _uploadAttachments(attachments);
 
-    await _api.createPost(requestBody);
-  }
+    await _api.create(requestBody);
+  }*/
 
+/*
   Future<List<int>> _uploadAttachments(List<XFile>? attachments) async {
     if (attachments != null) {
       final List<int> result = [];
@@ -51,4 +52,5 @@ class PostsService {
 
     return [];
   }
+*/
 }

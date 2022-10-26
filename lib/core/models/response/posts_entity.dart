@@ -1,25 +1,68 @@
-import 'package:cheffy/core/models/data/post_entity.dart';
+import 'package:cheffy/ui/views/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/generated/json/base/json_field.dart';
-import 'package:cheffy/generated/json/posts_entity.g.dart';
 import 'dart:convert';
 
-@JsonSerializable()
 class PostsEntity {
-  late List<PostEntity> data;
-  late int total;
-  late int page;
-  @JSONField(name: "last_page")
-  late int lastPage;
+  final List<PostEntity> data;
+  final int total;
+  final int page;
+  final int lastPage;
 
-  PostsEntity();
+//<editor-fold desc="Data Methods">
 
-  factory PostsEntity.fromJson(Map<String, dynamic> json) =>
-      $PostsEntityFromJson(json);
+  const PostsEntity({
+    required this.data,
+    required this.total,
+    required this.page,
+    required this.lastPage,
+  });
 
-  Map<String, dynamic> toJson() => $PostsEntityToJson(this);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PostsEntity &&
+          runtimeType == other.runtimeType &&
+          data == other.data &&
+          total == other.total &&
+          page == other.page &&
+          lastPage == other.lastPage);
+
+  @override
+  int get hashCode =>
+      data.hashCode ^ total.hashCode ^ page.hashCode ^ lastPage.hashCode;
 
   @override
   String toString() {
-    return jsonEncode(this);
+    return 'PostsEntity{' +
+        ' data: $data,' +
+        ' total: $total,' +
+        ' page: $page,' +
+        ' lastPage: $lastPage,' +
+        '}';
   }
+
+  PostsEntity copyWith({
+    List<PostEntity>? data,
+    int? total,
+    int? page,
+    int? lastPage,
+  }) {
+    return PostsEntity(
+      data: data ?? this.data,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      lastPage: lastPage ?? this.lastPage,
+    );
+  }
+
+  factory PostsEntity.fromMap(Map<String, dynamic> map) {
+    return PostsEntity(
+      data: (map['data'] as List).map((e) => PostEntity.fromJson(e)).toList(),
+      total: map['total'] as int,
+      page: map['page'] as int,
+      lastPage: map['lastPage'] as int,
+    );
+  }
+
+//</editor-fold>
 }

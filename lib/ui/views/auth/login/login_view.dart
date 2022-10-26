@@ -1,3 +1,5 @@
+import 'package:cheffy/app/app.locator.dart';
+import 'package:cheffy/ui/views/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:cheffy/ui/views/main/map/map_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -167,5 +169,6 @@ class LoginView extends ViewModelBuilderWidget<LoginViewModel> {
   }
 
   @override
-  LoginViewModel viewModelBuilder(BuildContext context) => LoginViewModel();
+  LoginViewModel viewModelBuilder(BuildContext context) =>
+      LoginViewModel(locator.get<AuthRepo>());
 }

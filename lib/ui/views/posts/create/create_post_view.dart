@@ -1,3 +1,4 @@
+import 'package:cheffy/app/app.locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:reactive_date_range_picker/reactive_date_range_picker.dart';
@@ -23,6 +24,7 @@ class CreatePostView extends ViewModelBuilderWidget<CreatePostViewModel> {
   @override
   Widget builder(
       BuildContext context, CreatePostViewModel viewModel, Widget? child) {
+
     return Scaffold(
       appBar: AppBar(title: const Text('Add Travel Details')),
       body: BackgroundProgress<CreatePostViewModel>(
@@ -246,5 +248,5 @@ class CreatePostView extends ViewModelBuilderWidget<CreatePostViewModel> {
 
   @override
   CreatePostViewModel viewModelBuilder(BuildContext context) =>
-      CreatePostViewModel(type);
+      CreatePostViewModel(type, locator.get());
 }

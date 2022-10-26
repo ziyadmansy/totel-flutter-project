@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:cheffy/core/models/data/post_entity.dart';
-import 'package:cheffy/core/models/response/profile_entity.dart';
+import 'package:cheffy/ui/views/posts/posts/domain/entities/post_entity.dart';
+import 'package:cheffy/ui/views/auth/auth/domain/entities/profile_entity.dart';
 import 'package:cheffy/generated/json/base/json_field.dart';
 import 'package:cheffy/generated/json/bidding_entity.g.dart';
 

@@ -130,7 +130,7 @@ class ApiClient {
     return errorDescription;
   }
 
-  Future<R> get<T, R>(
+  Future<Response> get(
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -146,13 +146,13 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
 
-      return getEntity<T, R>(response.data);
+      return /*getEntity<T, R>*/ (response);
     } on DioError catch (e) {
-      return Future<R>.error(_handleError(e));
+      rethrow;
     }
   }
 
-  Future<R> post<T, R>(
+  Future<Response> post(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
@@ -161,7 +161,7 @@ class ApiClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      var response = await _dio.post(
+      final response = await _dio.post(
         path,
         data: data,
         queryParameters: queryParameters,
@@ -170,9 +170,9 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
 
-      return getEntity<T, R>(response.data);
+      return (response);
     } on DioError catch (e) {
-      return Future<R>.error(_handleError(e));
+      rethrow;
     }
   }
 
@@ -194,7 +194,7 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
 
-      return getEntity<T, R>(response.data);
+      return /*getEntity<T, R>*/ (response.data);
     } on DioError catch (e) {
       return Future<R>.error(_handleError(e));
     }
@@ -216,12 +216,13 @@ class ApiClient {
         cancelToken: cancelToken,
       );
 
-      return getEntity<T, R>(response.data);
+      return /*getEntity<T, R>*/ (response.data);
     } on DioError catch (e) {
       return Future<R>.error(_handleError(e));
     }
   }
 
+/*
   dynamic getEntity<T, R>(responseBody) {
     try {
       if (R.toString().startsWith('List')) {
@@ -234,4 +235,5 @@ class ApiClient {
       throw FormatException('$T Not parsable');
     }
   }
+*/
 }

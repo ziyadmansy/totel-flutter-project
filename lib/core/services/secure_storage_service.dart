@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cheffy/ui/views/auth/auth/domain/entities/profile_entity.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
@@ -15,13 +16,13 @@ class SecureStorageService {
 
   final FlutterSecureStorage _instance = const FlutterSecureStorage();
 
-  Future<AppUserEntity?> getAppUser() async {
+  Future<ProfileEntity?> getAppUser() async {
     try {
       var res = await _instance.read(key: _keyAppUser);
       Log.d(TAG, '$res', references: ['getAppUser']);
 
       if (res != null) {
-        return AppUserEntity.fromJson(json.decode(res));
+        return ProfileEntity.fromJson(json.decode(res));
       }
     } on PlatformException catch (e) {
       Log.e(TAG, '${e.message}',
@@ -34,7 +35,7 @@ class SecureStorageService {
     return null;
   }
 
-  Future<AppUserEntity?> setAppUser(AppUserEntity? appUser) async {
+  Future<ProfileEntity?> setAppUser(ProfileEntity? appUser) async {
     try {
       if ((await _instance.containsKey(key: _keyAppUser)) || appUser == null) {
         await _instance.delete(key: _keyAppUser);

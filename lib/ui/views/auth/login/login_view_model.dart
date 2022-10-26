@@ -1,3 +1,4 @@
+import 'package:cheffy/ui/views/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:cheffy/ui/views/main/map/map_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -11,6 +12,7 @@ import 'package:cheffy/core/services/authentication_service.dart';
 class LoginViewModel extends BaseViewModel {
   final NavigationService _navigationService = locator.get();
   final AuthenticationService _authenticationService = locator.get();
+  final AuthRepo authRepo;
   final SnackbarService _snackbarService = locator.get();
 
   final controls = _Controls();
@@ -19,12 +21,14 @@ class LoginViewModel extends BaseViewModel {
 
   bool _obscureText = true;
 
-  LoginViewModel() {
+  LoginViewModel(
+    this.authRepo,
+  ) {
     form = FormGroup({
       controls.username: FormControl(
-          value: 'testuser1@mail.com', asyncValidators: [_usernameValidation]),
+          value: 'usertest@gmail.com', asyncValidators: [_usernameValidation]),
       controls.password:
-          FormControl(value: '456456', validators: [Validators.required]),
+          FormControl(value: '123456', validators: [Validators.required]),
     });
   }
 
@@ -73,17 +77,19 @@ class LoginViewModel extends BaseViewModel {
     return null;
   }
 
-  void onSubmit() {
+  Future<void> onSubmit() async {
     if (form.valid) {
       setBusy(true);
-      _authenticationService
-          .logInUser(form.control(controls.username).value,
-              form.control(controls.password).value)
-          .then((value) => _navigationService.navigateToMainView(),
-              onError: (error) {
-        _navigationService.navigateToMainView();
-        _snackbarService.showSnackbar(message: error.toString());
-      }).whenComplete(() => setBusy(false));
+      final result = await authRepo.login(form.control(controls.username).value,
+          form.control(controls.password).value);
+      result.fold(
+        (l) {
+          _snackbarService.showSnackbar(message: error.toString());
+        },
+        (r) {},
+      );
+      _navigationService.navigateToMainView();
+      setBusy(false);
     } else {
       form.markAllAsTouched();
     }

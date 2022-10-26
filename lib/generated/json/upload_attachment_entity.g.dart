@@ -1,5 +1,5 @@
 import 'package:cheffy/generated/json/base/json_convert_content.dart';
-import 'package:cheffy/core/models/response/upload_attachment_entity.dart';
+import 'package:cheffy/ui/views/posts/posts/domain/entities/upload_attachment_entity.dart';
 
 UploadAttachmentEntity $UploadAttachmentEntityFromJson(
     Map<String, dynamic> json) {

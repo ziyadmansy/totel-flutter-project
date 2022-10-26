@@ -7,6 +7,12 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:cheffy/core/services/bidding_service.dart';
+import 'package:cheffy/ui/views/auth/auth/data/repositories/auth_repo_impl.dart';
+import 'package:cheffy/ui/views/auth/auth/domain/repositories/auth_repo.dart';
+import 'package:cheffy/ui/views/posts/posts/data/repositories/post_repo_impl.dart';
+import 'package:cheffy/ui/views/posts/posts/domain/repositories/post_repo.dart';
+import 'package:cheffy/ui/views/profile/profile/data/repositories/profile_repo_impl.dart';
+import 'package:cheffy/ui/views/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:stacked_core/stacked_core.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -27,8 +33,17 @@ Future<void> setupLocator(
 
 // Register dependencies
   locator.registerLazySingleton(() => ApiClient());
-  locator.registerLazySingleton(() => ApiProvider());
   locator.registerLazySingleton(() => AuthenticationService());
+
+  locator.registerLazySingleton<ProfileRepo>(
+      () => ProfileRepoImpl(locator.get<ApiClient>()));
+
+  locator.registerLazySingleton<AuthRepo>(
+      () => AuthRepoImpl(locator.get<ProfileRepo>()));
+  locator.registerLazySingleton<PostRepo>(
+          () => PostRepoImpl(locator.get<ApiClient>()));
+
+  locator.registerLazySingleton(() => ApiProvider());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => SecureStorageService());
   locator.registerLazySingleton(() => PostsService());

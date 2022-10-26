@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cheffy/generated/json/base/json_field.dart';
-import 'package:cheffy/generated/json/profile_entity.g.dart';
 
 import '../../../generated/json/app_user_entity.g.dart';
 

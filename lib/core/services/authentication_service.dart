@@ -151,6 +151,7 @@ class AuthenticationService {
   }
 
   /// user login with username and password
+/*
   Future<String> logInUser(String username, String password) async {
     try {
       var response = await _api.login(username, password);
@@ -177,6 +178,7 @@ class AuthenticationService {
       return Future.error(e.toString());
     }
   }
+*/
 
   // google login
   Future<void> signInWithGoogle() async {

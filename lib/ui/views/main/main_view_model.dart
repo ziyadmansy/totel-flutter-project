@@ -1,3 +1,4 @@
+import 'package:cheffy/ui/views/auth/auth/domain/entities/profile_entity.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -21,7 +22,7 @@ class MainViewModel extends BaseViewModel {
 
   int _index = 0;
 
-  AppUserEntity? _appUser;
+  ProfileEntity? _appUser;
 
   String? _location = 'Miami, Florida';
 
@@ -33,9 +34,9 @@ class MainViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  AppUserEntity? get appUser => _appUser;
+  ProfileEntity? get appUser => _appUser;
 
-  set appUser(AppUserEntity? appUserEntity) {
+  set appUser(ProfileEntity? appUserEntity) {
     _appUser = appUserEntity;
     notifyListeners();
   }

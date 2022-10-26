@@ -1,3 +1,4 @@
+import 'package:cheffy/ui/views/auth/auth/domain/entities/profile_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:cheffy/app/app.dart';
 import 'package:cheffy/core/models/data/app_user_entity.dart';
@@ -8,7 +9,7 @@ import '../theme/styles.dart';
 import 'account_avatar.dart';
 
 class AppBarLocationPicker extends StatelessWidget {
-  final AppUserEntity? appUser;
+  final ProfileEntity? appUser;
   final dynamic location;
   final VoidCallback? onTapViewProfile;
   final VoidCallback? onTapChangeLocation;
