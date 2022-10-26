@@ -7,12 +7,12 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:cheffy/core/services/bidding_service.dart';
-import 'package:cheffy/ui/views/auth/auth/data/repositories/auth_repo_impl.dart';
-import 'package:cheffy/ui/views/auth/auth/domain/repositories/auth_repo.dart';
-import 'package:cheffy/ui/views/posts/posts/data/repositories/post_repo_impl.dart';
-import 'package:cheffy/ui/views/posts/posts/domain/repositories/post_repo.dart';
-import 'package:cheffy/ui/views/profile/profile/data/repositories/profile_repo_impl.dart';
-import 'package:cheffy/ui/views/profile/profile/domain/repositories/profile_repo.dart';
+import 'package:cheffy/modules/auth/auth/data/repositories/auth_repo_impl.dart';
+import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
+import 'package:cheffy/modules/posts/posts/data/repositories/post_repo_impl.dart';
+import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
+import 'package:cheffy/modules/profile/profile/data/repositories/profile_repo_impl.dart';
+import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:stacked_core/stacked_core.dart';
 import 'package:stacked_services/stacked_services.dart';
 

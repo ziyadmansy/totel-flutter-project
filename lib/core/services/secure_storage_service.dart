@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cheffy/ui/views/auth/auth/domain/entities/profile_entity.dart';
+import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';

@@ -1,4 +1,4 @@
-import 'package:cheffy/ui/views/posts/posts/domain/entities/post_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/generated/json/base/json_field.dart';
 import 'dart:convert';
 

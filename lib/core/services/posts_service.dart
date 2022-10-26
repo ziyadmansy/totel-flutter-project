@@ -1,7 +1,7 @@
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cheffy/app/app.locator.dart';
-import 'package:cheffy/ui/views/posts/posts/domain/entities/create_booked_post_params.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/create_booked_post_params.dart';
 import 'package:cheffy/core/services/api/api.dart';
 import 'package:cheffy/core/services/api/api_provider.dart';
 
