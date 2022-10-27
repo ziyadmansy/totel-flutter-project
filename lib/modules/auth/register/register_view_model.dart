@@ -9,7 +9,7 @@ class RegisterViewModel extends BaseViewModel {
   RegisterViewModel(this.authRepo);
 
   final NavigationService _navigationService = locator.get();
-  final navKey = 2;
+  static const int navKey = 2;
   final controls = _Controls();
 
   final AuthRepo authRepo;
@@ -25,7 +25,10 @@ class RegisterViewModel extends BaseViewModel {
       Validators.required,
       Validators.email,
     ]),
-    _Controls().password: FormControl(validators: [Validators.required]),
+    _Controls().password: FormControl(validators: [
+      Validators.required,
+      Validators.minLength(6)
+    ]),
     _Controls().username: FormControl(),
   });
 
@@ -44,10 +47,12 @@ class RegisterViewModel extends BaseViewModel {
 
   void onShowPassword() => obscureText = !obscureText;
 
-  void onSubmitOtp() => _navigationService.navigateToNestedRegisterFormView();
+  void onSubmitOtp() => _navigationService.navigateToNestedRegisterFormView(
+      routerId: RegisterViewModel.navKey);
 
   void onRegisterSubmit() async {
     try {
+      print(accountForm.valid);
       if (accountForm.valid) {
         setBusy(true);
         final registerMsg = await authRepo.register(

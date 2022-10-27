@@ -18,14 +18,14 @@ class RegisterView extends ViewModelBuilderWidget<RegisterViewModel> {
       appBar: AppBar(),
       body: ExtendedNavigator(
         router: RegisterViewRouter(),
-        navigatorKey: StackedService.nestedNavigationKey(viewModel.navKey),
+        navigatorKey: StackedService.nestedNavigationKey(RegisterViewModel.navKey),
       ),
     );
   }
 
   @override
   RegisterViewModel viewModelBuilder(BuildContext context) =>
-      RegisterViewModel(locator.get<AuthRepoImpl>());
+      RegisterViewModel(locator.get());
 
   @override
   bool get disposeViewModel => false;

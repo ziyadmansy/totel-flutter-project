@@ -75,6 +75,7 @@ class AuthRepoImpl implements AuthRepo {
     required String lastName,
   }) async {
     try {
+      print(ApiRoutes.register);
       final result = await _apiClient.post(
         ApiRoutes.register,
         data: {
@@ -86,6 +87,8 @@ class AuthRepoImpl implements AuthRepo {
         },
       );
       final statusCode = result.statusCode!;
+      print(statusCode);
+      print(result.data);
       if (statusCode == 201) {
         final registerMsg = result.data['message'];
         return registerMsg;
