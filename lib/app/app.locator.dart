@@ -9,6 +9,8 @@
 import 'package:cheffy/core/services/bidding_service.dart';
 import 'package:cheffy/modules/auth/auth/data/repositories/auth_repo_impl.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
+import 'package:cheffy/modules/notifications/data/repositories/notifications_repo_impl.dart';
+import 'package:cheffy/modules/notifications/domain/repositories/notification_repo.dart';
 import 'package:cheffy/modules/posts/posts/data/repositories/post_repo_impl.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:cheffy/modules/profile/profile/data/repositories/profile_repo_impl.dart';
@@ -40,6 +42,8 @@ Future<void> setupLocator(
 
   locator.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(locator.get()));
   locator.registerLazySingleton<PostRepo>(() => PostRepoImpl(locator.get()));
+  locator.registerLazySingleton<NotificationsRepo>(
+      () => NotificationsRepoImpl(locator.get()));
 
   locator.registerLazySingleton(() => ApiProvider());
   locator.registerLazySingleton(() => NavigationService());

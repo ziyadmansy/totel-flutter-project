@@ -12,10 +12,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.5
+
   flutter_support_pack: ^1.1.0
-  firebase_core: 2.1.0
-  firebase_auth: 4.0.2
-  firebase_crashlytics: ^3.0.2
   provider: ^6.0.3
   stacked: ^2.3.15
   stacked_services: ^0.9.5
@@ -48,10 +46,16 @@ dependencies:
   google_maps_flutter: ^2.1.12
   image_picker: ^0.8.5+3
   expandable_bottom_sheet:
-#  material_design_icons_flutter:
+  font_awesome_flutter: ^10.2.1
+  timeago_flutter: ^1.2.0
 #  google_fonts:
 #  flutter_svg:
 #  google_maps_flutter:
+
+  # Firebase
+  firebase_core: 2.1.0
+  firebase_auth: 4.0.2
+  firebase_crashlytics: ^3.0.2
 
 dev_dependencies:
   flutter_test:

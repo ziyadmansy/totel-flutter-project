@@ -6,7 +6,7 @@ extension AccountAvatarTypeExtension on AccountAvatarType {
       case AccountAvatarType.Account:
         return 56.5;
       case AccountAvatarType.Drawer:
-        return 35.0;
+        return 120.0;
       case AccountAvatarType.AppBar:
         return 42.0;
       default:
@@ -30,7 +30,7 @@ extension AccountAvatarTypeExtension on AccountAvatarType {
       case AccountAvatarType.Account:
         return false;
       case AccountAvatarType.Drawer:
-        return false;
+        return true;
       case AccountAvatarType.AppBar:
         return false;
     }

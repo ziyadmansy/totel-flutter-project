@@ -1,15 +1,58 @@
+import 'package:cheffy/modules/main/main_view_model.dart';
+import 'package:cheffy/widgets/drawer_header.dart';
+import 'package:cheffy/widgets/drawer_item.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stacked/stacked.dart';
 
-class AppDrawer extends StatelessWidget {
-  const AppDrawer({Key? key}) : super(key: key);
-
+class AppDrawer extends ViewModelWidget<MainViewModel> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, MainViewModel mainViewModel) {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
-            child: Text('Miami'),
+          DrawerHeaderWidget(),
+          DrawerItem(
+            title: 'Profile',
+            icon: FontAwesomeIcons.userLarge,
+            onPress: mainViewModel.onTapViewProfile,
+          ),
+          DrawerItem(
+            title: 'My bookings',
+            icon: FontAwesomeIcons.hotel,
+            onPress: () {},
+          ),
+          DrawerItem(
+            title: 'Bookmarks',
+            icon: FontAwesomeIcons.bookBookmark,
+            onPress: () {},
+          ),
+          Divider(),
+          DrawerItem(
+            title: 'How it works',
+            icon: FontAwesomeIcons.book,
+            onPress: () {},
+          ),
+          DrawerItem(
+            title: 'Help',
+            icon: FontAwesomeIcons.solidCircleQuestion,
+            onPress: () {},
+          ),
+          DrawerItem(
+            title: 'About',
+            icon: FontAwesomeIcons.circleInfo,
+            onPress: mainViewModel.onDrawerItemPressedAbout,
+          ),
+          DrawerItem(
+            title: 'Settings',
+            icon: FontAwesomeIcons.gear,
+            onPress: () {},
+          ),
+          Divider(),
+          DrawerItem(
+            title: 'Logout',
+            icon: FontAwesomeIcons.arrowRightFromBracket,
+            onPress: () {},
           ),
         ],
       ),

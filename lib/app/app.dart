@@ -93,7 +93,7 @@ class Application {
   // ignore: constant_identifier_names
   static const TAG = 'AppSetup';
 
-  static const String appName = 'Total';
+  static const String appName = 'Totel';
 
   static late Flavor flavor;
   static late String baseUrl;

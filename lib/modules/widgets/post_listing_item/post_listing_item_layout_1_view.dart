@@ -1,3 +1,4 @@
+import 'package:cheffy/Utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 
@@ -21,19 +22,11 @@ class PostListingItemLayout1View extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 220,
-      padding: const EdgeInsets.all(12),
+      width: MediaQuery.of(context).size.width / 1.5,
       margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Theme.of(context).colorScheme.shadow,
-        //     offset: const Offset(0, 2),
-        //     blurRadius: 12,
-        //   ),
-        // ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,7 +36,8 @@ class PostListingItemLayout1View extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius:
+                      BorderRadius.circular(UniversalVariables.kBorderRadius),
                   child: Image(
                     image: image,
                     fit: BoxFit.cover,

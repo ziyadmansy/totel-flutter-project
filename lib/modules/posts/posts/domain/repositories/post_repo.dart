@@ -18,9 +18,9 @@ abstract class PostRepo {
     CreateFindingPostParams entity,
   );
 
-  Future<PostsEntity> getAll();
+  Future<PostsEntity> getAllPosts();
 
-  Future<PostEntity> get(int postId);
+  Future<PostEntity> getPostById(int postId);
 
   Future<UploadAttachmentEntity> uploadAttachment(String path, String fileName);
 }

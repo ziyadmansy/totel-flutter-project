@@ -1,8 +1,14 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class UniversalVariables {
+  static final dateFormat = DateFormat('yyyy-MM-dd');
+  static final monthlyDateFormat = DateFormat('MMM, yyyy');
+  static final timeFormat = DateFormat.jm();
+  static final dateTimeFormat = DateFormat('dd-MM-yyyy').add_jm();
+
   static final Color blueColor = Color(0xff2b9ed4);
   static final Color blackColor = Color(0xff19191b);
   static final Color greyColor = Color(0xff8f8f8f);
@@ -16,6 +22,8 @@ class UniversalVariables {
 
   static final Color senderColor = Colors.blue;
   static final Color receiverColor = Colors.blue;
+
+  static const double kBorderRadius = 12;
 
   static final Gradient fabGradient = LinearGradient(
       colors: [gradientColorStart, gradientColorEnd],

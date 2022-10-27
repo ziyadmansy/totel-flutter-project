@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cheffy/core/models/data/bidding_entity.dart';
 import 'package:cheffy/core/services/api/api.dart';
 import 'package:cheffy/core/services/api/api_client.dart';
+import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:dio/dio.dart';
@@ -20,12 +21,6 @@ class PostRepoImpl implements PostRepo {
   PostRepoImpl(this._apiClient);
 
   final ApiClient _apiClient;
-
-  @override
-  Future<PostEntity> get(int postId) async {
-    final res = await _apiClient.get('post/$postId');
-    return PostEntity.fromJson((res.data)[0]);
-  }
 
   @override
   Future<void> createBookedPost(CreateBookedPostParams params,
@@ -46,15 +41,18 @@ class PostRepoImpl implements PostRepo {
     } catch (e) {
       rethrow;
     }
-    return;
   }
 
   @override
-  Future<PostsEntity> getAll() async {
-    final res = await _apiClient.get(
-      'post',
-    );
+  Future<PostsEntity> getAllPosts() async {
+    final res = await _apiClient.get(ApiRoutes.post);
     return PostsEntity.fromMap(res.data);
+  }
+
+  @override
+  Future<PostEntity> getPostById(int postId) async {
+    final res = await _apiClient.get(ApiRoutes.postById(postId));
+    return PostEntity.fromJson((res.data)[0]);
   }
 
   @override
@@ -79,7 +77,6 @@ class PostRepoImpl implements PostRepo {
           result.add(res.id);
         } catch (e) {
           rethrow;
-          // Log.d(TAG, e.toString(), references: ['_uploadAttachments']);
         }
       }
       return result;

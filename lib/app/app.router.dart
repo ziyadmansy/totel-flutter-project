@@ -6,6 +6,8 @@
 
 // ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
+import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
+import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -55,6 +57,8 @@ class Routes {
   static const String paymentAddCartView = '/payment-add-cart-view';
   static const String requestView = '/request-view';
   static const String mapView = '/map-view';
+  static const String aboutView = '/about-view';
+  static const String notificationsView = '/notifications-view';
   static const all = <String>{
     onBoardingView,
     loginView,
@@ -73,7 +77,9 @@ class Routes {
     paymentOptionsView,
     paymentAddCartView,
     requestView,
-    mapView
+    mapView,
+    aboutView,
+    notificationsView,
   };
 }
 
@@ -107,6 +113,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.paymentAddCartView, page: PaymentAddCartView),
     RouteDef(Routes.requestView, page: RequestView),
     RouteDef(Routes.mapView, page: MapPageView),
+    RouteDef(Routes.aboutView, page: AboutScreenView),
+    RouteDef(Routes.notificationsView, page: NotificationsScreenView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -223,6 +231,18 @@ class StackedRouter extends RouterBase {
     RequestView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const RequestView(),
+        settings: data,
+      );
+    },
+    AboutScreenView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AboutScreenView(),
+        settings: data,
+      );
+    },
+    NotificationsScreenView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const NotificationsScreenView(),
         settings: data,
       );
     },

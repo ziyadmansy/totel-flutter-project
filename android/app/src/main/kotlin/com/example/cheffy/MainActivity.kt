@@ -1,4 +1,4 @@
-package com.example.cheffy
+package com.totel.totel
 
 import io.flutter.embedding.android.FlutterActivity
 

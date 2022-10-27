@@ -48,8 +48,6 @@ class MainViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  //endregion
-
   void init() {
     _authenticationService.authStatusStream.listen((event) async {
       if (event == AuthenticationStatus.authenticated) {
@@ -63,7 +61,7 @@ class MainViewModel extends BaseViewModel {
   void onAddPostHandler() {
     _bottomSheetService
         .showCustomSheet<PostType, PostType>(
-        variant: BottomSheetType.postCreate)
+            variant: BottomSheetType.postCreate)
         .then((value) {
       if (value is SheetResponse<PostType> &&
           value.confirmed &&
@@ -81,22 +79,32 @@ class MainViewModel extends BaseViewModel {
 
     switch (index) {
       case 1:
+        // Map Page View
         _navigationService.navigateToNestedMapView(routerId: navKey);
         break;
       case 3:
+        // Posts Page View
         _navigationService.navigateToNestedPostView(routerId: navKey);
         break;
       case 4:
+        // Chats Page View
         _navigationService.navigateToNestedChatView(routerId: navKey);
         break;
       case 0:
       default:
+        // Home Page View
         _navigationService.navigateToNestedHomeView(routerId: navKey);
         break;
     }
   }
 
-  void onPressedNotifications() {}
+  void onPressedNotifications() {
+    _navigationService.navigateTo(Routes.notificationsView);
+  }
+
+  void onDrawerItemPressedAbout() {
+    _navigationService.navigateTo(Routes.aboutView);
+  }
 
   void onTapViewProfile() {
     _navigationService.navigateToProfileView();
