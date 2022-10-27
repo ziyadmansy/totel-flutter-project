@@ -69,7 +69,6 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<String> register({
     required String email,
-    required String username,
     required String password,
     required String firstName,
     required String lastName,
@@ -79,14 +78,13 @@ class AuthRepoImpl implements AuthRepo {
       final result = await _apiClient.post(
         ApiRoutes.register,
         data: {
-          'username': username,
           'email': email,
           'password': password,
           'first_name': firstName,
           'last_name': lastName,
         },
       );
-      final statusCode = result.statusCode!;
+      final statusCode = result.statusCode;
       print(statusCode);
       print(result.data);
       if (statusCode == 201) {
@@ -96,13 +94,16 @@ class AuthRepoImpl implements AuthRepo {
         throw UnExpectedException();
       }
     } on DioError catch (e) {
-      if (e.response!.statusCode == 401) {
-        throw UnExpectedException();
+      print(e.message);
+      print(e.response);
+      print(e.error);
+      if (e.response?.statusCode == 400) {
+        throw UserAlreadyRegisteredException();
       }
-      throw UnExpectedException();
+      rethrow;
     } catch (e) {
       print(e);
-      throw UnExpectedException();
+      rethrow;
     }
   }
 /*

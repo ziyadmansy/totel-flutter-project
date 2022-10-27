@@ -1,5 +1,7 @@
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/modules/auth/auth/data/repositories/auth_repo_impl.dart';
+import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
+import 'package:cheffy/modules/widgets/progress/background_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -16,16 +18,18 @@ class RegisterView extends ViewModelBuilderWidget<RegisterViewModel> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(),
-      body: ExtendedNavigator(
-        router: RegisterViewRouter(),
-        navigatorKey: StackedService.nestedNavigationKey(RegisterViewModel.navKey),
+      body: BackgroundProgress<RegisterViewModel>(
+        child: ExtendedNavigator(
+          router: RegisterViewRouter(),
+          navigatorKey: StackedService.nestedNavigationKey(RegisterViewModel.navKey),
+        ),
       ),
     );
   }
 
   @override
   RegisterViewModel viewModelBuilder(BuildContext context) =>
-      RegisterViewModel(locator.get());
+      RegisterViewModel(locator.get<AuthRepo>());
 
   @override
   bool get disposeViewModel => false;

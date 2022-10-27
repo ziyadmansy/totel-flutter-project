@@ -72,18 +72,6 @@ class RegisterFormView extends ViewModelWidget<RegisterViewModel> {
                   ),
                   const SizedBox(height: 16),
                   AppFormField(
-                    label: 'Username',
-                    field: ReactiveTextField(
-                      formControlName: viewModel.controls.username,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColors.soap,
-                        hintText: 'username',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  AppFormField(
                     label: 'Email Address',
                     field: ReactiveTextField(
                       formControlName: viewModel.controls.email,

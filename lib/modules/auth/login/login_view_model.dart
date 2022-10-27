@@ -84,11 +84,15 @@ class LoginViewModel extends BaseViewModel {
           form.control(controls.password).value);
       result.fold(
         (l) {
-          _snackbarService.showSnackbar(message: error.toString());
+          _snackbarService.showSnackbar(
+            title: 'Wrong Credentials',
+            message: 'E-mail or password is wrong',
+          );
         },
-        (r) {},
+        (r) {
+          _navigationService.clearStackAndShow(Routes.mainView);
+        },
       );
-      _navigationService.navigateToMainView();
       setBusy(false);
     } else {
       form.markAllAsTouched();

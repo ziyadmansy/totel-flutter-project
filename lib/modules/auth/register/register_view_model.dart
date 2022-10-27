@@ -1,3 +1,4 @@
+import 'package:cheffy/core/exceptions/custom_exceptions.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:stacked/stacked.dart';
@@ -9,6 +10,8 @@ class RegisterViewModel extends BaseViewModel {
   RegisterViewModel(this.authRepo);
 
   final NavigationService _navigationService = locator.get();
+  final SnackbarService _snackbarService = locator.get();
+
   static const int navKey = 2;
   final controls = _Controls();
 
@@ -25,11 +28,8 @@ class RegisterViewModel extends BaseViewModel {
       Validators.required,
       Validators.email,
     ]),
-    _Controls().password: FormControl(validators: [
-      Validators.required,
-      Validators.minLength(6)
-    ]),
-    _Controls().username: FormControl(),
+    _Controls().password:
+        FormControl(validators: [Validators.required, Validators.minLength(6)]),
   });
 
   bool _obscureText = true;
@@ -60,15 +60,17 @@ class RegisterViewModel extends BaseViewModel {
           password: accountForm.control(controls.password).value,
           firstName: accountForm.control(controls.firstName).value,
           lastName: accountForm.control(controls.lastName).value,
-          username: accountForm.control(controls.username).value,
         );
-
-        _navigationService.navigateToMainView();
-        setBusy(false);
+        _snackbarService.showSnackbar(message: registerMsg);
+        _navigationService.clearStackAndShow(Routes.loginView);
       } else {
         accountForm.markAllAsTouched();
       }
-    } catch (e) {}
+    } on UserAlreadyRegisteredException catch (e) {
+      _snackbarService.showSnackbar(message: 'User is already registered');
+    } finally {
+      setBusy(false);
+    }
   }
 
   void onLogin() => _navigationService.back();
@@ -82,8 +84,6 @@ class _Controls {
   String get lastName => 'last_name';
 
   String get email => 'email';
-
-  String get username => 'username';
 
   String get password => 'password';
 }

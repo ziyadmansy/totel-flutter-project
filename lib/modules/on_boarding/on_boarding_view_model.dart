@@ -10,7 +10,7 @@ class OnBoardingViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService = locator.get();
 
   void onPressedSkip() async {
-    // await _authenticationService.initEnvironment();
+    await _authenticationService.initEnvironment();
 
     if (_authenticationService.authState ==
         AuthenticationStatus.authenticated) {
