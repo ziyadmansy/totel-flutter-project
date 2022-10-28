@@ -17,6 +17,7 @@ import 'package:cheffy/modules/auth/auth/data/remote/models/login_data_model.dar
 import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -27,6 +28,7 @@ class AuthRepoImpl implements AuthRepo {
   final ApiClient _apiClient = locator.get();
   final SecureStorageService _secureStorageService = locator.get();
   final NavigationService _navigationService = locator.get();
+  final SnackbarService _snackbarService = locator.get();
 
   Future<Either<Failure, ProfileEntity>> login(
       String username, String password) async {
@@ -108,6 +110,28 @@ class AuthRepoImpl implements AuthRepo {
       print(e);
       rethrow;
     }
+  }
+
+  @override
+  Future<void> sendOtp({
+    required String phoneNumber,
+    required void Function(PhoneAuthCredential) onVerificationCompleted,
+    required void Function(FirebaseAuthException) onVerificationFailed,
+    required void Function(String, int?) onCodeSent,
+    required void Function(String) onCodeAutoRetrievalTimeout,
+    int? forceResendingToken,
+  }) async {
+    // Send OTP is only sent during registration
+    // Thats why I only call register()
+    FirebaseAuth auth = FirebaseAuth.instance;
+    await auth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: onVerificationCompleted,
+      verificationFailed: onVerificationFailed,
+      codeSent: onCodeSent,
+      forceResendingToken: forceResendingToken,
+      codeAutoRetrievalTimeout: onCodeAutoRetrievalTimeout,
+    );
   }
 
   @override

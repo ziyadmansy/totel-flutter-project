@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>407855852221-h043tkgp823595i2i6s3lgr2rngu2t4i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.407855852221-h043tkgp823595i2i6s3lgr2rngu2t4i</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>407855852221-3cfgj728ubsn4e3q7edhem2kaep0edej.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC6H7yc46mrseC3ABYOjz9jvG3tdWeHniA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>407855852221</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.totel.totel</string>
+	<key>PROJECT_ID</key>
+	<string>totel-d7322</string>
+	<key>STORAGE_BUCKET</key>
+	<string>totel-d7322.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:407855852221:ios:23005e2d3a3d50bcf9e5d4</string>
+</dict>
+</plist>

@@ -115,7 +115,6 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  // void onRegister() => _navigationService.navigateToRegisterView();
   void onRegister() => _navigationService.navigateToRegisterView();
 
   void onShowPassword() => obscureText = !obscureText;

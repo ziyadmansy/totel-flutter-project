@@ -1,4 +1,5 @@
 import 'package:cheffy/core/services/bidding_service.dart';
+import 'package:cheffy/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -42,15 +43,16 @@ import '../modules/profile/profile_view.dart';
 import '../modules/request/request_view.dart';
 import '../modules/wallet/wallet_view.dart';
 import 'app.locator.dart';
-import 'firebase/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 @StackedApp(
   routes: [
     AdaptiveRoute(page: OnBoardingView, initial: true),
     AdaptiveRoute(page: LoginView),
     AdaptiveRoute(page: RegisterView, children: [
-      AdaptiveRoute(page: RegisterPhoneView, initial: true),
-      AdaptiveRoute(page: RegisterFormView),
+      // AdaptiveRoute(page: RegisterPhoneView, initial: true),
+      // AdaptiveRoute(page: RegisterFormView),
+      AdaptiveRoute(page: RegisterFormView, initial: true),
     ]),
     AdaptiveRoute(page: OTPView),
     AdaptiveRoute(
@@ -142,8 +144,13 @@ class Application {
     );
 
     //region firebase
+    // await Firebase.initializeApp(
+    //   options: DefaultFirebaseOptions.currentPlatform(flavor),
+    // );
+
+    // References teh firebase_options in the root not in the (firebase) folder
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform(flavor),
+      options: DefaultFirebaseOptions.currentPlatform,
     );
 
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);

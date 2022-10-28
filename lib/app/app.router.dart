@@ -274,10 +274,11 @@ class EditProfileViewArguments {
 }
 
 class RegisterViewRoutes {
-  static const String registerPhoneView = '/';
-  static const String registerFormView = '/register-form-view';
+  // static const String registerPhoneView = '/';
+  // static const String registerFormView = '/register-form-view';
+  static const String registerFormView = '/';
   static const all = <String>{
-    registerPhoneView,
+    // registerPhoneView,
     registerFormView,
   };
 }
@@ -286,18 +287,18 @@ class RegisterViewRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(RegisterViewRoutes.registerPhoneView, page: RegisterPhoneView),
+    // RouteDef(RegisterViewRoutes.registerPhoneView, page: RegisterPhoneView),
     RouteDef(RegisterViewRoutes.registerFormView, page: RegisterFormView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
-    RegisterPhoneView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const RegisterPhoneView(),
-        settings: data,
-      );
-    },
+    // RegisterPhoneView: (data) {
+    //   return buildAdaptivePageRoute<dynamic>(
+    //     builder: (context) => const RegisterPhoneView(),
+    //     settings: data,
+    //   );
+    // },
     RegisterFormView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const RegisterFormView(),
@@ -412,21 +413,21 @@ extension NavigatorStateExtension on NavigationService {
     );
   }
 
-  Future<dynamic> navigateToNestedRegisterPhoneView({
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-    transition,
-  }) async {
-    return navigateTo(
-      RegisterViewRoutes.registerPhoneView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
-  }
+  // Future<dynamic> navigateToNestedRegisterPhoneView({
+  //   int? routerId,
+  //   bool preventDuplicates = true,
+  //   Map<String, String>? parameters,
+  //   Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+  //   transition,
+  // }) async {
+  //   return navigateTo(
+  //     RegisterViewRoutes.registerPhoneView,
+  //     id: routerId,
+  //     preventDuplicates: preventDuplicates,
+  //     parameters: parameters,
+  //     transition: transition,
+  //   );
+  // }
 
   Future<dynamic> navigateToNestedRegisterFormView({
     int? routerId,
@@ -448,6 +449,7 @@ extension NavigatorStateExtension on NavigationService {
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
+    dynamic args,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
     transition,
   }) async {
@@ -457,6 +459,7 @@ extension NavigatorStateExtension on NavigationService {
       preventDuplicates: preventDuplicates,
       parameters: parameters,
       transition: transition,
+      arguments: args,
     );
   }
 
