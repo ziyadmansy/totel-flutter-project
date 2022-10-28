@@ -52,7 +52,9 @@ class AppDrawer extends ViewModelWidget<MainViewModel> {
           DrawerItem(
             title: 'Logout',
             icon: FontAwesomeIcons.arrowRightFromBracket,
-            onPress: () {},
+            onPress: () async {
+              await mainViewModel.logout();
+            },
           ),
         ],
       ),

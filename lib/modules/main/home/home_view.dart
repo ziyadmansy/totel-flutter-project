@@ -14,6 +14,7 @@ class HomePageView extends ViewModelBuilderWidget<HomeViewModel> {
   @override
   Widget builder(BuildContext context, HomeViewModel viewModel, Widget? child) {
     return SafeArea(
+      bottom: false, // To make the body extend behind Bottom Nav
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

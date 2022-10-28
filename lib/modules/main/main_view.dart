@@ -1,4 +1,5 @@
 import 'package:cheffy/Utils/key.dart';
+import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -17,13 +18,13 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
   Widget builder(BuildContext context, MainViewModel viewModel, Widget? child) {
     return Scaffold(
       key: mainScreenScaffoldKey,
+      extendBody: true,
+      drawer: AppDrawer(),
       body: ExtendedNavigator(
         router: MainViewRouter(),
         navigatorKey: StackedService.nestedNavigationKey(MainViewModel.navKey),
       ),
-      drawer: AppDrawer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      extendBody: true,
       floatingActionButton: ClipOval(
         child: FloatingActionButton(
           onPressed: viewModel.onAddPostHandler,
@@ -81,7 +82,8 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
   }
 
   @override
-  MainViewModel viewModelBuilder(BuildContext context) => MainViewModel();
+  MainViewModel viewModelBuilder(BuildContext context) =>
+      MainViewModel(locator.get());
 
   @override
   void onViewModelReady(MainViewModel viewModel) => viewModel.init();

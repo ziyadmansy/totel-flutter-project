@@ -1,4 +1,5 @@
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
+import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -20,11 +21,15 @@ class MainViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService = locator.get();
   final SecureStorageService _secureStoreService = locator.get();
 
+  final AuthRepo authRepo;
+
   int _index = 0;
 
   ProfileEntity? _appUser;
 
   String? _location = 'Miami, Florida';
+
+  MainViewModel(this.authRepo);
 
   //region getters setters
   int get index => _index;
@@ -49,6 +54,7 @@ class MainViewModel extends BaseViewModel {
   }
 
   void init() {
+    // Handles Authentication Status
     _authenticationService.authStatusStream.listen((event) async {
       if (event == AuthenticationStatus.authenticated) {
         appUser = await _secureStoreService.getAppUser();
@@ -78,21 +84,24 @@ class MainViewModel extends BaseViewModel {
     this.index = index;
 
     switch (index) {
+      case 0:
+        // Home Page View
+        _navigationService.navigateToNestedHomeView(routerId: navKey);
+        break;
       case 1:
         // Map Page View
         _navigationService.navigateToNestedMapView(routerId: navKey);
         break;
-      case 3:
+      case 2:
         // Posts Page View
         _navigationService.navigateToNestedPostView(routerId: navKey);
         break;
-      case 4:
+      case 3:
         // Chats Page View
         _navigationService.navigateToNestedChatView(routerId: navKey);
         break;
-      case 0:
       default:
-        // Home Page View
+        // Default case goes to Home Page
         _navigationService.navigateToNestedHomeView(routerId: navKey);
         break;
     }
@@ -108,5 +117,9 @@ class MainViewModel extends BaseViewModel {
 
   void onTapViewProfile() {
     _navigationService.navigateToProfileView();
+  }
+
+  Future<void> logout() async {
+    await authRepo.logout();
   }
 }

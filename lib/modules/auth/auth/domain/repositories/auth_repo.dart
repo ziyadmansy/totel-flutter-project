@@ -13,4 +13,6 @@ abstract class AuthRepo {
     required String firstName,
     required String lastName,
   });
+
+  Future<void> logout();
 }

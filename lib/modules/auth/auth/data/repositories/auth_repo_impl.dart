@@ -1,3 +1,4 @@
+import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/failures/failures.dart';
 import 'package:cheffy/core/models/response/login_entity.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
@@ -17,6 +18,7 @@ import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:fresh_dio/fresh_dio.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class AuthRepoImpl implements AuthRepo {
   AuthRepoImpl(this.profileRepo);
@@ -24,6 +26,7 @@ class AuthRepoImpl implements AuthRepo {
   final ProfileRepo profileRepo;
   final ApiClient _apiClient = locator.get();
   final SecureStorageService _secureStorageService = locator.get();
+  final NavigationService _navigationService = locator.get();
 
   Future<Either<Failure, ProfileEntity>> login(
       String username, String password) async {
@@ -106,26 +109,13 @@ class AuthRepoImpl implements AuthRepo {
       rethrow;
     }
   }
-/*
+
   @override
-  Future<LoginEntity> login(String username, String password) async {
-    try {
-      var response = await remoteDataSource.login(username, password);
-      if (response.statusCode == null && response.message == null) {
-        if (response.accessToken != null) {
-
-          return response.accessToken!;
-        } else {
-          return Future.error(ErrorMessages.unexpectedErrorOccurred);
-        }
-      } else {
-        return Future.error(
-            response.message ?? ErrorMessages.somethingWentWrong);
-      }
-    } catch (e) {
-      return Future.error(e.toString());
-    }
+  Future<void> logout() async {
+    await _secureStorageService.setAccessToken(null);
+    await _secureStorageService.setRefreshToken(null);
+    await _secureStorageService.setAppUser(null);
+    await _apiClient.fresh.clearToken();
+    _navigationService.clearStackAndShow(Routes.loginView);
   }
-*/
-
 }

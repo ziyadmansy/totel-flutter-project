@@ -14,7 +14,7 @@ class PostsPageView extends ViewModelBuilderWidget<PostViewModel> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Post'),
+          title: const Text('My Posts'),
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Live'),

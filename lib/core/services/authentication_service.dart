@@ -129,26 +129,26 @@ class AuthenticationService {
 //   });
 // }
 
-  Future<void> logout() async {
-    await _secureStorageService.setAccessToken(null);
-    await _secureStorageService.setRefreshToken(null);
-    // await _secureStorageService.setAppUser(null);
-    await _api.fresh.clearToken();
-  }
+  // Future<void> logout() async {
+  //   await _secureStorageService.setAccessToken(null);
+  //   await _secureStorageService.setRefreshToken(null);
+  //   // await _secureStorageService.setAppUser(null);
+  //   await _api.fresh.clearToken();
+  // }
 
 // create user
-  Future<String> createUser() async {
-    // var response = await _api.post('/api/v1/auth/register', data: {
-    //   "email": "usertest1@mail.com",
-    //   "username": "",
-    //   "password": "456456",
-    //   "first_name": "kim",
-    //   "last_name": "john"
-    // });
-    //
-    // return json.decode(response);
-    return '';
-  }
+  // Future<String> createUser() async {
+  //   // var response = await _api.post('/api/v1/auth/register', data: {
+  //   //   "email": "usertest1@mail.com",
+  //   //   "username": "",
+  //   //   "password": "456456",
+  //   //   "first_name": "kim",
+  //   //   "last_name": "john"
+  //   // });
+  //   //
+  //   // return json.decode(response);
+  //   return '';
+  // }
 
   /// user login with username and password
 /*
