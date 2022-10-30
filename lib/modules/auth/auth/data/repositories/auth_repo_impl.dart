@@ -1,4 +1,5 @@
 import 'package:cheffy/app/app.router.dart';
+import 'package:cheffy/app/constants/error_messages.dart';
 import 'package:cheffy/core/failures/failures.dart';
 import 'package:cheffy/core/models/response/login_entity.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
@@ -18,7 +19,9 @@ import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fresh_dio/fresh_dio.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class AuthRepoImpl implements AuthRepo {
@@ -132,6 +135,51 @@ class AuthRepoImpl implements AuthRepo {
       forceResendingToken: forceResendingToken,
       codeAutoRetrievalTimeout: onCodeAutoRetrievalTimeout,
     );
+  }
+
+  // google login
+  Future<void> signInWithGoogle() async {
+    try {
+      final _auth = FirebaseAuth.instance;
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+
+      if (userCredential.user != null) {
+        if (userCredential.additionalUserInfo!.isNewUser) {
+          print('New Google Account created Successfully');
+        } else {
+          print('Existing Google Account Logged in Successfully');
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      return Future.error(e.message ?? ErrorMessages.somethingWentWrong);
+    }
+  }
+
+// facebook login
+  Future<void> signInWithFacebook() async {
+    try {
+      final _auth = FirebaseAuth.instance;
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      final OAuthCredential facebookCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+      await _auth.signInWithCredential(facebookCredential);
+    } on FirebaseAuthException catch (e) {
+      return Future.error(e.message ?? ErrorMessages.somethingWentWrong);
+    }
   }
 
   @override

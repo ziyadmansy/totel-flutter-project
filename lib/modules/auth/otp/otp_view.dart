@@ -37,7 +37,7 @@ class OTPView extends ViewModelBuilderWidget<OTPViewModel> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'We send OTP on +1 846 564 8945',
+                            'We sent an OTP to your number',
                             style: AppStyle.of(context).b4.wCRhythm,
                           ),
                           Align(

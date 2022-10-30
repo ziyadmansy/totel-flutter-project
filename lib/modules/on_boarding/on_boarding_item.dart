@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:cheffy/r.g.dart';
 import 'package:flutter/material.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 
@@ -28,6 +29,21 @@ class OnBoardingItem extends StatelessWidget {
     return Column(
       children: [
         Expanded(
+          flex: 1,
+          child: Center(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(image: R.image.img_logo()),
+                const SizedBox(width: 16),
+                Image(image: R.image.img_logo_name()),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 2,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: padding),
             child: Image(
@@ -37,6 +53,7 @@ class OnBoardingItem extends StatelessWidget {
           ),
         ),
         Expanded(
+          flex: 2,
           child: Stack(
             fit: StackFit.expand,
             children: [

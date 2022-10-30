@@ -11,7 +11,6 @@ import 'package:cheffy/core/services/authentication_service.dart';
 
 class LoginViewModel extends BaseViewModel {
   final NavigationService _navigationService = locator.get();
-  final AuthenticationService _authenticationService = locator.get();
   final AuthRepo authRepo;
   final SnackbarService _snackbarService = locator.get();
 
@@ -101,7 +100,8 @@ class LoginViewModel extends BaseViewModel {
 
   void onGoogle() async {
     try {
-      await _authenticationService.signInWithGoogle();
+      await authRepo.signInWithGoogle();
+      _navigationService.navigateToMainView();
     } catch (e) {
       _snackbarService.showSnackbar(message: e.toString());
     }
@@ -109,7 +109,7 @@ class LoginViewModel extends BaseViewModel {
 
   void onFacebook() async {
     try {
-      await _authenticationService.signInWithGoogle();
+      await authRepo.signInWithGoogle();
     } catch (e) {
       _snackbarService.showSnackbar(message: e.toString());
     }

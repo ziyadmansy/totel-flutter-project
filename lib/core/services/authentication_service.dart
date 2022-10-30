@@ -180,64 +180,26 @@ class AuthenticationService {
   }
 */
 
-  // google login
-  Future<void> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-      UserCredential userCredential =
-          await _auth.signInWithCredential(credential);
-
-      if (userCredential.user != null) {
-        if (userCredential.additionalUserInfo!.isNewUser) {}
-      }
-    } on FirebaseAuthException catch (e) {
-      return Future.error(e.message ?? ErrorMessages.somethingWentWrong);
-    }
-  }
-
-// facebook login
-  Future<void> signInWithFacebook() async {
-    try {
-      final LoginResult loginResult = await FacebookAuth.instance.login();
-
-      final OAuthCredential facebookCredential =
-          FacebookAuthProvider.credential(loginResult.accessToken!.token);
-
-      await _auth.signInWithCredential(facebookCredential);
-    } on FirebaseAuthException catch (e) {
-      return Future.error(e.message ?? ErrorMessages.somethingWentWrong);
-    }
-  }
-
   // otp login
-  Future<void> phoneSignIn(
-    BuildContext context,
-    String phoneNumber,
-    String smsCode,
-    Callback<String?> callback,
-  ) async {
-    // for android, ios
-    return _auth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await _auth.signInWithCredential(credential);
-        },
-        verificationFailed: (e) =>
-            callback(e.message ?? ErrorMessages.somethingWentWrong),
-        codeSent: ((verificationId, forceResendingToken) async {
-          PhoneAuthCredential credential = PhoneAuthProvider.credential(
-              verificationId: verificationId, smsCode: smsCode.trim());
-          await _auth.signInWithCredential(credential);
-        }),
-        codeAutoRetrievalTimeout: (String verificationId) {});
-  }
+  // Future<void> phoneSignIn(
+  //   BuildContext context,
+  //   String phoneNumber,
+  //   String smsCode,
+  //   Callback<String?> callback,
+  // ) async {
+  //   // for android, ios
+  //   return _auth.verifyPhoneNumber(
+  //       phoneNumber: phoneNumber,
+  //       verificationCompleted: (PhoneAuthCredential credential) async {
+  //         await _auth.signInWithCredential(credential);
+  //       },
+  //       verificationFailed: (e) =>
+  //           callback(e.message ?? ErrorMessages.somethingWentWrong),
+  //       codeSent: ((verificationId, forceResendingToken) async {
+  //         PhoneAuthCredential credential = PhoneAuthProvider.credential(
+  //             verificationId: verificationId, smsCode: smsCode.trim());
+  //         await _auth.signInWithCredential(credential);
+  //       }),
+  //       codeAutoRetrievalTimeout: (String verificationId) {});
+  // }
 }

@@ -24,5 +24,9 @@ abstract class AuthRepo {
     int? forceResendingToken,
   });
 
+  Future<void> signInWithGoogle();
+
+  Future<void> signInWithFacebook();
+
   Future<void> logout();
 }

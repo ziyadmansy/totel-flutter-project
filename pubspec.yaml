@@ -41,8 +41,6 @@ dependencies:
   google_fonts: ^3.0.1
   flutter_chat_ui: ^1.6.4
   dotted_border: ^2.0.0+2
-  flutter_facebook_auth: ^4.4.1
-  google_sign_in: ^5.4.1
   google_maps_flutter: ^2.1.12
   image_picker: ^0.8.5+3
   expandable_bottom_sheet:
@@ -56,6 +54,8 @@ dependencies:
   firebase_core: 2.1.0
   firebase_auth: 4.0.2
   firebase_crashlytics: ^3.0.2
+  google_sign_in: ^5.4.2
+  flutter_facebook_auth: ^5.0.0+2
 
 dev_dependencies:
   flutter_test:
