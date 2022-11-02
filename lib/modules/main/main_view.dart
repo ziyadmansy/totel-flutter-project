@@ -20,9 +20,12 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
       key: mainScreenScaffoldKey,
       extendBody: true,
       drawer: AppDrawer(),
-      body: ExtendedNavigator(
-        router: MainViewRouter(),
-        navigatorKey: StackedService.nestedNavigationKey(MainViewModel.navKey),
+      body: SafeArea(
+        child: ExtendedNavigator(
+          router: MainViewRouter(),
+          navigatorKey:
+              StackedService.nestedNavigationKey(MainViewModel.navKey),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ClipOval(
@@ -38,7 +41,7 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
         shape: CircularNotchedRectangle(),
         notchMargin: 5.0,
         clipBehavior: Clip.antiAlias,
-        color: Theme.of(context).primaryColor.withAlpha(0),
+        // color: Theme.of(context).primaryColor.withAlpha(0),
         // ↑ use .withAlpha(0) to debug/peek underneath ↑ BottomAppBar
         child: BottomNavigationBar(
           currentIndex: viewModel.index,

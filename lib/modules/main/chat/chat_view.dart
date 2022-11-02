@@ -11,24 +11,27 @@ class ChatPageView extends ViewModelBuilderWidget<ChatViewModel> {
 
   @override
   Widget builder(BuildContext context, ChatViewModel viewModel, Widget? child) {
-    return ListView(
-      children: [
-        ChatListingItemView(
-          userName: 'Jane Cooper',
-          userImage: R.image.img_avatar(),
-        ),
-        Divider(color: AppColors.soap, height: 1),
-        ChatListingItemView(
-          userName: 'Jane Cooper',
-          userImage: R.image.img_avatar(),
-        ),
-        Divider(color: AppColors.soap, height: 1),
-        ChatListingItemView(
-          userName: 'Jane Cooper',
-          userImage: R.image.img_avatar(),
-        ),
-        Divider(color: AppColors.soap, height: 1),
-      ],
+    return Container(
+      color: Colors.white,
+      child: ListView(
+        children: [
+          ChatListingItemView(
+            userName: 'Jane Cooper',
+            userImage: R.image.img_avatar(),
+          ),
+          Divider(color: AppColors.soap, height: 1),
+          ChatListingItemView(
+            userName: 'Jane Cooper',
+            userImage: R.image.img_avatar(),
+          ),
+          Divider(color: AppColors.soap, height: 1),
+          ChatListingItemView(
+            userName: 'Jane Cooper',
+            userImage: R.image.img_avatar(),
+          ),
+          Divider(color: AppColors.soap, height: 1),
+        ],
+      ),
     );
   }
 

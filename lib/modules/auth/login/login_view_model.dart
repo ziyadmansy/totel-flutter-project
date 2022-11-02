@@ -60,18 +60,18 @@ class LoginViewModel extends BaseViewModel {
     }
 
     RegExp exp = RegExp(r'[\s\d\+]+');
-    if (exp.allMatches((control.value as String)).isNotEmpty) {
-      try {
-        var phoneNumber = PhoneNumber.fromRaw(control.value);
-        if (!phoneNumber.validate(type: PhoneNumberType.mobile)) {
-          control.markAsTouched();
-          return phoneError;
-        }
-      } catch (e) {
-        control.markAsTouched();
-        return phoneError;
-      }
-    }
+    // if (exp.allMatches((control.value as String)).isNotEmpty) {
+    //   try {
+    //     var phoneNumber = PhoneNumber.fromRaw(control.value);
+    //     if (!phoneNumber.validate(type: PhoneNumberType.mobile)) {
+    //       control.markAsTouched();
+    //       return phoneError;
+    //     }
+    //   } catch (e) {
+    //     control.markAsTouched();
+    //     return phoneError;
+    //   }
+    // }
 
     return null;
   }

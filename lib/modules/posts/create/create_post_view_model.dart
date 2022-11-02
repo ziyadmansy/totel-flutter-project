@@ -221,7 +221,7 @@ class CreatePostViewModel extends BaseViewModel {
 
       if (res.isListNotEmptyOrNull) {
         int remaining = 3 - att.length;
-        att.addAll(res!.take(remaining));
+        att.addAll(res.take(remaining));
 
         remaining = 3 - att.length;
         if (remaining > 0) {

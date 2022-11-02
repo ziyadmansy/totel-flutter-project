@@ -13,6 +13,7 @@ class PostsPageView extends ViewModelBuilderWidget<PostViewModel> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),

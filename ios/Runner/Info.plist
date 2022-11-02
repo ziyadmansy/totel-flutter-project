@@ -61,5 +61,15 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow access to camera to upload images from your camera. In order to be able to change profile picture, upload images and more.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to photo library to upload and share photos you choose from your photo library. In order to be able to change profile picture, upload images and more.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need your location for searching on hotels and partners</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location for searching on hotels and partners</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location for searching on hotels and partners</string>
 </dict>
 </plist>

@@ -15,6 +15,7 @@ class OnBoardingView extends ViewModelBuilderWidget<OnBoardingViewModel> {
       BuildContext context, OnBoardingViewModel viewModel, Widget? child) {
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: CarouselView(
           itemCount: 3,
           onPressedButton: viewModel.onPressedSkip,

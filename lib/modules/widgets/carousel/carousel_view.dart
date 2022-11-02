@@ -35,42 +35,45 @@ class CarouselView extends ViewModelBuilderWidget<CarouselViewModel> {
           left: 16,
           right: 8,
           bottom: bottom,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 150,
-                height: 8,
-                child: ListView.separated(
-                  itemCount: itemCount,
-                  scrollDirection: Axis.horizontal,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 16),
-                  itemBuilder: (context, index) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      width: viewModel.index == index ? 48 : 24,
-                      decoration: BoxDecoration(
-                        color: viewModel.index == index
-                            ? AppColors.magnolia
-                            : AppColors.soap,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              if (onPressedButton != null)
-                TextButton(
-                  onPressed: onPressedButton,
-                  child: Text(
-                    'Skip',
-                    style: AppStyle.of(context).b4.wCSoap,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 150,
+                  height: 8,
+                  child: ListView.separated(
+                    itemCount: itemCount,
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 16),
+                    itemBuilder: (context, index) {
+                      return AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        width: viewModel.index == index ? 48 : 24,
+                        decoration: BoxDecoration(
+                          color: viewModel.index == index
+                              ? AppColors.magnolia
+                              : AppColors.soap,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      );
+                    },
                   ),
                 ),
-            ],
+                if (onPressedButton != null)
+                  TextButton(
+                    onPressed: onPressedButton,
+                    child: Text(
+                      'Skip',
+                      style: AppStyle.of(context).b4.wCSoap,
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ],
