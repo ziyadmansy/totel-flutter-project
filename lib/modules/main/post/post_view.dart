@@ -14,7 +14,11 @@ class PostsPageView extends ViewModelBuilderWidget<PostViewModel> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('My Posts'),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: const Text('My Posts'),
+          ),
+          automaticallyImplyLeading: false,
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Live'),

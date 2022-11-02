@@ -36,7 +36,7 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
       ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
-        notchMargin: 8.0,
+        notchMargin: 5.0,
         clipBehavior: Clip.antiAlias,
         color: Theme.of(context).primaryColor.withAlpha(0),
         // ↑ use .withAlpha(0) to debug/peek underneath ↑ BottomAppBar

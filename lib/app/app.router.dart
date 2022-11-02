@@ -58,7 +58,7 @@ class Routes {
   static const String paymentOptionsView = '/payment-options-view';
   static const String paymentAddCartView = '/payment-add-cart-view';
   static const String requestView = '/request-view';
-  static const String mapView = '/map-view';
+  // static const String mapView = '/map-view';
   static const String aboutView = '/about-view';
   static const String notificationsView = '/notifications-view';
   static const all = <String>{
@@ -80,7 +80,7 @@ class Routes {
     paymentOptionsView,
     paymentAddCartView,
     requestView,
-    mapView,
+    // mapView,
     aboutView,
     notificationsView,
   };
@@ -116,7 +116,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.paymentOptionsView, page: PaymentOptionsView),
     RouteDef(Routes.paymentAddCartView, page: PaymentAddCartView),
     RouteDef(Routes.requestView, page: RequestView),
-    RouteDef(Routes.mapView, page: MapPageView),
+    // RouteDef(Routes.mapView, page: MapPageView),
     RouteDef(Routes.aboutView, page: AboutScreenView),
     RouteDef(Routes.notificationsView, page: NotificationsScreenView),
   ];

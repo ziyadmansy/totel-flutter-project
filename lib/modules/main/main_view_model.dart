@@ -86,23 +86,28 @@ class MainViewModel extends BaseViewModel {
     switch (index) {
       case 0:
         // Home Page View
-        _navigationService.navigateToNestedHomeView(routerId: navKey);
+        _navigationService.navigateToNestedHomeView(
+            routerId: MainViewModel.navKey);
         break;
       case 1:
         // Map Page View
-        _navigationService.navigateToNestedMapView(routerId: navKey);
+        _navigationService.navigateToNestedMapView(
+            routerId: MainViewModel.navKey);
         break;
       case 2:
         // Posts Page View
-        _navigationService.navigateToNestedPostView(routerId: navKey);
+        _navigationService.navigateToNestedPostView(
+            routerId: MainViewModel.navKey);
         break;
       case 3:
         // Chats Page View
-        _navigationService.navigateToNestedChatView(routerId: navKey);
+        _navigationService.navigateToNestedChatView(
+            routerId: MainViewModel.navKey);
         break;
       default:
         // Default case goes to Home Page
-        _navigationService.navigateToNestedHomeView(routerId: navKey);
+        _navigationService.navigateToNestedHomeView(
+            routerId: MainViewModel.navKey);
         break;
     }
   }

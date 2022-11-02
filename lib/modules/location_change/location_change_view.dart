@@ -78,12 +78,6 @@ class LocationChangeView
                         data![index].name,
                         style: AppStyle.of(context).b4M.wCChineseBlack,
                       ),
-                      subtitle: Text(
-                        'api does not return',
-                        style: AppStyle.of(context).b5.wCRhythm,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
                       onTap: () =>
                           viewModel.onTapLocationItem(index, data[index]),
                     ),
