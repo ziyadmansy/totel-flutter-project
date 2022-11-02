@@ -19,7 +19,6 @@ import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -169,17 +168,17 @@ class AuthRepoImpl implements AuthRepo {
 
 // facebook login
   Future<void> signInWithFacebook() async {
-    try {
-      final _auth = FirebaseAuth.instance;
-      final LoginResult loginResult = await FacebookAuth.instance.login();
+    // try {
+    //   final _auth = FirebaseAuth.instance;
+    //   final LoginResult loginResult = await FacebookAuth.instance.login();
 
-      final OAuthCredential facebookCredential =
-          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+    //   final OAuthCredential facebookCredential =
+    //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-      await _auth.signInWithCredential(facebookCredential);
-    } on FirebaseAuthException catch (e) {
-      return Future.error(e.message ?? ErrorMessages.somethingWentWrong);
-    }
+    //   await _auth.signInWithCredential(facebookCredential);
+    // } on FirebaseAuthException catch (e) {
+    //   return Future.error(e.message ?? ErrorMessages.somethingWentWrong);
+    // }
   }
 
   @override
