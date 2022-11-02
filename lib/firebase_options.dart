@@ -59,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC6H7yc46mrseC3ABYOjz9jvG3tdWeHniA',
-    appId: '1:407855852221:ios:23005e2d3a3d50bcf9e5d4',
+    appId: '1:407855852221:ios:b2263fa603dade42f9e5d4',
     messagingSenderId: '407855852221',
     projectId: 'totel-d7322',
     storageBucket: 'totel-d7322.appspot.com',
     androidClientId: '407855852221-3cfgj728ubsn4e3q7edhem2kaep0edej.apps.googleusercontent.com',
-    iosClientId: '407855852221-h043tkgp823595i2i6s3lgr2rngu2t4i.apps.googleusercontent.com',
-    iosBundleId: 'com.totel.totel',
+    iosClientId: '407855852221-dekodiuo3tdg6lnsmc2jscrdk40o2a5i.apps.googleusercontent.com',
+    iosBundleId: 'com.oluhagroup.totelpartner',
   );
 }

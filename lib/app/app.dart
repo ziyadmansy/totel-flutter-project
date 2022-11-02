@@ -148,7 +148,7 @@ class Application {
     //   options: DefaultFirebaseOptions.currentPlatform(flavor),
     // );
 
-    // References teh firebase_options in the root not in the (firebase) folder
+    // References the firebase_options in the root not in the (firebase) folder
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );

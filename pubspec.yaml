@@ -51,9 +51,11 @@ dependencies:
 #  google_maps_flutter:
 
   # Firebase
-  firebase_core: 2.1.0
-  firebase_auth: 4.0.2
+  firebase_core: ^2.1.1
+  firebase_auth: ^4.1.0
+  firebase_messaging: ^14.0.2
   firebase_crashlytics: ^3.0.2
+
   google_sign_in: ^5.4.2
   flutter_facebook_auth: ^5.0.0+2
 

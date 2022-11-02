@@ -7,72 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:407855852221:android:3c0f4c66af66371ff9e5d4",
-        "android_client_info": {
-          "package_name": "com.example.totel"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "407855852221-3cfgj728ubsn4e3q7edhem2kaep0edej.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.totel",
-            "certificate_hash": "bd243e10a39a6405e27e19ef3aade379c6a1641c"
-          }
-        },
-        {
-          "client_id": "407855852221-qbikfv723povvbqffvdn97plgit6po94.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.totel",
-            "certificate_hash": "6df5aaae196d52f98486255efc6c01521284c78d"
-          }
-        },
-        {
-          "client_id": "407855852221-v5i3qoipifii4gf3metdcurls736tehc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.totel",
-            "certificate_hash": "ef35d7a4cc908c49cf38635bc2ddabfdbb1c59ef"
-          }
-        },
-        {
-          "client_id": "407855852221-9milom47ganrf9s4t614bho2mj4h4ui5.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA7AXhkTJTg5j5xWgBJjS8dRV8oZXfTEMQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "407855852221-9milom47ganrf9s4t614bho2mj4h4ui5.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "407855852221-coiol78e6tjp3ogcjcuttuc6dr7j8drr.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.totel"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:407855852221:android:9930db9b3571bad8f9e5d4",
         "android_client_info": {
           "package_name": "com.totel.totel"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "407855852221-b3kg2e5lsgtu6rqinoitge7814nqq4d4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.totel.totel",
+            "certificate_hash": "6df5aaae196d52f98486255efc6c01521284c78d"
+          }
+        },
         {
           "client_id": "407855852221-9milom47ganrf9s4t614bho2mj4h4ui5.apps.googleusercontent.com",
           "client_type": 3
