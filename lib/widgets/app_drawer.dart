@@ -46,7 +46,7 @@ class AppDrawer extends ViewModelWidget<MainViewModel> {
           DrawerItem(
             title: 'Settings',
             icon: FontAwesomeIcons.gear,
-            onPress: () {},
+            onPress: mainViewModel.onDrawerItemPressedSettings,
           ),
           Divider(),
           DrawerItem(

@@ -1,23 +1,21 @@
-import 'package:cheffy/SettingsTab/ChangePassword.dart';
-import 'package:cheffy/ProfilesTab/Edit.dart';
-import 'package:cheffy/SettingsTab/ChangePassword.dart';
-import 'package:cheffy/SettingsTab/Notification.dart';
+import 'package:cheffy/settings/ChangePassword.dart';
+import 'package:cheffy/settings/edit_profile_screen.dart';
+import 'package:cheffy/settings/Notification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingsMainScreen extends StatelessWidget {
-  List<String> _settingsList = [
+  final List<String> _settingsList = [
     'Notifications',
     'Change Password',
     'Edit Profile',
-    'Help'
   ];
-  List<Widget> settingsScreens = [
+  final List<Widget> settingsScreens = [
     NotificationScreen(),
-    // ChangePasswordScreen(),
+    ChangePasswordScreen(),
     EditProfileScreen(),
-    Container(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +45,11 @@ class SettingsMainScreen extends StatelessWidget {
           ),
           onTap: () {
             Navigator.push(
-                context,
-                CupertinoPageRoute(
-                    builder: (context) => settingsScreens[index]));
+              context,
+              CupertinoPageRoute(
+                builder: (context) => settingsScreens[index],
+              ),
+            );
           },
         ),
         separatorBuilder: (context, i) => Divider(),

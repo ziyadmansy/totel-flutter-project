@@ -6,6 +6,7 @@
 
 // ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
+import 'package:cheffy/settings/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
 import 'package:cheffy/modules/splash/presentation/splash_view.dart';
@@ -61,6 +62,7 @@ class Routes {
   // static const String mapView = '/map-view';
   static const String aboutView = '/about-view';
   static const String notificationsView = '/notifications-view';
+  static const String settingsView = '/settings-view';
   static const all = <String>{
     splashView,
     onBoardingView,
@@ -83,6 +85,7 @@ class Routes {
     // mapView,
     aboutView,
     notificationsView,
+    settingsView,
   };
 }
 
@@ -119,6 +122,7 @@ class StackedRouter extends RouterBase {
     // RouteDef(Routes.mapView, page: MapPageView),
     RouteDef(Routes.aboutView, page: AboutScreenView),
     RouteDef(Routes.notificationsView, page: NotificationsScreenView),
+    RouteDef(Routes.settingsView, page: SettingsMainScreen),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -253,6 +257,12 @@ class StackedRouter extends RouterBase {
     NotificationsScreenView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const NotificationsScreenView(),
+        settings: data,
+      );
+    },
+    SettingsMainScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SettingsMainScreen(),
         settings: data,
       );
     },

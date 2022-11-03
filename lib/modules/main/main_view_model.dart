@@ -120,6 +120,10 @@ class MainViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.aboutView);
   }
 
+  void onDrawerItemPressedSettings() {
+    _navigationService.navigateTo(Routes.settingsView);
+  }
+
   void onTapViewProfile() {
     _navigationService.navigateToProfileView();
   }

@@ -1,7 +1,5 @@
 import 'package:cheffy/Utils/dateFunction.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -19,15 +17,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         title: Text(
           'Edit Profile',
           style: TextStyle(fontSize: 18, color: Colors.black),
@@ -171,7 +160,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
           ),
           SizedBox(height: 20),
-//Bio
+          //Bio
           Text(
             'Bio',
             style: TextStyle(
@@ -222,15 +211,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             readOnly: true,
             style: TextStyle(fontSize: 15),
             onTap: () async {
-              _selectedDate = (await showDatePicker(
+              final pickedDate = await showDatePicker(
                 context: context,
                 initialDate: DateTime.now(),
                 firstDate: DateTime(1901, 1),
                 lastDate: DateTime.now(),
-              ))!;
-              setState(() {
-                dobController.text = getFullDate(_selectedDate);
-              });
+              );
+              if (pickedDate != null) {
+                setState(() {
+                  _selectedDate = pickedDate;
+                  dobController.text = getFullDate(_selectedDate);
+                });
+              }
             },
             decoration: InputDecoration(
               fillColor: Colors.grey.shade100,
@@ -299,70 +291,75 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
+              Expanded(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
                     side: BorderSide(
                       color: maleSelected ? Colors.blue : Colors.black,
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18))),
-                onPressed: () {
-                  setState(() {
-                    if (maleSelected) {
-                      maleSelected = false;
-                    } else {
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
                       maleSelected = true;
-                    }
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.male,
-                          color: maleSelected ? Colors.blue : Colors.black),
-                      Text(
-                        'Male',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.male,
                           color: maleSelected ? Colors.blue : Colors.black,
                         ),
-                      ),
-                    ],
+                        Text(
+                          'Male',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: maleSelected ? Colors.blue : Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
+              SizedBox(
+                width: 8,
+              ),
+              Expanded(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
                     side: BorderSide(
                       color: maleSelected ? Colors.black : Colors.blue,
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18))),
-                onPressed: () {
-                  setState(() {
-                    if (maleSelected)
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
                       maleSelected = false;
-                    else
-                      maleSelected = true;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.female,
-                          color: maleSelected ? Colors.black : Colors.blue),
-                      Text(
-                        'Female',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: maleSelected ? Colors.black : Colors.blue,
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.female,
+                            color: maleSelected ? Colors.black : Colors.blue),
+                        Text(
+                          'Female',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: maleSelected ? Colors.black : Colors.blue,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
