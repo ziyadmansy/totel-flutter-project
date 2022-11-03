@@ -65,6 +65,12 @@ dependency_overrides:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+# flutter_icons:
+#   android: false
+#   ios: true
+#   image_path: "assets/images/3x/img_logo.png"
+#   remove_alpha_ios: true
 
 # The following section is specific to Flutter.
 flutter:
