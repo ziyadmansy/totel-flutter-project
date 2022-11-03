@@ -10,30 +10,33 @@ import 'package:cheffy/app/app.router.dart';
 
 class RegisterViewModel extends BaseViewModel {
   RegisterViewModel(this.authRepo) {
-    accountForm = FormGroup({
-      controls.firstName: FormControl<String>(validators: [
-        Validators.required,
-      ]),
-      controls.lastName: FormControl<String>(validators: [
-        Validators.required,
-      ]),
-      controls.email: FormControl<String>(validators: [
-        Validators.required,
-        Validators.email,
-      ]),
-      controls.password: FormControl<String>(validators: [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
-      controls.confirmPassword: FormControl<String>(),
-      controls.phone: FormControl<PhoneNumber>(validators: [
-        Validators.required,
-        // Validators.maxLength(12),
-        // Validators.minLength(10),
-      ]),
-    }, validators: [
-      Validators.mustMatch(controls.password, controls.confirmPassword),
-    ]);
+    accountForm = FormGroup(
+      {
+        controls.firstName: FormControl<String>(validators: [
+          Validators.required,
+        ]),
+        controls.lastName: FormControl<String>(validators: [
+          Validators.required,
+        ]),
+        controls.email: FormControl<String>(validators: [
+          Validators.required,
+          Validators.email,
+        ]),
+        controls.password: FormControl<String>(validators: [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
+        controls.confirmPassword: FormControl<String>(),
+        controls.phone: FormControl<PhoneNumber>(validators: [
+          Validators.required,
+          // Validators.maxLength(12),
+          // Validators.minLength(10),
+        ]),
+      },
+      validators: [
+        Validators.mustMatch(controls.password, controls.confirmPassword),
+      ],
+    );
   }
 
   final NavigationService _navigationService = locator.get();

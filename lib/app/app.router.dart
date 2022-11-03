@@ -6,6 +6,7 @@
 
 // ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
+import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
 import 'package:cheffy/settings/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
@@ -63,6 +64,7 @@ class Routes {
   static const String aboutView = '/about-view';
   static const String notificationsView = '/notifications-view';
   static const String settingsView = '/settings-view';
+  static const String resetPasswordView = '/reset-password-view';
   static const all = <String>{
     splashView,
     onBoardingView,
@@ -86,6 +88,7 @@ class Routes {
     aboutView,
     notificationsView,
     settingsView,
+    resetPasswordView,
   };
 }
 
@@ -123,6 +126,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.aboutView, page: AboutScreenView),
     RouteDef(Routes.notificationsView, page: NotificationsScreenView),
     RouteDef(Routes.settingsView, page: SettingsMainScreen),
+    RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -263,6 +267,12 @@ class StackedRouter extends RouterBase {
     SettingsMainScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => SettingsMainScreen(),
+        settings: data,
+      );
+    },
+    ResetPasswordView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ResetPasswordView(),
         settings: data,
       );
     },

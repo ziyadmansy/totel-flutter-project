@@ -164,14 +164,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
           SizedBox(height: 5),
           Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                'Reset password',
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500),
-              )),
+            alignment: Alignment.centerRight,
+            child: Text(
+              'Reset password',
+              style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500),
+            ),
+          ),
           SizedBox(height: 40),
           ElevatedButton(
             onPressed: () async {},

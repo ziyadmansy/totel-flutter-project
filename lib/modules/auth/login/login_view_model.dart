@@ -119,7 +119,9 @@ class LoginViewModel extends BaseViewModel {
 
   void onShowPassword() => obscureText = !obscureText;
 
-  void onResetPassword() {}
+  void onResetPassword() {
+    _navigationService.navigateTo(Routes.resetPasswordView);
+  }
 }
 
 class _Controls {
