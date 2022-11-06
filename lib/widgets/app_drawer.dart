@@ -36,7 +36,7 @@ class AppDrawer extends ViewModelWidget<MainViewModel> {
           DrawerItem(
             title: 'Help',
             icon: FontAwesomeIcons.solidCircleQuestion,
-            onPress: () {},
+            onPress: mainViewModel.onDrawerItemPressedHelp,
           ),
           DrawerItem(
             title: 'About',

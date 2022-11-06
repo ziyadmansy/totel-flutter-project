@@ -8,9 +8,10 @@
 
 import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
 import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
-import 'package:cheffy/settings/SettingsMain.dart';
+import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
+import 'package:cheffy/modules/settings/presentation/help_view.dart';
 import 'package:cheffy/modules/splash/presentation/splash_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,7 @@ class Routes {
   static const String notificationsView = '/notifications-view';
   static const String settingsView = '/settings-view';
   static const String resetPasswordView = '/reset-password-view';
+  static const String helpView = '/help-view';
   static const all = <String>{
     splashView,
     onBoardingView,
@@ -92,6 +94,7 @@ class Routes {
     notificationsView,
     settingsView,
     resetPasswordView,
+    helpView,
   };
 }
 
@@ -131,6 +134,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.notificationsView, page: NotificationsScreenView),
     RouteDef(Routes.settingsView, page: SettingsMainScreen),
     RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
+    RouteDef(Routes.helpView, page: HelpView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -283,6 +287,12 @@ class StackedRouter extends RouterBase {
     ResetPasswordView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => ResetPasswordView(),
+        settings: data,
+      );
+    },
+    HelpView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => HelpView(),
         settings: data,
       );
     },

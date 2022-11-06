@@ -1,6 +1,6 @@
-import 'package:cheffy/settings/ChangePassword.dart';
-import 'package:cheffy/settings/edit_profile_screen.dart';
-import 'package:cheffy/settings/Notification.dart';
+import 'package:cheffy/modules/settings/presentation/ChangePassword.dart';
+import 'package:cheffy/modules/settings/presentation/edit_profile_screen.dart';
+import 'package:cheffy/modules/settings/presentation/Notification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

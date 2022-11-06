@@ -128,6 +128,10 @@ class MainViewModel extends BaseViewModel {
     _navigationService.navigateToProfileView();
   }
 
+  void onDrawerItemPressedHelp() {
+    _navigationService.navigateTo(Routes.helpView);
+  }
+
   Future<void> logout() async {
     await authRepo.logout();
   }
