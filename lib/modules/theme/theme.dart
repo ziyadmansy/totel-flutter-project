@@ -23,7 +23,7 @@ class AppTheme {
         outlinedButtonTheme: outlinedButtonThemeData,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: AppColors.plumpPurplePrimary,
+            foregroundColor: AppColors.plumpPurplePrimary,
             textStyle: AppStyle.of(context).b4,
           ),
         ),
@@ -53,13 +53,7 @@ class AppTheme {
   ThemeData get dark => ThemeData(
         useMaterial3: true,
         colorScheme: AppColors.darkColorScheme,
-      ).copyWith(
-          // inputDecorationTheme: AppTheme.inputDecorationThemeDefault,
-          // elevatedButtonTheme: elevatedButtonThemeData,
-          // textButtonTheme: textButtonThemeData,
-          // outlinedButtonTheme: outlinedButtonThemeData,
-          // appBarTheme: const AppBarTheme(elevation: 0),
-          );
+      );
 
   static InputDecorationTheme get inputDecorationThemeDefault =>
       InputDecorationTheme(

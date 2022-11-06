@@ -1,24 +1,21 @@
+import 'package:cheffy/modules/payment/presentation/payment_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:stacked/stacked.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 import 'package:cheffy/modules/widgets/app_form_field.dart';
 
-import 'payment_add_cart_view_model.dart';
-
-class PaymentAddCartView
-    extends ViewModelBuilderWidget<PaymentAddCartViewModel> {
+class PaymentAddCartView extends ViewModelWidget<PaymentViewModel> {
   const PaymentAddCartView({super.key});
 
   @override
-  Widget builder(
-      BuildContext context, PaymentAddCartViewModel viewModel, Widget? child) {
+  Widget build(BuildContext context, PaymentViewModel viewModel) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Card'),
       ),
       body: ReactiveForm(
-        formGroup: viewModel.form,
+        formGroup: viewModel.creditCardForm,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -95,7 +92,7 @@ class PaymentAddCartView
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: viewModel.onProceed,
+                  onPressed: viewModel.onCreditCardProceed,
                   child: const Text('Proceed'),
                 ),
               ],
@@ -105,8 +102,4 @@ class PaymentAddCartView
       ),
     );
   }
-
-  @override
-  PaymentAddCartViewModel viewModelBuilder(BuildContext context) =>
-      PaymentAddCartViewModel();
 }

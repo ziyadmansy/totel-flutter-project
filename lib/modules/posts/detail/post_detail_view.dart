@@ -1,4 +1,5 @@
 import 'package:cheffy/modules/widgets/main_app_bar.dart';
+import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:stacked/stacked.dart';
@@ -339,50 +340,63 @@ class PostDetailView extends ViewModelBuilderWidget<PostDetailViewModel> {
                               "Don't bring strangers to my room"
                             ],
                             context),
+                        SharedWidgets.buildRoundedElevatedButton(
+                          btnChild: Text('Book now'),
+                          onPress: () {
+                            viewModel.onTapBookNow();
+                          },
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        SharedWidgets.buildRoundedOutlinedButton(
+                          btnChild: Text('Be a partner'),
+                          onPress: () {},
+                        ),
                         SizedBox(height: 80),
                       ],
                     ));
               }),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              // height: 80,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade100),
-                color: Colors.white,
-              ),
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 18.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Highest Bid',
-                            style: AppStyle.of(context).b5.wCRhythm),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text("\$75.00",
-                            style: AppStyle.of(context).b4B.wCChineseBlack)
-                      ],
-                    ),
-                    ElevatedButton(
-                      child: Text('Place a Bid',
-                          style: AppStyle.of(context).b5.wCWhite),
-                      onPressed: () {
-                        viewModel.onTapPost();
-                      },
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   bottom: 0,
+          //   child: Container(
+          //     // height: 80,
+          //     decoration: BoxDecoration(
+          //       border: Border.all(color: Colors.grey.shade100),
+          //       color: Colors.white,
+          //     ),
+          //     width: MediaQuery.of(context).size.width,
+          //     child: Padding(
+          //       padding:
+          //           const EdgeInsets.symmetric(horizontal: 20, vertical: 18.0),
+          //       child: Row(
+          //         crossAxisAlignment: CrossAxisAlignment.center,
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: [
+          //               Text('Highest Bid',
+          //                   style: AppStyle.of(context).b5.wCRhythm),
+          //               SizedBox(
+          //                 height: 5,
+          //               ),
+          //               Text("\$75.00",
+          //                   style: AppStyle.of(context).b4B.wCChineseBlack)
+          //             ],
+          //           ),
+          //           ElevatedButton(
+          //             child: Text('Place a Bid',
+          //                 style: AppStyle.of(context).b5.wCWhite),
+          //             onPressed: () {
+          //               viewModel.onTapPost();
+          //             },
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

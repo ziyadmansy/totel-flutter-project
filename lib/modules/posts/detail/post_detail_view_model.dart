@@ -18,11 +18,9 @@ class PostDetailViewModel extends BaseViewModel {
     _navigationService.back();
   }
 
-  void onTapPost() {
+  void onTapBookNow() {
     //added
     _navigationService.navigateToPaymentSummaryView();
-    // _navigationService.navigateToPaymentOptionsView();
-    // _navigationService.navigateToPaymentSummaryView();
   }
 
   void onSendMessage() {}

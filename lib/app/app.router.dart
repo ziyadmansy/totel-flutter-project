@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
 import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
+import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
 import 'package:cheffy/settings/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
@@ -31,9 +32,9 @@ import '../modules/main/main_view.dart';
 import '../modules/main/map/map_view.dart';
 import '../modules/main/post/post_view.dart';
 import '../modules/on_boarding/on_boarding_view.dart';
-import '../modules/payment/add_card/payment_add_cart_view.dart';
-import '../modules/payment/options/payment_options_view.dart';
-import '../modules/payment/summary/payment_summary_view.dart';
+import '../modules/payment/presentation/add_card/payment_add_cart_view.dart';
+import '../modules/payment/presentation/options/payment_options_view.dart';
+import '../modules/payment/presentation/summary/payment_summary_view.dart';
 import '../modules/posts/create/create_post_view.dart';
 import '../modules/posts/detail/post_detail_view.dart';
 import '../modules/profile/edit/edit_profile_view.dart';
@@ -57,6 +58,7 @@ class Routes {
   static const String editProfileView = '/edit-profile-view';
   static const String walletView = '/wallet-view';
   static const String paymentSummaryView = '/payment-summary-view';
+  static const String paymentPercentageView = '/payment-percentage-view';
   static const String paymentOptionsView = '/payment-options-view';
   static const String paymentAddCartView = '/payment-add-cart-view';
   static const String requestView = '/request-view';
@@ -81,6 +83,7 @@ class Routes {
     editProfileView,
     walletView,
     paymentSummaryView,
+    paymentPercentageView,
     paymentOptionsView,
     paymentAddCartView,
     requestView,
@@ -119,6 +122,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.editProfileView, page: EditProfileView),
     RouteDef(Routes.walletView, page: WalletView),
     RouteDef(Routes.paymentSummaryView, page: PaymentSummaryView),
+    RouteDef(Routes.paymentPercentageView, page: PaymentPercentageView),
     RouteDef(Routes.paymentOptionsView, page: PaymentOptionsView),
     RouteDef(Routes.paymentAddCartView, page: PaymentAddCartView),
     RouteDef(Routes.requestView, page: RequestView),
@@ -231,6 +235,12 @@ class StackedRouter extends RouterBase {
     PaymentSummaryView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const PaymentSummaryView(),
+        settings: data,
+      );
+    },
+    PaymentPercentageView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const PaymentPercentageView(),
         settings: data,
       );
     },

@@ -32,9 +32,9 @@ import '../modules/main/main_view.dart';
 import '../modules/main/map/map_view.dart';
 import '../modules/main/post/post_view.dart';
 import '../modules/on_boarding/on_boarding_view.dart';
-import '../modules/payment/add_card/payment_add_cart_view.dart';
-import '../modules/payment/options/payment_options_view.dart';
-import '../modules/payment/summary/payment_summary_view.dart';
+import '../modules/payment/presentation/add_card/payment_add_cart_view.dart';
+import '../modules/payment/presentation/options/payment_options_view.dart';
+import '../modules/payment/presentation/summary/payment_summary_view.dart';
 import '../modules/posts/create/create_post_view.dart';
 import '../modules/posts/create/post_type_selection_view.dart';
 import '../modules/posts/detail/post_detail_view.dart';
@@ -43,7 +43,6 @@ import '../modules/profile/profile_view.dart';
 import '../modules/request/request_view.dart';
 import '../modules/wallet/wallet_view.dart';
 import 'app.locator.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 @StackedApp(
   routes: [

@@ -24,6 +24,7 @@ class UniversalVariables {
   static final Color receiverColor = Colors.blue;
 
   static const double kBorderRadius = 12;
+  static const double kButtonBorderRadius = 100;
 
   static final Gradient fabGradient = LinearGradient(
       colors: [gradientColorStart, gradientColorEnd],

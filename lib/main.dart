@@ -1,4 +1,7 @@
+import 'package:cheffy/Utils/app_providers.dart';
+import 'package:cheffy/modules/payment/presentation/payment_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 
@@ -36,17 +39,20 @@ class App extends StatelessWidget {
       defaultThemeMode: ThemeMode.system,
       darkTheme: AppTheme.of(context).dark,
       lightTheme: AppTheme.of(context).light,
-      builder: (context, regularTheme, darkTheme, themeMode) => MaterialApp(
-        title: '${Application.appName}${Application.flavor.appNameSuffix}',
-        theme: regularTheme,
-        darkTheme: darkTheme,
-        themeMode: themeMode,
-        debugShowCheckedModeBanner: false,
-        // localizationsDelegates: context.localizationDelegates,
-        // supportedLocales: context.supportedLocales,
-        // locale: context.locale,
-        navigatorKey: StackedService.navigatorKey,
-        onGenerateRoute: StackedRouter().onGenerateRoute,
+      builder: (context, regularTheme, darkTheme, themeMode) => MultiProvider(
+        providers: appProviders,
+        child: MaterialApp(
+          title: '${Application.appName}${Application.flavor.appNameSuffix}',
+          theme: regularTheme,
+          darkTheme: darkTheme,
+          themeMode: themeMode,
+          debugShowCheckedModeBanner: false,
+          // localizationsDelegates: context.localizationDelegates,
+          // supportedLocales: context.supportedLocales,
+          // locale: context.locale,
+          navigatorKey: StackedService.navigatorKey,
+          onGenerateRoute: StackedRouter().onGenerateRoute,
+        ),
       ),
       // ),
     );

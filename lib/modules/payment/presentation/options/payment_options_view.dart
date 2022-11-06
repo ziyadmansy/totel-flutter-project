@@ -1,20 +1,17 @@
 import 'dart:io';
 
+import 'package:cheffy/modules/payment/presentation/payment_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 
-import 'payment_options_view_model.dart';
-
-class PaymentOptionsView
-    extends ViewModelBuilderWidget<PaymentOptionsViewModel> {
+class PaymentOptionsView extends ViewModelWidget<PaymentViewModel> {
   const PaymentOptionsView({super.key});
 
   @override
-  Widget builder(
-      BuildContext context, PaymentOptionsViewModel viewModel, Widget? child) {
+  Widget build(BuildContext context, PaymentViewModel viewModel) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -122,8 +119,4 @@ class PaymentOptionsView
       ),
     );
   }
-
-  @override
-  PaymentOptionsViewModel viewModelBuilder(BuildContext context) =>
-      PaymentOptionsViewModel();
 }
