@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +24,18 @@ class UniversalVariables {
   static const double kBorderRadius = 12;
   static const double kButtonBorderRadius = 100;
 
+  static const double kSelectedOpacity = 0.15;
+  static const double kUnSelectedOpacity = 0.0;
+
+  static const double kBtnHeight = 60;
+
   static final Gradient fabGradient = LinearGradient(
       colors: [gradientColorStart, gradientColorEnd],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight);
+}
+
+class ReactiveFormControls {
+  static const String selectedDays = 'selected_days';
+  static const String roomsCount = 'rooms_count';
 }

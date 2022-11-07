@@ -1,0 +1,4 @@
+enum DayWeek {
+  Day,
+  Week,
+}

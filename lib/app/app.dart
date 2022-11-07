@@ -152,8 +152,13 @@ class Application {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    // Only send crashlytics outside dev env
+    if (flavor != Flavor.dev) {
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+      FlutterError.onError =
+          FirebaseCrashlytics.instance.recordFlutterFatalError;
+    }
+
     //endregion
 
     Log.init(logInDebugMode: kDebugMode, logInReleaseMode: kReleaseMode);

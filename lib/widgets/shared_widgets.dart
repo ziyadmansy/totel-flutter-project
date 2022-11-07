@@ -77,6 +77,7 @@ class SharedWidgets {
     required VoidCallback? onPress,
     bool isEnabled = true,
     Color? btnColor,
+    bool isTooRounded = true,
   }) =>
       SizedBox(
         height: 48,
@@ -84,8 +85,11 @@ class SharedWidgets {
           child: btnChild,
           style: OutlinedButton.styleFrom(
             shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(UniversalVariables.kButtonBorderRadius),
+              borderRadius: BorderRadius.circular(
+                isTooRounded
+                    ? UniversalVariables.kButtonBorderRadius
+                    : UniversalVariables.kBorderRadius,
+              ),
             ),
             backgroundColor: btnColor,
           ),
@@ -98,6 +102,7 @@ class SharedWidgets {
     required VoidCallback onPress,
     bool isEnabled = true,
     Color? btnColor,
+    bool isTooRounded = true,
   }) =>
       SizedBox(
         height: 40,
@@ -106,8 +111,9 @@ class SharedWidgets {
           style: ElevatedButton.styleFrom(
             foregroundColor: btnColor,
             shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(UniversalVariables.kButtonBorderRadius),
+              borderRadius: BorderRadius.circular(isTooRounded
+                  ? UniversalVariables.kButtonBorderRadius
+                  : UniversalVariables.kBorderRadius),
             ),
           ),
           onPressed: isEnabled ? onPress : null,
@@ -119,6 +125,7 @@ class SharedWidgets {
     required VoidCallback? onPress,
     Color? btnColor,
     bool isEnabled = true,
+    bool isTooRounded = true,
   }) {
     return SizedBox(
       height: 48,
@@ -127,8 +134,9 @@ class SharedWidgets {
         style: ElevatedButton.styleFrom(
           backgroundColor: btnColor ?? AppColors.plumpPurplePrimary,
           shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(UniversalVariables.kButtonBorderRadius),
+            borderRadius: BorderRadius.circular(isTooRounded
+                ? UniversalVariables.kButtonBorderRadius
+                : UniversalVariables.kBorderRadius),
           ),
         ),
         onPressed: isEnabled ? onPress : null,
@@ -142,6 +150,7 @@ class SharedWidgets {
     required VoidCallback? onPress,
     Color? btnColor,
     bool isEnabled = true,
+    bool isTooRounded = true,
   }) {
     return SizedBox(
       height: 48,
@@ -150,8 +159,9 @@ class SharedWidgets {
         style: ElevatedButton.styleFrom(
           backgroundColor: btnColor,
           shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(UniversalVariables.kButtonBorderRadius),
+            borderRadius: BorderRadius.circular(isTooRounded
+                ? UniversalVariables.kButtonBorderRadius
+                : UniversalVariables.kBorderRadius),
           ),
         ),
         onPressed: isEnabled ? onPress : null,

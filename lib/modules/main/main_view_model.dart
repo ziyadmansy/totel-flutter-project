@@ -117,7 +117,7 @@ class MainViewModel extends BaseViewModel {
   }
 
   void onPressedSearch() {
-    // _navigationService.navigateTo(Routes.notificationsView);
+    _navigationService.navigateTo(Routes.searchStayingView);
   }
 
   void onDrawerItemPressedAbout() {
