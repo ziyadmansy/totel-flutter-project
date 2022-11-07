@@ -8,6 +8,8 @@ class RoommateModel {
   final String occupation;
   final String email;
   final String contactNo;
+  final String checkIn;
+  final String checkOut;
   bool isExpanded;
 
   RoommateModel({
@@ -17,6 +19,8 @@ class RoommateModel {
     required this.occupation,
     required this.email,
     required this.contactNo,
+    required this.checkIn,
+    required this.checkOut,
     this.isExpanded = false,
   });
 
@@ -27,6 +31,9 @@ class RoommateModel {
     String? occupation,
     String? email,
     String? contactNo,
+    String? checkIn,
+    String? checkOut,
+    bool? isExpanded,
   }) {
     return RoommateModel(
       id: id ?? this.id,
@@ -35,6 +42,9 @@ class RoommateModel {
       occupation: occupation ?? this.occupation,
       email: email ?? this.email,
       contactNo: contactNo ?? this.contactNo,
+      checkIn: checkIn ?? this.checkIn,
+      checkOut: checkOut ?? this.checkOut,
+      isExpanded: isExpanded ?? this.isExpanded,
     );
   }
 
@@ -46,6 +56,9 @@ class RoommateModel {
       'occupation': occupation,
       'email': email,
       'contactNo': contactNo,
+      'checkIn': checkIn,
+      'checkOut': checkOut,
+      'isExpanded': isExpanded,
     };
   }
 
@@ -57,6 +70,8 @@ class RoommateModel {
       occupation: map['occupation'] as String,
       email: map['email'] as String,
       contactNo: map['contactNo'] as String,
+      checkIn: map['checkIn'] as String,
+      checkOut: map['checkOut'] as String,
       isExpanded: false,
     );
   }
@@ -68,7 +83,7 @@ class RoommateModel {
 
   @override
   String toString() {
-    return 'RoommateModel(id: $id, imgUrl: $imgUrl, name: $name, occupation: $occupation, email: $email, contactNo: $contactNo)';
+    return 'RoommateModel(id: $id, imgUrl: $imgUrl, name: $name, occupation: $occupation, email: $email, contactNo: $contactNo, checkIn: $checkIn, checkOut: $checkOut, isExpanded: $isExpanded)';
   }
 
   @override
@@ -80,7 +95,10 @@ class RoommateModel {
         other.name == name &&
         other.occupation == occupation &&
         other.email == email &&
-        other.contactNo == contactNo;
+        other.contactNo == contactNo &&
+        other.checkIn == checkIn &&
+        other.checkOut == checkOut &&
+        other.isExpanded == isExpanded;
   }
 
   @override
@@ -90,6 +108,9 @@ class RoommateModel {
         name.hashCode ^
         occupation.hashCode ^
         email.hashCode ^
-        contactNo.hashCode;
+        contactNo.hashCode ^
+        checkIn.hashCode ^
+        checkOut.hashCode ^
+        isExpanded.hashCode;
   }
 }

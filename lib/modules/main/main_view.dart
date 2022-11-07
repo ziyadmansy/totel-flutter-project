@@ -1,6 +1,7 @@
 import 'package:cheffy/Utils/key.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/widgets/app_drawer.dart';
+import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -21,6 +22,7 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
       extendBody: true,
       drawer: AppDrawer(),
       body: SafeArea(
+        bottom: false, // To make the body extend behind bottom bar
         child: ExtendedNavigator(
           router: MainViewRouter(),
           navigatorKey:

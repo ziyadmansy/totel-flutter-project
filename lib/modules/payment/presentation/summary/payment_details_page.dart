@@ -2,14 +2,16 @@ import 'package:cheffy/Utils/theme/styles.dart';
 import 'package:cheffy/modules/payment/presentation/payment_view_model.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:stacked/stacked.dart';
 
-class PaymentDetailsPage extends ViewModelWidget<PaymentViewModel> {
+class PaymentDetailsPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context, PaymentViewModel viewModel) {
+  Widget build(BuildContext context) {
+    final paymentProvider = context.watch<PaymentViewModel>();
     return ReactiveForm(
-      formGroup: viewModel.couponForm,
+      formGroup: paymentProvider.couponForm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -136,7 +138,7 @@ class PaymentDetailsPage extends ViewModelWidget<PaymentViewModel> {
                     Divider(color: AppColors.soap, thickness: 1),
                     const SizedBox(height: 16),
                     ReactiveTextField(
-                      formControlName: viewModel.controls.coupon,
+                      formControlName: paymentProvider.controls.coupon,
                       decoration: const InputDecoration(
                         labelText: 'Enter a coupon',
                       ),
@@ -159,7 +161,7 @@ class PaymentDetailsPage extends ViewModelWidget<PaymentViewModel> {
               ],
             ),
             child: ElevatedButton(
-              onPressed: viewModel.onPay,
+              onPressed: paymentProvider.onPay,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [

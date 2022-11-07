@@ -1,12 +1,74 @@
 import 'package:cheffy/Utils/Utils.dart';
+import 'package:cheffy/Utils/theme/styles.dart';
+import 'package:cheffy/app/app.dart';
+import 'package:cheffy/core/enums/account_avatar_type.dart';
+import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
 import 'package:cheffy/modules/theme/color.dart';
+import 'package:cheffy/modules/widgets/account_avatar.dart';
+import 'package:cheffy/r.g.dart';
 import 'package:flutter/material.dart';
 
 class SharedWidgets {
+  static AppBar buildHomeAppBar({
+    required ProfileEntity? appUser,
+    required dynamic location,
+    required VoidCallback? onTapViewProfile,
+    required VoidCallback? onTapChangeLocation,
+    required VoidCallback? onNotificationPressed,
+    required VoidCallback? onSearchPressed,
+    PreferredSizeWidget? bottom,
+  }) {
+    return AppBar(
+      title: ListTile(
+        contentPadding: const EdgeInsets.all(0),
+        leading: AccountAvatar(
+          type: AccountAvatarType.AppBar,
+          url: appUser?.avatar == null
+              ? null
+              : '${Application.baseUrl}${appUser?.avatar}',
+          viewCallback: onTapViewProfile,
+        ),
+        title: Text(
+          '${appUser?.firstName} ${appUser?.lastName}',
+          style: TextStyle(
+            color: AppColors.rhythm,
+          ),
+        ),
+        subtitle: Text(
+          appUser?.city ?? 'Miami, Florida',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        onTap: onTapChangeLocation,
+      ),
+      bottom: bottom,
+      actions: [
+        IconButton(
+          onPressed: onSearchPressed,
+          icon: Icon(
+            Icons.search,
+          ),
+        ),
+        OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            shape: const CircleBorder(),
+            side: BorderSide(color: AppColors.soap),
+          ),
+          onPressed: onNotificationPressed,
+          child: Center(
+            child: Icon(
+              Icons.notifications,
+              color: AppColors.plumpPurplePrimary,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   static AppBar buildAppBar({required String title}) {
     return AppBar(
       title: Text(title),
-      centerTitle: true,
     );
   }
 

@@ -1,4 +1,7 @@
+import 'package:cheffy/modules/main/main_view_model.dart';
+import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/theme/color.dart';
@@ -11,26 +14,37 @@ class ChatPageView extends ViewModelBuilderWidget<ChatViewModel> {
 
   @override
   Widget builder(BuildContext context, ChatViewModel viewModel, Widget? child) {
-    return Container(
-      color: Colors.white,
-      child: ListView(
-        children: [
-          ChatListingItemView(
-            userName: 'Jane Cooper',
-            userImage: R.image.img_avatar(),
-          ),
-          Divider(color: AppColors.soap, height: 1),
-          ChatListingItemView(
-            userName: 'Jane Cooper',
-            userImage: R.image.img_avatar(),
-          ),
-          Divider(color: AppColors.soap, height: 1),
-          ChatListingItemView(
-            userName: 'Jane Cooper',
-            userImage: R.image.img_avatar(),
-          ),
-          Divider(color: AppColors.soap, height: 1),
-        ],
+    final mainViewModel = context.watch<MainViewModel>();
+    return Scaffold(
+      appBar: SharedWidgets.buildHomeAppBar(
+        appUser: mainViewModel.appUser,
+        location: mainViewModel.location,
+        onTapViewProfile: mainViewModel.onTapViewProfile,
+        onTapChangeLocation: mainViewModel.onTapChangeLocation,
+        onNotificationPressed: mainViewModel.onPressedNotifications,
+        onSearchPressed: mainViewModel.onPressedSearch,
+      ),
+      body: Container(
+        color: Colors.white,
+        child: ListView(
+          children: [
+            ChatListingItemView(
+              userName: 'Jane Cooper',
+              userImage: R.image.img_avatar(),
+            ),
+            Divider(color: AppColors.soap, height: 1),
+            ChatListingItemView(
+              userName: 'Jane Cooper',
+              userImage: R.image.img_avatar(),
+            ),
+            Divider(color: AppColors.soap, height: 1),
+            ChatListingItemView(
+              userName: 'Jane Cooper',
+              userImage: R.image.img_avatar(),
+            ),
+            Divider(color: AppColors.soap, height: 1),
+          ],
+        ),
       ),
     );
   }

@@ -22,6 +22,8 @@ class PaymentViewModel extends BaseViewModel {
       occupation: 'Doctor',
       email: 'test@test.com',
       contactNo: '202-555-0190',
+      checkIn: '21/6/2022',
+      checkOut: '12/7/2022',
     ),
     RoommateModel(
       id: 2,
@@ -31,6 +33,8 @@ class PaymentViewModel extends BaseViewModel {
       occupation: 'Doctor',
       email: 'test@test.com',
       contactNo: '202-555-0190',
+      checkIn: '21/8/2022',
+      checkOut: '29/8/2022',
     ),
   ];
 

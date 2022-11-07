@@ -1,4 +1,7 @@
+import 'package:cheffy/modules/main/main_view_model.dart';
+import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_view.dart';
@@ -10,16 +13,18 @@ class PostsPageView extends ViewModelBuilderWidget<PostViewModel> {
 
   @override
   Widget builder(BuildContext context, PostViewModel viewModel, Widget? child) {
+    final mainViewModel = context.watch<MainViewModel>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: const Text('My Posts'),
-          ),
-          automaticallyImplyLeading: false,
+        appBar: SharedWidgets.buildHomeAppBar(
+          appUser: mainViewModel.appUser,
+          location: mainViewModel.location,
+          onTapViewProfile: mainViewModel.onTapViewProfile,
+          onTapChangeLocation: mainViewModel.onTapChangeLocation,
+          onNotificationPressed: mainViewModel.onPressedNotifications,
+          onSearchPressed: mainViewModel.onPressedSearch,
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Live'),
