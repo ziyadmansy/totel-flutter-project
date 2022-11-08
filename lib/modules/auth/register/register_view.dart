@@ -1,3 +1,4 @@
+import 'package:cheffy/Utils/stacked_nav_keys.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/modules/auth/auth/data/repositories/auth_repo_impl.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
@@ -21,7 +22,8 @@ class RegisterView extends ViewModelBuilderWidget<RegisterViewModel> {
       body: BackgroundProgress<RegisterViewModel>(
         child: ExtendedNavigator(
           router: RegisterViewRouter(),
-          navigatorKey: StackedService.nestedNavigationKey(RegisterViewModel.navKey),
+          navigatorKey:
+              StackedService.nestedNavigationKey(StackedNavKeys.registerNavKey),
         ),
       ),
     );

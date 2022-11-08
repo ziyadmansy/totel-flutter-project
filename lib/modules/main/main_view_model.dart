@@ -1,3 +1,4 @@
+import 'package:cheffy/Utils/stacked_nav_keys.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:fresh_dio/fresh_dio.dart';
@@ -14,7 +15,7 @@ import 'package:cheffy/core/services/secure_storage_service.dart';
 class MainViewModel extends BaseViewModel {
   // ignore: constant_identifier_names
   static const String TAG = 'MainViewModel';
-  static const int navKey = 1;
+  
 
   final NavigationService _navigationService = locator.get();
   final BottomSheetService _bottomSheetService = locator.get();
@@ -87,27 +88,27 @@ class MainViewModel extends BaseViewModel {
       case 0:
         // Home Page View
         _navigationService.navigateToNestedHomeView(
-            routerId: MainViewModel.navKey);
+            routerId: StackedNavKeys.mainNavKey);
         break;
       case 1:
         // Map Page View
         _navigationService.navigateToNestedMapView(
-            routerId: MainViewModel.navKey);
+            routerId: StackedNavKeys.mainNavKey);
         break;
       case 2:
         // Posts Page View
         _navigationService.navigateToNestedPostView(
-            routerId: MainViewModel.navKey);
+            routerId: StackedNavKeys.mainNavKey);
         break;
       case 3:
         // Chats Page View
         _navigationService.navigateToNestedChatView(
-            routerId: MainViewModel.navKey);
+            routerId: StackedNavKeys.mainNavKey);
         break;
       default:
         // Default case goes to Home Page
         _navigationService.navigateToNestedHomeView(
-            routerId: MainViewModel.navKey);
+            routerId: StackedNavKeys.mainNavKey);
         break;
     }
   }
@@ -117,7 +118,7 @@ class MainViewModel extends BaseViewModel {
   }
 
   void onPressedSearch() {
-    _navigationService.navigateTo(Routes.searchStayingView);
+    _navigationService.navigateTo(Routes.searchView);
   }
 
   void onDrawerItemPressedAbout() {

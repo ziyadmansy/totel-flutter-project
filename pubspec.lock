@@ -854,6 +854,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.0"
+  reactive_date_time_picker:
+    dependency: "direct main"
+    description:
+      name: reactive_date_time_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.0"
   reactive_flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -889,6 +896,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+  reactive_range_slider:
+    dependency: "direct main"
+    description:
+      name: reactive_range_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.0"
   responsive_builder:
     dependency: "direct main"
     description:

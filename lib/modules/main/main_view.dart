@@ -1,4 +1,5 @@
 import 'package:cheffy/Utils/key.dart';
+import 'package:cheffy/Utils/stacked_nav_keys.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/widgets/app_drawer.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
@@ -26,7 +27,7 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
         child: ExtendedNavigator(
           router: MainViewRouter(),
           navigatorKey:
-              StackedService.nestedNavigationKey(MainViewModel.navKey),
+              StackedService.nestedNavigationKey(StackedNavKeys.mainNavKey),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

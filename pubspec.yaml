@@ -29,6 +29,8 @@ dependencies:
   reactive_phone_form_field: ^0.10.0
   reactive_pin_code_fields: ^0.4.0
   reactive_date_range_picker: ^0.5.0
+  reactive_date_time_picker: ^0.5.0
+  reactive_range_slider: ^0.5.0
   shimmer: ^2.0.0
   r_dart_library: ^0.4.1
   flutter_secure_storage: ^6.0.0

@@ -36,6 +36,16 @@ class UniversalVariables {
 }
 
 class ReactiveFormControls {
-  static const String selectedDays = 'selected_days';
-  static const String roomsCount = 'rooms_count';
+  static const String searchLocation = 'search_location';
+  static const String searchDaysNumber = 'search_days_number';
+  static const String searchRoomsNumber = 'search_rooms_number';
+  
+  static const String searchCheckInDate = 'search_check_in_date';
+  static const String searchCheckOutDate = 'search_check_out_date';
+
+  static const String searchStartTime = 'search_start_time';
+  static const String searchEndTime = 'search_end_time';
+
+  static const String searchHourRangeStart = 'search_hours_range_start';
+  static const String searchHourRangeEnd = 'search_hours_range_end';
 }

@@ -8,8 +8,12 @@
 
 import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
 import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
-import 'package:cheffy/modules/search/presentation/search_hours_selection_screen.dart';
-import 'package:cheffy/modules/search/presentation/search_staying_screen.dart';
+import 'package:cheffy/modules/search/presentation/search_view.dart';
+import 'package:cheffy/modules/search/presentation/stacked_pages/search_hotels_page.dart';
+import 'package:cheffy/modules/search/presentation/stacked_pages/search_location_page.dart';
+import 'package:cheffy/modules/search/presentation/stacked_pages/search_room_time_page.dart';
+import 'package:cheffy/modules/search/presentation/stacked_pages/search_stay_type_page.dart';
+import 'package:cheffy/modules/search/presentation/stacked_pages/search_stay_with_page.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
@@ -50,6 +54,7 @@ class Routes {
   static const String onBoardingView = '/on-boarding-view';
   static const String loginView = '/login-view';
   static const String registerView = '/register-view';
+  static const String searchView = '/search-view';
   static const String oTPView = '/o-tp-view';
   static const String mainView = '/main-view';
   static const String chatDetailView = '/chat-detail-view';
@@ -71,13 +76,12 @@ class Routes {
   static const String settingsView = '/settings-view';
   static const String resetPasswordView = '/reset-password-view';
   static const String helpView = '/help-view';
-  static const String searchStayingView = '/search-staying-view';
-  static const String searchHoursView = '/search-hours-view';
   static const all = <String>{
     splashView,
     onBoardingView,
     loginView,
     registerView,
+    searchView,
     oTPView,
     mainView,
     chatDetailView,
@@ -99,8 +103,6 @@ class Routes {
     settingsView,
     resetPasswordView,
     helpView,
-    searchStayingView,
-    searchHoursView,
   };
 }
 
@@ -115,6 +117,11 @@ class StackedRouter extends RouterBase {
       Routes.registerView,
       page: RegisterView,
       generator: RegisterViewRouter(),
+    ),
+    RouteDef(
+      Routes.searchView,
+      page: SearchView,
+      generator: SearchRouter(),
     ),
     RouteDef(Routes.oTPView, page: OTPView),
     RouteDef(
@@ -141,8 +148,6 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.settingsView, page: SettingsMainScreen),
     RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
     RouteDef(Routes.helpView, page: HelpView),
-    RouteDef(Routes.searchStayingView, page: SearchStayingScreen),
-    RouteDef(Routes.searchHoursView, page: SearchHoursSelectionScreen),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -168,6 +173,12 @@ class StackedRouter extends RouterBase {
     RegisterView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const RegisterView(),
+        settings: data,
+      );
+    },
+    SearchView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const SearchView(),
         settings: data,
       );
     },
@@ -304,15 +315,15 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    SearchStayingScreen: (data) {
+    SearchStayTypePage: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchStayingScreen(),
+        builder: (context) => SearchStayTypePage(),
         settings: data,
       );
     },
-    SearchHoursSelectionScreen: (data) {
+    SearchRoomTimePage: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchHoursSelectionScreen(),
+        builder: (context) => SearchRoomTimePage(),
         settings: data,
       );
     },
@@ -424,6 +435,67 @@ class MainViewRouter extends RouterBase {
     ChatPageView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const ChatPageView(),
+        settings: data,
+      );
+    },
+  };
+}
+
+class SearchRoutes {
+  static const String searchLocationView = '/';
+  static const String stayTypeView = '/stay-type-view';
+  static const String roomTypeView = '/room-type-view';
+  static const String stayWithView = '/stay-with-view';
+  static const String searchHotelsView = '/search-hotels-view';
+  static const all = <String>{
+    searchLocationView,
+    stayTypeView,
+    roomTypeView,
+    stayWithView,
+    searchHotelsView,
+  };
+}
+
+class SearchRouter extends RouterBase {
+  @override
+  List<RouteDef> get routes => _routes;
+  final _routes = <RouteDef>[
+    RouteDef(SearchRoutes.searchLocationView, page: SearchLocationPage),
+    RouteDef(SearchRoutes.stayTypeView, page: SearchStayTypePage),
+    RouteDef(SearchRoutes.roomTypeView, page: SearchRoomTimePage),
+    RouteDef(SearchRoutes.stayWithView, page: SearchStayWithPage),
+    RouteDef(SearchRoutes.searchHotelsView, page: SearchHotelsPage),
+  ];
+  @override
+  Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
+  final _pagesMap = <Type, StackedRouteFactory>{
+    SearchLocationPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SearchLocationPage(),
+        settings: data,
+      );
+    },
+    SearchStayTypePage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SearchStayTypePage(),
+        settings: data,
+      );
+    },
+    SearchRoomTimePage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SearchRoomTimePage(),
+        settings: data,
+      );
+    },
+    SearchStayWithPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SearchStayWithPage(),
+        settings: data,
+      );
+    },
+    SearchHotelsPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SearchHotelsPage(),
         settings: data,
       );
     },

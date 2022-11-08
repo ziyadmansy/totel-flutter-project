@@ -1,3 +1,4 @@
+import 'package:cheffy/Utils/stacked_nav_keys.dart';
 import 'package:cheffy/core/exceptions/custom_exceptions.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,7 +45,6 @@ class RegisterViewModel extends BaseViewModel {
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  static const int navKey = 2;
   final controls = _Controls();
 
   final AuthRepo authRepo;
@@ -70,7 +70,7 @@ class RegisterViewModel extends BaseViewModel {
   void onShowPassword() => obscureText = !obscureText;
 
   void onSubmitOtp() => _navigationService.navigateToNestedRegisterFormView(
-      routerId: RegisterViewModel.navKey);
+      routerId: StackedNavKeys.registerNavKey);
 
   void onRegisterSubmit() async {
     try {

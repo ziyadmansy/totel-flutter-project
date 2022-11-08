@@ -66,9 +66,36 @@ class SharedWidgets {
     );
   }
 
-  static AppBar buildAppBar({required String title}) {
+  static AppBar buildAppBar(
+      {required String title, PreferredSizeWidget? bottom}) {
     return AppBar(
       title: Text(title),
+      bottom: bottom,
+    );
+  }
+
+  static ListTile buildListTileTitle({required String title}) {
+    return ListTile(
+      contentPadding: const EdgeInsets.all(0),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
+
+  static Widget buildSwitchListTile({
+    required String title,
+    required bool val,
+    required void Function(bool)? onChange,
+  }) {
+    return SwitchListTile.adaptive(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 4),
+      value: val,
+      title: Text(title),
+      onChanged: onChange,
     );
   }
 
