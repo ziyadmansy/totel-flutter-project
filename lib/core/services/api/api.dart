@@ -22,5 +22,5 @@ abstract class Api {
 
   Future<List<LocationEntity>> locations();
 
-  Future<List<BiddingEntity>> biddings();
+  // Future<List<BiddingEntity>> biddings();
 }

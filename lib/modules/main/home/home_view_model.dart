@@ -12,7 +12,7 @@ class HomeViewModel extends BaseViewModel {
   final BiddingService _biddingService = locator.get();
 
   void onTapPost() {
-    _biddingService.getBiddings();
+    // _biddingService.getBiddings();
     _navigationService.navigateToPostDetailView();
   }
 }

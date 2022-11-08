@@ -8,7 +8,7 @@ import 'package:cheffy/core/services/api/api_provider.dart';
 class BiddingService {
   final Api _api = locator.get<ApiProvider>();
 
-  Future<List<BiddingEntity>> getBiddings() {
-    return _api.biddings();
-  }
+  // Future<List<BiddingEntity>> getBiddings() {
+  //   return _api.biddings();
+  // }
 }

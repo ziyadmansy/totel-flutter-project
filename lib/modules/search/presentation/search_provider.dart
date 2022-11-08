@@ -1,6 +1,7 @@
 import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/Utils/theme/color.dart';
 import 'package:cheffy/app/app.locator.dart';
+import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class SearchProvider extends ChangeNotifier {
   void onSubmitBtnPressed() {
     if (stayingSearchForm.valid) {
       // Continue the process of searching
+      _navigationService.navigateTo(Routes.searchHoursView);
     } else {
       stayingSearchForm.markAllAsTouched();
     }

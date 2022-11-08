@@ -8,6 +8,7 @@
 
 import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
 import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
+import 'package:cheffy/modules/search/presentation/search_hours_selection_screen.dart';
 import 'package:cheffy/modules/search/presentation/search_staying_screen.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
@@ -71,6 +72,7 @@ class Routes {
   static const String resetPasswordView = '/reset-password-view';
   static const String helpView = '/help-view';
   static const String searchStayingView = '/search-staying-view';
+  static const String searchHoursView = '/search-hours-view';
   static const all = <String>{
     splashView,
     onBoardingView,
@@ -98,6 +100,7 @@ class Routes {
     resetPasswordView,
     helpView,
     searchStayingView,
+    searchHoursView,
   };
 }
 
@@ -139,6 +142,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
     RouteDef(Routes.helpView, page: HelpView),
     RouteDef(Routes.searchStayingView, page: SearchStayingScreen),
+    RouteDef(Routes.searchHoursView, page: SearchHoursSelectionScreen),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -303,6 +307,12 @@ class StackedRouter extends RouterBase {
     SearchStayingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => SearchStayingScreen(),
+        settings: data,
+      );
+    },
+    SearchHoursSelectionScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SearchHoursSelectionScreen(),
         settings: data,
       );
     },

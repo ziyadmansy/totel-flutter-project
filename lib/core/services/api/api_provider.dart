@@ -66,11 +66,11 @@ class ApiProvider implements Api {
   //   return UploadAttachmentEntity.fromJson(result.data);
   // }
 
-  @override
-  Future<List<BiddingEntity>> biddings() async {
-    final result = await _apiClient.get('bidding');
-    return ((result.data) as List)
-        .map((e) => BiddingEntity.fromMap(e))
-        .toList();
-  }
+  // @override
+  // Future<List<BiddingEntity>> biddings() async {
+  //   final result = await _apiClient.get('bidding');
+  //   return ((result.data) as List)
+  //       .map((e) => BiddingEntity.fromMap(e))
+  //       .toList();
+  // }
 }
