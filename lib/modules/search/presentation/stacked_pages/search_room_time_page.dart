@@ -98,6 +98,9 @@ class SearchRoomTimePage extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 16,
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -118,37 +121,36 @@ class SearchRoomTimePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 16,
-                ),
-                SharedWidgets.buildListTileTitle(title: 'Hours Range'),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ReactiveDateTimePicker(
-                        formControlName: ReactiveFormControls.searchStartTime,
-                        type: ReactiveDatePickerFieldType.time,
-                        decoration: const InputDecoration(
-                          labelText: 'Start',
-                          suffixIcon: Icon(Icons.calendar_today),
+                if (!searchProvider.isFullDay) ...[
+                  SharedWidgets.buildListTileTitle(title: 'Hours Range'),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ReactiveDateTimePicker(
+                          formControlName: ReactiveFormControls.searchStartTime,
+                          type: ReactiveDatePickerFieldType.time,
+                          decoration: const InputDecoration(
+                            labelText: 'Start',
+                            suffixIcon: Icon(Icons.calendar_today),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                      child: ReactiveDateTimePicker(
-                        formControlName: ReactiveFormControls.searchEndTime,
-                        type: ReactiveDatePickerFieldType.time,
-                        decoration: const InputDecoration(
-                          labelText: 'End',
-                          suffixIcon: Icon(Icons.calendar_today),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Expanded(
+                        child: ReactiveDateTimePicker(
+                          formControlName: ReactiveFormControls.searchEndTime,
+                          type: ReactiveDatePickerFieldType.time,
+                          decoration: const InputDecoration(
+                            labelText: 'End',
+                            suffixIcon: Icon(Icons.calendar_today),
+                          ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ],
+                  ),
+                ],
                 SizedBox(
                   height: 16,
                 ),
