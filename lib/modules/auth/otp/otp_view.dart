@@ -16,7 +16,6 @@ class OTPView extends ViewModelBuilderWidget<OTPViewModel> {
   @override
   Widget builder(BuildContext context, OTPViewModel viewModel, Widget? child) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(),
       body: BackgroundProgress<OTPViewModel>(
         child: SafeArea(

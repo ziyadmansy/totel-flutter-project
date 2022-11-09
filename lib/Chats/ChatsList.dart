@@ -24,7 +24,6 @@ class _ChatsListState extends State<ChatsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Chats',

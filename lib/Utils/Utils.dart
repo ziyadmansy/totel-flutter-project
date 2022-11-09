@@ -37,7 +37,6 @@ class UniversalVariables {
 
 class ReactiveFormControls {
   static const String searchLocation = 'search_location';
-  static const String searchDaysNumber = 'search_days_number';
   static const String searchRoomsNumber = 'search_rooms_number';
   
   static const String searchCheckInDate = 'search_check_in_date';

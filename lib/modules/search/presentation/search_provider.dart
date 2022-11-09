@@ -5,22 +5,60 @@ import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/day_night_enum.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
+import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_view.dart';
+import 'package:cheffy/r.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class SearchProvider extends ChangeNotifier {
-  bool isLoading = false;
-
   final NavigationService _navigationService = locator.get();
   final BottomSheetService _bottomSheetService = locator.get();
 
+  bool isLoading = false;
+
+  List<PostListingItemView> filteredHotels = [
+    PostListingItemView(
+      layoutType: 2,
+      userImage: R.image.img_avatar_2(),
+      image: R.image.img_ad_1(),
+      dateRange: '4 Jun - 6 Jun',
+      title: 'Hilton Miami Downtown',
+      by: 'Albert Flores',
+      price: '\$90',
+      period: 'Day',
+      onTap: () {},
+    ),
+    PostListingItemView(
+      layoutType: 2,
+      userImage: R.image.img_avatar_3(),
+      image: R.image.img_ad_2(),
+      dateRange: '4 Jun - 6 Jun',
+      title: 'Radisson RED Miami Airport',
+      by: 'Albert Flores',
+      price: '\$90',
+      period: 'Day',
+      type: 2,
+      rating: 2,
+      onTap: () {},
+    ),
+    PostListingItemView(
+      layoutType: 2,
+      userImage: R.image.img_avatar_3(),
+      image: R.image.img_ad_2(),
+      dateRange: '4 Jun - 6 Jun',
+      title: 'Radisson RED Miami Airport',
+      by: 'Albert Flores',
+      price: '\$90',
+      period: 'Day',
+      type: 3,
+      onTap: () {},
+    ),
+  ];
+
   // Search location Page Form
   late final FormGroup searchLocationForm;
-
-  // Search Room Type Page Form
-  late final FormGroup stayingSearchForm;
 
   // Search Time Page Form
   late final FormGroup timeSearchForm;
@@ -60,24 +98,14 @@ class SearchProvider extends ChangeNotifier {
       ),
     });
 
-    stayingSearchForm = FormGroup(
-      {
-        ReactiveFormControls.searchDaysNumber: FormControl<int>(
-          validators: [
-            Validators.required,
-          ],
-        ),
-        ReactiveFormControls.searchRoomsNumber: FormControl<int>(
-          validators: [
-            Validators.required,
-            Validators.number,
-            Validators.max<int>(maxRoomsNumber),
-          ],
-        ),
-      },
-    );
-
     timeSearchForm = FormGroup({
+      ReactiveFormControls.searchRoomsNumber: FormControl<int>(
+        validators: [
+          Validators.required,
+          Validators.number,
+          Validators.max<int>(maxRoomsNumber),
+        ],
+      ),
       ReactiveFormControls.searchHourRangeStart: FormControl<int>(
         validators: [
           Validators.required,
@@ -123,11 +151,11 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onLocationSubmit() {
+  void onAdvancedSearchLocationSubmit() {
     if (searchLocationForm.valid) {
       // Continue the process of searching to stay type
       _navigationService.navigateTo(
-        SearchRoutes.stayTypeView,
+        SearchRoutes.roomTypeView,
         id: StackedNavKeys.searchNavKey,
       );
     } else {
@@ -136,17 +164,18 @@ class SearchProvider extends ChangeNotifier {
     }
   }
 
-  void onSubmitBtnPressed() {
-    if (stayingSearchForm.valid) {
-      // Continue the process of searching to room type
-      _navigationService.navigateTo(
-        SearchRoutes.roomTypeView,
-        id: StackedNavKeys.searchNavKey,
-      );
-    } else {
-      print('Not valid (onLocationSubmit)');
-      stayingSearchForm.markAllAsTouched();
-    }
+  void onNormalSearchLocationSubmit() {
+    _navigationService.navigateTo(
+      SearchRoutes.searchHotelsView,
+      id: StackedNavKeys.searchNavKey,
+    );
+  }
+
+  void onSearchFilterResultSubmit() {
+    _navigationService.navigateTo(
+      SearchRoutes.searchHotelsView,
+      id: StackedNavKeys.searchNavKey,
+    );
   }
 
   void onDayweekChoice(DayWeek dayWeekChoice) {

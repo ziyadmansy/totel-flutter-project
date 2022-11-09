@@ -14,7 +14,6 @@ class ChatDetailView extends ViewModelBuilderWidget<ChatDetailViewModel> {
   Widget builder(
       BuildContext context, ChatDetailViewModel viewModel, Widget? child) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Row(
           mainAxisSize: MainAxisSize.min,

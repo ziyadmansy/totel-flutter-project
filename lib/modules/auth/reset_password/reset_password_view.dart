@@ -10,9 +10,7 @@ class ResetPasswordView extends ViewModelBuilderWidget<ResetPasswordViewModel> {
   Widget builder(
       BuildContext context, ResetPasswordViewModel viewModel, Widget? child) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(
           color: Colors.grey,

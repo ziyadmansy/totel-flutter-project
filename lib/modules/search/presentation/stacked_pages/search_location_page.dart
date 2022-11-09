@@ -1,5 +1,6 @@
 import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/modules/search/presentation/search_provider.dart';
+import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -112,8 +113,16 @@ class SearchLocationPage extends StatelessWidget {
                 height: 100,
               ),
               SharedWidgets.buildRoundedElevatedButton(
-                btnChild: Text('Find a place'),
-                onPress: searchProvider.onLocationSubmit,
+                btnChild: Text('Search'),
+                onPress: searchProvider.onNormalSearchLocationSubmit,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              SharedWidgets.buildRoundedElevatedButton(
+                btnChild: Text('Advanced Search'),
+                onPress: searchProvider.onAdvancedSearchLocationSubmit,
+                btnColor: AppColors.darkGunmetal,
               ),
               SizedBox(
                 height: 8,

@@ -24,27 +24,24 @@ class ChatPageView extends ViewModelBuilderWidget<ChatViewModel> {
         onNotificationPressed: mainViewModel.onPressedNotifications,
         onSearchPressed: mainViewModel.onPressedSearch,
       ),
-      body: Container(
-        color: Colors.white,
-        child: ListView(
-          children: [
-            ChatListingItemView(
-              userName: 'Jane Cooper',
-              userImage: R.image.img_avatar(),
-            ),
-            Divider(color: AppColors.soap, height: 1),
-            ChatListingItemView(
-              userName: 'Jane Cooper',
-              userImage: R.image.img_avatar(),
-            ),
-            Divider(color: AppColors.soap, height: 1),
-            ChatListingItemView(
-              userName: 'Jane Cooper',
-              userImage: R.image.img_avatar(),
-            ),
-            Divider(color: AppColors.soap, height: 1),
-          ],
-        ),
+      body: ListView(
+        children: [
+          ChatListingItemView(
+            userName: 'Jane Cooper',
+            userImage: R.image.img_avatar(),
+          ),
+          Divider(color: AppColors.soap, height: 1),
+          ChatListingItemView(
+            userName: 'Jane Cooper',
+            userImage: R.image.img_avatar(),
+          ),
+          Divider(color: AppColors.soap, height: 1),
+          ChatListingItemView(
+            userName: 'Jane Cooper',
+            userImage: R.image.img_avatar(),
+          ),
+          Divider(color: AppColors.soap, height: 1),
+        ],
       ),
     );
   }

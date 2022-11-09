@@ -37,7 +37,6 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         extendBodyBehindAppBar: true,
-        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white70,
           elevation: 0,

@@ -104,7 +104,7 @@ class SharedWidgets {
     required VoidCallback? onPress,
     bool isEnabled = true,
     Color? btnColor,
-    bool isTooRounded = true,
+    bool isTooRounded = false,
   }) =>
       SizedBox(
         height: 48,
@@ -129,7 +129,7 @@ class SharedWidgets {
     required VoidCallback onPress,
     bool isEnabled = true,
     Color? btnColor,
-    bool isTooRounded = true,
+    bool isTooRounded = false,
   }) =>
       SizedBox(
         height: 40,
@@ -152,7 +152,7 @@ class SharedWidgets {
     required VoidCallback? onPress,
     Color? btnColor,
     bool isEnabled = true,
-    bool isTooRounded = true,
+    bool isTooRounded = false,
   }) {
     return SizedBox(
       height: 48,
@@ -177,7 +177,7 @@ class SharedWidgets {
     required VoidCallback? onPress,
     Color? btnColor,
     bool isEnabled = true,
-    bool isTooRounded = true,
+    bool isTooRounded = false,
   }) {
     return SizedBox(
       height: 48,

@@ -21,7 +21,6 @@ class LoginView extends ViewModelBuilderWidget<LoginViewModel> {
   Widget builder(
       BuildContext context, LoginViewModel viewModel, Widget? child) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: BackgroundProgress<LoginViewModel>(
           child: Padding(

@@ -18,9 +18,7 @@ class _SetYourLocationScreenState extends State<SetYourLocationScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
             icon: Icon(

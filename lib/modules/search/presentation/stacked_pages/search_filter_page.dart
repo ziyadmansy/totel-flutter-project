@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class SearchRoomTimePage extends StatelessWidget {
-  SearchRoomTimePage({super.key});
+class SearchFilterPage extends StatelessWidget {
+  SearchFilterPage({super.key});
 
   // Initially selected color
   final Color selectedBtnColor = AppColors.plumpPurplePrimary
@@ -30,6 +30,25 @@ class SearchRoomTimePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
             child: Column(
               children: [
+                SharedWidgets.buildListTileTitle(title: 'Rooms count'),
+                ReactiveTextField(
+                  formControlName: ReactiveFormControls.searchRoomsNumber,
+                  decoration: InputDecoration(
+                    labelText: 'Rooms',
+                    hintText: 'How many rooms',
+                  ),
+                  keyboardType: TextInputType.number,
+                  validationMessages: {
+                    ValidationMessage.required: (val) => 'Enter rooms number',
+                    ValidationMessage.number: (val) => 'Enter a valid number',
+                    ValidationMessage.max: (val) =>
+                        'Max rooms number is ${searchProvider.maxRoomsNumber}',
+                  },
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                SharedWidgets.buildListTileTitle(title: 'Date'),
                 Row(
                   children: [
                     Expanded(
@@ -58,48 +77,11 @@ class SearchRoomTimePage extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 8,
+                ),
                 SharedWidgets.buildListTileTitle(
                   title: 'Hours',
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: UniversalVariables.kBtnHeight,
-                        child: SharedWidgets.buildRoundedOutlinedButton(
-                          isTooRounded: false,
-                          btnChild: Text('Day Hours'),
-                          onPress: () {
-                            searchProvider.onDayNightChoice(DayNight.Day);
-                          },
-                          btnColor: searchProvider.dayNight == DayNight.Day
-                              ? selectedBtnColor
-                              : unselectedBtnColor,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                        height: UniversalVariables.kBtnHeight,
-                        child: SharedWidgets.buildRoundedOutlinedButton(
-                          isTooRounded: false,
-                          btnChild: Text('Night Hours'),
-                          onPress: () {
-                            searchProvider.onDayNightChoice(DayNight.Night);
-                          },
-                          btnColor: searchProvider.dayNight == DayNight.Night
-                              ? selectedBtnColor
-                              : unselectedBtnColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 16,
                 ),
                 Row(
                   children: [
@@ -120,6 +102,9 @@ class SearchRoomTimePage extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 8,
                 ),
                 if (!searchProvider.isFullDay) ...[
                   SharedWidgets.buildListTileTitle(title: 'Hours Range'),
@@ -150,9 +135,33 @@ class SearchRoomTimePage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 8,
+                  ),
                 ],
+                SharedWidgets.buildListTileTitle(title: 'Room Service Type'),
+                SharedWidgets.buildSwitchListTile(
+                  val: searchProvider.isFullBoard,
+                  title: 'Full Board',
+                  onChange: searchProvider.switchFullBoard,
+                ),
+                SharedWidgets.buildSwitchListTile(
+                  val: searchProvider.isHalfBoard,
+                  title: 'Half Board',
+                  onChange: searchProvider.switchHalfBoard,
+                ),
+                SharedWidgets.buildSwitchListTile(
+                  val: searchProvider.isBedAndBreakfast,
+                  title: 'Bed & Breakfast',
+                  onChange: searchProvider.switchBedAndBreakfast,
+                ),
+                SharedWidgets.buildSwitchListTile(
+                  val: searchProvider.isRoomOnly,
+                  title: 'Room Only',
+                  onChange: searchProvider.switchRoomOnly,
+                ),
                 SizedBox(
-                  height: 16,
+                  height: 8,
                 ),
                 SharedWidgets.buildListTileTitle(title: 'Price Range'),
                 Row(
@@ -183,7 +192,7 @@ class SearchRoomTimePage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: SharedWidgets.buildRoundedElevatedButton(
                     btnChild: Text('Search'),
-                    onPress: () {},
+                    onPress: searchProvider.onSearchFilterResultSubmit,
                   ),
                 ),
               ],

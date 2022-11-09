@@ -11,9 +11,7 @@ import 'package:cheffy/modules/payment/presentation/options/payment_percentage_v
 import 'package:cheffy/modules/search/presentation/search_view.dart';
 import 'package:cheffy/modules/search/presentation/stacked_pages/search_hotels_page.dart';
 import 'package:cheffy/modules/search/presentation/stacked_pages/search_location_page.dart';
-import 'package:cheffy/modules/search/presentation/stacked_pages/search_room_time_page.dart';
-import 'package:cheffy/modules/search/presentation/stacked_pages/search_stay_type_page.dart';
-import 'package:cheffy/modules/search/presentation/stacked_pages/search_stay_with_page.dart';
+import 'package:cheffy/modules/search/presentation/stacked_pages/search_filter_page.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
@@ -315,15 +313,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    SearchStayTypePage: (data) {
+    SearchFilterPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchStayTypePage(),
-        settings: data,
-      );
-    },
-    SearchRoomTimePage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchRoomTimePage(),
+        builder: (context) => SearchFilterPage(),
         settings: data,
       );
     },
@@ -443,13 +435,11 @@ class MainViewRouter extends RouterBase {
 
 class SearchRoutes {
   static const String searchLocationView = '/';
-  static const String stayTypeView = '/stay-type-view';
   static const String roomTypeView = '/room-type-view';
   static const String stayWithView = '/stay-with-view';
   static const String searchHotelsView = '/search-hotels-view';
   static const all = <String>{
     searchLocationView,
-    stayTypeView,
     roomTypeView,
     stayWithView,
     searchHotelsView,
@@ -461,9 +451,7 @@ class SearchRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(SearchRoutes.searchLocationView, page: SearchLocationPage),
-    RouteDef(SearchRoutes.stayTypeView, page: SearchStayTypePage),
-    RouteDef(SearchRoutes.roomTypeView, page: SearchRoomTimePage),
-    RouteDef(SearchRoutes.stayWithView, page: SearchStayWithPage),
+    RouteDef(SearchRoutes.roomTypeView, page: SearchFilterPage),
     RouteDef(SearchRoutes.searchHotelsView, page: SearchHotelsPage),
   ];
   @override
@@ -475,21 +463,9 @@ class SearchRouter extends RouterBase {
         settings: data,
       );
     },
-    SearchStayTypePage: (data) {
+    SearchFilterPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchStayTypePage(),
-        settings: data,
-      );
-    },
-    SearchRoomTimePage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchRoomTimePage(),
-        settings: data,
-      );
-    },
-    SearchStayWithPage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchStayWithPage(),
+        builder: (context) => SearchFilterPage(),
         settings: data,
       );
     },

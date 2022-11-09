@@ -19,7 +19,6 @@ class SearchView extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: SharedWidgets.buildAppBar(
           title: 'Search',
         ),

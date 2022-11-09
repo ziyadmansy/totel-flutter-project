@@ -36,7 +36,7 @@ class App extends StatelessWidget {
     //   useOnlyLangCode: true,
     //   child:
     return ThemeBuilder(
-      defaultThemeMode: ThemeMode.system,
+      defaultThemeMode: ThemeMode.light, // Dark mode is not well implemented
       darkTheme: AppTheme.of(context).dark,
       lightTheme: AppTheme.of(context).light,
       builder: (context, regularTheme, darkTheme, themeMode) => MultiProvider(

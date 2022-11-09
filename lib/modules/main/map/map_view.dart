@@ -30,67 +30,64 @@ class MapPageView extends ViewModelBuilderWidget<MapViewModel> {
         onNotificationPressed: mainViewModel.onPressedNotifications,
         onSearchPressed: mainViewModel.onPressedSearch,
       ),
-      body: Container(
-        color: Colors.white,
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: GoogleMap(
-                          initialCameraPosition: _kGooglePlex,
-                          onMapCreated: viewModel.onMapCreated,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Expanded(
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                      child: GoogleMap(
+                        initialCameraPosition: _kGooglePlex,
+                        onMapCreated: viewModel.onMapCreated,
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 75,
+                      child: SizedBox(
+                        height: 282,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            const SizedBox(width: 8),
+                            PostListingItemView(
+                              layoutType: 1,
+                              image: R.image.img_ad_1(),
+                              dateRange: '4 Jun - 6 Jun',
+                              title: 'Hilton Miami Downtown',
+                              by: 'Albert Flores',
+                              price: '\$90',
+                              period: 'Day',
+                              onTap: () => viewModel.onTapPost(context),
+                            ),
+                            PostListingItemView(
+                              layoutType: 1,
+                              image: R.image.img_ad_2(),
+                              dateRange: '4 Jun - 6 Jun',
+                              title: 'Radisson RED Miami Airport',
+                              by: 'Albert Flores',
+                              price: '\$90',
+                              period: 'Day',
+                              onTap: () => viewModel.onTapPost(context),
+                            ),
+                            const SizedBox(width: 8),
+                          ],
                         ),
                       ),
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 75,
-                        child: SizedBox(
-                          height: 282,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              const SizedBox(width: 8),
-                              PostListingItemView(
-                                layoutType: 1,
-                                image: R.image.img_ad_1(),
-                                dateRange: '4 Jun - 6 Jun',
-                                title: 'Hilton Miami Downtown',
-                                by: 'Albert Flores',
-                                price: '\$90',
-                                period: 'Day',
-                                onTap: () => viewModel.onTapPost(context),
-                              ),
-                              PostListingItemView(
-                                layoutType: 1,
-                                image: R.image.img_ad_2(),
-                                dateRange: '4 Jun - 6 Jun',
-                                title: 'Radisson RED Miami Airport',
-                                by: 'Albert Flores',
-                                price: '\$90',
-                                period: 'Day',
-                                onTap: () => viewModel.onTapPost(context),
-                              ),
-                              const SizedBox(width: 8),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

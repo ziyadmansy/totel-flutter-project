@@ -17,7 +17,6 @@ class RegisterView extends ViewModelBuilderWidget<RegisterViewModel> {
   Widget builder(
       BuildContext context, RegisterViewModel viewModel, Widget? child) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(),
       body: BackgroundProgress<RegisterViewModel>(
         child: ExtendedNavigator(

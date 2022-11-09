@@ -13,9 +13,7 @@ class PaymentOptionsView extends ViewModelWidget<PaymentViewModel> {
   @override
   Widget build(BuildContext context, PaymentViewModel viewModel) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: const Text("Payment Options"),
       ),
       body: SafeArea(
