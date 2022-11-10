@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -17,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -32,9 +34,19 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow access to camera to upload images from your camera. In order to be able to change profile picture, upload images and more.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need your location for searching on hotels and partners</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location for searching on hotels and partners</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location for searching on hotels and partners</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to photo library to upload and share photos you choose from your photo library. In order to be able to change profile picture, upload images and more.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -59,17 +71,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Allow access to camera to upload images from your camera. In order to be able to change profile picture, upload images and more.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to photo library to upload and share photos you choose from your photo library. In order to be able to change profile picture, upload images and more.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need your location for searching on hotels and partners</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need your location for searching on hotels and partners</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location for searching on hotels and partners</string>
 </dict>
 </plist>
