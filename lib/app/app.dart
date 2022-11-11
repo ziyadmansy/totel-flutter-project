@@ -96,6 +96,9 @@ class Application {
 
   static const String appName = 'Totel';
 
+  // This is temporary till backend fixes it
+  static String imgBaseUrl = 'https://metoospace.herokuapp.com';
+
   static late Flavor flavor;
   static late String baseUrl;
   static late String? encAlgorithm;

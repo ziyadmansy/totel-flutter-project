@@ -1,10 +1,8 @@
 import 'package:cheffy/Utils/app_providers.dart';
-import 'package:cheffy/modules/payment/presentation/payment_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
-
 import 'app/app.dart';
 import 'app/app.router.dart';
 import 'modules/theme/theme.dart';

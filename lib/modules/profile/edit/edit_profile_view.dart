@@ -7,6 +7,7 @@ import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_image_picker/reactive_image_picker.dart';
 import 'package:stacked/stacked.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/widgets/app_bar_action_button.dart';
@@ -25,7 +26,9 @@ class _EditProfileViewState extends State<EditProfileView> {
   void initState() {
     super.initState();
     final profileProvider = context.read<ProfileProvider>();
-    profileProvider.getOccupations();
+    Future.delayed(Duration.zero, () {
+      profileProvider.getOccupations();
+    });
   }
 
   @override
@@ -43,9 +46,22 @@ class _EditProfileViewState extends State<EditProfileView> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    AppFormField(
+                      label: 'Avatar',
+                      field: ReactiveImagePicker(
+                        formControlName: ReactiveFormControls.avatar,
+                        inputBuilder: (onPressed) => TextButton.icon(
+                          onPressed: onPressed,
+                          icon: const Icon(Icons.add),
+                          label: const Text('Add an avatar'),
+                        ),
+                        imageQuality: 40,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -138,7 +154,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                       width: MediaQuery.of(context).size.width,
                       child: SharedWidgets.buildRoundedElevatedButton(
                         btnChild: Text('Save'),
-                        onPress: profileProvider.onEditSave,
+                        onPress: () async {
+                          FocusScope.of(context).unfocus();
+                          await profileProvider.onEditSave();
+                        },
                       ),
                     ),
                     const SizedBox(height: 32),

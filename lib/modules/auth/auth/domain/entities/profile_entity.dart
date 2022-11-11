@@ -14,7 +14,6 @@ class ProfileEntity {
   final String lastName;
   final String username;
   final String email;
-  final String password;
   final String? native;
   final String? bio;
   final String? phoneNo;
@@ -34,7 +33,6 @@ class ProfileEntity {
     required this.lastName,
     required this.username,
     required this.email,
-    required this.password,
     required this.native,
     required this.bio,
     required this.phoneNo,
@@ -55,7 +53,6 @@ class ProfileEntity {
         lastName: json["last_name"],
         username: json["username"],
         email: json["email"],
-        password: json["password"],
         native: json["native"],
         bio: json["bio"],
         phoneNo: json["phone_no"],
@@ -64,7 +61,7 @@ class ProfileEntity {
             : DateTime.tryParse(json["date_of_brith"]),
         avatar: json["avatar"] == null
             ? null
-            : '${Application.baseUrl}/${json["avatar"]}',
+            : '${Application.imgBaseUrl}/${(json["avatar"] as String).replaceAll('public/', '')}',
         city: json["city"],
         rating: json["rating"],
         gender: json["gender"],
@@ -82,11 +79,14 @@ class ProfileEntity {
         "first_name": firstName,
         "last_name": lastName,
         "email": email,
-        "password": password,
         "native": native,
         "bio": bio,
-        "avatar": avatar,
         "gender": gender,
         "occupation": occupation?.id,
       };
+
+  String getImgFullUrlPath(String avatarUrl) {
+    final fixedAvatarUrl = avatarUrl.replaceAll('public/', '');
+    return '${Application.imgBaseUrl}/$fixedAvatarUrl';
+  }
 }

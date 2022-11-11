@@ -178,7 +178,7 @@ class ApiClient {
 
   Future<Response> put(
     String path, {
-    Map<String, dynamic>? data,
+    dynamic  data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,

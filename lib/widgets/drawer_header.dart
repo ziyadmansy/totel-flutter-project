@@ -27,7 +27,7 @@ class DrawerHeaderWidget extends ViewModelWidget<MainViewModel> {
                 type: AccountAvatarType.Drawer,
                 url: profileProvider.profileEntity?.avatar == null
                     ? null
-                    : '${Application.baseUrl}${profileProvider.profileEntity?.avatar}',
+                    : '${profileProvider.profileEntity?.avatar}',
                 viewCallback: mainViewModel.onTapViewProfile,
               ),
               SizedBox(

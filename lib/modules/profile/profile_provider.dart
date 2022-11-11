@@ -5,6 +5,7 @@ import 'package:cheffy/core/services/secure_storage_service.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
 import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_image_picker/image_file.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:cheffy/app/app.locator.dart';
@@ -39,9 +40,7 @@ class ProfileProvider extends BaseViewModel {
       ReactiveFormControls.native: FormControl(
         validators: [Validators.required],
       ),
-      ReactiveFormControls.avatar: FormControl<String>(
-        validators: [Validators.required],
-      ),
+      ReactiveFormControls.avatar: FormControl<ImageFile>(),
       ReactiveFormControls.occupation: FormControl<int>(
         validators: [Validators.required],
       ),
@@ -97,6 +96,7 @@ class ProfileProvider extends BaseViewModel {
   Future<void> onEditSave() async {
     try {
       setBusy(true);
+
       final editedProfile = ProfileEntity(
         id: profileEntity!.id,
         firstName:
@@ -104,24 +104,34 @@ class ProfileProvider extends BaseViewModel {
         lastName: editProfileForm.control(ReactiveFormControls.lastName).value,
         username: profileEntity!.username,
         email: profileEntity!.email,
-        password: profileEntity!.password,
         native: editProfileForm.control(ReactiveFormControls.native).value,
         bio: editProfileForm.control(ReactiveFormControls.bio).value,
         phoneNo: profileEntity!.phoneNo,
         dateOfBrith: profileEntity!.dateOfBrith,
-        avatar: editProfileForm.control(ReactiveFormControls.avatar).value,
+        avatar: profileEntity!.avatar,
         city: profileEntity!.city,
         rating: profileEntity!.rating,
         gender: maleFemaleEnum.name,
         createdAt: profileEntity!.createdAt,
         updatedAt: profileEntity!.updatedAt,
         hobbie: profileEntity!.hobbie,
-        occupation:
-            editProfileForm.control(ReactiveFormControls.occupation).value,
+        occupation: Occupation(
+          id: (editProfileForm.control(ReactiveFormControls.occupation).value
+              as int),
+          name: '',
+        ),
       );
-      profileEntity = await profileRepo.update(editedProfile);
+
+      profileEntity = await profileRepo.update(
+        editedProfile,
+        newAvatar: (editProfileForm.control(ReactiveFormControls.avatar).value
+                as ImageFile?)
+            ?.image,
+      );
       notifyListeners();
+      _navigationService.back();
     } catch (e) {
+      print(e);
       _snackbarService.showSnackbar(
         title: 'Error',
         message: 'Something went wrong, please try again',

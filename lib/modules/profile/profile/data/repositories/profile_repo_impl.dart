@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cheffy/Models/occupation.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/core/failures/failures.dart';
@@ -46,16 +48,35 @@ class ProfileRepoImpl extends ProfileRepo {
   }
 
   @override
-  Future<ProfileEntity> update(ProfileEntity profileEntity) async {
+  Future<ProfileEntity> update(ProfileEntity profileEntity,
+      {File? newAvatar}) async {
     try {
+      Map<String, MultipartFile>? avatarMap;
+      if (newAvatar != null) {
+        String fileName = newAvatar.path.split('/').last;
+        avatarMap = {
+          "avatar": await MultipartFile.fromFile(
+            newAvatar.path,
+            filename: fileName,
+          ),
+        };
+      }
+      
+      FormData formData = FormData.fromMap({
+        ...profileEntity.toJson(),
+        if (avatarMap != null) ...avatarMap,
+      });
+
       final result = await _apiClient.put(
         ApiRoutes.profile,
-        data: profileEntity.toJson(),
+        data: formData,
       );
+
       final resultData = result.data;
 
       return ProfileEntity.fromJson(resultData);
     } on DioError catch (e) {
+      print(e);
       throw e;
     } catch (e) {
       throw e;

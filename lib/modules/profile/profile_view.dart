@@ -24,7 +24,9 @@ class _ProfileViewState extends State<ProfileView> {
   void initState() {
     super.initState();
     final profileProvider = context.read<ProfileProvider>();
-    profileProvider.getProfile();
+    Future.delayed(Duration.zero, () {
+      profileProvider.getProfile();
+    });
   }
 
   @override

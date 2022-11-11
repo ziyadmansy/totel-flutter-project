@@ -28,10 +28,11 @@ class ProfileHeaderView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 93,
-                  height: 93,
+                  width: 100,
+                  height: 100,
                   child: Stack(
                     fit: StackFit.expand,
+                    clipBehavior: Clip.none,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
@@ -53,26 +54,34 @@ class ProfileHeaderView extends StatelessWidget {
                       Positioned(
                         right: 8,
                         left: 8,
-                        bottom: 0,
+                        bottom: -10,
                         child: Container(
                           decoration: BoxDecoration(
                             color: AppColors.profileGreen,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.person,
-                                color: Colors.white,
-                              ),
                               Text(
                                 "${profileProvider.profileEntity?.rating}",
-                                style: TextStyle(color: Colors.white),
-                              )
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.white,
+                                size: 20,
+                              ),
                             ],
                           ),
                         ),

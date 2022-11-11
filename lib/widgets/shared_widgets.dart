@@ -26,7 +26,7 @@ class SharedWidgets {
           type: AccountAvatarType.AppBar,
           url: appUser?.avatar == null
               ? null
-              : '${Application.baseUrl}${appUser?.avatar}',
+              : '${appUser?.avatar}',
           viewCallback: onTapViewProfile,
         ),
         title: Text(

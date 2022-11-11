@@ -29,8 +29,10 @@ class _MainViewState extends State<MainView> {
     final mainViewModel = context.read<MainViewModel>();
     final profileProvider = context.read<ProfileProvider>();
 
-    mainViewModel.init();
-    profileProvider.getProfile();
+    Future.delayed(Duration.zero, () {
+      mainViewModel.init();
+      profileProvider.getProfile();
+    });
   }
 
   @override
