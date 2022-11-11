@@ -77,24 +77,25 @@ class LoginViewModel extends BaseViewModel {
   }
 
   Future<void> onSubmit() async {
-    if (form.valid) {
-      setBusy(true);
-      final result = await authRepo.login(form.control(controls.username).value,
-          form.control(controls.password).value);
-      result.fold(
-        (l) {
-          _snackbarService.showSnackbar(
-            title: 'Wrong Credentials',
-            message: 'E-mail or password is wrong',
-          );
-        },
-        (r) {
-          _navigationService.clearStackAndShow(Routes.mainView);
-        },
+    try {
+      if (form.valid) {
+        setBusy(true);
+        final result = await authRepo.login(
+            form.control(controls.username).value,
+            form.control(controls.password).value);
+
+        // Goes to Main Screen
+        _navigationService.clearStackAndShow(Routes.mainView);
+
+        setBusy(false);
+      } else {
+        form.markAllAsTouched();
+      }
+    } catch (e) {
+      _snackbarService.showSnackbar(
+        title: 'Wrong Credentials',
+        message: 'E-mail or password is wrong',
       );
-      setBusy(false);
-    } else {
-      form.markAllAsTouched();
     }
   }
 

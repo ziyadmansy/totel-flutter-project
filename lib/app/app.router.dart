@@ -233,7 +233,7 @@ class StackedRouter extends RouterBase {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => ProfileView(
           key: args.key,
-          isMyProfile: args.isMyProfile,
+          // isMyProfile: args.isMyProfile,
         ),
         settings: data,
       );

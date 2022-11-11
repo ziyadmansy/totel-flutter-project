@@ -1,0 +1,4 @@
+enum MaleFemaleEnum {
+  male,
+  female,
+}

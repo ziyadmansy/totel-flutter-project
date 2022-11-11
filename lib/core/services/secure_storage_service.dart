@@ -16,47 +16,47 @@ class SecureStorageService {
 
   final FlutterSecureStorage _instance = const FlutterSecureStorage();
 
-  Future<ProfileEntity?> getAppUser() async {
-    try {
-      var res = await _instance.read(key: _keyAppUser);
-      Log.d(TAG, '$res', references: ['getAppUser']);
+  // Future<ProfileEntity?> getAppUser() async {
+  //   try {
+  //     var res = await _instance.read(key: _keyAppUser);
+  //     Log.d(TAG, '$res', references: ['getAppUser']);
 
-      if (res != null) {
-        return ProfileEntity.fromJson(json.decode(res));
-      }
-    } on PlatformException catch (e) {
-      Log.e(TAG, '${e.message}',
-          references: ['getAppUser'],
-          exception: e,
-          stackTrace: e.stacktrace.isNotNullOrEmpty
-              ? StackTrace.fromString(e.stacktrace!)
-              : null);
-    }
-    return null;
-  }
+  //     if (res != null) {
+  //       return ProfileEntity.fromJson(json.decode(res));
+  //     }
+  //   } on PlatformException catch (e) {
+  //     Log.e(TAG, '${e.message}',
+  //         references: ['getAppUser'],
+  //         exception: e,
+  //         stackTrace: e.stacktrace.isNotNullOrEmpty
+  //             ? StackTrace.fromString(e.stacktrace!)
+  //             : null);
+  //   }
+  //   return null;
+  // }
 
-  Future<ProfileEntity?> setAppUser(ProfileEntity? appUser) async {
-    try {
-      if ((await _instance.containsKey(key: _keyAppUser)) || appUser == null) {
-        await _instance.delete(key: _keyAppUser);
-      }
+  // Future<ProfileEntity?> setAppUser(ProfileEntity? appUser) async {
+  //   try {
+  //     if ((await _instance.containsKey(key: _keyAppUser)) || appUser == null) {
+  //       await _instance.delete(key: _keyAppUser);
+  //     }
 
-      if (appUser != null) {
-        await _instance.write(
-            key: _keyAppUser, value: json.encode(appUser.toJson()));
-        return appUser;
-      }
-    } on PlatformException catch (e) {
-      Log.e(TAG, '${e.message}',
-          references: ['setAppUser'],
-          exception: e,
-          stackTrace: e.stacktrace.isNotNullOrEmpty
-              ? StackTrace.fromString(e.stacktrace!)
-              : null);
-    }
+  //     if (appUser != null) {
+  //       await _instance.write(
+  //           key: _keyAppUser, value: json.encode(appUser.toJson()));
+  //       return appUser;
+  //     }
+  //   } on PlatformException catch (e) {
+  //     Log.e(TAG, '${e.message}',
+  //         references: ['setAppUser'],
+  //         exception: e,
+  //         stackTrace: e.stacktrace.isNotNullOrEmpty
+  //             ? StackTrace.fromString(e.stacktrace!)
+  //             : null);
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
   Future<String?> getAccessToken() async {
     try {

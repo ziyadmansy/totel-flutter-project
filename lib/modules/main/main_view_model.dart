@@ -15,7 +15,6 @@ import 'package:cheffy/core/services/secure_storage_service.dart';
 class MainViewModel extends BaseViewModel {
   // ignore: constant_identifier_names
   static const String TAG = 'MainViewModel';
-  
 
   final NavigationService _navigationService = locator.get();
   final BottomSheetService _bottomSheetService = locator.get();
@@ -26,8 +25,6 @@ class MainViewModel extends BaseViewModel {
 
   int _index = 0;
 
-  ProfileEntity? _appUser;
-
   String? _location = 'Miami, Florida';
 
   MainViewModel(this.authRepo);
@@ -37,13 +34,6 @@ class MainViewModel extends BaseViewModel {
 
   set index(int index) {
     _index = index;
-    notifyListeners();
-  }
-
-  ProfileEntity? get appUser => _appUser;
-
-  set appUser(ProfileEntity? appUserEntity) {
-    _appUser = appUserEntity;
     notifyListeners();
   }
 
@@ -58,10 +48,7 @@ class MainViewModel extends BaseViewModel {
     // Handles Authentication Status
     _authenticationService.authStatusStream.listen((event) async {
       if (event == AuthenticationStatus.authenticated) {
-        appUser = await _secureStoreService.getAppUser();
-      } else {
-        appUser = null;
-      }
+      } else {}
     });
   }
 

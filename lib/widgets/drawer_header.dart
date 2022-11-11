@@ -1,8 +1,10 @@
 import 'package:cheffy/app/app.dart';
 import 'package:cheffy/core/enums/account_avatar_type.dart';
 import 'package:cheffy/modules/main/main_view_model.dart';
+import 'package:cheffy/modules/profile/profile_provider.dart';
 import 'package:cheffy/modules/widgets/account_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 class DrawerHeaderWidget extends ViewModelWidget<MainViewModel> {
@@ -13,6 +15,7 @@ class DrawerHeaderWidget extends ViewModelWidget<MainViewModel> {
 
   @override
   Widget build(BuildContext context, MainViewModel mainViewModel) {
+    final profileProvider = context.watch<ProfileProvider>();
     return SizedBox(
       height: 220,
       child: DrawerHeader(
@@ -22,9 +25,9 @@ class DrawerHeaderWidget extends ViewModelWidget<MainViewModel> {
             children: [
               AccountAvatar(
                 type: AccountAvatarType.Drawer,
-                url: mainViewModel.appUser?.avatar == null
+                url: profileProvider.profileEntity?.avatar == null
                     ? null
-                    : '${Application.baseUrl}${mainViewModel.appUser?.avatar}',
+                    : '${Application.baseUrl}${profileProvider.profileEntity?.avatar}',
                 viewCallback: mainViewModel.onTapViewProfile,
               ),
               SizedBox(
@@ -32,8 +35,8 @@ class DrawerHeaderWidget extends ViewModelWidget<MainViewModel> {
               ),
               Text(
                 getUserName(
-                  mainViewModel.appUser?.firstName,
-                  mainViewModel.appUser?.lastName,
+                  profileProvider.profileEntity?.firstName,
+                  profileProvider.profileEntity?.lastName,
                 ),
                 style: TextStyle(
                   fontSize: 20,

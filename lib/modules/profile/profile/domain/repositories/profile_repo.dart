@@ -1,9 +1,10 @@
-import 'package:cheffy/core/failures/failures.dart';
+import 'package:cheffy/Models/occupation.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
-import 'package:cheffy/core/services/api/api_client.dart';
-import 'package:dartz/dartz.dart';
 
 abstract class ProfileRepo {
+  Future<ProfileEntity> get();
 
-  Future<Either<Failure, ProfileEntity>> get();
+  Future<List<Occupation>> getOccupations();
+
+  Future<ProfileEntity> update(ProfileEntity profileEntity);
 }

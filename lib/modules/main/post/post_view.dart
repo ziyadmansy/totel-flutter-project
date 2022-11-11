@@ -1,4 +1,5 @@
 import 'package:cheffy/modules/main/main_view_model.dart';
+import 'package:cheffy/modules/profile/profile_provider.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,11 +15,12 @@ class PostsPageView extends ViewModelBuilderWidget<PostViewModel> {
   @override
   Widget builder(BuildContext context, PostViewModel viewModel, Widget? child) {
     final mainViewModel = context.watch<MainViewModel>();
+    final profileProvider = context.watch<ProfileProvider>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: SharedWidgets.buildHomeAppBar(
-          appUser: mainViewModel.appUser,
+          appUser: profileProvider.profileEntity,
           location: mainViewModel.location,
           onTapViewProfile: mainViewModel.onTapViewProfile,
           onTapChangeLocation: mainViewModel.onTapChangeLocation,

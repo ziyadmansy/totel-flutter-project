@@ -1,11 +1,8 @@
-import 'package:cheffy/core/failures/failures.dart';
-import 'package:cheffy/core/models/response/login_entity.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
-import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepo {
-  Future<Either<Failure, ProfileEntity>> login(
+  Future<void> login(
       String username, String password);
 
   Future<String> register({

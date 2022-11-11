@@ -1,9 +1,11 @@
 import 'package:cheffy/Utils/key.dart';
 import 'package:cheffy/Utils/stacked_nav_keys.dart';
 import 'package:cheffy/app/app.locator.dart';
+import 'package:cheffy/modules/profile/profile_provider.dart';
 import 'package:cheffy/widgets/app_drawer.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:cheffy/r.g.dart';
@@ -13,11 +15,27 @@ import 'package:cheffy/modules/theme/styles.dart';
 import '../../../app/app.router.dart';
 import 'main_view_model.dart';
 
-class MainView extends ViewModelBuilderWidget<MainViewModel> {
+class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
 
   @override
-  Widget builder(BuildContext context, MainViewModel viewModel, Widget? child) {
+  State<MainView> createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  @override
+  void initState() {
+    super.initState();
+    final mainViewModel = context.read<MainViewModel>();
+    final profileProvider = context.read<ProfileProvider>();
+
+    mainViewModel.init();
+    profileProvider.getProfile();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mainViewModel = context.watch<MainViewModel>();
     return Scaffold(
       key: mainScreenScaffoldKey,
       extendBody: true,
@@ -33,7 +51,7 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ClipOval(
         child: FloatingActionButton(
-          onPressed: viewModel.onAddPostHandler,
+          onPressed: mainViewModel.onAddPostHandler,
           elevation: 8,
           child: Icon(
             Icons.add,
@@ -47,7 +65,7 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
         // color: Theme.of(context).primaryColor.withAlpha(0),
         // ↑ use .withAlpha(0) to debug/peek underneath ↑ BottomAppBar
         child: BottomNavigationBar(
-          currentIndex: viewModel.index,
+          currentIndex: mainViewModel.index,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: true,
           showUnselectedLabels: true,
@@ -55,7 +73,7 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
           unselectedLabelStyle: AppStyle.of(context).b5M,
           selectedItemColor: AppColors.plumpPurplePrimary,
           unselectedItemColor: AppColors.rhythm,
-          onTap: viewModel.onTapItem,
+          onTap: mainViewModel.onTapItem,
           items: [
             BottomNavigationBarItem(
               icon: Image(image: R.svg.ic_home(width: 35, height: 35)),
@@ -86,11 +104,4 @@ class MainView extends ViewModelBuilderWidget<MainViewModel> {
       ),
     );
   }
-
-  @override
-  MainViewModel viewModelBuilder(BuildContext context) =>
-      MainViewModel(locator.get());
-
-  @override
-  void onViewModelReady(MainViewModel viewModel) => viewModel.init();
 }

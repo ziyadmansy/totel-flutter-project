@@ -38,7 +38,7 @@ class UniversalVariables {
 class ReactiveFormControls {
   static const String searchLocation = 'search_location';
   static const String searchRoomsNumber = 'search_rooms_number';
-  
+
   static const String searchCheckInDate = 'search_check_in_date';
   static const String searchCheckOutDate = 'search_check_out_date';
 
@@ -47,4 +47,13 @@ class ReactiveFormControls {
 
   static const String searchHourRangeStart = 'search_hours_range_start';
   static const String searchHourRangeEnd = 'search_hours_range_end';
+
+  // Profile
+  static String firstName = 'first_name';
+  static String lastName = 'last_name';
+  static String native = 'native';
+  static String avatar = 'avatar';
+  static String occupation = 'occupation';
+  static String bio = 'bio';
+  static String gender = 'gender';
 }

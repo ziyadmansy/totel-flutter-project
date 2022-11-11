@@ -1,4 +1,11 @@
+import 'package:cheffy/Models/occupation.dart';
+import 'package:cheffy/Utils/Utils.dart';
+import 'package:cheffy/core/enums/male_female_enum.dart';
+import 'package:cheffy/modules/profile/profile_provider.dart';
+import 'package:cheffy/modules/widgets/progress/background_progress.dart';
+import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:stacked/stacked.dart';
 import 'package:cheffy/r.g.dart';
@@ -6,153 +13,142 @@ import 'package:cheffy/modules/widgets/app_bar_action_button.dart';
 import 'package:cheffy/modules/widgets/app_form_field.dart';
 import 'package:cheffy/modules/widgets/app_toggle_button.dart';
 
-import 'edit_profile_view_model.dart';
-
-class EditProfileView extends ViewModelBuilderWidget<EditProfileViewModel> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneNumber = TextEditingController();
-  final TextEditingController occupationController = TextEditingController();
-  final TextEditingController dobController = TextEditingController();
-  final TextEditingController cityController = TextEditingController();
-
+class EditProfileView extends StatefulWidget {
   EditProfileView({super.key});
 
   @override
-  Widget builder(
-      BuildContext context, EditProfileViewModel viewModel, Widget? child) {
+  State<EditProfileView> createState() => _EditProfileViewState();
+}
+
+class _EditProfileViewState extends State<EditProfileView> {
+  @override
+  void initState() {
+    super.initState();
+    final profileProvider = context.read<ProfileProvider>();
+    profileProvider.getOccupations();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final profileProvider = context.watch<ProfileProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Edit Profile"),
-        actions: [
-          AppBarActionButton(
-            onPressed: viewModel.settings,
-            showElevation: false,
-            child: Image(
-              image: R.svg.ic_settings(width: 24, height: 24),
-            ),
-          ),
-        ],
       ),
-      body: SafeArea(
-        child: ReactiveForm(
-          formGroup: viewModel.form,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      body: BackgroundProgress<ProfileProvider>(
+        child: SafeArea(
+          child: ReactiveForm(
+            formGroup: profileProvider.editProfileForm,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        AppFormField(
-                          label: 'Full Name',
-                          field: ReactiveTextField(
-                            formControlName: viewModel.controls.fullName,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        AppFormField(
-                          label: 'Email',
-                          field: ReactiveTextField(
-                            formControlName: viewModel.controls.email,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        AppFormField(
-                          label: 'Phone Number',
-                          field: ReactiveTextField(
-                            formControlName: viewModel.controls.phoneNumber,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        AppFormField(
-                          label: 'Occupation',
-                          field: ReactiveTextField(
-                            formControlName: viewModel.controls.occupation,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        AppFormField(
-                          label: 'BIO',
-                          field: ReactiveTextField(
-                            formControlName: viewModel.controls.bio,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        AppFormField(
-                          label: 'Date of Birth',
-                          field: ReactiveTextField(
-                            formControlName: viewModel.controls.dob,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        AppFormField(
-                          label: 'City',
-                          field: ReactiveTextField(
-                            formControlName: viewModel.controls.city,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        AppFormField(
-                          label: 'Who are you',
-                          field: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              AppToggleButton(
-                                icon: R.svg.ic_male(width: 21, height: 28),
-                                name: 'Male',
-                                isSelected: viewModel.isMalePartner,
-                                callback: () => viewModel
-                                    .onTapMalePartner(viewModel.isMalePartner),
+                        Expanded(
+                          child: AppFormField(
+                            label: 'First Name',
+                            field: ReactiveTextField(
+                              formControlName: ReactiveFormControls.firstName,
+                              decoration: InputDecoration(
+                                hintText: 'ex: John',
                               ),
-                              const SizedBox(width: 16),
-                              AppToggleButton(
-                                icon: R.svg.ic_female(width: 21, height: 28),
-                                name: 'Female',
-                                isSelected: viewModel.isFemalePartner,
-                                callback: () => viewModel.onTapFemalePartner(
-                                    viewModel.isFemalePartner),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Expanded(
+                          child: AppFormField(
+                            label: 'Last Name',
+                            field: ReactiveTextField(
+                              formControlName: ReactiveFormControls.lastName,
+                              decoration: InputDecoration(
+                                hintText: 'ex: Doe',
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ),
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(context).colorScheme.shadow,
-                      offset: const Offset(0, -2),
-                      blurRadius: 4,
+                    const SizedBox(height: 16),
+                    AppFormField(
+                      label: 'Native',
+                      field: ReactiveTextField(
+                        formControlName: ReactiveFormControls.native,
+                        decoration: InputDecoration(
+                          hintText: 'ex: us',
+                        ),
+                      ),
                     ),
+                    const SizedBox(height: 16),
+                    AppFormField(
+                      label: 'Occupation',
+                      field: ReactiveDropdownField(
+                        formControlName: ReactiveFormControls.occupation,
+                        hint: Text('Occupation'),
+                        validationMessages: {
+                          ValidationMessage.required: (val) =>
+                              'Enter payment percentage',
+                        },
+                        items: profileProvider.occupations
+                            .map(
+                              (occ) => DropdownMenuItem<int>(
+                                value: occ.id,
+                                child: Text(occ.name),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    AppFormField(
+                      label: 'Bio',
+                      field: ReactiveTextField(
+                        formControlName: ReactiveFormControls.bio,
+                        decoration: InputDecoration(
+                          hintText:
+                              'ex: I\'m a student looking for rental rooms',
+                        ),
+                        maxLines: 5,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SharedWidgets.buildListTileTitle(title: 'Who are you'),
+                    RadioListTile<MaleFemaleEnum>(
+                      value: MaleFemaleEnum.male,
+                      contentPadding: const EdgeInsets.all(0),
+                      title: Text('Male'),
+                      groupValue: profileProvider.maleFemaleEnum,
+                      onChanged: profileProvider.onMaleFemaleChoice,
+                    ),
+                    RadioListTile<MaleFemaleEnum>(
+                      value: MaleFemaleEnum.female,
+                      contentPadding: const EdgeInsets.all(0),
+                      title: Text('Female'),
+                      groupValue: profileProvider.maleFemaleEnum,
+                      onChanged: profileProvider.onMaleFemaleChoice,
+                    ),
+                    const SizedBox(height: 32),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: SharedWidgets.buildRoundedElevatedButton(
+                        btnChild: Text('Save'),
+                        onPress: profileProvider.onEditSave,
+                      ),
+                    ),
+                    const SizedBox(height: 32),
                   ],
                 ),
-                child: ElevatedButton(
-                  onPressed: viewModel.onSave,
-                  child: const Text('Save'),
-                ),
-              )
-            ],
+              ),
+            ),
           ),
         ),
       ),
     );
   }
-
-  @override
-  EditProfileViewModel viewModelBuilder(BuildContext context) =>
-      EditProfileViewModel();
 }

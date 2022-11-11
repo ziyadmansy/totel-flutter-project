@@ -5,6 +5,7 @@ import 'package:cheffy/core/enums/account_avatar_type.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/widgets/account_avatar.dart';
+import 'package:cheffy/modules/widgets/app_bar_action_button.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:flutter/material.dart';
 
@@ -29,13 +30,13 @@ class SharedWidgets {
           viewCallback: onTapViewProfile,
         ),
         title: Text(
-          '${appUser?.firstName} ${appUser?.lastName}',
+          '${appUser?.firstName ?? ''} ${appUser?.lastName ?? ''}',
           style: TextStyle(
             color: AppColors.rhythm,
           ),
         ),
         subtitle: Text(
-          appUser?.city ?? 'Miami, Florida',
+          appUser?.city ?? '',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -43,24 +44,22 @@ class SharedWidgets {
       ),
       bottom: bottom,
       actions: [
-        IconButton(
+        AppBarActionButton(
+          child: Center(
+            child: Icon(
+              Icons.search,
+            ),
+          ),
           onPressed: onSearchPressed,
-          icon: Icon(
-            Icons.search,
-          ),
         ),
-        OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            shape: const CircleBorder(),
-            side: BorderSide(color: AppColors.soap),
-          ),
-          onPressed: onNotificationPressed,
+        AppBarActionButton(
           child: Center(
             child: Icon(
               Icons.notifications,
               color: AppColors.plumpPurplePrimary,
             ),
           ),
+          onPressed: onNotificationPressed,
         ),
       ],
     );

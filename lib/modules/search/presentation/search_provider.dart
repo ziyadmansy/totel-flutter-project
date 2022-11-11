@@ -165,10 +165,16 @@ class SearchProvider extends ChangeNotifier {
   }
 
   void onNormalSearchLocationSubmit() {
-    _navigationService.navigateTo(
-      SearchRoutes.searchHotelsView,
-      id: StackedNavKeys.searchNavKey,
-    );
+    if (searchLocationForm.valid) {
+      // Skip the process of searching and go to Hotels List
+      _navigationService.navigateTo(
+        SearchRoutes.searchHotelsView,
+        id: StackedNavKeys.searchNavKey,
+      );
+    } else {
+      print('Not valid (onLocationSubmit)');
+      searchLocationForm.markAllAsTouched();
+    }
   }
 
   void onSearchFilterResultSubmit() {

@@ -4,7 +4,6 @@ import 'package:cheffy/modules/theme/color.dart';
 class AppBarActionButton extends StatelessWidget {
   final Widget? child;
   final VoidCallback? onPressed;
-  final bool addMargin;
   final bool showElevation;
   final Color? backgroundColor;
 
@@ -12,7 +11,6 @@ class AppBarActionButton extends StatelessWidget {
       {Key? key,
       this.child,
       this.onPressed,
-      this.addMargin = true,
       this.showElevation = true,
       this.backgroundColor})
       : super(key: key);
@@ -20,9 +18,9 @@ class AppBarActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 45,
-      height: 45,
-      margin: EdgeInsets.all(addMargin ? 8.0 : 0.0),
+      width: 40,
+      height: 40,
+      margin: EdgeInsets.all(4.0),
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: backgroundColor ?? Theme.of(context).colorScheme.background,
