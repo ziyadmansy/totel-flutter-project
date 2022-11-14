@@ -2,10 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:cheffy/Utils/Utils.dart';
+import 'package:cheffy/app/app.locator.dart';
+import 'package:cheffy/core/exceptions/custom_exceptions.dart';
+import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:cheffy/generated/json/base/json_convert_content.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.dart';
 import '../../../app/constants/error_messages.dart';
@@ -148,6 +153,10 @@ class ApiClient {
 
       return response;
     } on DioError catch (e) {
+      if (e.response?.statusCode == UniversalVariables.kUnauthenticatedCode) {
+        final AuthRepo authRepo = locator.get();
+        await authRepo.logout();
+      }
       rethrow;
     }
   }
@@ -172,13 +181,17 @@ class ApiClient {
 
       return response;
     } on DioError catch (e) {
+      if (e.response?.statusCode == UniversalVariables.kUnauthenticatedCode) {
+        final AuthRepo authRepo = locator.get();
+        await authRepo.logout();
+      }
       rethrow;
     }
   }
 
   Future<Response> put(
     String path, {
-    dynamic  data,
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
     CancelToken? cancelToken,
@@ -196,6 +209,10 @@ class ApiClient {
 
       return response;
     } on DioError catch (e) {
+      if (e.response?.statusCode == UniversalVariables.kUnauthenticatedCode) {
+        final AuthRepo authRepo = locator.get();
+        await authRepo.logout();
+      }
       rethrow;
     }
   }
@@ -218,6 +235,10 @@ class ApiClient {
 
       return response;
     } on DioError catch (e) {
+      if (e.response?.statusCode == UniversalVariables.kUnauthenticatedCode) {
+        final AuthRepo authRepo = locator.get();
+        await authRepo.logout();
+      }
       rethrow;
     }
   }

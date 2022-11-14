@@ -1,4 +1,3 @@
-import 'package:cheffy/core/services/bidding_service.dart';
 import 'package:cheffy/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -6,90 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 import 'package:cheffy/modules/theme/color.dart';
-import 'package:cheffy/modules/main/chat/chat_view.dart';
 
 import '../core/enums/bottom_sheet_type.dart';
-import '../core/services/api/api_client.dart';
-import '../core/services/api/api_provider.dart';
-import '../core/services/authentication_service.dart';
-import '../core/services/location_service.dart';
-import '../core/services/posts_service.dart';
-import '../core/services/secure_storage_service.dart';
-import '../modules/auth/login/login_view.dart';
-import '../modules/auth/otp/otp_view.dart';
-import '../modules/auth/register/register_form_view.dart';
-import '../modules/auth/register/register_phone_view.dart';
-import '../modules/auth/register/register_view.dart';
-import '../modules/chat_detail/chat_detail_view.dart';
-import '../modules/location_change/location_change_view.dart';
-import '../modules/location_change_map/location_change_map_view.dart';
-import '../modules/main/home/home_view.dart';
-import '../modules/main/main_view.dart';
-import '../modules/main/map/map_view.dart';
-import '../modules/main/post/post_view.dart';
-import '../modules/on_boarding/on_boarding_view.dart';
-import '../modules/payment/presentation/add_card/payment_add_cart_view.dart';
-import '../modules/payment/presentation/options/payment_options_view.dart';
-import '../modules/payment/presentation/summary/payment_summary_view.dart';
-import '../modules/posts/create/create_post_view.dart';
 import '../modules/posts/create/post_type_selection_view.dart';
-import '../modules/posts/detail/post_detail_view.dart';
-import '../modules/profile/edit/edit_profile_view.dart';
-import '../modules/profile/profile_view.dart';
-import '../modules/request/request_view.dart';
-import '../modules/wallet/wallet_view.dart';
 import 'app.locator.dart';
 
-@StackedApp(
-  routes: [
-    AdaptiveRoute(page: OnBoardingView, initial: true),
-    AdaptiveRoute(page: LoginView),
-    AdaptiveRoute(page: RegisterView, children: [
-      // AdaptiveRoute(page: RegisterPhoneView, initial: true),
-      // AdaptiveRoute(page: RegisterFormView),
-      AdaptiveRoute(page: RegisterFormView, initial: true),
-    ]),
-    AdaptiveRoute(page: OTPView),
-    AdaptiveRoute(
-      page: MainView,
-      children: [
-        AdaptiveRoute(page: HomePageView, initial: true),
-        AdaptiveRoute(page: MapPageView),
-        AdaptiveRoute(page: PostsPageView),
-        AdaptiveRoute(page: ChatPageView),
-      ],
-    ),
-    AdaptiveRoute(page: ChatDetailView),
-    AdaptiveRoute(page: CreatePostView),
-    AdaptiveRoute(page: LocationChangeView),
-    AdaptiveRoute(page: LocationChangeMapView),
-    AdaptiveRoute(page: PostDetailView),
-    AdaptiveRoute(page: ProfileView),
-    AdaptiveRoute(page: EditProfileView),
-    AdaptiveRoute(page: WalletView),
-    AdaptiveRoute(page: PaymentSummaryView),
-    AdaptiveRoute(page: PaymentOptionsView),
-    AdaptiveRoute(page: PaymentAddCartView),
-    AdaptiveRoute(page: RequestView),
-  ],
-  dependencies: [
-    LazySingleton(classType: ApiClient),
-    LazySingleton(classType: ApiProvider),
-    LazySingleton(classType: AuthenticationService),
-    LazySingleton(classType: NavigationService),
-    LazySingleton(classType: SecureStorageService),
-    LazySingleton(classType: PostsService),
-    LazySingleton(classType: DialogService),
-    LazySingleton(classType: SnackbarService),
-    LazySingleton(classType: BottomSheetService),
-    LazySingleton(classType: LocationService),
-    LazySingleton(classType: BiddingService),
-  ],
-)
 class Application {
   // ignore: constant_identifier_names
   static const TAG = 'AppSetup';
@@ -144,11 +67,6 @@ class Application {
     ResponsiveSizingConfig.instance.setCustomBreakpoints(
       const ScreenBreakpoints(desktop: 800, tablet: 500, watch: 200),
     );
-
-    //region firebase
-    // await Firebase.initializeApp(
-    //   options: DefaultFirebaseOptions.currentPlatform(flavor),
-    // );
 
     // References the firebase_options in the root not in the (firebase) folder
     await Firebase.initializeApp(

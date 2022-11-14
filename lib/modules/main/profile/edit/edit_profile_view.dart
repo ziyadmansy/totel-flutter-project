@@ -1,7 +1,7 @@
 import 'package:cheffy/Models/occupation.dart';
 import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/core/enums/male_female_enum.dart';
-import 'package:cheffy/modules/profile/profile_provider.dart';
+import 'package:cheffy/modules/main/profile/profile_provider.dart';
 import 'package:cheffy/modules/widgets/progress/background_progress.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';

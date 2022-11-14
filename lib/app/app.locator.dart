@@ -13,8 +13,8 @@ import 'package:cheffy/modules/notifications/data/repositories/notifications_rep
 import 'package:cheffy/modules/notifications/domain/repositories/notification_repo.dart';
 import 'package:cheffy/modules/posts/posts/data/repositories/post_repo_impl.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
-import 'package:cheffy/modules/profile/profile/data/repositories/profile_repo_impl.dart';
-import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.dart';
+import 'package:cheffy/modules/main/profile/profile/data/repositories/profile_repo_impl.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:stacked_core/stacked_core.dart';
 import 'package:stacked_services/stacked_services.dart';
 

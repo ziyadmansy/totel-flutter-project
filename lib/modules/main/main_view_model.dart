@@ -25,7 +25,7 @@ class MainViewModel extends BaseViewModel {
 
   int _index = 0;
 
-  String? _location = 'Miami, Florida';
+  String appBarTitle = 'Discover';
 
   MainViewModel(this.authRepo);
 
@@ -34,13 +34,6 @@ class MainViewModel extends BaseViewModel {
 
   set index(int index) {
     _index = index;
-    notifyListeners();
-  }
-
-  String? get location => _location;
-
-  set location(String? location) {
-    _location = location;
     notifyListeners();
   }
 
@@ -73,28 +66,33 @@ class MainViewModel extends BaseViewModel {
 
     switch (index) {
       case 0:
-        // Home Page View
-        _navigationService.navigateToNestedHomeView(
+        // Discover Page View
+        appBarTitle = 'Discover';
+        _navigationService.navigateToNestedSearchView(
             routerId: StackedNavKeys.mainNavKey);
         break;
       case 1:
         // Map Page View
+        appBarTitle = 'Map';
         _navigationService.navigateToNestedMapView(
             routerId: StackedNavKeys.mainNavKey);
         break;
       case 2:
         // Posts Page View
+        appBarTitle = 'Posts';
         _navigationService.navigateToNestedPostView(
             routerId: StackedNavKeys.mainNavKey);
         break;
       case 3:
         // Chats Page View
-        _navigationService.navigateToNestedChatView(
+        appBarTitle = 'Profile';
+        _navigationService.navigateToNestedProfileView(
             routerId: StackedNavKeys.mainNavKey);
         break;
       default:
         // Default case goes to Home Page
-        _navigationService.navigateToNestedHomeView(
+        appBarTitle = 'Discover';
+        _navigationService.navigateToNestedSearchView(
             routerId: StackedNavKeys.mainNavKey);
         break;
     }

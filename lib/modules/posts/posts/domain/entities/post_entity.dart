@@ -10,6 +10,7 @@ class PostEntity {
     required this.id,
     required this.name,
     required this.overview,
+    required this.caption,
     required this.rate,
     required this.notes,
     required this.partnerAmount,
@@ -29,13 +30,17 @@ class PostEntity {
     required this.biddings,
     required this.type,
     required this.hotel,
+    required this.imgUrl,
+    required this.price,
   });
 
   final int id;
   final String name;
   final String overview;
+  final String caption;
   final int rate;
   final String notes;
+  final String imgUrl;
   final int partnerAmount;
   final String gender;
   final int latitude;
@@ -53,11 +58,13 @@ class PostEntity {
   final List<dynamic> biddings;
   final Type type;
   final Hotel hotel;
+  final double price;
 
   factory PostEntity.fromJson(Map<String, dynamic> json) => PostEntity(
         id: json["id"],
         name: json["name"],
         overview: json["overview"],
+        caption: json["caption"],
         rate: json["rate"],
         notes: json["notes"],
         partnerAmount: json["partner_amount"],
@@ -78,12 +85,15 @@ class PostEntity {
         biddings: List<dynamic>.from(json["biddings"].map((x) => x)),
         type: Type.fromJson(json["type"]),
         hotel: Hotel.fromJson(json["hotel"]),
+        imgUrl: json["imgUrl"],
+        price: json["price"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "overview": overview,
+        "caption": caption,
         "rate": rate,
         "notes": notes,
         "partner_amount": partnerAmount,
@@ -103,6 +113,8 @@ class PostEntity {
         "biddings": List<dynamic>.from(biddings.map((x) => x)),
         "type": type.toJson(),
         "hotel": hotel.toJson(),
+        "imgUrl": imgUrl,
+        "price": price,
       };
 }
 

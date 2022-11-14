@@ -1,7 +1,7 @@
 import 'package:cheffy/app/app.dart';
 import 'package:cheffy/core/enums/account_avatar_type.dart';
 import 'package:cheffy/modules/main/main_view_model.dart';
-import 'package:cheffy/modules/profile/profile_provider.dart';
+import 'package:cheffy/modules/main/profile/profile_provider.dart';
 import 'package:cheffy/modules/widgets/account_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,10 +1,11 @@
 import 'package:cheffy/Utils/key.dart';
 import 'package:cheffy/Utils/stacked_nav_keys.dart';
 import 'package:cheffy/app/app.locator.dart';
-import 'package:cheffy/modules/profile/profile_provider.dart';
+import 'package:cheffy/modules/main/profile/profile_provider.dart';
 import 'package:cheffy/widgets/app_drawer.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -27,11 +28,9 @@ class _MainViewState extends State<MainView> {
   void initState() {
     super.initState();
     final mainViewModel = context.read<MainViewModel>();
-    final profileProvider = context.read<ProfileProvider>();
 
     Future.delayed(Duration.zero, () {
       mainViewModel.init();
-      profileProvider.getProfile();
     });
   }
 
@@ -78,28 +77,48 @@ class _MainViewState extends State<MainView> {
           onTap: mainViewModel.onTapItem,
           items: [
             BottomNavigationBarItem(
-              icon: Image(image: R.svg.ic_home(width: 35, height: 35)),
-              activeIcon:
-                  Image(image: R.svg.ic_home_active(width: 35, height: 35)),
-              label: 'Home',
+              icon: FaIcon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: AppColors.rhythm,
+              ),
+              activeIcon: FaIcon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: AppColors.plumpPurplePrimary,
+              ),
+              label: 'Discover',
             ),
             BottomNavigationBarItem(
-              icon: Image(image: R.svg.ic_map(width: 35, height: 35)),
-              activeIcon:
-                  Image(image: R.svg.ic_map_active(width: 35, height: 35)),
+              icon: FaIcon(
+                FontAwesomeIcons.map,
+                color: AppColors.rhythm,
+              ),
+              activeIcon: FaIcon(
+                FontAwesomeIcons.solidMap,
+                color: AppColors.plumpPurplePrimary,
+              ),
               label: 'Map',
             ),
             BottomNavigationBarItem(
-              icon: Image(image: R.svg.ic_post(width: 35, height: 35)),
-              activeIcon:
-                  Image(image: R.svg.ic_post_active(width: 35, height: 35)),
+              icon: FaIcon(
+                FontAwesomeIcons.image,
+                color: AppColors.rhythm,
+              ),
+              activeIcon: FaIcon(
+                FontAwesomeIcons.solidImage,
+                color: AppColors.plumpPurplePrimary,
+              ),
               label: 'Posts',
             ),
             BottomNavigationBarItem(
-              icon: Image(image: R.svg.ic_chat(width: 35, height: 35)),
-              activeIcon:
-                  Image(image: R.svg.ic_chat_active(width: 35, height: 35)),
-              label: 'Chat',
+              icon: FaIcon(
+                FontAwesomeIcons.user,
+                color: AppColors.rhythm,
+              ),
+              activeIcon: FaIcon(
+                FontAwesomeIcons.solidUser,
+                color: AppColors.plumpPurplePrimary,
+              ),
+              label: 'Profile',
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:cheffy/modules/main/main_view_model.dart';
-import 'package:cheffy/modules/profile/profile_provider.dart';
+import 'package:cheffy/modules/main/profile/profile_provider.dart';
+import 'package:cheffy/widgets/app_drawer.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,12 +21,8 @@ class PostsPageView extends ViewModelBuilderWidget<PostViewModel> {
       length: 2,
       child: Scaffold(
         appBar: SharedWidgets.buildHomeAppBar(
-          appUser: profileProvider.profileEntity,
-          location: mainViewModel.location,
-          onTapViewProfile: mainViewModel.onTapViewProfile,
-          onTapChangeLocation: mainViewModel.onTapChangeLocation,
+          title: mainViewModel.appBarTitle,
           onNotificationPressed: mainViewModel.onPressedNotifications,
-          onSearchPressed: mainViewModel.onPressedSearch,
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Live'),
@@ -33,6 +30,7 @@ class PostsPageView extends ViewModelBuilderWidget<PostViewModel> {
             ],
           ),
         ),
+        drawer: AppDrawer(),
         body: TabBarView(
           children: [
             ListView(

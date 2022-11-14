@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/theme/color.dart';
-import 'package:cheffy/modules/profile/profile_header_view.dart';
+import 'package:cheffy/modules/main/profile/profile_header_view.dart';
 import 'package:cheffy/modules/widgets/app_bar_action_button.dart';
 import 'package:cheffy/modules/widgets/booking_listing_item/booking_listing_item_view.dart';
 import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_view.dart';

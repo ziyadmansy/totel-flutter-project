@@ -3,7 +3,7 @@ import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/core/enums/male_female_enum.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
-import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_image_picker/image_file.dart';
 import 'package:stacked/stacked.dart';

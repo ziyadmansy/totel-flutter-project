@@ -29,6 +29,9 @@ class UniversalVariables {
 
   static const double kBtnHeight = 60;
 
+  // Status Codes
+  static const double kUnauthenticatedCode = 401;
+
   static final Gradient fabGradient = LinearGradient(
       colors: [gradientColorStart, gradientColorEnd],
       begin: Alignment.topLeft,

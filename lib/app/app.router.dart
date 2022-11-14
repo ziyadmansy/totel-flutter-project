@@ -8,16 +8,14 @@
 
 import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
 import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
-import 'package:cheffy/modules/search/presentation/search_view.dart';
-import 'package:cheffy/modules/search/presentation/stacked_pages/search_hotels_page.dart';
-import 'package:cheffy/modules/search/presentation/stacked_pages/search_location_page.dart';
-import 'package:cheffy/modules/search/presentation/stacked_pages/search_filter_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/stacked_pages/search_hotels_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/stacked_pages/search_location_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/stacked_pages/search_filter_page.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
 import 'package:cheffy/modules/settings/presentation/help_view.dart';
 import 'package:cheffy/modules/splash/presentation/splash_view.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -32,7 +30,6 @@ import '../modules/chat_detail/chat_detail_view.dart';
 import '../modules/location_change/location_change_view.dart';
 import '../modules/location_change_map/location_change_map_view.dart';
 import '../modules/main/chat/chat_view.dart';
-import '../modules/main/home/home_view.dart';
 import '../modules/main/main_view.dart';
 import '../modules/main/map/map_view.dart';
 import '../modules/main/post/post_view.dart';
@@ -42,8 +39,8 @@ import '../modules/payment/presentation/options/payment_options_view.dart';
 import '../modules/payment/presentation/summary/payment_summary_view.dart';
 import '../modules/posts/create/create_post_view.dart';
 import '../modules/posts/detail/post_detail_view.dart';
-import '../modules/profile/edit/edit_profile_view.dart';
-import '../modules/profile/profile_view.dart';
+import '../modules/main/profile/edit/edit_profile_view.dart';
+import '../modules/main/profile/profile_view.dart';
 import '../modules/request/request_view.dart';
 import '../modules/wallet/wallet_view.dart';
 
@@ -74,6 +71,8 @@ class Routes {
   static const String settingsView = '/settings-view';
   static const String resetPasswordView = '/reset-password-view';
   static const String helpView = '/help-view';
+  static const String searchFilterView = '/search-filter-view';
+  static const String searchHotelsView = '/search-hotels-view';
   static const all = <String>{
     splashView,
     onBoardingView,
@@ -95,12 +94,13 @@ class Routes {
     paymentOptionsView,
     paymentAddCartView,
     requestView,
-    // mapView,
     aboutView,
     notificationsView,
     settingsView,
     resetPasswordView,
     helpView,
+    searchFilterView,
+    searchHotelsView,
   };
 }
 
@@ -111,15 +111,12 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.splashView, page: SplashView),
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
     RouteDef(Routes.loginView, page: LoginView),
+    RouteDef(Routes.searchFilterView, page: SearchFilterPage),
+    RouteDef(Routes.searchHotelsView, page: SearchHotelsPage),
     RouteDef(
       Routes.registerView,
       page: RegisterView,
       generator: RegisterViewRouter(),
-    ),
-    RouteDef(
-      Routes.searchView,
-      page: SearchView,
-      generator: SearchRouter(),
     ),
     RouteDef(Routes.oTPView, page: OTPView),
     RouteDef(
@@ -174,9 +171,21 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    SearchView: (data) {
+    SearchLocationPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const SearchView(),
+        builder: (context) => SearchLocationPage(),
+        settings: data,
+      );
+    },
+    SearchFilterPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SearchFilterPage(),
+        settings: data,
+      );
+    },
+    SearchHotelsPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SearchHotelsPage(),
         settings: data,
       );
     },
@@ -382,15 +391,15 @@ class RegisterViewRouter extends RouterBase {
 }
 
 class MainViewRoutes {
-  static const String homeView = '/';
+  static const String searchLocationView = '/';
   static const String mapView = '/map-view';
   static const String postView = '/post-view';
-  static const String chatView = '/chat-view';
+  static const String profileView = '/profile-view';
   static const all = <String>{
-    homeView,
+    searchLocationView,
     mapView,
     postView,
-    chatView,
+    profileView,
   };
 }
 
@@ -398,17 +407,17 @@ class MainViewRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(MainViewRoutes.homeView, page: HomePageView),
+    RouteDef(MainViewRoutes.searchLocationView, page: SearchLocationPage),
     RouteDef(MainViewRoutes.mapView, page: MapPageView),
     RouteDef(MainViewRoutes.postView, page: PostsPageView),
-    RouteDef(MainViewRoutes.chatView, page: ChatPageView),
+    RouteDef(MainViewRoutes.profileView, page: ProfileView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
-    HomePageView: (data) {
+    SearchLocationPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const HomePageView(),
+        builder: (context) => SearchLocationPage(),
         settings: data,
       );
     },
@@ -424,57 +433,20 @@ class MainViewRouter extends RouterBase {
         settings: data,
       );
     },
-    ChatPageView: (data) {
+    ProfileView: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const ChatPageView(),
+        builder: (context) => const ProfileView(),
         settings: data,
       );
     },
-  };
-}
 
-class SearchRoutes {
-  static const String searchLocationView = '/';
-  static const String roomTypeView = '/room-type-view';
-  static const String stayWithView = '/stay-with-view';
-  static const String searchHotelsView = '/search-hotels-view';
-  static const all = <String>{
-    searchLocationView,
-    roomTypeView,
-    stayWithView,
-    searchHotelsView,
-  };
-}
-
-class SearchRouter extends RouterBase {
-  @override
-  List<RouteDef> get routes => _routes;
-  final _routes = <RouteDef>[
-    RouteDef(SearchRoutes.searchLocationView, page: SearchLocationPage),
-    RouteDef(SearchRoutes.roomTypeView, page: SearchFilterPage),
-    RouteDef(SearchRoutes.searchHotelsView, page: SearchHotelsPage),
-  ];
-  @override
-  Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
-  final _pagesMap = <Type, StackedRouteFactory>{
-    SearchLocationPage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchLocationPage(),
-        settings: data,
-      );
-    },
-    SearchFilterPage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchFilterPage(),
-        settings: data,
-      );
-    },
-    SearchHotelsPage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchHotelsPage(),
-        settings: data,
-      );
-    },
+    // Todo: Postponed to phase 2
+    // ChatPageView: (data) {
+    //   return buildAdaptivePageRoute<dynamic>(
+    //     builder: (context) => const ChatPageView(),
+    //     settings: data,
+    //   );
+    // },
   };
 }
 
@@ -597,7 +569,7 @@ extension NavigatorStateExtension on NavigationService {
     );
   }
 
-  Future<dynamic> navigateToNestedHomeView({
+  Future<dynamic> navigateToNestedSearchView({
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -605,7 +577,7 @@ extension NavigatorStateExtension on NavigationService {
         transition,
   }) async {
     return navigateTo(
-      MainViewRoutes.homeView,
+      MainViewRoutes.searchLocationView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
@@ -661,7 +633,7 @@ extension NavigatorStateExtension on NavigationService {
     );
   }
 
-  Future<dynamic> navigateToNestedChatView({
+  Future<dynamic> navigateToNestedProfileView({
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -669,7 +641,7 @@ extension NavigatorStateExtension on NavigationService {
         transition,
   }) async {
     return navigateTo(
-      MainViewRoutes.chatView,
+      MainViewRoutes.profileView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

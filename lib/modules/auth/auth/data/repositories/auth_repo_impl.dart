@@ -8,7 +8,7 @@ import 'package:cheffy/core/exceptions/custom_exceptions.dart';
 import 'package:cheffy/core/services/api/api_client.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 import 'package:cheffy/modules/auth/auth/data/remote/models/login_data_model.dart';
-import 'package:cheffy/modules/profile/profile/domain/repositories/profile_repo.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_dio/fresh_dio.dart';

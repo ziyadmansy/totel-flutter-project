@@ -1,7 +1,7 @@
 import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/Utils/theme/color.dart';
 import 'package:cheffy/core/enums/day_night_enum.dart';
-import 'package:cheffy/modules/search/presentation/search_provider.dart';
+import 'package:cheffy/modules/main/discover/presentation/search_provider.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
