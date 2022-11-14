@@ -61,9 +61,11 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                 avatar: Image(
                   image: R.svg.ic_user_filled(width: 14, height: 14),
                 ),
-                backgroundColor: post.hotel!.rating! >= 3
-                    ? AppColors.ratingNormal
-                    : AppColors.ratingLow,
+                backgroundColor: post.hotel?.rating == null
+                    ? null
+                    : post.hotel!.rating! >= 3
+                        ? AppColors.ratingNormal
+                        : AppColors.ratingLow,
               ),
             ],
           ),

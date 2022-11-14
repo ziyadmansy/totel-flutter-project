@@ -38,13 +38,13 @@ class PostRepoImpl implements PostRepo {
 
   @override
   Future<PostsEntity> getAllPosts() async {
-    final res = await _apiClient.get(ApiRoutes.post);
+    final res = await _apiClient.get(ApiRoutes.posts);
     return PostsEntity.fromMap(res.data);
   }
 
   @override
   Future<PostsEntity> getPostById(int postId) async {
-    final res = await _apiClient.get(ApiRoutes.postById(postId));
+    final res = await _apiClient.get(ApiRoutes.postsByUserId(postId));
     return PostsEntity.fromJson((res.data)[0]);
   }
 

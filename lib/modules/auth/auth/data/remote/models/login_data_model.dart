@@ -1,12 +1,5 @@
-import 'dart:convert';
-
-import 'package:cheffy/generated/json/base/json_field.dart';
-import 'package:cheffy/generated/json/login_entity.g.dart';
-
 class LoginDataModel {
   final String accessToken;
-
-//<editor-fold desc="Data Methods">
 
   const LoginDataModel({
     required this.accessToken,
@@ -46,6 +39,4 @@ class LoginDataModel {
       accessToken: map['access_token'] as String,
     );
   }
-
-//</editor-fold>
 }

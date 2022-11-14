@@ -1,20 +1,15 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/app/app.locator.dart';
-import 'package:cheffy/core/exceptions/custom_exceptions.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:fresh_dio/fresh_dio.dart';
-import 'package:cheffy/generated/json/base/json_convert_content.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.dart';
 import '../../../app/constants/error_messages.dart';
-import '../../models/response/base_entity.dart';
 
 class ApiClient {
   // ignore: constant_identifier_names

@@ -8,7 +8,6 @@ import 'package:cheffy/modules/main/profile/profile/data/repositories/profile_re
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:stacked_core/stacked_core.dart';
 import 'package:stacked_services/stacked_services.dart';
-
 import '../core/services/api/api_client.dart';
 import '../core/services/api/api_provider.dart';
 import '../core/services/authentication_service.dart';

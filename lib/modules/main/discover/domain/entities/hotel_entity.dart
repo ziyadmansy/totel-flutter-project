@@ -17,12 +17,12 @@ class HotelEntity {
   final bool isBooked;
   final double latitude;
   final double longitude;
-  final List childrenPolicy;
-  final List nearbyCities;
-  final List nearbyPlaces;
-  final List amenities;
-  final String city;
-  final int cityId;
+  final List? childrenPolicy;
+  final List? nearbyCities;
+  final List? nearbyPlaces;
+  final List? amenities;
+  final String? city;
+  final int? cityId;
 
   HotelEntity({
     required this.id,
@@ -80,21 +80,34 @@ class HotelEntity {
           map['description'] != null ? map['description'] as String : null,
       imageUrl: map['image_url'] != null ? map['image_url'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
-      rating: map['rating'] != null ? map['rating'] as double : null,
-      minPrice: map['min_price'] != null ? map['min_price'] as double : null,
-      maxPrice: map['max_price'] != null ? map['max_price'] as double : null,
+      rating:
+          map['rating'] != null ? double.parse(map['rating'].toString()) : null,
+      minPrice: map['min_price'] != null
+          ? double.parse(map['min_price'].toString())
+          : null,
+      maxPrice: map['max_price'] != null
+          ? double.parse(map['max_price'].toString())
+          : null,
       type: map['type'] != null ? map['type'] as String : null,
       isHourlyBasis: map['is_hourly_basis'] as bool,
       numberOfRooms: map['number_of_rooms'] as int,
       isBooked: map['is_booked'] == 1,
       latitude: map['latitude'] as double,
       longitude: map['longitude'] as double,
-      childrenPolicy: List.from((map['childrenPolicy'] as List)),
-      nearbyCities: List.from((map['nearbyCities'] as List)),
-      nearbyPlaces: List.from((map['nearbyPlaces'] as List)),
-      amenities: List.from((map['amenities'] as List)),
-      city: map['city'] as String,
-      cityId: map['cityId'] as int,
+      childrenPolicy: map['childrenPolicy'] == null
+          ? null
+          : List.from((map['childrenPolicy'] as List)),
+      nearbyCities: map['nearbyCities'] == null
+          ? null
+          : List.from((map['nearbyCities'] as List)),
+      nearbyPlaces: map['nearbyPlaces'] == null
+          ? null
+          : List.from((map['nearbyPlaces'] as List)),
+      amenities: map['amenities'] == null
+          ? null
+          : List.from((map['amenities'] as List)),
+      city: map['city'],
+      cityId: map['cityId'],
     );
   }
 

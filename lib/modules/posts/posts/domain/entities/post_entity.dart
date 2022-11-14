@@ -29,7 +29,7 @@ class PostsEntity {
   factory PostsEntity.fromMap(Map<String, dynamic> map) {
     return PostsEntity(
       posts: List<Post>.from(
-        (map['posts'] as List<int>).map<Post>(
+        (map['posts'] as List).map<Post>(
           (x) => Post.fromMap(x as Map<String, dynamic>),
         ),
       ),
@@ -114,7 +114,7 @@ class Post {
       location: map['location'] as String,
       startDate: map['startDate'] as String,
       endDate: map['endDate'] as String,
-      paymentAmountPerNight: map['paymentAmountPerNight'] as double,
+      paymentAmountPerNight: double.parse(map['paymentAmountPerNight'].toString()),
       messageToPartner: map['messageToPartner'] as String,
       partnerGender: map['partnerGender'] as String,
       isHourly: map['isHourly'] as bool,

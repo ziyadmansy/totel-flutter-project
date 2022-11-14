@@ -11,7 +11,8 @@ final appProviders = [
   ChangeNotifierProvider<PaymentViewModel>(create: (_) => PaymentViewModel()),
   ChangeNotifierProvider<SettingsViewModel>(create: (_) => SettingsViewModel()),
   ChangeNotifierProvider<SearchProvider>(create: (_) => SearchProvider()),
-  ChangeNotifierProvider<PostsProvider>(create: (_) => PostsProvider()),
+  ChangeNotifierProvider<PostsProvider>(
+      create: (_) => PostsProvider(locator.get())),
   ChangeNotifierProvider<ProfileProvider>(
       create: (_) => ProfileProvider(locator.get())),
   ChangeNotifierProvider<MainViewModel>(

@@ -2,9 +2,11 @@ class ApiRoutes {
   static const String register = 'auth/register';
 
   // Posts
-  static const String post = 'post';
+  static const String posts = 'posting';
+  static String postsByUserId(int userId) => 'posting/$userId';
+
+  // Notifications
   static const String notifications = 'notification';
-  static String postById(int postId) => 'post/$postId';
 
   // Profile
   static const String profile = 'user/profile';
