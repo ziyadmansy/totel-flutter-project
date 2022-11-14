@@ -1,22 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:fresh_dio/fresh_dio.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cheffy/app/constants/error_messages.dart';
-import 'package:cheffy/core/methods/typedefs.dart';
-import 'package:cheffy/core/models/data/app_user_entity.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 
 import '../../app/app.locator.dart';
-import 'api/api.dart';
 import 'api/api_provider.dart';
 
 class AuthenticationService {
   // ignore: constant_identifier_names
   static const String TAG = 'AuthenticationService';
 
-  final Api _api = locator.get<ApiProvider>();
+  final ApiProvider _api = locator.get<ApiProvider>();
   final SecureStorageService _secureStorageService = locator.get();
   final _auth = FirebaseAuth.instance;
 

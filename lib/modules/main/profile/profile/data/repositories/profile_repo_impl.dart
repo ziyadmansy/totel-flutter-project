@@ -5,11 +5,11 @@ import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/core/failures/failures.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
-import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
+import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:cheffy/core/failures/failures.dart';
-import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
+import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/core/services/api/api_client.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -18,12 +18,12 @@ class ProfileRepoImpl extends ProfileRepo {
   final ApiClient _apiClient = locator.get();
 
   @override
-  Future<ProfileEntity> get() async {
+  Future<UserEntity> get() async {
     try {
       final result = await _apiClient.get(ApiRoutes.profile);
       final resultData = result.data;
 
-      return ProfileEntity.fromJson(resultData);
+      return UserEntity.fromJson(resultData);
     } on DioError catch (e) {
       throw e;
     } catch (e) {
@@ -48,8 +48,7 @@ class ProfileRepoImpl extends ProfileRepo {
   }
 
   @override
-  Future<ProfileEntity> update(ProfileEntity profileEntity,
-      {File? newAvatar}) async {
+  Future<UserEntity> update(UserEntity profileEntity, {File? newAvatar}) async {
     try {
       Map<String, MultipartFile>? avatarMap;
       if (newAvatar != null) {
@@ -61,7 +60,7 @@ class ProfileRepoImpl extends ProfileRepo {
           ),
         };
       }
-      
+
       FormData formData = FormData.fromMap({
         ...profileEntity.toJson(),
         if (avatarMap != null) ...avatarMap,
@@ -74,7 +73,7 @@ class ProfileRepoImpl extends ProfileRepo {
 
       final resultData = result.data;
 
-      return ProfileEntity.fromJson(resultData);
+      return UserEntity.fromJson(resultData);
     } on DioError catch (e) {
       print(e);
       throw e;

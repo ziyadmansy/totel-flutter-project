@@ -97,9 +97,8 @@ class ApiClient {
           case 400:
           case 403:
             try {
-              var r = json.encode(error.response?.data);
-              errorDescription = BaseEntity.fromJson(json.decode(r)).message ??
-                  ErrorMessages.somethingWentWrong;
+              errorDescription =
+                  error.response?.data ?? ErrorMessages.somethingWentWrong;
             } catch (e) {
               Log.e(TAG, '$e',
                   references: ['_handleError', 'DioErrorType.response'],
@@ -117,9 +116,8 @@ class ApiClient {
             break;
           default:
             try {
-              var r = json.encode(error.response?.data);
               errorDescription =
-                  '${BaseEntity.fromJson(json.decode(r)).message ?? ErrorMessages.somethingWentWrong}\nStatus Code: ${error.response?.statusCode}';
+                  '${error.response?.data ?? ErrorMessages.somethingWentWrong}\nStatus Code: ${error.response?.statusCode}';
             } catch (ignore) {
               errorDescription =
                   '${ErrorMessages.somethingWentWrong}\nStatus Code: ${error.response?.statusCode}';

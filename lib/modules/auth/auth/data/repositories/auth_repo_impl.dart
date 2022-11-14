@@ -1,7 +1,7 @@
 import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/app/constants/error_messages.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
-import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
+import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/core/exceptions/custom_exceptions.dart';

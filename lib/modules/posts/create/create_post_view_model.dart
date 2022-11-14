@@ -11,11 +11,9 @@ import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/post_type.dart';
 import 'package:cheffy/core/methods/extensions.dart';
 import 'package:cheffy/core/models/data/locations_entity.dart';
-import 'package:cheffy/core/services/posts_service.dart';
 
 class CreatePostViewModel extends BaseViewModel {
   final NavigationService _navigationService = locator.get();
-  final PostsService _postsService = locator.get();
   final SnackbarService _snackbarService = locator.get();
   final DialogService _dialogService = locator.get();
   final PostRepo _postsRepo;

@@ -48,19 +48,19 @@ class PostListingItemView extends StatelessWidget {
           price: price,
           period: period,
         );
-      case 2:
-        return PostListingItemVerticalLayoutView(
-          user: null,
-          hotel: HotelEntity(
-            id: 0,
-            name: 'Hilton Miami Downtown',
-            caption: 'Caption',
-            imgUrl: '',
-            price: 99,
-            rate: 3.0,
-            dateRange: '4 Jun - 6 Jun',
-          ),
-        );
+      // case 2:
+      //   return PostListingItemVerticalLayoutView(
+      //     user: null,
+      //     hotel: HotelEntity(
+      //       id: 0,
+      //       name: 'Hilton Miami Downtown',
+      //       caption: 'Caption',
+      //       imgUrl: '',
+      //       price: 99,
+      //       rate: 3.0,
+      //       dateRange: '4 Jun - 6 Jun',
+      //     ),
+      //   );
       default:
         return ErrorView(message: ErrorMessages.unexpectedErrorOccurred);
     }

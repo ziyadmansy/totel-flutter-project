@@ -1,14 +1,7 @@
-// To parse this JSON data, do
-//
-//     final profileEntity = profileEntityFromJson(jsonString);
-
 import 'package:cheffy/Models/occupation.dart';
 import 'package:cheffy/app/app.dart';
-import 'package:cheffy/main.dart';
-import 'package:meta/meta.dart';
-import 'dart:convert';
 
-class ProfileEntity {
+class UserEntity {
   final int id;
   final String firstName;
   final String lastName;
@@ -24,10 +17,10 @@ class ProfileEntity {
   final String? gender;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final String? hobbie;
+  final String? hobbies;
   final Occupation? occupation;
 
-  ProfileEntity({
+  UserEntity({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -43,11 +36,11 @@ class ProfileEntity {
     required this.gender,
     required this.createdAt,
     required this.updatedAt,
-    required this.hobbie,
+    required this.hobbies,
     required this.occupation,
   });
 
-  factory ProfileEntity.fromJson(Map<String, dynamic> json) => ProfileEntity(
+  factory UserEntity.fromJson(Map<String, dynamic> json) => UserEntity(
         id: json["id"],
         firstName: json["first_name"],
         lastName: json["last_name"],
@@ -69,7 +62,7 @@ class ProfileEntity {
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
-        hobbie: json["hobbie"],
+        hobbies: json["hobbies"],
         occupation: json["occupation"] == null
             ? null
             : Occupation.fromMap(json["occupation"]),

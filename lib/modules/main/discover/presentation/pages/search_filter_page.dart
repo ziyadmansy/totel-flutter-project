@@ -23,6 +23,7 @@ class SearchFilterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final searchProvider = context.watch<SearchProvider>();
     return Scaffold(
+      appBar: SharedWidgets.buildHomeAppBar(title: 'Filter'),
       body: ReactiveForm(
         formGroup: searchProvider.timeSearchForm,
         child: SingleChildScrollView(

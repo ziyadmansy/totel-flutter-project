@@ -133,13 +133,6 @@ class SearchLocationPage extends StatelessWidget {
                   onPress: searchProvider.onAdvancedSearchLocationSubmit,
                   btnColor: AppColors.darkGunmetal,
                 ),
-                SizedBox(
-                  height: 8,
-                ),
-                SharedWidgets.buildRoundedOutlinedButton(
-                  btnChild: Text('Be a partner'),
-                  onPress: () {},
-                ),
               ],
             ),
           ),

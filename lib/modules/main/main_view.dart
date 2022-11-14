@@ -28,9 +28,13 @@ class _MainViewState extends State<MainView> {
   void initState() {
     super.initState();
     final mainViewModel = context.read<MainViewModel>();
+    final profileProvider = context.read<ProfileProvider>();
 
     Future.delayed(Duration.zero, () {
       mainViewModel.init();
+
+      // To get drawer profile and name
+      profileProvider.getProfile();
     });
   }
 

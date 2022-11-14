@@ -1,5 +1,5 @@
 import 'package:cheffy/Utils/stacked_nav_keys.dart';
-import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
+import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:stacked/stacked.dart';
@@ -8,7 +8,6 @@ import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/bottom_sheet_type.dart';
 import 'package:cheffy/core/enums/post_type.dart';
-import 'package:cheffy/core/models/data/app_user_entity.dart';
 import 'package:cheffy/core/services/authentication_service.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 

@@ -13,15 +13,16 @@ class SharedWidgets {
       title: Text(title),
       bottom: bottom,
       actions: [
-        AppBarActionButton(
-          child: Center(
-            child: Icon(
-              Icons.notifications,
-              color: AppColors.plumpPurplePrimary,
+        if (onNotificationPressed != null)
+          AppBarActionButton(
+            child: Center(
+              child: Icon(
+                Icons.notifications,
+                color: AppColors.plumpPurplePrimary,
+              ),
             ),
+            onPressed: onNotificationPressed,
           ),
-          onPressed: onNotificationPressed,
-        ),
       ],
     );
   }

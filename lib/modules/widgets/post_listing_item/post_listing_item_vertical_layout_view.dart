@@ -1,19 +1,16 @@
 import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
-import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 
 class PostListingItemVerticalLayoutView extends StatelessWidget {
-  final User? user;
-  final HotelEntity hotel;
+  final Post post;
 
   const PostListingItemVerticalLayoutView({
     super.key,
-    required this.user,
-    required this.hotel,
+    required this.post,
   });
 
   @override
@@ -35,7 +32,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      backgroundImage: user?.avatar,
+                      backgroundImage: NetworkImage(post.user?.avatar ?? ''),
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       radius: 24,
                     ),
@@ -44,11 +41,11 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${user?.firstName ?? 'Albert'} ${user?.lastName ?? 'Flores'}',
+                          '${post.user?.firstName ?? 'N/A'} ${post.user?.lastName ?? 'N/A'}',
                           style: AppStyle.of(context).b4M.wCChineseBlack,
                         ),
                         Text(
-                          user?.gender ?? '',
+                          post.user?.gender ?? '',
                           style: AppStyle.of(context).b6.wCCrayola,
                         ),
                       ],
@@ -58,13 +55,13 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
               ),
               Chip(
                 label: Text(
-                  hotel.rate.toString(),
+                  'post.user?.rate',
                   style: AppStyle.of(context).b5M.wCWhite,
                 ),
                 avatar: Image(
                   image: R.svg.ic_user_filled(width: 14, height: 14),
                 ),
-                backgroundColor: hotel.rate >= 3
+                backgroundColor: post.hotel!.rating! >= 3
                     ? AppColors.ratingNormal
                     : AppColors.ratingLow,
               ),
@@ -79,7 +76,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(hotel.imgUrl),
+                      image: NetworkImage('post.imgUrl'),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(
@@ -93,7 +90,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                   bottom: 12,
                   child: Chip(
                     label: Text(
-                      hotel.caption,
+                      'Caption',
                       style: AppStyle.of(context).b5M.wCWhite,
                     ),
                     backgroundColor: AppColors.plumpPurplePrimary,
@@ -107,7 +104,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
             children: [
               Chip(
                 label: Text(
-                  hotel.dateRange,
+                  'hotel.dateRange',
                   style: AppStyle.of(context).b5M.wCChineseBlack,
                 ),
                 side: BorderSide(color: AppColors.soap),
@@ -127,13 +124,13 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            hotel.name,
+            'hotel.name',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppStyle.of(context).b4B.wCChineseBlack,
           ),
           Text(
-            hotel.price.toStringAsFixed(2),
+            'hotel.price.toStringAsFixed(2)',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppStyle.of(context).b3M.wCChineseBlack,

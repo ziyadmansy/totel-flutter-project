@@ -1,12 +1,3 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
-// **************************************************************************
-// StackedLocatorGenerator
-// **************************************************************************
-
-// ignore_for_file: public_member_api_docs
-
-import 'package:cheffy/core/services/bidding_service.dart';
 import 'package:cheffy/modules/auth/auth/data/repositories/auth_repo_impl.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:cheffy/modules/notifications/data/repositories/notifications_repo_impl.dart';
@@ -22,7 +13,6 @@ import '../core/services/api/api_client.dart';
 import '../core/services/api/api_provider.dart';
 import '../core/services/authentication_service.dart';
 import '../core/services/location_service.dart';
-import '../core/services/posts_service.dart';
 import '../core/services/secure_storage_service.dart';
 
 final locator = StackedLocator.instance;
@@ -48,10 +38,8 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => ApiProvider());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => SecureStorageService());
-  locator.registerLazySingleton(() => PostsService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => LocationService());
-  locator.registerLazySingleton(() => BiddingService());
 }

@@ -17,9 +17,9 @@ class LocationChangeViewModel extends BaseViewModel {
   Stream<List<LocationEntity>> get locations => _locationsController.stream;
   
   void init() async {
-    _locationService
-        .getLocations()
-        .then((value) => _locationsController.add(value));
+    // _locationService
+    //     .getLocations()
+    //     .then((value) => _locationsController.add(value));
   }
 
   void onTapSetCurrentLocation() =>

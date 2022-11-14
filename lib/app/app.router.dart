@@ -8,9 +8,9 @@
 
 import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
 import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
-import 'package:cheffy/modules/main/discover/presentation/stacked_pages/search_hotels_page.dart';
-import 'package:cheffy/modules/main/discover/presentation/stacked_pages/search_location_page.dart';
-import 'package:cheffy/modules/main/discover/presentation/stacked_pages/search_filter_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/pages/search_hotels_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/pages/search_location_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/pages/search_filter_page.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
@@ -32,7 +32,7 @@ import '../modules/location_change_map/location_change_map_view.dart';
 import '../modules/main/chat/chat_view.dart';
 import '../modules/main/main_view.dart';
 import '../modules/main/map/map_view.dart';
-import '../modules/main/post/post_view.dart';
+import '../modules/posts/post_view.dart';
 import '../modules/on_boarding/on_boarding_view.dart';
 import '../modules/payment/presentation/add_card/payment_add_cart_view.dart';
 import '../modules/payment/presentation/options/payment_options_view.dart';

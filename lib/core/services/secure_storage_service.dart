@@ -1,10 +1,6 @@
-import 'dart:convert';
-
-import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
-import 'package:cheffy/core/models/data/app_user_entity.dart';
 
 class SecureStorageService {
   // ignore: constant_identifier_names

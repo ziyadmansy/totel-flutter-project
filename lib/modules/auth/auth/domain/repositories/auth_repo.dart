@@ -1,4 +1,4 @@
-import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
+import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepo {

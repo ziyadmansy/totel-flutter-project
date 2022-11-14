@@ -1,18 +1,160 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+
 class HotelEntity {
   final int id;
   final String name;
-  final String caption;
-  final String imgUrl;
-  final double price;
-  final double rate;
-  final String dateRange;
+  final String? description;
+  final String? imageUrl;
+  final String? address;
+  final double? rating;
+  final double? minPrice;
+  final double? maxPrice;
+  final String? type;
+  final bool isHourlyBasis;
+  final int numberOfRooms;
+  final bool isBooked;
+  final double latitude;
+  final double longitude;
+  final List childrenPolicy;
+  final List nearbyCities;
+  final List nearbyPlaces;
+  final List amenities;
+  final String city;
+  final int cityId;
+
   HotelEntity({
     required this.id,
     required this.name,
-    required this.caption,
-    required this.imgUrl,
-    required this.price,
-    required this.rate,
-    required this.dateRange,
+    this.description,
+    this.imageUrl,
+    this.address,
+    this.rating,
+    this.minPrice,
+    this.maxPrice,
+    this.type,
+    required this.isHourlyBasis,
+    required this.numberOfRooms,
+    required this.isBooked,
+    required this.latitude,
+    required this.longitude,
+    required this.childrenPolicy,
+    required this.nearbyCities,
+    required this.nearbyPlaces,
+    required this.amenities,
+    required this.city,
+    required this.cityId,
   });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'description': description,
+      'imageUrl': imageUrl,
+      'address': address,
+      'rating': rating,
+      'minPrice': minPrice,
+      'maxPrice': maxPrice,
+      'type': type,
+      'isHourlyBasis': isHourlyBasis,
+      'numberOfRooms': numberOfRooms,
+      'isBooked': isBooked,
+      'latitude': latitude,
+      'longitude': longitude,
+      'childrenPolicy': childrenPolicy,
+      'nearbyCities': nearbyCities,
+      'nearbyPlaces': nearbyPlaces,
+      'amenities': amenities,
+      'city': city,
+      'cityId': cityId,
+    };
+  }
+
+  factory HotelEntity.fromMap(Map<String, dynamic> map) {
+    return HotelEntity(
+      id: map['id'] as int,
+      name: map['name'] as String,
+      description:
+          map['description'] != null ? map['description'] as String : null,
+      imageUrl: map['image_url'] != null ? map['image_url'] as String : null,
+      address: map['address'] != null ? map['address'] as String : null,
+      rating: map['rating'] != null ? map['rating'] as double : null,
+      minPrice: map['min_price'] != null ? map['min_price'] as double : null,
+      maxPrice: map['max_price'] != null ? map['max_price'] as double : null,
+      type: map['type'] != null ? map['type'] as String : null,
+      isHourlyBasis: map['is_hourly_basis'] as bool,
+      numberOfRooms: map['number_of_rooms'] as int,
+      isBooked: map['is_booked'] == 1,
+      latitude: map['latitude'] as double,
+      longitude: map['longitude'] as double,
+      childrenPolicy: List.from((map['childrenPolicy'] as List)),
+      nearbyCities: List.from((map['nearbyCities'] as List)),
+      nearbyPlaces: List.from((map['nearbyPlaces'] as List)),
+      amenities: List.from((map['amenities'] as List)),
+      city: map['city'] as String,
+      cityId: map['cityId'] as int,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory HotelEntity.fromJson(String source) =>
+      HotelEntity.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'HotelEntity(id: $id, name: $name, description: $description, imageUrl: $imageUrl, address: $address, rating: $rating, minPrice: $minPrice, maxPrice: $maxPrice, type: $type, isHourlyBasis: $isHourlyBasis, numberOfRooms: $numberOfRooms, isBooked: $isBooked, latitude: $latitude, longitude: $longitude, childrenPolicy: $childrenPolicy, nearbyCities: $nearbyCities, nearbyPlaces: $nearbyPlaces, amenities: $amenities, city: $city, cityId: $cityId)';
+  }
+
+  @override
+  bool operator ==(covariant HotelEntity other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.name == name &&
+        other.description == description &&
+        other.imageUrl == imageUrl &&
+        other.address == address &&
+        other.rating == rating &&
+        other.minPrice == minPrice &&
+        other.maxPrice == maxPrice &&
+        other.type == type &&
+        other.isHourlyBasis == isHourlyBasis &&
+        other.numberOfRooms == numberOfRooms &&
+        other.isBooked == isBooked &&
+        other.latitude == latitude &&
+        other.longitude == longitude &&
+        listEquals(other.childrenPolicy, childrenPolicy) &&
+        listEquals(other.nearbyCities, nearbyCities) &&
+        listEquals(other.nearbyPlaces, nearbyPlaces) &&
+        listEquals(other.amenities, amenities) &&
+        other.city == city &&
+        other.cityId == cityId;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        name.hashCode ^
+        description.hashCode ^
+        imageUrl.hashCode ^
+        address.hashCode ^
+        rating.hashCode ^
+        minPrice.hashCode ^
+        maxPrice.hashCode ^
+        type.hashCode ^
+        isHourlyBasis.hashCode ^
+        numberOfRooms.hashCode ^
+        isBooked.hashCode ^
+        latitude.hashCode ^
+        longitude.hashCode ^
+        childrenPolicy.hashCode ^
+        nearbyCities.hashCode ^
+        nearbyPlaces.hashCode ^
+        amenities.hashCode ^
+        city.hashCode ^
+        cityId.hashCode;
+  }
 }

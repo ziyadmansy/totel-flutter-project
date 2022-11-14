@@ -1,55 +1,23 @@
 import 'package:cheffy/Utils/Utils.dart';
-import 'package:cheffy/Utils/stacked_nav_keys.dart';
-import 'package:cheffy/Utils/theme/color.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/day_night_enum.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
-import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
-import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_horizontal_layout_view.dart';
 import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_vertical_layout_view.dart';
-import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_view.dart';
-import 'package:cheffy/r.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class SearchProvider extends ChangeNotifier {
+class SearchProvider extends BaseViewModel {
   final NavigationService _navigationService = locator.get();
   final BottomSheetService _bottomSheetService = locator.get();
 
   bool isLoading = false;
 
-  List<PostListingItemVerticalLayoutView> filteredHotels = [
-    PostListingItemVerticalLayoutView(
-      hotel: HotelEntity(
-        id: 0,
-        name: 'Hilton Miami Downtown',
-        caption: 'Caption',
-        imgUrl:
-            'https://www.gannett-cdn.com/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg',
-        price: 99.95,
-        rate: 3.0,
-        dateRange: '4 Jun - 6 Jun',
-      ),
-      user: null,
-    ),
-    PostListingItemVerticalLayoutView(
-      hotel: HotelEntity(
-        id: 1,
-        name: 'Hilton Miami Downtown',
-        caption: 'Caption',
-        imgUrl:
-            'https://www.gannett-cdn.com/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg',
-        price: 99.95,
-        rate: 3.0,
-        dateRange: '4 Jun - 6 Jun',
-      ),
-      user: null,
-    ),
-  ];
+  List<PostListingItemVerticalLayoutView> filteredHotels = [];
 
   // Search location Page Form
   late final FormGroup searchLocationForm;

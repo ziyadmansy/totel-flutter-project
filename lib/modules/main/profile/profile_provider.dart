@@ -2,7 +2,7 @@ import 'package:cheffy/Models/occupation.dart';
 import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/core/enums/male_female_enum.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
-import 'package:cheffy/modules/auth/auth/domain/entities/profile_entity.dart';
+import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_image_picker/image_file.dart';
@@ -26,7 +26,7 @@ class ProfileProvider extends BaseViewModel {
 
   final ProfileRepo profileRepo;
 
-  ProfileEntity? profileEntity;
+  UserEntity? profileEntity;
   List<Occupation> occupations = [];
 
   ProfileProvider(this.profileRepo) {
@@ -97,7 +97,7 @@ class ProfileProvider extends BaseViewModel {
     try {
       setBusy(true);
 
-      final editedProfile = ProfileEntity(
+      final editedProfile = UserEntity(
         id: profileEntity!.id,
         firstName:
             editProfileForm.control(ReactiveFormControls.firstName).value,
@@ -114,7 +114,7 @@ class ProfileProvider extends BaseViewModel {
         gender: maleFemaleEnum.name,
         createdAt: profileEntity!.createdAt,
         updatedAt: profileEntity!.updatedAt,
-        hobbie: profileEntity!.hobbie,
+        hobbies: profileEntity!.hobbies,
         occupation: Occupation(
           id: (editProfileForm.control(ReactiveFormControls.occupation).value
               as int),

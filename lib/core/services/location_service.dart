@@ -1,12 +1,9 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/core/models/data/locations_entity.dart';
-import 'package:cheffy/core/services/api/api.dart';
 import 'package:cheffy/core/services/api/api_provider.dart';
 
 class LocationService {
-  final Api _api = locator.get<ApiProvider>();
-
   /// Determine the current position of the device.
   ///
   /// When the location services are not enabled or permissions
@@ -48,9 +45,5 @@ class LocationService {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
-  }
-
-  Future<List<LocationEntity>> getLocations() {
-    return _api.locations();
   }
 }

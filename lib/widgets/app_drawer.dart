@@ -12,11 +12,11 @@ class AppDrawer extends ViewModelWidget<MainViewModel> {
       child: ListView(
         children: [
           DrawerHeaderWidget(),
-          DrawerItem(
-            title: 'Profile',
-            icon: FontAwesomeIcons.userLarge,
-            onPress: mainViewModel.onTapViewProfile,
-          ),
+          // DrawerItem(
+          //   title: 'Profile',
+          //   icon: FontAwesomeIcons.userLarge,
+          //   onPress: mainViewModel.onTapViewProfile,
+          // ),
           DrawerItem(
             title: 'My bookings',
             icon: FontAwesomeIcons.hotel,

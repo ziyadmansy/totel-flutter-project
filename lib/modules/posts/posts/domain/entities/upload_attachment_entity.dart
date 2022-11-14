@@ -1,21 +1,54 @@
-import 'package:cheffy/generated/json/base/json_field.dart';
-import 'package:cheffy/generated/json/upload_attachment_entity.g.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-@JsonSerializable()
 class UploadAttachmentEntity {
-  late int id;
-  late String url;
+  final int id;
+  final String url;
+  UploadAttachmentEntity({
+    required this.id,
+    required this.url,
+  });
 
-  UploadAttachmentEntity();
+  UploadAttachmentEntity copyWith({
+    int? id,
+    String? url,
+  }) {
+    return UploadAttachmentEntity(
+      id: id ?? this.id,
+      url: url ?? this.url,
+    );
+  }
 
-  factory UploadAttachmentEntity.fromJson(Map<String, dynamic> json) =>
-      $UploadAttachmentEntityFromJson(json);
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'url': url,
+    };
+  }
 
-  Map<String, dynamic> toJson() => $UploadAttachmentEntityToJson(this);
+  factory UploadAttachmentEntity.fromMap(Map<String, dynamic> map) {
+    return UploadAttachmentEntity(
+      id: map['id'] as int,
+      url: map['url'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UploadAttachmentEntity.fromJson(String source) => UploadAttachmentEntity.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return jsonEncode(this);
+  String toString() => 'UploadAttachmentEntity(id: $id, url: $url)';
+
+  @override
+  bool operator ==(covariant UploadAttachmentEntity other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.id == id &&
+      other.url == url;
   }
+
+  @override
+  int get hashCode => id.hashCode ^ url.hashCode;
 }
