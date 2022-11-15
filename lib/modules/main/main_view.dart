@@ -63,68 +63,71 @@ class _MainViewState extends State<MainView> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 5.0,
-        clipBehavior: Clip.antiAlias,
-        // color: Theme.of(context).primaryColor.withAlpha(0),
-        // ↑ use .withAlpha(0) to debug/peek underneath ↑ BottomAppBar
-        child: BottomNavigationBar(
-          currentIndex: mainViewModel.index,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          selectedLabelStyle: AppStyle.of(context).b5M,
-          unselectedLabelStyle: AppStyle.of(context).b5M,
-          selectedItemColor: AppColors.plumpPurplePrimary,
-          unselectedItemColor: AppColors.rhythm,
-          onTap: mainViewModel.onTapItem,
-          items: [
-            BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.magnifyingGlass,
-                color: AppColors.rhythm,
+      bottomNavigationBar: SizedBox(
+        height: 65,
+        child: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          notchMargin: 5.0,
+          clipBehavior: Clip.antiAlias,
+          // color: Theme.of(context).primaryColor.withAlpha(0),
+          // ↑ use .withAlpha(0) to debug/peek underneath ↑ BottomAppBar
+          child: BottomNavigationBar(
+            currentIndex: mainViewModel.index,
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            selectedLabelStyle: AppStyle.of(context).b5M,
+            unselectedLabelStyle: AppStyle.of(context).b5M,
+            selectedItemColor: AppColors.plumpPurplePrimary,
+            unselectedItemColor: AppColors.rhythm,
+            onTap: mainViewModel.onTapItem,
+            items: [
+              BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.magnifyingGlass,
+                  color: AppColors.rhythm,
+                ),
+                activeIcon: FaIcon(
+                  FontAwesomeIcons.magnifyingGlass,
+                  color: AppColors.plumpPurplePrimary,
+                ),
+                label: 'Discover',
               ),
-              activeIcon: FaIcon(
-                FontAwesomeIcons.magnifyingGlass,
-                color: AppColors.plumpPurplePrimary,
+              BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.map,
+                  color: AppColors.rhythm,
+                ),
+                activeIcon: FaIcon(
+                  FontAwesomeIcons.solidMap,
+                  color: AppColors.plumpPurplePrimary,
+                ),
+                label: 'Map',
               ),
-              label: 'Discover',
-            ),
-            BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.map,
-                color: AppColors.rhythm,
+              BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.image,
+                  color: AppColors.rhythm,
+                ),
+                activeIcon: FaIcon(
+                  FontAwesomeIcons.solidImage,
+                  color: AppColors.plumpPurplePrimary,
+                ),
+                label: 'Posts',
               ),
-              activeIcon: FaIcon(
-                FontAwesomeIcons.solidMap,
-                color: AppColors.plumpPurplePrimary,
+              BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.user,
+                  color: AppColors.rhythm,
+                ),
+                activeIcon: FaIcon(
+                  FontAwesomeIcons.solidUser,
+                  color: AppColors.plumpPurplePrimary,
+                ),
+                label: 'Profile',
               ),
-              label: 'Map',
-            ),
-            BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.image,
-                color: AppColors.rhythm,
-              ),
-              activeIcon: FaIcon(
-                FontAwesomeIcons.solidImage,
-                color: AppColors.plumpPurplePrimary,
-              ),
-              label: 'Posts',
-            ),
-            BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.user,
-                color: AppColors.rhythm,
-              ),
-              activeIcon: FaIcon(
-                FontAwesomeIcons.solidUser,
-                color: AppColors.plumpPurplePrimary,
-              ),
-              label: 'Profile',
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

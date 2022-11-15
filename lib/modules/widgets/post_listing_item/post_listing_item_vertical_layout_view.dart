@@ -9,11 +9,13 @@ import 'package:cheffy/modules/theme/styles.dart';
 class PostListingItemVerticalLayoutView extends StatelessWidget {
   final Post post;
   final VoidCallback? onPress;
+  final VoidCallback? onDelete;
 
   const PostListingItemVerticalLayoutView({
     super.key,
     required this.post,
     this.onPress,
+    this.onDelete,
   });
 
   @override
@@ -59,19 +61,24 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (post.hotel.rating != null)
-                  Chip(
-                    label: Text(
-                      post.hotel.rating.toString(),
-                      style: AppStyle.of(context).b5M.wCWhite,
-                    ),
-                    avatar: Image(
-                      image: R.svg.ic_user_filled(width: 14, height: 14),
-                    ),
-                    backgroundColor: post.hotel.rating! >= 3
-                        ? AppColors.ratingNormal
-                        : AppColors.ratingLow,
-                  ),
+                PopupMenuButton<String>(
+                  elevation: 16,
+                  color: AppColors.soap,
+                  itemBuilder: (context) {
+                    return [
+                      if (onPress != null)
+                        PopupMenuItem(
+                          child: Text('View'),
+                          onTap: onPress,
+                        ),
+                      if (onDelete != null)
+                        PopupMenuItem(
+                          child: Text('Delete'),
+                          onTap: onDelete,
+                        ),
+                    ];
+                  },
+                ),
               ],
             ),
             SizedBox(height: 8),
@@ -118,6 +125,23 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                             );
                           },
                         ),
+                  if (post.hotel.rating != null)
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: Chip(
+                        label: Text(
+                          post.hotel.rating.toString(),
+                          style: AppStyle.of(context).b5M.wCWhite,
+                        ),
+                        avatar: Image(
+                          image: R.svg.ic_user_filled(width: 14, height: 14),
+                        ),
+                        backgroundColor: post.hotel.rating! >= 3
+                            ? AppColors.ratingNormal
+                            : AppColors.ratingLow,
+                      ),
+                    ),
                   Positioned(
                     left: 12,
                     bottom: 12,

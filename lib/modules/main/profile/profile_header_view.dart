@@ -136,7 +136,7 @@ class ProfileHeaderView extends StatelessWidget {
                       side: BorderSide(color: AppColors.soap),
                     ),
                     child: Text(
-                      '14 Posts',
+                      '${profileProvider.postEntity?.posts.length ?? 0} Posts',
                       style: AppStyle.of(context).b4M.wCChineseBlack,
                     ),
                   ),

@@ -63,6 +63,12 @@ class LoginView extends ViewModelBuilderWidget<LoginViewModel> {
                                 filled: true,
                                 fillColor: AppColors.soap,
                               ),
+                              validationMessages: {
+                                ValidationMessage.required: (val) =>
+                                    'Enter your E-mail',
+                                ValidationMessage.email: (val) =>
+                                    'Enter a valid E-mail',
+                              },
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -77,12 +83,18 @@ class LoginView extends ViewModelBuilderWidget<LoginViewModel> {
                                 suffixIcon: IconButton(
                                   onPressed: viewModel.onShowPassword,
                                   splashRadius: 1,
-                                  icon: Icon(viewModel.obscureText
-                                      ? Icons.visibility_off_rounded
-                                      : Icons.visibility_rounded),
+                                  icon: Icon(
+                                    viewModel.obscureText
+                                        ? Icons.visibility_off_rounded
+                                        : Icons.visibility_rounded,
+                                  ),
                                 ),
                               ),
                               obscureText: viewModel.obscureText,
+                              validationMessages: {
+                                ValidationMessage.required: (val) =>
+                                    'Enter your password',
+                              },
                             ),
                           ),
                           Align(

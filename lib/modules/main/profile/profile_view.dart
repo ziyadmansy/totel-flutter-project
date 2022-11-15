@@ -1,3 +1,4 @@
+import 'package:cheffy/modules/main/profile/tabs/posts_tab.dart';
 import 'package:cheffy/modules/widgets/progress/background_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class _ProfileViewState extends State<ProfileView> {
     final profileProvider = context.read<ProfileProvider>();
     Future.delayed(Duration.zero, () {
       profileProvider.getProfile();
+      profileProvider.getUserPosts();
     });
   }
 
@@ -39,7 +41,7 @@ class _ProfileViewState extends State<ProfileView> {
           child: NestedScrollView(
             headerSliverBuilder: (context, _) => [
               SliverAppBar(
-                title: Text(profileProvider.profileEntity?.username ?? ''),
+                title: Text('Profile'),
                 backgroundColor: Colors.white,
                 pinned: true,
                 flexibleSpace: const FlexibleSpaceBar(
@@ -52,9 +54,15 @@ class _ProfileViewState extends State<ProfileView> {
                     color: Colors.white,
                     child: const TabBar(
                       tabs: [
-                        Tab(child: Text("Posts")),
-                        Tab(child: Text("Bookings")),
-                        Tab(child: Text("Reviews")),
+                        Tab(
+                          text: "Posts",
+                        ),
+                        Tab(
+                          text: "Bookings",
+                        ),
+                        Tab(
+                          text: "Reviews",
+                        ),
                       ],
                     ),
                   ),
@@ -75,21 +83,8 @@ class _ProfileViewState extends State<ProfileView> {
             ],
             body: TabBarView(
               children: [
-                ListView.separated(
-                  itemBuilder: (context, index) => PostListingItemView(
-                    layoutType: 2,
-                    userImage: R.image.img_avatar_2(),
-                    image: R.image.img_ad_1(),
-                    dateRange: '4 Jun - 6 Jun',
-                    title: 'Hilton Miami Downtown',
-                    by: 'Albert Flores',
-                    price: '\$90',
-                    period: 'Day',
-                    onTap: () => profileProvider.onTapPost(),
-                  ),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 8),
-                  itemCount: 5,
+                PostsTab(
+                  postEntity: profileProvider.postEntity,
                 ),
                 ListView.separated(
                   itemCount: 5,

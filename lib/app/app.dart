@@ -98,7 +98,7 @@ class Application {
 
     // Registers a config to be used when calling showSnackbar
     service.registerSnackbarConfig(SnackbarConfig(
-      backgroundColor: AppColors.crayola,
+      backgroundColor: AppColors.soap,
       textColor: AppColors.chineseBlack,
       messageColor: AppColors.chineseBlack,
       mainButtonTextColor: Colors.black,

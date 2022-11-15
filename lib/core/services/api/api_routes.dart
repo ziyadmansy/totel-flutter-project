@@ -3,7 +3,8 @@ class ApiRoutes {
 
   // Posts
   static const String posts = 'posting';
-  static String postsByUserId(int userId) => 'posting/$userId';
+  static const String postsByCurrentUser = 'posting/user';
+  static String deleteCurrentUserPost(int postId) => 'posting/user/$postId';
 
   // Notifications
   static const String notifications = 'notification';

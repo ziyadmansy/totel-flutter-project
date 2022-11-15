@@ -4,6 +4,7 @@ import 'package:cheffy/core/enums/male_female_enum.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_image_picker/image_file.dart';
 import 'package:stacked/stacked.dart';
@@ -16,6 +17,7 @@ class ProfileProvider extends BaseViewModel {
   final BottomSheetService _bottomSheetService = locator.get();
   final SnackbarService _snackbarService = locator.get();
   final SecureStorageService _secureStorageService = locator.get();
+  PostsEntity? postEntity;
 
   bool isLoading = false;
 
@@ -73,6 +75,7 @@ class ProfileProvider extends BaseViewModel {
       // await _secureStorageService.setAppUser(profileEntity);
       notifyListeners();
     } catch (e) {
+      print(e);
       _snackbarService.showSnackbar(
           title: 'Error', message: 'Something went wrong, please try again');
     } finally {
@@ -138,6 +141,43 @@ class ProfileProvider extends BaseViewModel {
       );
     } finally {
       setBusy(false);
+    }
+  }
+
+  Future<void> getUserPosts() async {
+    try {
+      setBusyForObject(postEntity, true);
+      postEntity = await profileRepo.getUserPosts();
+      notifyListeners();
+    } catch (e) {
+      _snackbarService.showSnackbar(
+        title: 'Error',
+        message: 'Something went wrong, please try again',
+      );
+    } finally {
+      setBusyForObject(postEntity, false);
+    }
+  }
+
+  Future<void> deletePost(int postId) async {
+    try {
+      setBusyForObject(postEntity, true);
+      await profileRepo.deletePostById(postId);
+
+      // Remove the deleted post
+      postEntity!.posts.removeWhere((element) => element.id == postId);
+
+      _snackbarService.showSnackbar(message: 'Post deleted successfully');
+
+      notifyListeners();
+    } catch (e) {
+      print(e);
+      _snackbarService.showSnackbar(
+        title: 'Error',
+        message: 'Something went wrong, post couldn\'t be deleted',
+      );
+    } finally {
+      setBusyForObject(postEntity, false);
     }
   }
 

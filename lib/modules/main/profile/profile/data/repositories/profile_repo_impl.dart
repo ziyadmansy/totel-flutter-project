@@ -7,6 +7,7 @@ import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:cheffy/core/failures/failures.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
@@ -29,6 +30,25 @@ class ProfileRepoImpl extends ProfileRepo {
     } catch (e) {
       throw e;
     }
+  }
+
+  @override
+  Future<PostsEntity> getUserPosts() async {
+    try {
+      final result = await _apiClient.get(ApiRoutes.postsByCurrentUser);
+      final resultData = result.data;
+
+      return PostsEntity.fromMap(resultData);
+    } on DioError catch (e) {
+      throw e;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  @override
+  Future<void> deletePostById(int postId) async {
+    await _apiClient.delete(ApiRoutes.deleteCurrentUserPost(postId));
   }
 
   @override

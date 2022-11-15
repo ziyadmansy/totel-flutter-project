@@ -43,12 +43,6 @@ class PostRepoImpl implements PostRepo {
   }
 
   @override
-  Future<PostsEntity> getPostById(int postId) async {
-    final res = await _apiClient.get(ApiRoutes.postsByUserId(postId));
-    return PostsEntity.fromJson((res.data)[0]);
-  }
-
-  @override
   Future<AttachmentEntity> uploadAttachment(
       String path, String fileName) async {
     FormData data = FormData.fromMap(

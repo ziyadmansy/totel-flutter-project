@@ -14,7 +14,7 @@ abstract class PostRepo {
 
   Future<PostsEntity> getAllPosts();
 
-  Future<PostsEntity> getPostById(int postId);
+  
 
   Future<AttachmentEntity> uploadAttachment(String path, String fileName);
 }

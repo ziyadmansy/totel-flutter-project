@@ -55,6 +55,8 @@ class _PostsPageViewState extends State<PostsPageView> {
                     onPress: () {
                       postsProvider.onTapPost(postItem);
                     },
+                    // Users can't delete public posts
+                    onDelete: null,
                   );
                 },
               ),

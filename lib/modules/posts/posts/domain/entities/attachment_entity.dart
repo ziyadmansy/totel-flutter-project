@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:cheffy/app/app.dart';
-
 class AttachmentEntity {
   final int id;
   final String url;
