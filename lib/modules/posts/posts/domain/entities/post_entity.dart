@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
@@ -59,17 +60,17 @@ class Post {
   final int id;
   final String postingType;
   final String location;
-  final String startDate;
-  final String endDate;
+  final DateTime startDate;
+  final DateTime endDate;
   final double paymentAmountPerNight;
   final String messageToPartner;
   final String partnerGender;
   final bool isHourly;
-  final List attachments;
+  final List<AttachmentEntity> attachments;
   final String? createdAt;
   final String? updatedAt;
-  final UserEntity? user;
-  final HotelEntity? hotel;
+  final UserEntity user;
+  final HotelEntity hotel;
 
   Post({
     required this.id,
@@ -84,8 +85,8 @@ class Post {
     required this.attachments,
     this.createdAt,
     this.updatedAt,
-    this.user,
-    this.hotel,
+    required this.user,
+    required this.hotel,
   });
 
   Map<String, dynamic> toMap() {
@@ -93,8 +94,8 @@ class Post {
       'id': id,
       'postingType': postingType,
       'location': location,
-      'startDate': startDate,
-      'endDate': endDate,
+      'startDate': startDate.toIso8601String(),
+      'endDate': endDate.toIso8601String(),
       'paymentAmountPerNight': paymentAmountPerNight,
       'messageToPartner': messageToPartner,
       'partnerGender': partnerGender,
@@ -102,8 +103,8 @@ class Post {
       'attachments': attachments,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
-      'user': user?.toJson(),
-      'hotel': hotel?.toMap(),
+      'user': user.toJson(),
+      'hotel': hotel.toMap(),
     };
   }
 
@@ -112,21 +113,20 @@ class Post {
       id: map['id'] as int,
       postingType: map['postingType'] as String,
       location: map['location'] as String,
-      startDate: map['startDate'] as String,
-      endDate: map['endDate'] as String,
-      paymentAmountPerNight: double.parse(map['paymentAmountPerNight'].toString()),
+      startDate: DateTime.parse(map['startDate'] as String),
+      endDate: DateTime.parse(map['endDate'] as String),
+      paymentAmountPerNight:
+          double.parse(map['paymentAmountPerNight'].toString()),
       messageToPartner: map['messageToPartner'] as String,
       partnerGender: map['partnerGender'] as String,
       isHourly: map['isHourly'] as bool,
-      attachments: List.from((map['attachments'] as List)),
+      attachments: (map['attachments'] as List)
+          .map((att) => AttachmentEntity.fromMap(att))
+          .toList(),
       createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
       updatedAt: map['updatedAt'] != null ? map['updatedAt'] as String : null,
-      user: map['user'] != null
-          ? UserEntity.fromJson(map['user'] as Map<String, dynamic>)
-          : null,
-      hotel: map['hotel'] != null
-          ? HotelEntity.fromMap(map['hotel'] as Map<String, dynamic>)
-          : null,
+      user: UserEntity.fromJson(map['user'] as Map<String, dynamic>),
+      hotel: HotelEntity.fromMap(map['hotel'] as Map<String, dynamic>),
     );
   }
 

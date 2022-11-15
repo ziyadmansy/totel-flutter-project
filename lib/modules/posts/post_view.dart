@@ -52,6 +52,9 @@ class _PostsPageViewState extends State<PostsPageView> {
                   final postItem = postsProvider.postEntity!.posts[i];
                   return PostListingItemVerticalLayoutView(
                     post: postItem,
+                    onPress: () {
+                      postsProvider.onTapPost(postItem);
+                    },
                   );
                 },
               ),

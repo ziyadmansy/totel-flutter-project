@@ -26,7 +26,10 @@ class PostsProvider extends BaseViewModel {
     }
   }
 
-  void onTapPost() {
-    _navigationService.navigateTo(Routes.postDetailView);
+  void onTapPost(Post selectedPost) {
+    _navigationService.navigateTo(
+      Routes.postDetailView,
+      arguments: selectedPost,
+    );
   }
 }

@@ -7,7 +7,7 @@ import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_booked_post_params.dart';
-import 'package:cheffy/modules/posts/posts/domain/entities/upload_attachment_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PostRepoImpl implements PostRepo {
@@ -49,7 +49,7 @@ class PostRepoImpl implements PostRepo {
   }
 
   @override
-  Future<UploadAttachmentEntity> uploadAttachment(
+  Future<AttachmentEntity> uploadAttachment(
       String path, String fileName) async {
     FormData data = FormData.fromMap(
       {"file": await MultipartFile.fromFile(path, filename: fileName)},
@@ -58,7 +58,7 @@ class PostRepoImpl implements PostRepo {
       'attachment',
       data: data,
     );
-    return UploadAttachmentEntity.fromJson(result.data);
+    return AttachmentEntity.fromJson(result.data);
   }
 
   Future<List<int>> _uploadAttachments(List<XFile>? attachments) async {

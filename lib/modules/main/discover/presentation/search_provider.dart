@@ -17,8 +17,6 @@ class SearchProvider extends BaseViewModel {
 
   bool isLoading = false;
 
-  List<PostListingItemVerticalLayoutView> filteredHotels = [];
-
   // Search location Page Form
   late final FormGroup searchLocationForm;
 

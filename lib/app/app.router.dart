@@ -718,6 +718,7 @@ extension NavigatorStateExtension on NavigationService {
 
   Future<dynamic> navigateToPostDetailView({
     int? routerId,
+    dynamic args,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
@@ -725,6 +726,7 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.postDetailView,
+      arguments: args,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

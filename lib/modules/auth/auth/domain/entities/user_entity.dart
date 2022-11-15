@@ -52,9 +52,7 @@ class UserEntity {
         dateOfBrith: json["date_of_brith"] == null
             ? null
             : DateTime.tryParse(json["date_of_brith"]),
-        avatar: json["avatar"] == null
-            ? null
-            : '${Application.imgBaseUrl}/${(json["avatar"] as String).replaceAll('public/', '')}',
+        avatar: json["avatar"],
         city: json["city"],
         rating: json["rating"],
         gender: json["gender"],

@@ -27,7 +27,7 @@ class MapViewModel extends BaseViewModel {
   }
 
   onTapPost(context) {
-    final NavigationService _navigationService = locator.get();
-    _navigationService.navigateToPostDetailView();
+    // final NavigationService _navigationService = locator.get();
+    // _navigationService.navigateToPostDetailView();
   }
 }

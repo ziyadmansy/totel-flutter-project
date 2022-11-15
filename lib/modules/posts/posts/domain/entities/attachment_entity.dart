@@ -1,19 +1,21 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class UploadAttachmentEntity {
+import 'package:cheffy/app/app.dart';
+
+class AttachmentEntity {
   final int id;
   final String url;
-  UploadAttachmentEntity({
+
+  AttachmentEntity({
     required this.id,
     required this.url,
   });
 
-  UploadAttachmentEntity copyWith({
+  AttachmentEntity copyWith({
     int? id,
     String? url,
   }) {
-    return UploadAttachmentEntity(
+    return AttachmentEntity(
       id: id ?? this.id,
       url: url ?? this.url,
     );
@@ -26,27 +28,26 @@ class UploadAttachmentEntity {
     };
   }
 
-  factory UploadAttachmentEntity.fromMap(Map<String, dynamic> map) {
-    return UploadAttachmentEntity(
+  factory AttachmentEntity.fromMap(Map<String, dynamic> map) {
+    return AttachmentEntity(
       id: map['id'] as int,
-      url: map['url'] as String,
+      url: map["url"],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UploadAttachmentEntity.fromJson(String source) => UploadAttachmentEntity.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory AttachmentEntity.fromJson(String source) =>
+      AttachmentEntity.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'UploadAttachmentEntity(id: $id, url: $url)';
 
   @override
-  bool operator ==(covariant UploadAttachmentEntity other) {
+  bool operator ==(covariant AttachmentEntity other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.url == url;
+
+    return other.id == id && other.url == url;
   }
 
   @override

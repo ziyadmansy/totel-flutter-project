@@ -2,10 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class UniversalVariables {
-  static final dateFormat = DateFormat('yyyy-MM-dd');
+  // American date format starts with the month
+  static final dateFormat = DateFormat('MM-dd-yyyy');
   static final monthlyDateFormat = DateFormat('MMM, yyyy');
   static final timeFormat = DateFormat.jm();
-  static final dateTimeFormat = DateFormat('dd-MM-yyyy').add_jm();
+  static final dateTimeFormat = DateFormat('MM-dd-yyyy').add_jm();
 
   static final Color blueColor = Color(0xff2b9ed4);
   static final Color blackColor = Color(0xff19191b);
@@ -21,6 +22,7 @@ class UniversalVariables {
   static final Color senderColor = Colors.blue;
   static final Color receiverColor = Colors.blue;
 
+  static const double kPostRadius = 8;
   static const double kBorderRadius = 12;
   static const double kButtonBorderRadius = 100;
 

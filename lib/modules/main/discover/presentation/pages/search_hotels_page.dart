@@ -12,12 +12,12 @@ class SearchHotelsPage extends StatelessWidget {
     final searchProvider = context.watch<SearchProvider>();
     return Scaffold(
       appBar: SharedWidgets.buildHomeAppBar(title: 'Discover Hotels'),
-      body: ListView.builder(
-        itemCount: searchProvider.filteredHotels.length,
-        itemBuilder: (context, i) {
-          return searchProvider.filteredHotels[i];
-        },
-      ),
+      // body: ListView.builder(
+      //   itemCount: searchProvider.filteredHotels.length,
+      //   itemBuilder: (context, i) {
+      //     return searchProvider.filteredHotels[i];
+      //   },
+      // ),
     );
   }
 }

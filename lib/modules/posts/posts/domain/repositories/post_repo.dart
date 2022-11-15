@@ -1,7 +1,7 @@
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_booked_post_params.dart';
-import 'package:cheffy/modules/posts/posts/domain/entities/upload_attachment_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 import 'package:image_picker/image_picker.dart';
 
 abstract class PostRepo {
@@ -16,5 +16,5 @@ abstract class PostRepo {
 
   Future<PostsEntity> getPostById(int postId);
 
-  Future<UploadAttachmentEntity> uploadAttachment(String path, String fileName);
+  Future<AttachmentEntity> uploadAttachment(String path, String fileName);
 }

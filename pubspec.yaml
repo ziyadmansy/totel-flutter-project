@@ -48,10 +48,8 @@ dependencies:
   expandable_bottom_sheet:
   font_awesome_flutter: ^10.2.1
   timeago_flutter: ^1.2.0
-  # reactive_dropdown_field: ^0.4.0
-#  google_fonts:
+  carousel_slider: ^4.1.1
 #  flutter_svg:
-#  google_maps_flutter:
 
   # Firebase
   firebase_core: ^2.1.1

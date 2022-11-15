@@ -103,32 +103,32 @@ class LoginView extends ViewModelBuilderWidget<LoginViewModel> {
                             textAlign: TextAlign.center,
                             style: AppStyle.of(context).b4.wCRhythm,
                           ),
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              OutlinedButton(
-                                onPressed: viewModel.onGoogle,
-                                style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.all(16),
-                                ),
-                                child: Image(
-                                  image: R.svg.ic_google(width: 24, height: 24),
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              OutlinedButton(
-                                onPressed: viewModel.onFacebook,
-                                style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.all(16),
-                                ),
-                                child: Image(
-                                  image:
-                                      R.svg.ic_facebook(width: 24, height: 24),
-                                ),
-                              ),
-                            ],
-                          ),
+                          // const SizedBox(height: 16),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     OutlinedButton(
+                          //       onPressed: viewModel.onGoogle,
+                          //       style: OutlinedButton.styleFrom(
+                          //         padding: const EdgeInsets.all(16),
+                          //       ),
+                          //       child: Image(
+                          //         image: R.svg.ic_google(width: 24, height: 24),
+                          //       ),
+                          //     ),
+                          //     const SizedBox(width: 16),
+                          //     OutlinedButton(
+                          //       onPressed: viewModel.onFacebook,
+                          //       style: OutlinedButton.styleFrom(
+                          //         padding: const EdgeInsets.all(16),
+                          //       ),
+                          //       child: Image(
+                          //         image:
+                          //             R.svg.ic_facebook(width: 24, height: 24),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                           SizedBox(
                             height: getValueForScreenType(
                                 context: context, mobile: 16, tablet: 36),

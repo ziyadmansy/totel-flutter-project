@@ -6,7 +6,7 @@ class HotelEntity {
   final int id;
   final String name;
   final String? description;
-  final String? imageUrl;
+  final String imageUrl;
   final String? address;
   final double? rating;
   final double? minPrice;
@@ -28,7 +28,7 @@ class HotelEntity {
     required this.id,
     required this.name,
     this.description,
-    this.imageUrl,
+    required this.imageUrl,
     this.address,
     this.rating,
     this.minPrice,
@@ -78,7 +78,7 @@ class HotelEntity {
       name: map['name'] as String,
       description:
           map['description'] != null ? map['description'] as String : null,
-      imageUrl: map['image_url'] != null ? map['image_url'] as String : null,
+      imageUrl: map['image_url'],
       address: map['address'] != null ? map['address'] as String : null,
       rating:
           map['rating'] != null ? double.parse(map['rating'].toString()) : null,
