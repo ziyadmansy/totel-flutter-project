@@ -100,39 +100,44 @@ class ProfileProvider extends BaseViewModel {
     try {
       setBusy(true);
 
-      final editedProfile = UserEntity(
-        id: profileEntity!.id,
-        firstName:
-            editProfileForm.control(ReactiveFormControls.firstName).value,
-        lastName: editProfileForm.control(ReactiveFormControls.lastName).value,
-        username: profileEntity!.username,
-        email: profileEntity!.email,
-        native: editProfileForm.control(ReactiveFormControls.native).value,
-        bio: editProfileForm.control(ReactiveFormControls.bio).value,
-        phoneNo: profileEntity!.phoneNo,
-        dateOfBrith: profileEntity!.dateOfBrith,
-        avatar: profileEntity!.avatar,
-        city: profileEntity!.city,
-        rating: profileEntity!.rating,
-        gender: maleFemaleEnum.name,
-        createdAt: profileEntity!.createdAt,
-        updatedAt: profileEntity!.updatedAt,
-        hobbies: profileEntity!.hobbies,
-        occupation: Occupation(
-          id: (editProfileForm.control(ReactiveFormControls.occupation).value
-              as int),
-          name: '',
-        ),
-      );
+      if (editProfileForm.valid) {
+        final editedProfile = UserEntity(
+          id: profileEntity!.id,
+          firstName:
+              editProfileForm.control(ReactiveFormControls.firstName).value,
+          lastName:
+              editProfileForm.control(ReactiveFormControls.lastName).value,
+          username: profileEntity!.username,
+          email: profileEntity!.email,
+          native: editProfileForm.control(ReactiveFormControls.native).value,
+          bio: editProfileForm.control(ReactiveFormControls.bio).value,
+          phoneNo: profileEntity!.phoneNo,
+          dateOfBrith: profileEntity!.dateOfBrith,
+          avatar: profileEntity!.avatar,
+          city: profileEntity!.city,
+          rating: profileEntity!.rating,
+          gender: maleFemaleEnum.name,
+          createdAt: profileEntity!.createdAt,
+          updatedAt: profileEntity!.updatedAt,
+          hobbies: profileEntity!.hobbies,
+          occupation: Occupation(
+            id: (editProfileForm.control(ReactiveFormControls.occupation).value
+                as int),
+            name: '',
+          ),
+        );
 
-      profileEntity = await profileRepo.update(
-        editedProfile,
-        newAvatar: (editProfileForm.control(ReactiveFormControls.avatar).value
-                as ImageFile?)
-            ?.image,
-      );
-      notifyListeners();
-      _navigationService.back();
+        profileEntity = await profileRepo.update(
+          editedProfile,
+          newAvatar: (editProfileForm.control(ReactiveFormControls.avatar).value
+                  as ImageFile?)
+              ?.image,
+        );
+        notifyListeners();
+        _navigationService.back();
+      } else {
+        editProfileForm.markAllAsTouched();
+      }
     } catch (e) {
       print(e);
       _snackbarService.showSnackbar(

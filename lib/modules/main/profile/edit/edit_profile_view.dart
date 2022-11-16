@@ -57,6 +57,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                           label: const Text('Add an avatar'),
                         ),
                         imageQuality: 40,
+                        validationMessages: {
+                          ValidationMessage.required: (val) =>
+                              'Select your avatar',
+                        },
                       ),
                     ),
                     SizedBox(
@@ -72,6 +76,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                               decoration: InputDecoration(
                                 hintText: 'ex: John',
                               ),
+                              validationMessages: {
+                                ValidationMessage.required: (val) =>
+                                    'Enter first name',
+                              },
                             ),
                           ),
                         ),
@@ -86,6 +94,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                               decoration: InputDecoration(
                                 hintText: 'ex: Doe',
                               ),
+                              validationMessages: {
+                                ValidationMessage.required: (val) =>
+                                    'Enter last name',
+                              },
                             ),
                           ),
                         ),
@@ -99,6 +111,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                         decoration: InputDecoration(
                           hintText: 'ex: us',
                         ),
+                        validationMessages: {
+                          ValidationMessage.required: (val) =>
+                              'Enter your native',
+                        },
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -109,7 +125,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                         hint: Text('Occupation'),
                         validationMessages: {
                           ValidationMessage.required: (val) =>
-                              'Enter payment percentage',
+                              'Enter your occupation',
                         },
                         items: profileProvider.occupations
                             .map(
@@ -131,6 +147,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                               'ex: I\'m a student looking for rental rooms',
                         ),
                         maxLines: 5,
+                        validationMessages: {
+                          ValidationMessage.required: (val) => 'Enter your bio',
+                        },
                       ),
                     ),
                     const SizedBox(height: 16),

@@ -42,19 +42,17 @@ class PostDetailViewModel extends BaseViewModel {
   
   void onMapCreated(GoogleMapController controller) {
     _controller = controller;
-    _navigateToCurrent();
+    // _navigateToCurrent();
   }
 
-  void _navigateToCurrent() {
-    // Get the passed argument from postView (Post)
-    print('args: ' + _navigationService.currentArguments.toString());
-    _locationService.determinePosition().then((value) {
-      _controller.animateCamera(CameraUpdate.newLatLngZoom(
-          LatLng(value.latitude, value.longitude), 14));
-    },
-        onError: (error) =>
-            _dialogService.showDialog(description: error.toString()));
-  }
+  // void _navigateToCurrent() {
+  //   _locationService.determinePosition().then((value) {
+  //     _controller.animateCamera(CameraUpdate.newLatLngZoom(
+  //         LatLng(value.latitude, value.longitude), 14));
+  //   },
+  //       onError: (error) =>
+  //           _dialogService.showDialog(description: error.toString()));
+  // }
 
   void onRequest() {
     if (isRequested) {

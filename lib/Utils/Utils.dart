@@ -5,6 +5,7 @@ class UniversalVariables {
   // American date format starts with the month
   static final dateFormat = DateFormat('MM-dd-yyyy');
   static final monthlyDateFormat = DateFormat('MMM, yyyy');
+  static final dayMonthDateFormat = DateFormat('dd MMM');
   static final timeFormat = DateFormat.jm();
   static final dateTimeFormat = DateFormat('MM-dd-yyyy').add_jm();
 

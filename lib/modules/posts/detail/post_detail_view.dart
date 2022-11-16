@@ -1,4 +1,6 @@
+import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/app/app.locator.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/widgets/main_app_bar.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
@@ -17,21 +19,23 @@ import 'post_detail_view_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PostDetailView extends StatefulWidget {
-  const PostDetailView({super.key});
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 15,
-  );
+  final Post post;
+  const PostDetailView({super.key, required this.post});
 
   @override
   State<PostDetailView> createState() => _PostDetailViewState();
 }
 
 class _PostDetailViewState extends State<PostDetailView> {
+  late CameraPosition cameraPosition;
+
   @override
   void initState() {
     super.initState();
+    cameraPosition = CameraPosition(
+      target: LatLng(widget.post.hotel.latitude, widget.post.hotel.longitude),
+      zoom: 16,
+    );
     Future.delayed(
       Duration.zero,
       () {
@@ -40,6 +44,28 @@ class _PostDetailViewState extends State<PostDetailView> {
         // print(_navigationService.currentArguments);
         // postDetailProvider.init();
       },
+    );
+  }
+
+  Widget buildSection({required String title, required String body}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: AppStyle.of(context).b3M.wCChineseBlack,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          body,
+          style: AppStyle.of(context).b5.wCRhythm,
+        ),
+        SizedBox(
+          height: 16,
+        ),
+      ],
     );
   }
 
@@ -121,23 +147,22 @@ class _PostDetailViewState extends State<PostDetailView> {
       body: Stack(
         children: [
           GoogleMap(
-            initialCameraPosition: PostDetailView._kGooglePlex,
+            initialCameraPosition: cameraPosition,
             onMapCreated: postDetailProvider.onMapCreated,
           ),
           DraggableScrollableSheet(
             maxChildSize: 0.8,
-            minChildSize: 0.4,
+            minChildSize: 0.25,
             builder: (context, ScrollController sc) {
               return Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20))),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
                 child: ListView(
-                  // mainAxisSize: MainAxisSize.min,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  // physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
                     horizontal: 20,
                   ),
@@ -153,62 +178,66 @@ class _PostDetailViewState extends State<PostDetailView> {
                     SizedBox(height: 20),
                     Row(
                       mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image(
-                            image: R.image.img_ad_1(),
-                            fit: BoxFit.cover,
-                            height: 100,
+                          child: SharedWidgets.buildImageNetwork(
+                            imgUrl: widget.post.hotel.imageUrl,
                             width: 120,
+                            height: 100,
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text("Hilton",
-                                style: AppStyle.of(context).b4M.wCChineseBlack),
-                            SizedBox(height: 15),
-                            Row(
-                              children: [
-                                Text(
-                                  "4.9",
-                                  style: AppStyle.of(context).b5.wCRhythm,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "200 Reviews",
-                                  style: AppStyle.of(context).b5.wCRhythm,
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 15),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 8),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surface,
-                                borderRadius: BorderRadius.circular(26),
-                              ),
-                              child: Text(
-                                "4 Jun - 6 Jun",
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.post.hotel.name,
                                 style: AppStyle.of(context).b4M.wCChineseBlack,
                               ),
-                            )
-                          ],
+                              SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  Text(
+                                    widget.post.hotel.rating
+                                            ?.toStringAsFixed(1) ??
+                                        '0.0',
+                                    style: AppStyle.of(context).b5.wCRhythm,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.surface,
+                                  borderRadius: BorderRadius.circular(26),
+                                ),
+                                child: Text(
+                                  '${UniversalVariables.dayMonthDateFormat.format(widget.post.startDate)} - ${UniversalVariables.dayMonthDateFormat.format(widget.post.endDate)}',
+                                  style:
+                                      AppStyle.of(context).b4M.wCChineseBlack,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                '\$${widget.post.paymentAmountPerNight.toStringAsFixed(2)} / Night',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppStyle.of(context).b4B.wCChineseBlack,
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -223,7 +252,7 @@ class _PostDetailViewState extends State<PostDetailView> {
                         const SizedBox(width: 4),
                         Flexible(
                           child: Text(
-                            '1601 Biscayne Bivd, Miami, FL 33132, United States',
+                            widget.post.hotel.address ?? '',
                             style: AppStyle.of(context).b5.wCRhythm,
                           ),
                         )
@@ -231,15 +260,14 @@ class _PostDetailViewState extends State<PostDetailView> {
                     ),
                     SizedBox(height: 10),
                     Divider(),
-                    //Partner
+                    //Partner part
                     SizedBox(height: 10),
                     Row(
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image(
-                            image: R.image.img_ad_1(),
-                            fit: BoxFit.cover,
+                          child: SharedWidgets.buildImageNetwork(
+                            imgUrl: widget.post.user.avatar ?? '',
                             height: 80,
                             width: 80,
                           ),
@@ -247,37 +275,44 @@ class _PostDetailViewState extends State<PostDetailView> {
                         SizedBox(
                           width: 10,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Tony Blair",
-                              style: AppStyle.of(context).b4M.wCChineseBlack,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "Partner",
-                              style: AppStyle.of(context).b5.wCRhythm,
-                            )
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${widget.post.user.firstName} ${widget.post.user.lastName}",
+                                style: AppStyle.of(context).b4B.wCChineseBlack,
+                              ),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                widget.post.user.occupation?.name ?? '',
+                                style: AppStyle.of(context).b5.wCRhythm,
+                              ),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                widget.post.user.native ?? '',
+                                style: AppStyle.of(context).b5.wCRhythm,
+                              ),
+                            ],
+                          ),
                         ),
-                        Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
                           children: [
                             Text(
-                              "Ending in",
+                              widget.post.user.rating.toStringAsFixed(1),
                               style: AppStyle.of(context).b5.wCRhythm,
                             ),
                             SizedBox(
-                              height: 10,
+                              width: 5,
                             ),
-                            Text(
-                              "28 : 32 : 12",
-                              style: AppStyle.of(context).b4B.wCChineseBlack,
-                            )
+                            Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -287,23 +322,22 @@ class _PostDetailViewState extends State<PostDetailView> {
                     ),
                     SizedBox(height: 10),
                     Divider(),
-                    SizedBox(
-                      height: 10,
-                    ),
                     //Description
-                    Text(
-                      'Description',
-                      style: AppStyle.of(context).b2M.wCChineseBlack,
+                    buildSection(
+                      title: 'Description',
+                      body: widget.post.hotel.description ?? '',
                     ),
-                    SizedBox(
-                      height: 10,
+                    Divider(),
+                    // Message to partner
+                    buildSection(
+                      title: 'Message to partner',
+                      body: widget.post.messageToPartner,
                     ),
-                    Text(
-                      'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.',
-                      style: AppStyle.of(context).b5.wCRhythm,
-                    ),
-                    SizedBox(
-                      height: 20,
+                    Divider(),
+                    // Gender
+                    buildSection(
+                      title: 'Partner Gender',
+                      body: widget.post.partnerGender,
                     ),
                     Divider(),
                     requiredQuestion(

@@ -161,7 +161,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
               children: [
                 Chip(
                   label: Text(
-                    '${UniversalVariables.dateFormat.format(post.startDate)} - ${UniversalVariables.dateFormat.format(post.endDate)}',
+                    '${UniversalVariables.dayMonthDateFormat.format(post.startDate)} - ${UniversalVariables.dayMonthDateFormat.format(post.endDate)}',
                     style: AppStyle.of(context).b5M.wCChineseBlack,
                   ),
                   side: BorderSide(color: AppColors.soap),

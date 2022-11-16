@@ -52,7 +52,7 @@ class UserEntity {
         dateOfBrith: json["date_of_brith"] == null
             ? null
             : DateTime.tryParse(json["date_of_brith"]),
-        avatar: json["avatar"],
+        avatar: json["avatar"].toString().replaceAll('public/', ''),
         city: json["city"],
         rating: json["rating"],
         gender: json["gender"],
@@ -76,8 +76,8 @@ class UserEntity {
         "occupation": occupation?.id,
       };
 
-  String getImgFullUrlPath(String avatarUrl) {
-    final fixedAvatarUrl = avatarUrl.replaceAll('public/', '');
-    return '${Application.imgBaseUrl}/$fixedAvatarUrl';
-  }
+  // String getImgFullUrlPath(String avatarUrl) {
+  //   final fixedAvatarUrl = avatarUrl.replaceAll('public/', '');
+  //   return '${Application.imgBaseUrl}/$fixedAvatarUrl';
+  // }
 }

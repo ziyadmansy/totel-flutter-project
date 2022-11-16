@@ -27,6 +27,33 @@ class SharedWidgets {
     );
   }
 
+  static Widget buildImageNetwork({
+    required String imgUrl,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.fill,
+  }) {
+    return Image.network(
+      imgUrl,
+      width: width,
+      height: height,
+      fit: fit,
+      errorBuilder: (BuildContext context, Object e, StackTrace? st) {
+        return Container(
+          width: width,
+          height: height,
+          color: Colors.grey[300],
+          child: Center(
+            child: Icon(
+              Icons.error,
+              color: Colors.white,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   static ListTile buildListTileTitle({required String title}) {
     return ListTile(
       contentPadding: const EdgeInsets.all(0),

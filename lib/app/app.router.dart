@@ -11,6 +11,7 @@ import 'package:cheffy/modules/payment/presentation/options/payment_percentage_v
 import 'package:cheffy/modules/main/discover/presentation/pages/search_hotels_page.dart';
 import 'package:cheffy/modules/main/discover/presentation/pages/search_location_page.dart';
 import 'package:cheffy/modules/main/discover/presentation/pages/search_filter_page.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
@@ -230,8 +231,12 @@ class StackedRouter extends RouterBase {
       );
     },
     PostDetailView: (data) {
+      var args = data.getArgs<PostDetailViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const PostDetailView(),
+        builder: (context) => PostDetailView(
+          key: args.key,
+          post: args.post,
+        ),
         settings: data,
       );
     },
@@ -322,12 +327,6 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    SearchFilterPage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchFilterPage(),
-        settings: data,
-      );
-    },
   };
 }
 
@@ -340,6 +339,13 @@ class CreatePostViewArguments {
   final Key? key;
   final PostType type;
   CreatePostViewArguments({this.key, required this.type});
+}
+
+/// CreatePostView arguments holder class
+class PostDetailViewArguments {
+  final Key? key;
+  final Post post;
+  PostDetailViewArguments({this.key, required this.post});
 }
 
 /// ProfileView arguments holder class

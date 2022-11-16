@@ -29,7 +29,7 @@ class PostsProvider extends BaseViewModel {
   void onTapPost(Post selectedPost) {
     _navigationService.navigateTo(
       Routes.postDetailView,
-      arguments: selectedPost,
+      arguments: PostDetailViewArguments(post: selectedPost),
     );
   }
 }
