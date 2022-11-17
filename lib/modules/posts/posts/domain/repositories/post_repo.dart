@@ -1,3 +1,4 @@
+import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_booked_post_params.dart';
@@ -14,7 +15,7 @@ abstract class PostRepo {
 
   Future<PostsEntity> getAllPosts();
 
-  
+  Future<List<HotelEntity>> getFilteredHotels(String name);
 
   Future<AttachmentEntity> uploadAttachment(String path, String fileName);
 }

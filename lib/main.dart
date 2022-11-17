@@ -36,7 +36,9 @@ class App extends StatelessWidget {
     return ThemeBuilder(
       defaultThemeMode: ThemeMode.light, // Dark mode is not well implemented
       darkTheme: AppTheme.of(context).dark,
-      lightTheme: AppTheme.of(context).light,
+      lightTheme: AppTheme.of(context).light.copyWith(
+            useMaterial3: true,
+          ),
       builder: (context, regularTheme, darkTheme, themeMode) => MultiProvider(
         providers: appProviders,
         child: MaterialApp(

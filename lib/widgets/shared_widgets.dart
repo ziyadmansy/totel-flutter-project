@@ -104,6 +104,33 @@ class SharedWidgets {
         ),
       );
 
+  static Widget buildRoundedIconOutlinedButton({
+    required Widget btnChild,
+    required Widget btnIcon,
+    required VoidCallback? onPress,
+    bool isEnabled = true,
+    Color? btnColor,
+    bool isTooRounded = false,
+  }) =>
+      SizedBox(
+        height: 48,
+        child: OutlinedButton.icon(
+          label: btnChild,
+          icon: btnIcon,
+          style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                isTooRounded
+                    ? UniversalVariables.kButtonBorderRadius
+                    : UniversalVariables.kBorderRadius,
+              ),
+            ),
+            backgroundColor: btnColor,
+          ),
+          onPressed: isEnabled ? onPress : null,
+        ),
+      );
+
   static Widget buildTextButton({
     required String btnText,
     required VoidCallback onPress,
@@ -115,6 +142,31 @@ class SharedWidgets {
         height: 40,
         child: TextButton(
           child: Text(btnText),
+          style: ElevatedButton.styleFrom(
+            foregroundColor: btnColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(isTooRounded
+                  ? UniversalVariables.kButtonBorderRadius
+                  : UniversalVariables.kBorderRadius),
+            ),
+          ),
+          onPressed: isEnabled ? onPress : null,
+        ),
+      );
+
+  static Widget buildIconTextButton({
+    required String btnText,
+    required IconData btnIcon,
+    required VoidCallback onPress,
+    bool isEnabled = true,
+    Color? btnColor,
+    bool isTooRounded = false,
+  }) =>
+      SizedBox(
+        height: 40,
+        child: TextButton.icon(
+          label: Text(btnText),
+          icon: Icon(btnIcon),
           style: ElevatedButton.styleFrom(
             foregroundColor: btnColor,
             shape: RoundedRectangleBorder(

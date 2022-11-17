@@ -1,71 +1,54 @@
-import 'package:meta/meta.dart';
-import 'dart:convert';
-
-// To parse this JSON data, do
-//
-//     final createPostEntity = createPostEntityFromJson(jsonString);
+import 'package:cheffy/core/enums/post_type.dart';
+import 'package:dio/dio.dart';
+import 'package:reactive_image_picker/reactive_image_picker.dart';
+import 'package:path/path.dart';
 
 class CreateFindingPostParams {
-  CreateFindingPostParams({
-    required this.isAcceptHourly,
-    required this.dateFrom,
-    required this.dateTo,
-    required this.gender,
-    required this.notes,
-    required this.partnerAmount,
-    required this.location,
-  });
-  final String name = '----';
-  final bool isAcceptHourly;
-  final DateTime dateFrom;
-  final DateTime dateTo;
-  final String gender;
-  final String? notes;
+  final DateTime startDate;
+  final DateTime endDate;
+  final double paymentAmountPerNight;
+  final String partnerGender;
+  final String partnerMessage;
   final num partnerAmount;
   final String location;
+  final PostType postType;
+  final bool isHourly;
+  final List<XFile> attachments;
+  final int hotelId;
 
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "notes": notes,
-        "partner_amount": partnerAmount,
-        "gender": gender,
-        "location": location,
-        'date_from': dateFrom.toIso8601String(),
-        'date_to': dateTo.toIso8601String(),
-        'is_accept_hourly': isAcceptHourly,
-        'type': 'finding',
-      };
+  CreateFindingPostParams({
+    required this.startDate,
+    required this.endDate,
+    required this.paymentAmountPerNight,
+    required this.partnerGender,
+    required this.partnerMessage,
+    required this.partnerAmount,
+    required this.location,
+    required this.postType,
+    required this.isHourly,
+    required this.attachments,
+    required this.hotelId,
+  });
 
-  CreateFindingPostParams copyWith(
-      {String? name,
-      String? overview,
-      num? rate,
-      String? type,
-      String? notes,
-      num? partnerAmount,
-      String? gender,
-      List<int>? attachments,
-      String? location,
-      DateTime? dateFrom,
-      DateTime? dateTo,
-      double? lat,
-      double? long,
-      String? hotel,
-      DateTime? bidEnds,
-      String? checkIn,
-      String? checkout,
-      bool? isAcceptHourly,
-      DateTime? bidStart}) {
-    return CreateFindingPostParams(
-      dateFrom: dateFrom ?? this.dateFrom,
-      dateTo: dateTo ?? this.dateTo,
-      notes: notes ?? this.notes,
-      partnerAmount: partnerAmount ?? this.partnerAmount,
-      gender: gender ?? this.gender,
-      location: location ?? this.location,
-      isAcceptHourly: isAcceptHourly ?? this.isAcceptHourly,
-    );
+  Map<String, dynamic> toMap() {
+    return {
+      'hotel': hotelId,
+      'postingType':
+          postType == PostType.finding ? 'Finding Partner' : 'Already Booked',
+      'location': location,
+      'startDate': startDate.toUtc().toIso8601String(),
+      'endDate': endDate.toUtc().toIso8601String(),
+      'paymentAmountPerNight': paymentAmountPerNight,
+      'messageToPartner': partnerMessage,
+      'partnerGender': partnerGender,
+      'isHourly': isHourly,
+      'attachments': attachments
+          .map(
+            (att) async => await MultipartFile.fromFile(
+              att.path,
+            ),
+          )
+          .toList(),
+    };
   }
-// copy with
-
 }

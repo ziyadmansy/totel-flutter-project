@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cheffy/core/services/api/api_client.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
+import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:dio/dio.dart';
@@ -74,8 +75,21 @@ class PostRepoImpl implements PostRepo {
 
   @override
   Future<void> createFindingPost(CreateFindingPostParams entity) async {
-    final body = entity.toJson();
-    print(jsonEncode(body));
-    final res = await _apiClient.post('post', data: body);
+    print(entity.toMap());
+
+    final formData = FormData.fromMap(entity.toMap());
+
+    final res = await _apiClient.post(
+      ApiRoutes.posts,
+      data: formData,
+    );
+  }
+
+  @override
+  Future<List<HotelEntity>> getFilteredHotels(String name) async {
+    final res = await _apiClient.get(ApiRoutes.filteredHotels(name: name));
+    final List<HotelEntity> hotels =
+        (res.data as List).map((e) => HotelEntity.fromMap(e)).toList();
+    return hotels;
   }
 }

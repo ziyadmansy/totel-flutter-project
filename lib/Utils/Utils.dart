@@ -63,3 +63,8 @@ class ReactiveFormControls {
   static String bio = 'bio';
   static String gender = 'gender';
 }
+
+class DebounceTags {
+  static const int debouncerDurationInMillis = 1000;
+  static const String hotelsDebouncer = 'hotels-selection-debouncer';
+}

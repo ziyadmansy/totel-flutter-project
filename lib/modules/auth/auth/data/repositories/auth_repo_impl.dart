@@ -23,10 +23,13 @@ class AuthRepoImpl implements AuthRepo {
 
   Future<void> login(String username, String password) async {
     try {
-      final result = await _apiClient.post('auth/login', data: {
-        'username': username,
-        'password': password,
-      });
+      final result = await _apiClient.post(
+        ApiRoutes.login,
+        data: {
+          'username': username,
+          'password': password,
+        },
+      );
       final statusCode = result.statusCode!;
       if (statusCode == 201) {
         final loginResult = LoginDataModel.fromMap(result.data);
@@ -157,10 +160,14 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<void> logout() async {
-    await _secureStorageService.setAccessToken(null);
-    await _secureStorageService.setRefreshToken(null);
-    // await _secureStorageService.setAppUser(null);
-    await _apiClient.fresh.clearToken();
-    _navigationService.clearStackAndShow(Routes.loginView);
+    final result = await _apiClient.post(ApiRoutes.logout);
+    final statusCode = result.statusCode;
+    if (statusCode == 201) {
+      await _secureStorageService.setAccessToken(null);
+      await _secureStorageService.setRefreshToken(null);
+      // await _secureStorageService.setAppUser(null);
+      await _apiClient.fresh.clearToken();
+      _navigationService.clearStackAndShow(Routes.loginView);
+    }
   }
 }

@@ -49,6 +49,9 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   timeago_flutter: ^1.2.0
   carousel_slider: ^4.1.1
+  easy_debounce: ^2.0.2+1
+  path: ^1.8.2
+  path_provider: ^2.0.11
 #  flutter_svg:
 
   # Firebase

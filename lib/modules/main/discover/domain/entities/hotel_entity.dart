@@ -20,7 +20,7 @@ class HotelEntity {
   final List? childrenPolicy;
   final List? nearbyCities;
   final List? nearbyPlaces;
-  final List? amenities;
+  // final List? amenities;
   final String? city;
   final int? cityId;
 
@@ -42,7 +42,7 @@ class HotelEntity {
     required this.childrenPolicy,
     required this.nearbyCities,
     required this.nearbyPlaces,
-    required this.amenities,
+    // required this.amenities,
     required this.city,
     required this.cityId,
   });
@@ -66,7 +66,7 @@ class HotelEntity {
       'childrenPolicy': childrenPolicy,
       'nearbyCities': nearbyCities,
       'nearbyPlaces': nearbyPlaces,
-      'amenities': amenities,
+      // 'amenities': amenities,
       'city': city,
       'cityId': cityId,
     };
@@ -103,9 +103,9 @@ class HotelEntity {
       nearbyPlaces: map['nearbyPlaces'] == null
           ? null
           : List.from((map['nearbyPlaces'] as List)),
-      amenities: map['amenities'] == null
-          ? null
-          : List.from((map['amenities'] as List)),
+      // amenities: map['amenities'] == null
+      //     ? null
+      //     : List.from((map['amenities'] as List)),
       city: map['city'],
       cityId: map['cityId'],
     );
@@ -118,7 +118,7 @@ class HotelEntity {
 
   @override
   String toString() {
-    return 'HotelEntity(id: $id, name: $name, description: $description, imageUrl: $imageUrl, address: $address, rating: $rating, minPrice: $minPrice, maxPrice: $maxPrice, type: $type, isHourlyBasis: $isHourlyBasis, numberOfRooms: $numberOfRooms, isBooked: $isBooked, latitude: $latitude, longitude: $longitude, childrenPolicy: $childrenPolicy, nearbyCities: $nearbyCities, nearbyPlaces: $nearbyPlaces, amenities: $amenities, city: $city, cityId: $cityId)';
+    return 'HotelEntity(id: $id, name: $name, description: $description, imageUrl: $imageUrl, address: $address, rating: $rating, minPrice: $minPrice, maxPrice: $maxPrice, type: $type, isHourlyBasis: $isHourlyBasis, numberOfRooms: $numberOfRooms, isBooked: $isBooked, latitude: $latitude, longitude: $longitude, childrenPolicy: $childrenPolicy, nearbyCities: $nearbyCities, nearbyPlaces: $nearbyPlaces, city: $city, cityId: $cityId)';
   }
 
   @override
@@ -142,7 +142,7 @@ class HotelEntity {
         listEquals(other.childrenPolicy, childrenPolicy) &&
         listEquals(other.nearbyCities, nearbyCities) &&
         listEquals(other.nearbyPlaces, nearbyPlaces) &&
-        listEquals(other.amenities, amenities) &&
+        // listEquals(other.amenities, amenities) &&
         other.city == city &&
         other.cityId == cityId;
   }
@@ -166,7 +166,7 @@ class HotelEntity {
         childrenPolicy.hashCode ^
         nearbyCities.hashCode ^
         nearbyPlaces.hashCode ^
-        amenities.hashCode ^
+        // amenities.hashCode ^
         city.hashCode ^
         cityId.hashCode;
   }

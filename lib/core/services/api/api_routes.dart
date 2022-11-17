@@ -1,5 +1,8 @@
 class ApiRoutes {
+  // Auth
   static const String register = 'auth/register';
+  static const String login = 'auth/login';
+  static const String logout = 'auth/logout';
 
   // Posts
   static const String posts = 'posting';
@@ -12,4 +15,17 @@ class ApiRoutes {
   // Profile
   static const String profile = 'user/profile';
   static const String occupation = 'occupation';
+
+  // Hotels
+  static String filteredHotels({
+    String name = '',
+    String city = '',
+    String type = '',
+    String minPrice = '',
+    String maxPrice = '',
+    String rating = '',
+    String latitude = '',
+    String longitude = '',
+  }) =>
+      'hotel?city=$city&type=$type&min_price=$minPrice&max_price=$maxPrice&rating=$rating&latitude=$latitude&longitude=$longitude&name=$name';
 }

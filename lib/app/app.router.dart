@@ -11,6 +11,7 @@ import 'package:cheffy/modules/payment/presentation/options/payment_percentage_v
 import 'package:cheffy/modules/main/discover/presentation/pages/search_hotels_page.dart';
 import 'package:cheffy/modules/main/discover/presentation/pages/search_location_page.dart';
 import 'package:cheffy/modules/main/discover/presentation/pages/search_filter_page.dart';
+import 'package:cheffy/modules/posts/create/hotels_selection_view.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
@@ -74,6 +75,7 @@ class Routes {
   static const String helpView = '/help-view';
   static const String searchFilterView = '/search-filter-view';
   static const String searchHotelsView = '/search-hotels-view';
+  static const String hotelsSelectionView = '/hotels-selection-view';
   static const all = <String>{
     splashView,
     onBoardingView,
@@ -102,6 +104,7 @@ class Routes {
     helpView,
     searchFilterView,
     searchHotelsView,
+    hotelsSelectionView,
   };
 }
 
@@ -144,6 +147,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.settingsView, page: SettingsMainScreen),
     RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
     RouteDef(Routes.helpView, page: HelpView),
+    RouteDef(Routes.hotelsSelectionView, page: HotelsSelectionView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -324,6 +328,12 @@ class StackedRouter extends RouterBase {
     HelpView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => HelpView(),
+        settings: data,
+      );
+    },
+    HotelsSelectionView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => HotelsSelectionView(),
         settings: data,
       );
     },
