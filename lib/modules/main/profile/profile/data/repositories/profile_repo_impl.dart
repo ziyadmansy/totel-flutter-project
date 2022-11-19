@@ -6,6 +6,7 @@ import 'package:cheffy/core/failures/failures.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/entities/review_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:dartz/dartz.dart';
@@ -39,6 +40,21 @@ class ProfileRepoImpl extends ProfileRepo {
       final resultData = result.data;
 
       return PostsEntity.fromMap(resultData);
+    } on DioError catch (e) {
+      throw e;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<List<ReviewEntity>> getUserReviews() async {
+    try {
+      final result = await _apiClient.get(ApiRoutes.userReviews);
+      final resultData = result.data;
+
+      return (resultData as List)
+          .map((rev) => ReviewEntity.fromMap(rev))
+          .toList();
     } on DioError catch (e) {
       throw e;
     } catch (e) {

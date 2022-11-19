@@ -1,4 +1,5 @@
 import 'package:cheffy/modules/main/profile/tabs/posts_tab.dart';
+import 'package:cheffy/modules/main/profile/tabs/reviews_tab.dart';
 import 'package:cheffy/modules/widgets/progress/background_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -96,16 +97,7 @@ class _ProfileViewState extends State<ProfileView> {
                   itemBuilder: (BuildContext context, int index) =>
                       const BookingListingItemView(),
                 ),
-                ListView.separated(
-                  itemCount: 5,
-                  separatorBuilder: (BuildContext context, int index) =>
-                      Divider(
-                    thickness: 4,
-                    color: AppColors.soap,
-                  ),
-                  itemBuilder: (BuildContext context, int index) =>
-                      const ReviewListingItemView(),
-                ),
+                ReviewsTab(),
               ],
             ),
           ),

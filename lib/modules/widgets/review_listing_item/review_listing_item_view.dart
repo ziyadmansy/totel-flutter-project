@@ -1,64 +1,42 @@
+import 'package:cheffy/Utils/shared_core.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/entities/review_entity.dart';
+import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 
-import 'review_listing_item_view_model.dart';
-
-class ReviewListingItemView
-    extends ViewModelBuilderWidget<ReviewListingItemViewModel> {
-  const ReviewListingItemView({super.key});
+class ReviewListingItemView extends StatelessWidget {
+  final ReviewEntity review;
+  const ReviewListingItemView(this.review, {super.key});
 
   @override
-  Widget builder(BuildContext context, ReviewListingItemViewModel viewModel,
-      Widget? child) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: const Image(
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                  image: NetworkImage(
-                    "https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80",
-                  ),
-                ),
+          ListTile(
+            contentPadding: const EdgeInsets.all(0),
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: SharedWidgets.buildImageNetwork(
+                height: 50,
+                width: 50,
+                imgUrl: review.user.avatar ?? '',
+                fit: BoxFit.cover,
               ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Hilton Miami Downtowss',
-                      style: AppStyle.of(context).b4.wCChineseBlack,
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Albert Flores',
-                      style: AppStyle.of(context).b5.wCRhythm,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
+            title: Text('${review.user.firstName} ${review.user.lastName}'),
+            subtitle: Text(review.hotel.name),
           ),
           const SizedBox(height: 8),
           Row(
             children: [
               Chip(
                 label: Text(
-                  '3.0',
+                  review.user.rating.toStringAsFixed(1),
                   style: AppStyle.of(context).b5M,
                 ),
                 avatar: Image(
@@ -74,7 +52,7 @@ class ReviewListingItemView
               const SizedBox(width: 8),
               Chip(
                 label: Text(
-                  '3.0',
+                  review.hotel.rating?.toStringAsFixed(1) ?? '0.0',
                   style: AppStyle.of(context).b5M,
                 ),
                 avatar: Icon(
@@ -91,25 +69,21 @@ class ReviewListingItemView
           ),
           const SizedBox(height: 8),
           Text(
-            'Beautiful location',
+            review.title,
             style: AppStyle.of(context).b4B.wCChineseBlack,
           ),
           const SizedBox(height: 4),
           Text(
-            'Staff was very cordial and hotel was very clean and hygienic, rooms were very well maintained, only the complaint is food in the bar was not great and no variety in sea food was there',
+            review.desc,
             style: AppStyle.of(context).b5.wCRhythm,
           ),
           const SizedBox(height: 8),
           Text(
-            '2 hours ago',
+            SharedCore.getTimeAgoFromDate(review.datePosted),
             style: AppStyle.of(context).b5.wCCrayola,
           ),
         ],
       ),
     );
   }
-
-  @override
-  ReviewListingItemViewModel viewModelBuilder(BuildContext context) =>
-      ReviewListingItemViewModel();
 }

@@ -16,6 +16,9 @@ class ApiRoutes {
   static const String profile = 'user/profile';
   static const String occupation = 'occupation';
 
+  // Reviews
+  static const String userReviews = 'review/user';
+
   // Hotels
   static String filteredHotels({
     String name = '',
