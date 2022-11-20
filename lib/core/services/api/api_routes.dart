@@ -19,6 +19,9 @@ class ApiRoutes {
   // Reviews
   static const String userReviews = 'review/user';
 
+  // Bookings
+  static const String userBookings = 'booking/user';
+
   // Hotels
   static String filteredHotels({
     String name = '',

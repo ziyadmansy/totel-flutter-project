@@ -8,38 +8,40 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ReviewsTab extends StatefulWidget {
+class BookingsTab extends StatefulWidget {
   @override
-  State<ReviewsTab> createState() => _ReviewsTabState();
+  State<BookingsTab> createState() => _BookingsTabState();
 }
 
-class _ReviewsTabState extends State<ReviewsTab> {
+class _BookingsTabState extends State<BookingsTab> {
   @override
   void initState() {
     super.initState();
     final profileProvider = context.read<ProfileProvider>();
-    profileProvider.getReviews();
+    profileProvider.getBookings();
   }
 
   @override
   Widget build(BuildContext context) {
     final profileProvider = context.watch<ProfileProvider>();
     return ProviderProgressLoader(
-      isLoading: profileProvider.busy(profileProvider.reviews),
-      child: profileProvider.reviews.isEmpty
+      isLoading: profileProvider.busy(profileProvider.bookings),
+      child: profileProvider.bookings.isEmpty
           ? Center(
               child: Text(
-                'No reviews available. Try reviewing some hotels!',
+                'No bookings available. Try booking some hotels!',
                 style: TextStyle(
                   color: Colors.grey,
                 ),
               ),
             )
           : ListView.separated(
-              itemCount: profileProvider.reviews.length,
+              itemCount: profileProvider.bookings.length,
               itemBuilder: (context, i) {
-                final review = profileProvider.reviews[i];
-                return ReviewListingItemView(review);
+                final booking = profileProvider.bookings[i];
+                return ListTile(
+                  title: Text(booking.id.toString()),
+                );
               },
               separatorBuilder: (context, i) {
                 return Divider();

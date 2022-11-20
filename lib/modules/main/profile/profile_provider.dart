@@ -3,6 +3,7 @@ import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/core/enums/male_female_enum.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/entities/review_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
@@ -32,6 +33,7 @@ class ProfileProvider extends BaseViewModel {
   UserEntity? profileEntity;
   List<Occupation> occupations = [];
   List<ReviewEntity> reviews = [];
+  List<BookingEntity> bookings = [];
 
   ProfileProvider(this.profileRepo) {
     editProfileForm = FormGroup({
@@ -106,9 +108,27 @@ class ProfileProvider extends BaseViewModel {
     } catch (e) {
       print(e);
       _snackbarService.showSnackbar(
-          title: 'Error', message: 'Something went wrong, please try again');
+        title: 'Error',
+        message: 'Something went wrong, please try again',
+      );
     } finally {
       setBusyForObject(reviews, false);
+    }
+  }
+
+  Future<void> getBookings() async {
+    try {
+      setBusyForObject(bookings, true);
+      bookings = await profileRepo.getUserBookings();
+      notifyListeners();
+    } catch (e) {
+      print(e);
+      _snackbarService.showSnackbar(
+        title: 'Error',
+        message: 'Something went wrong, please try again',
+      );
+    } finally {
+      setBusyForObject(bookings, false);
     }
   }
 

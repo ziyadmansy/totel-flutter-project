@@ -21,7 +21,12 @@ class PostsTab extends StatelessWidget {
       isLoading: profileProvider.busy(profileProvider.postEntity),
       child: postEntity == null || postEntity!.posts.isEmpty
           ? Center(
-              child: Text('No posts available. Try adding new posts!'),
+              child: Text(
+                'No posts available. Try adding new posts!',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
             )
           : ListView.separated(
               itemCount: postEntity!.posts.length,

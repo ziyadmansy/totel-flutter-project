@@ -2,6 +2,7 @@ import 'package:cheffy/core/enums/post_type.dart';
 import 'package:dio/dio.dart';
 import 'package:reactive_image_picker/reactive_image_picker.dart';
 import 'package:path/path.dart';
+import 'dart:io';
 
 class CreateFindingPostParams {
   final DateTime startDate;
@@ -46,6 +47,7 @@ class CreateFindingPostParams {
           .map(
             (att) async => await MultipartFile.fromFile(
               att.path,
+              filename: basename(att.path),
             ),
           )
           .toList(),

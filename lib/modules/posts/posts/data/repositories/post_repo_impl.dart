@@ -82,6 +82,12 @@ class PostRepoImpl implements PostRepo {
     final res = await _apiClient.post(
       ApiRoutes.posts,
       data: formData,
+      options: Options(
+        headers: {
+          'Content-type': 'multipart/form-data',
+          "Accept": "*/*",
+        },
+      ),
     );
   }
 
