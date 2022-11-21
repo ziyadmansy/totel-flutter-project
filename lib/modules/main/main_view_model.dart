@@ -121,6 +121,10 @@ class MainViewModel extends BaseViewModel {
     _navigationService.navigateTo(Routes.helpView);
   }
 
+  void onDrawerItemPressedBookings() {
+    _navigationService.navigateTo(Routes.bookingsView);
+  }
+
   Future<void> logout() async {
     await authRepo.logout();
   }

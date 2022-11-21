@@ -1,10 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cheffy/modules/main/profile/profile/domain/entities/review_entity.dart';
 import 'package:cheffy/modules/main/profile/profile_provider.dart';
-import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_vertical_layout_view.dart';
 import 'package:cheffy/modules/widgets/progress/provider_progress_loader.dart';
-import 'package:cheffy/modules/widgets/review_listing_item/review_listing_item_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
