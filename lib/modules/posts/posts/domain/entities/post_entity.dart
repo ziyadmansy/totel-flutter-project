@@ -1,10 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 
 class PostsEntity {
   List<Post> posts;
@@ -59,52 +61,57 @@ class PostsEntity {
 class Post {
   final int id;
   final String postingType;
-  final String location;
-  final DateTime startDate;
-  final DateTime endDate;
-  final double paymentAmountPerNight;
   final String messageToPartner;
   final String partnerGender;
-  final bool isHourly;
-  final List<AttachmentEntity> attachments;
   final String? createdAt;
   final String? updatedAt;
   final UserEntity user;
-  final HotelEntity hotel;
+  final BookingEntity booking;
 
   Post({
     required this.id,
     required this.postingType,
-    required this.location,
-    required this.startDate,
-    required this.endDate,
-    required this.paymentAmountPerNight,
     required this.messageToPartner,
     required this.partnerGender,
-    required this.isHourly,
-    required this.attachments,
     this.createdAt,
     this.updatedAt,
     required this.user,
-    required this.hotel,
+    required this.booking,
   });
+
+  Post copyWith({
+    int? id,
+    String? postingType,
+    String? messageToPartner,
+    String? partnerGender,
+    String? createdAt,
+    String? updatedAt,
+    UserEntity? user,
+    HotelEntity? hotel,
+    BookingEntity? booking,
+  }) {
+    return Post(
+      id: id ?? this.id,
+      postingType: postingType ?? this.postingType,
+      messageToPartner: messageToPartner ?? this.messageToPartner,
+      partnerGender: partnerGender ?? this.partnerGender,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      user: user ?? this.user,
+      booking: booking ?? this.booking,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'postingType': postingType,
-      'location': location,
-      'startDate': startDate.toIso8601String(),
-      'endDate': endDate.toIso8601String(),
-      'paymentAmountPerNight': paymentAmountPerNight,
       'messageToPartner': messageToPartner,
       'partnerGender': partnerGender,
-      'isHourly': isHourly,
-      'attachments': attachments,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'user': user.toJson(),
-      'hotel': hotel.toMap(),
+      'booking': booking.toMap(),
     };
   }
 
@@ -112,69 +119,48 @@ class Post {
     return Post(
       id: map['id'] as int,
       postingType: map['postingType'] as String,
-      location: map['location'] as String,
-      startDate: DateTime.parse(map['startDate'] as String),
-      endDate: DateTime.parse(map['endDate'] as String),
-      paymentAmountPerNight:
-          double.parse(map['paymentAmountPerNight'].toString()),
       messageToPartner: map['messageToPartner'] as String,
       partnerGender: map['partnerGender'] as String,
-      isHourly: map['isHourly'] as bool,
-      attachments: (map['attachments'] as List)
-          .map((att) => AttachmentEntity.fromMap(att))
-          .toList(),
       createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
       updatedAt: map['updatedAt'] != null ? map['updatedAt'] as String : null,
-      user: UserEntity.fromJson(map['user'] as Map<String, dynamic>),
-      hotel: HotelEntity.fromMap(map['hotel'] as Map<String, dynamic>),
+      user: UserEntity.fromJson(map['user'] as Map<String,dynamic>),
+      booking: BookingEntity.fromMap(map['booking'] as Map<String,dynamic>),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Post.fromJson(String source) =>
-      Post.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Post.fromJson(String source) => Post.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'Post(id: $id, postingType: $postingType, location: $location, startDate: $startDate, endDate: $endDate, paymentAmountPerNight: $paymentAmountPerNight, messageToPartner: $messageToPartner, partnerGender: $partnerGender, isHourly: $isHourly, attachments: $attachments, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, hotel: $hotel)';
+    return 'Post(id: $id, postingType: $postingType, messageToPartner: $messageToPartner, partnerGender: $partnerGender, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, booking: $booking)';
   }
 
   @override
   bool operator ==(covariant Post other) {
     if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.postingType == postingType &&
-        other.location == location &&
-        other.startDate == startDate &&
-        other.endDate == endDate &&
-        other.paymentAmountPerNight == paymentAmountPerNight &&
-        other.messageToPartner == messageToPartner &&
-        other.partnerGender == partnerGender &&
-        other.isHourly == isHourly &&
-        listEquals(other.attachments, attachments) &&
-        other.createdAt == createdAt &&
-        other.updatedAt == updatedAt &&
-        other.user == user &&
-        other.hotel == hotel;
+  
+    return 
+      other.id == id &&
+      other.postingType == postingType &&
+      other.messageToPartner == messageToPartner &&
+      other.partnerGender == partnerGender &&
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt &&
+      other.user == user &&
+      other.booking == booking;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-        postingType.hashCode ^
-        location.hashCode ^
-        startDate.hashCode ^
-        endDate.hashCode ^
-        paymentAmountPerNight.hashCode ^
-        messageToPartner.hashCode ^
-        partnerGender.hashCode ^
-        isHourly.hashCode ^
-        attachments.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode ^
-        user.hashCode ^
-        hotel.hashCode;
+      postingType.hashCode ^
+      messageToPartner.hashCode ^
+      partnerGender.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode ^
+      user.hashCode ^
+      booking.hashCode;
   }
 }

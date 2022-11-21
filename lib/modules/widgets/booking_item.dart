@@ -1,22 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cheffy/Utils/Utils.dart';
-import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
-import 'package:flutter/material.dart';
-import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/theme/styles.dart';
+import 'package:cheffy/r.g.dart';
+import 'package:flutter/material.dart';
 
-class PostListingItemVerticalLayoutView extends StatelessWidget {
-  final Post post;
+import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_entity.dart';
+
+class BookingItem extends StatelessWidget {
+  final BookingEntity bookingEntity;
   final VoidCallback? onPress;
-  final VoidCallback? onDelete;
 
-  const PostListingItemVerticalLayoutView({
-    super.key,
-    required this.post,
+  const BookingItem({
+    Key? key,
+    required this.bookingEntity,
     this.onPress,
-    this.onDelete,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,8 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(post.user.avatar ?? ''),
+                        backgroundImage:
+                            NetworkImage(bookingEntity.user.avatar ?? ''),
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                         radius: 24,
@@ -49,11 +50,11 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${post.user.firstName} ${post.user.lastName}',
+                            '${bookingEntity.user.firstName} ${bookingEntity.user.lastName}',
                             style: AppStyle.of(context).b4M.wCChineseBlack,
                           ),
                           Text(
-                            post.user.occupation?.name ?? '',
+                            bookingEntity.user.occupation?.name ?? '',
                             style: AppStyle.of(context).b6.wCCrayola,
                           ),
                         ],
@@ -71,11 +72,6 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                           child: Text('View'),
                           onTap: onPress,
                         ),
-                      if (onDelete != null)
-                        PopupMenuItem(
-                          child: Text('Delete'),
-                          onTap: onDelete,
-                        ),
                     ];
                   },
                 ),
@@ -83,7 +79,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              post.messageToPartner,
+              bookingEntity.roomType,
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -94,13 +90,13 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  post.booking.hotel.attachments.isEmpty
+                  bookingEntity.hotel.attachments.isEmpty
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(
                             UniversalVariables.kPostRadius,
                           ),
                           child: Image.network(
-                            post.booking.hotel.imageUrl,
+                            bookingEntity.hotel.imageUrl,
                             fit: BoxFit.fill,
                           ),
                         )
@@ -111,9 +107,9 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                             enableInfiniteScroll: false,
                             enlargeCenterPage: true,
                           ),
-                          itemCount: post.booking.hotel.attachments.length,
+                          itemCount: bookingEntity.hotel.attachments.length,
                           itemBuilder: (context, int i, int pageViewIndex) {
-                            final attach = post.booking.hotel.attachments[i];
+                            final attach = bookingEntity.hotel.attachments[i];
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(
                                 UniversalVariables.kPostRadius,
@@ -125,19 +121,19 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                             );
                           },
                         ),
-                  if (post.booking.hotel.rating != null)
+                  if (bookingEntity.hotel.rating != null)
                     Positioned(
                       top: 8,
                       right: 8,
                       child: Chip(
                         label: Text(
-                          post.booking.hotel.rating.toString(),
+                          bookingEntity.hotel.rating.toString(),
                           style: AppStyle.of(context).b5M.wCWhite,
                         ),
                         avatar: Image(
                           image: R.svg.ic_user_filled(width: 14, height: 14),
                         ),
-                        backgroundColor: post.booking.hotel.rating! >= 3
+                        backgroundColor: bookingEntity.hotel.rating! >= 3
                             ? AppColors.ratingNormal
                             : AppColors.ratingLow,
                       ),
@@ -147,7 +143,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                     bottom: 12,
                     child: Chip(
                       label: Text(
-                        post.postingType,
+                        bookingEntity.bookingStatus,
                         style: AppStyle.of(context).b5M.wCWhite,
                       ),
                       backgroundColor: AppColors.plumpPurplePrimary,
@@ -161,7 +157,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
               children: [
                 Chip(
                   label: Text(
-                    '${UniversalVariables.dayMonthDateFormat.format(post.booking.checkInDate)} - ${UniversalVariables.dayMonthDateFormat.format(post.booking.checkOutDate)}',
+                    '${UniversalVariables.dayMonthDateFormat.format(bookingEntity.checkInDate)} - ${UniversalVariables.dayMonthDateFormat.format(bookingEntity.checkOutDate)}',
                     style: AppStyle.of(context).b5M.wCChineseBlack,
                   ),
                   side: BorderSide(color: AppColors.soap),
@@ -169,7 +165,7 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
                 ),
                 Chip(
                   label: Text(
-                    post.booking.hotel.type ?? '',
+                    bookingEntity.paymentOption,
                     style: AppStyle.of(context).b5M.wCChineseBlack,
                   ),
                   side: BorderSide(color: AppColors.soap),
@@ -179,20 +175,12 @@ class PostListingItemVerticalLayoutView extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Partner Gender: ${post.partnerGender}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppStyle.of(context).b4.wCDarkGunmetal,
+              bookingEntity.hotel.name,
+              style: AppStyle.of(context).b3B.wCChineseBlack,
             ),
             const SizedBox(height: 8),
             Text(
-              '${post.booking.hotel.name}',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppStyle.of(context).b3B.wCChineseBlack,
-            ),
-            Text(
-              '${post.booking.amount.toStringAsFixed(2)} ${post.booking.currency}',
+              '${bookingEntity.amount.toStringAsFixed(2)} ${bookingEntity.currency}',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: AppStyle.of(context).b4B.wCChineseBlack,

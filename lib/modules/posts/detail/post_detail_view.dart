@@ -33,7 +33,7 @@ class _PostDetailViewState extends State<PostDetailView> {
   void initState() {
     super.initState();
     cameraPosition = CameraPosition(
-      target: LatLng(widget.post.hotel.latitude, widget.post.hotel.longitude),
+      target: LatLng(widget.post.booking.hotel.latitude, widget.post.booking.hotel.longitude),
       zoom: 16,
     );
     Future.delayed(
@@ -183,7 +183,7 @@ class _PostDetailViewState extends State<PostDetailView> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: SharedWidgets.buildImageNetwork(
-                            imgUrl: widget.post.hotel.imageUrl,
+                            imgUrl: widget.post.booking.hotel.imageUrl,
                             width: 120,
                             height: 100,
                           ),
@@ -196,14 +196,14 @@ class _PostDetailViewState extends State<PostDetailView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.post.hotel.name,
+                                widget.post.booking.hotel.name,
                                 style: AppStyle.of(context).b4M.wCChineseBlack,
                               ),
                               SizedBox(height: 8),
                               Row(
                                 children: [
                                   Text(
-                                    widget.post.hotel.rating
+                                    widget.post.booking.hotel.rating
                                             ?.toStringAsFixed(1) ??
                                         '0.0',
                                     style: AppStyle.of(context).b5.wCRhythm,
@@ -224,16 +224,14 @@ class _PostDetailViewState extends State<PostDetailView> {
                                   borderRadius: BorderRadius.circular(26),
                                 ),
                                 child: Text(
-                                  '${UniversalVariables.dayMonthDateFormat.format(widget.post.startDate)} - ${UniversalVariables.dayMonthDateFormat.format(widget.post.endDate)}',
+                                  '${UniversalVariables.dayMonthDateFormat.format(widget.post.booking.checkInDate)} - ${UniversalVariables.dayMonthDateFormat.format(widget.post.booking.checkOutDate)}',
                                   style:
                                       AppStyle.of(context).b4M.wCChineseBlack,
                                 ),
                               ),
                               SizedBox(height: 8),
                               Text(
-                                '\$${widget.post.paymentAmountPerNight.toStringAsFixed(2)} / Night',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                                '${widget.post.booking.amount.toStringAsFixed(2)} ${widget.post.booking.currency}',
                                 style: AppStyle.of(context).b4B.wCChineseBlack,
                               )
                             ],
@@ -252,7 +250,7 @@ class _PostDetailViewState extends State<PostDetailView> {
                         const SizedBox(width: 4),
                         Flexible(
                           child: Text(
-                            widget.post.hotel.address ?? '',
+                            widget.post.booking.hotel.address ?? '',
                             style: AppStyle.of(context).b5.wCRhythm,
                           ),
                         )
@@ -325,7 +323,7 @@ class _PostDetailViewState extends State<PostDetailView> {
                     //Description
                     buildSection(
                       title: 'Description',
-                      body: widget.post.hotel.description ?? '',
+                      body: widget.post.booking.hotel.description ?? '',
                     ),
                     Divider(),
                     // Message to partner

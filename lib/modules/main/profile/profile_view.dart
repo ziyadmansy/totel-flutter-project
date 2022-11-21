@@ -1,3 +1,4 @@
+import 'package:cheffy/modules/main/profile/tabs/booking_tab.dart';
 import 'package:cheffy/modules/main/profile/tabs/posts_tab.dart';
 import 'package:cheffy/modules/main/profile/tabs/reviews_tab.dart';
 import 'package:cheffy/modules/widgets/progress/background_progress.dart';
@@ -28,7 +29,6 @@ class _ProfileViewState extends State<ProfileView> {
     final profileProvider = context.read<ProfileProvider>();
     Future.delayed(Duration.zero, () {
       profileProvider.getProfile();
-      profileProvider.getUserPosts();
     });
   }
 
@@ -71,7 +71,7 @@ class _ProfileViewState extends State<ProfileView> {
                 actions: [
                   AppBarActionButton(
                     onPressed: profileProvider.onShare,
-                    showElevation: false,
+                    showElevation: true,
                     child: Image(image: R.svg.ic_share(width: 20, height: 20)),
                   ),
                   AppBarActionButton(
@@ -84,19 +84,8 @@ class _ProfileViewState extends State<ProfileView> {
             ],
             body: TabBarView(
               children: [
-                PostsTab(
-                  postEntity: profileProvider.postEntity,
-                ),
-                ListView.separated(
-                  itemCount: 5,
-                  separatorBuilder: (BuildContext context, int index) =>
-                      Divider(
-                    thickness: 4,
-                    color: AppColors.soap,
-                  ),
-                  itemBuilder: (BuildContext context, int index) =>
-                      const BookingListingItemView(),
-                ),
+                PostsTab(),
+                BookingsTab(),
                 ReviewsTab(),
               ],
             ),

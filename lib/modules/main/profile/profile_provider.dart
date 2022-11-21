@@ -191,6 +191,7 @@ class ProfileProvider extends BaseViewModel {
       postEntity = await profileRepo.getUserPosts();
       notifyListeners();
     } catch (e) {
+      print(e);
       _snackbarService.showSnackbar(
         title: 'Error',
         message: 'Something went wrong, please try again',

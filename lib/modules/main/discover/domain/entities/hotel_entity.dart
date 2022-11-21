@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 import 'package:flutter/foundation.dart';
 
 class HotelEntity {
@@ -20,9 +21,9 @@ class HotelEntity {
   final List? childrenPolicy;
   final List? nearbyCities;
   final List? nearbyPlaces;
-  // final List? amenities;
   final String? city;
   final int? cityId;
+  final List<AttachmentEntity> attachments;
 
   HotelEntity({
     required this.id,
@@ -42,9 +43,9 @@ class HotelEntity {
     required this.childrenPolicy,
     required this.nearbyCities,
     required this.nearbyPlaces,
-    // required this.amenities,
     required this.city,
     required this.cityId,
+    required this.attachments,
   });
 
   Map<String, dynamic> toMap() {
@@ -66,9 +67,9 @@ class HotelEntity {
       'childrenPolicy': childrenPolicy,
       'nearbyCities': nearbyCities,
       'nearbyPlaces': nearbyPlaces,
-      // 'amenities': amenities,
       'city': city,
       'cityId': cityId,
+      'attachments': attachments,
     };
   }
 
@@ -103,9 +104,9 @@ class HotelEntity {
       nearbyPlaces: map['nearbyPlaces'] == null
           ? null
           : List.from((map['nearbyPlaces'] as List)),
-      // amenities: map['amenities'] == null
-      //     ? null
-      //     : List.from((map['amenities'] as List)),
+      attachments: (map['hotel_photos'] as List)
+          .map((att) => AttachmentEntity.fromMap(att))
+          .toList(),
       city: map['city'],
       cityId: map['cityId'],
     );

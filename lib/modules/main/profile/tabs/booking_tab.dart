@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cheffy/modules/main/profile/profile_provider.dart';
+import 'package:cheffy/modules/widgets/booking_item.dart';
 import 'package:cheffy/modules/widgets/progress/provider_progress_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,9 +36,7 @@ class _BookingsTabState extends State<BookingsTab> {
               itemCount: profileProvider.bookings.length,
               itemBuilder: (context, i) {
                 final booking = profileProvider.bookings[i];
-                return ListTile(
-                  title: Text(booking.id.toString()),
-                );
+                return BookingItem(bookingEntity: booking);
               },
               separatorBuilder: (context, i) {
                 return Divider();
