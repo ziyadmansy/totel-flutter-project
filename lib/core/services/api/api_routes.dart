@@ -12,4 +12,6 @@ class ApiRoutes {
   // Profile
   static const String profile = 'user/profile';
   static const String occupation = 'occupation';
+
+  static String searchHotels(String searchKey) => 'hotel?city=$searchKey';
 }

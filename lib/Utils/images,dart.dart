@@ -29,4 +29,5 @@ class AppImages {
   static final ic_chat = "assets/images/ic_chat.svg";
   static final ic_chat_active = "assets/images/ic_chat_active.svg";
   static final ic_tag = "assets/images/ic_tag.svg";
+  static final img_logo = "assets/images/img_logo.png";
 }

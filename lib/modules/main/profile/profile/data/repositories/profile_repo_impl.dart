@@ -6,6 +6,7 @@ import 'package:cheffy/core/failures/failures.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
+import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:dartz/dartz.dart';
@@ -96,6 +97,22 @@ class ProfileRepoImpl extends ProfileRepo {
       return UserEntity.fromJson(resultData);
     } on DioError catch (e) {
       print(e);
+      throw e;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  @override
+  Future<List<HotelEntity>> getSearchHotel(String searchKey) async {
+    try {
+      final result = await _apiClient.get(ApiRoutes.searchHotels(searchKey));
+      final resultData = result.data;
+
+      return (resultData as List)
+          .map((occ) => HotelEntity.fromMap(occ))
+          .toList();
+    } on DioError catch (e) {
       throw e;
     } catch (e) {
       throw e;

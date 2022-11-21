@@ -185,8 +185,12 @@ class StackedRouter extends RouterBase {
       );
     },
     SearchHotelsPage: (data) {
+      var args = data.getArgs<SearchViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchHotelsPage(),
+        builder: (context) => SearchHotelsPage(
+          key: args.key,
+          searchKeyWord: args.searchKeyWord,
+        ),
         settings: data,
       );
     },
@@ -339,6 +343,12 @@ class CreatePostViewArguments {
   final Key? key;
   final PostType type;
   CreatePostViewArguments({this.key, required this.type});
+}
+/// CreatePostView arguments holder class
+class SearchViewArguments {
+  final Key? key;
+  final String searchKeyWord;
+  SearchViewArguments({this.key, required this.searchKeyWord});
 }
 
 /// CreatePostView arguments holder class

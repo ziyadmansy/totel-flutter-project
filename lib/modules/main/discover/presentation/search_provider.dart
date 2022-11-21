@@ -4,6 +4,7 @@ import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/day_night_enum.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_vertical_layout_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'package:stacked_services/stacked_services.dart';
 class SearchProvider extends BaseViewModel {
   final NavigationService _navigationService = locator.get();
   final BottomSheetService _bottomSheetService = locator.get();
+  final SnackbarService _snackbarService = locator.get();
 
   bool isLoading = false;
 
@@ -45,8 +47,10 @@ class SearchProvider extends BaseViewModel {
   double minPrice = 0.0;
   double maxPrice = 1000.0;
   late RangeValues priceRange;
+  List<HotelEntity>? hotelEntity;
+  final ProfileRepo profileRepo;
 
-  SearchProvider() {
+  SearchProvider(this.profileRepo) {
     // Initializes price range slider
     priceRange = RangeValues(minPrice, maxPrice);
 
@@ -124,7 +128,7 @@ class SearchProvider extends BaseViewModel {
   void onNormalSearchLocationSubmit() {
     if (searchLocationForm.valid) {
       // Skip the process of searching and go to Hotels List
-      _navigationService.navigateTo(Routes.searchHotelsView);
+      _navigationService.navigateTo(Routes.searchHotelsView, arguments: SearchViewArguments(searchKeyWord: searchLocationForm.control(ReactiveFormControls.searchLocation).value));
     } else {
       print('Not valid (onLocationSubmit)');
       searchLocationForm.markAllAsTouched();
@@ -171,5 +175,20 @@ class SearchProvider extends BaseViewModel {
       isRoomOnly = isActive;
     }
     notifyListeners();
+  }
+
+  Future<void> getSearchHotels(String searchKeyWord) async {
+    try {
+      setBusyForObject(hotelEntity, true);
+      hotelEntity = await profileRepo.getSearchHotel(searchKeyWord);
+      notifyListeners();
+    } catch (e) {
+      _snackbarService.showSnackbar(
+        title: 'Error',
+        message: 'Something went wrong, please try again',
+      );
+    } finally {
+      setBusyForObject(hotelEntity, false);
+    }
   }
 }

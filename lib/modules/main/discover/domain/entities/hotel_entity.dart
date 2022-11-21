@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cheffy/modules/main/discover/domain/entities/hotel_photos.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 import 'package:flutter/foundation.dart';
 
 class HotelEntity {
@@ -23,6 +25,7 @@ class HotelEntity {
   final List? amenities;
   final String? city;
   final int? cityId;
+  final List<AttachmentEntity>? hotelPhotos;
 
   HotelEntity({
     required this.id,
@@ -45,6 +48,7 @@ class HotelEntity {
     required this.amenities,
     required this.city,
     required this.cityId,
+    required this.hotelPhotos,
   });
 
   Map<String, dynamic> toMap() {
@@ -69,6 +73,7 @@ class HotelEntity {
       'amenities': amenities,
       'city': city,
       'cityId': cityId,
+      'hotelPhotos': hotelPhotos,
     };
   }
 
@@ -108,6 +113,9 @@ class HotelEntity {
           : List.from((map['amenities'] as List)),
       city: map['city'],
       cityId: map['cityId'],
+      hotelPhotos: (map['hotel_photos'] as List)
+          .map((att) => AttachmentEntity.fromMap(att))
+          .toList(),
     );
   }
 
@@ -118,7 +126,7 @@ class HotelEntity {
 
   @override
   String toString() {
-    return 'HotelEntity(id: $id, name: $name, description: $description, imageUrl: $imageUrl, address: $address, rating: $rating, minPrice: $minPrice, maxPrice: $maxPrice, type: $type, isHourlyBasis: $isHourlyBasis, numberOfRooms: $numberOfRooms, isBooked: $isBooked, latitude: $latitude, longitude: $longitude, childrenPolicy: $childrenPolicy, nearbyCities: $nearbyCities, nearbyPlaces: $nearbyPlaces, amenities: $amenities, city: $city, cityId: $cityId)';
+    return 'HotelEntity(id: $id, name: $name, description: $description, imageUrl: $imageUrl, address: $address, rating: $rating, minPrice: $minPrice, maxPrice: $maxPrice, type: $type, isHourlyBasis: $isHourlyBasis, numberOfRooms: $numberOfRooms, isBooked: $isBooked, latitude: $latitude, longitude: $longitude, childrenPolicy: $childrenPolicy, nearbyCities: $nearbyCities, nearbyPlaces: $nearbyPlaces, amenities: $amenities, city: $city, cityId: $cityId, hotelPhotos: $hotelPhotos)';
   }
 
   @override
@@ -144,7 +152,8 @@ class HotelEntity {
         listEquals(other.nearbyPlaces, nearbyPlaces) &&
         listEquals(other.amenities, amenities) &&
         other.city == city &&
-        other.cityId == cityId;
+        other.cityId == cityId &&
+        listEquals(other.hotelPhotos, hotelPhotos);
   }
 
   @override
@@ -168,6 +177,7 @@ class HotelEntity {
         nearbyPlaces.hashCode ^
         amenities.hashCode ^
         city.hashCode ^
-        cityId.hashCode;
+        cityId.hashCode ^
+        hotelPhotos.hashCode;
   }
 }

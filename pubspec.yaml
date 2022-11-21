@@ -61,7 +61,7 @@ dependencies:
   # flutter_facebook_auth: ^5.0.0+2
 
 dependency_overrides:
-  firebase_auth_platform_interface: 6.11.0
+  firebase_auth_platform_interface: 6.11.2
 
 dev_dependencies:
   flutter_test:
