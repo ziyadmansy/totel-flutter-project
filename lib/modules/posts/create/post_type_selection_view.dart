@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:cheffy/core/enums/post_type.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 
 import '../../../../r.g.dart';
 
 class PostTypeSelectionView extends StatelessWidget {
-  final SheetRequest<PostType> request;
-  final Function(SheetResponse<PostType>) completer;
+  final VoidCallback onShareRoomPressed;
+  final VoidCallback onFindingPartnerPressed;
 
-  const PostTypeSelectionView(
-      {Key? key, required this.completer, required this.request})
-      : super(key: key);
+  const PostTypeSelectionView({
+    super.key,
+    required this.onShareRoomPressed,
+    required this.onFindingPartnerPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +30,16 @@ class PostTypeSelectionView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            InkWell(
-              onTap: () => completer
-                  .call(SheetResponse(confirmed: true, data: PostType.booked)),
-              child: _typeBookedButton(context),
+            GestureDetector(
+              onTap: onShareRoomPressed,
+              child: _typeShareRoomButton(context),
             ),
-            InkWell(
-              onTap: () => completer
-                  .call(SheetResponse(confirmed: true, data: PostType.finding)),
-              child: _typeFindingButton(context),
+            SizedBox(
+              height: 16,
+            ),
+            GestureDetector(
+              onTap: onFindingPartnerPressed,
+              child: _typeFindingPartnerButton(context),
             ),
           ],
         ),
@@ -45,7 +47,7 @@ class PostTypeSelectionView extends StatelessWidget {
     );
   }
 
-  Widget _typeBookedButton(BuildContext context) {
+  Widget _typeShareRoomButton(BuildContext context) {
     return SizedBox(
       height: 170,
       child: Stack(
@@ -93,12 +95,12 @@ class PostTypeSelectionView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already Booked',
+                    'Share my room',
                     style: AppStyle.of(context).b3B.wCChineseBlack,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'My hotel is booked just looking for partner',
+                    'My hotel is booked, just looking for partner',
                     style: AppStyle.of(context).b5.wCChineseBlack,
                   ),
                 ],
@@ -110,7 +112,7 @@ class PostTypeSelectionView extends StatelessWidget {
     );
   }
 
-  Widget _typeFindingButton(BuildContext context) {
+  Widget _typeFindingPartnerButton(BuildContext context) {
     return SizedBox(
       height: 170,
       child: Stack(
@@ -163,7 +165,7 @@ class PostTypeSelectionView extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'I’m looking for travel partner',
+                    'I’m looking for a travel partner',
                     style: AppStyle.of(context).b5.wCChineseBlack,
                   ),
                 ],

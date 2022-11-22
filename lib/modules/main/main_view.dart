@@ -2,6 +2,7 @@ import 'package:cheffy/Utils/key.dart';
 import 'package:cheffy/Utils/stacked_nav_keys.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/modules/main/profile/profile_provider.dart';
+import 'package:cheffy/modules/posts/create/post_type_selection_view.dart';
 import 'package:cheffy/widgets/app_drawer.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,24 @@ class _MainViewState extends State<MainView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ClipOval(
         child: FloatingActionButton(
-          onPressed: mainViewModel.onAddPostHandler,
+          onPressed: () {
+            final NavigationService _navigationService = locator.get();
+
+            showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return PostTypeSelectionView(
+                  onShareRoomPressed: () {
+                    _navigationService.navigateToCreatePostShareRoomView();
+                  },
+                  onFindingPartnerPressed: () {
+                    _navigationService
+                        .navigateTo(Routes.createPostFindingPartnerView);
+                  },
+                );
+              },
+            );
+          },
           elevation: 8,
           child: Icon(
             Icons.add,

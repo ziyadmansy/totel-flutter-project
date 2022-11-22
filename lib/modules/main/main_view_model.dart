@@ -1,13 +1,14 @@
 import 'package:cheffy/Utils/stacked_nav_keys.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
+import 'package:cheffy/modules/posts/create/post_type_selection_view.dart';
+import 'package:flutter/material.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/bottom_sheet_type.dart';
-import 'package:cheffy/core/enums/post_type.dart';
 import 'package:cheffy/core/services/authentication_service.dart';
 import 'package:cheffy/core/services/secure_storage_service.dart';
 
@@ -41,19 +42,6 @@ class MainViewModel extends BaseViewModel {
     _authenticationService.authStatusStream.listen((event) async {
       if (event == AuthenticationStatus.authenticated) {
       } else {}
-    });
-  }
-
-  void onAddPostHandler() {
-    _bottomSheetService
-        .showCustomSheet<PostType, PostType>(
-            variant: BottomSheetType.postCreate)
-        .then((value) {
-      if (value is SheetResponse<PostType> &&
-          value.confirmed &&
-          value.data != null) {
-        _navigationService.navigateToCreatePostView(type: value.data!);
-      }
     });
   }
 

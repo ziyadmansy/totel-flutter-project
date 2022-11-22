@@ -1,5 +1,6 @@
 import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
+import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -10,7 +11,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/app/app.router.dart';
-import 'package:cheffy/core/enums/post_type.dart';
 import 'package:cheffy/core/methods/extensions.dart';
 
 class CreatePostViewModel extends BaseViewModel {
@@ -23,7 +23,8 @@ class CreatePostViewModel extends BaseViewModel {
 
   final controls = _Controls();
 
-  late final FormGroup form;
+  late final FormGroup shareRoomForm;
+  late final FormGroup findingPartnerForm;
 
   List<XFile> _attachments = <XFile>[];
   bool _isMalePartner = false;
@@ -32,8 +33,10 @@ class CreatePostViewModel extends BaseViewModel {
   List<HotelEntity> filteredHotels = [];
   HotelEntity? selectedHotel;
 
+  BookingEntity? selectedBooking;
+
   CreatePostViewModel(this._postsRepo) {
-    form = FormGroup({
+    shareRoomForm = FormGroup({
       controls.attachments: FormControl(validators: [_validatorAttachments]),
       controls.date:
           FormControl<DateTimeRange>(validators: [Validators.required]),
@@ -42,14 +45,17 @@ class CreatePostViewModel extends BaseViewModel {
       controls.hourly: FormControl<bool>(),
     });
 
-    // form = FormGroup({
-    //   controls.location: FormControl(validators: [Validators.required]),
-    //   controls.date:
-    //       FormControl<DateTimeRange>(validators: [Validators.required]),
-    //   controls.price: FormControl<double>(),
-    //   controls.message: FormControl<String>(validators: [Validators.required]),
-    //   controls.hourly: FormControl<bool>(),
-    // });
+    findingPartnerForm = FormGroup({
+      controls.messageToPartner: FormControl<String>(
+        validators: [Validators.required],
+      ),
+      controls.selectedBooking: FormControl(
+        validators: [_validatorSelectedBooking],
+      ),
+      controls.partnerGender: FormControl(
+        validators: [_validatorPartnerGender],
+      ),
+    });
   }
 
   //region getters setters
@@ -86,33 +92,48 @@ class CreatePostViewModel extends BaseViewModel {
         : {'Minimum 1 or maximum 3 pictures must be attached': true};
   }
 
+  /// Validates the booking if it is selected
+  Map<String, dynamic>? _validatorSelectedBooking(
+      AbstractControl<dynamic> control) {
+    return (selectedBooking != null) ? null : {'Select a booked hotel': true};
+  }
+
+  /// Validates the booking partner gender to be at least one is selected
+  Map<String, dynamic>? _validatorPartnerGender(
+      AbstractControl<dynamic> control) {
+    return (isMalePartner || isFemalePartner)
+        ? null
+        : {'Select at least one gender for partner': true};
+  }
+
   double get partnerAmount =>
-      (double.tryParse(form.control(controls.price).value.toString()) ?? 0) / 2;
+      (double.tryParse(
+              shareRoomForm.control(controls.price).value.toString()) ??
+          0) /
+      2;
 
   void onTapMalePartner(bool? val) => isMalePartner = val!;
 
   void onTapFemalePartner(bool? val) => isFemalePartner = val!;
 
-  Future<void> onSubmit(PostType type) async {
-    if (form.valid && selectedHotel != null) {
+  void resetPostingFields() {
+    selectedBooking = null;
+    selectedHotel = null;
+    isMalePartner = false;
+    isFemalePartner = false;
+    notifyListeners();
+  }
+
+  Future<void> onFindingPartnerPostSubmit() async {
+    if (findingPartnerForm.valid) {
       setBusy(true);
       try {
         await _postsRepo.createFindingPost(
-          CreateFindingPostParams(
-            hotelId: selectedHotel!.id,
+          CreateFindingPartnerPostParams(
+            bookingId: selectedBooking!.id,
             partnerGender: _getGender(),
-            location: selectedHotel!.address ?? '',
-            partnerMessage: form.control(controls.message).value,
-            partnerAmount: form.control(controls.price).value,
-            startDate:
-                (form.control(controls.date).value as DateTimeRange).start,
-            endDate: (form.control(controls.date).value as DateTimeRange).end,
-            isHourly: form.control(controls.hourly).value,
-            postType: type,
-            paymentAmountPerNight: double.tryParse(
-                    form.control(controls.price).value.toString()) ??
-                0,
-            attachments: attachments,
+            messageToPartner:
+                findingPartnerForm.control(controls.messageToPartner).value,
           ),
         );
 
@@ -166,6 +187,7 @@ class CreatePostViewModel extends BaseViewModel {
         );
 
         _navigationService.back();
+        resetPostingFields();
       } catch (e) {
         _snackbarService.showSnackbar(message: e.toString());
         rethrow;
@@ -173,10 +195,7 @@ class CreatePostViewModel extends BaseViewModel {
         setBusy(false);
       }
     } else {
-      form.markAllAsTouched();
-      if (selectedHotel == null) {
-        _snackbarService.showSnackbar(message: 'Select a hotel');
-      }
+      findingPartnerForm.markAllAsTouched();
     }
   }
 
@@ -210,18 +229,10 @@ class CreatePostViewModel extends BaseViewModel {
     }
   }
 
-  String _getPostType(PostType type) {
-    if (type == PostType.finding) {
-      return 'Finding Partner';
-    } else {
-      return 'Already Booked';
-    }
-  }
-
   void onPressedRemove(int index) {
     attachments.removeAt(index);
 
-    form.control(controls.attachments).value = attachments;
+    shareRoomForm.control(controls.attachments).value = attachments;
     notifyListeners();
   }
 
@@ -242,13 +253,20 @@ class CreatePostViewModel extends BaseViewModel {
       }
     }
 
-    form.control(controls.attachments).value = attachments;
+    shareRoomForm.control(controls.attachments).value = attachments;
 
     notifyListeners();
   }
 
   void onAddHotelPress() {
     _navigationService.navigateTo(Routes.hotelsSelectionView);
+  }
+
+  Future<void> onAddBookingPress() async {
+    selectedBooking = await _navigationService.navigateTo(Routes.bookingsView)
+        as BookingEntity?;
+    notifyListeners();
+    print('selected booking: $selectedBooking');
   }
 
   void onSearchedHotelSelection(HotelEntity? selectedSearchedHotel) {
@@ -270,4 +288,8 @@ class _Controls {
   String get hourly => 'hourly';
 
   String get attachments => 'attachments';
+
+  String get selectedBooking => 'selectedBooking';
+  String get messageToPartner => 'messageToPartner';
+  String get partnerGender => 'partnerGender';
 }

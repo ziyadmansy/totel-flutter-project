@@ -12,6 +12,7 @@ import 'package:cheffy/modules/payment/presentation/options/payment_percentage_v
 import 'package:cheffy/modules/main/discover/presentation/pages/search_hotels_page.dart';
 import 'package:cheffy/modules/main/discover/presentation/pages/search_location_page.dart';
 import 'package:cheffy/modules/main/discover/presentation/pages/search_filter_page.dart';
+import 'package:cheffy/modules/posts/create/create_post_finding_partner_view.dart';
 import 'package:cheffy/modules/posts/create/hotels_selection_view.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
@@ -22,8 +23,6 @@ import 'package:cheffy/modules/splash/presentation/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-
-import '../core/enums/post_type.dart';
 import '../modules/auth/login/login_view.dart';
 import '../modules/auth/otp/otp_view.dart';
 import '../modules/auth/register/register_form_view.dart';
@@ -40,7 +39,7 @@ import '../modules/on_boarding/on_boarding_view.dart';
 import '../modules/payment/presentation/add_card/payment_add_cart_view.dart';
 import '../modules/payment/presentation/options/payment_options_view.dart';
 import '../modules/payment/presentation/summary/payment_summary_view.dart';
-import '../modules/posts/create/create_post_view.dart';
+import '../modules/posts/create/create_post_share_room_view.dart';
 import '../modules/posts/detail/post_detail_view.dart';
 import '../modules/main/profile/edit/edit_profile_view.dart';
 import '../modules/main/profile/profile_view.dart';
@@ -56,7 +55,9 @@ class Routes {
   static const String oTPView = '/o-tp-view';
   static const String mainView = '/main-view';
   static const String chatDetailView = '/chat-detail-view';
-  static const String createPostView = '/create-post-view';
+  static const String createPostShareRoomView = '/create-post-share-room-view';
+  static const String createPostFindingPartnerView =
+      '/create-post-finding-partner-view';
   static const String locationChangeView = '/location-change-view';
   static const String locationChangeMapView = '/location-change-map-view';
   static const String postDetailView = '/post-detail-view';
@@ -87,7 +88,8 @@ class Routes {
     oTPView,
     mainView,
     chatDetailView,
-    createPostView,
+    createPostShareRoomView,
+    createPostFindingPartnerView,
     locationChangeView,
     locationChangeMapView,
     postDetailView,
@@ -132,7 +134,9 @@ class StackedRouter extends RouterBase {
       generator: MainViewRouter(),
     ),
     RouteDef(Routes.chatDetailView, page: ChatDetailView),
-    RouteDef(Routes.createPostView, page: CreatePostView),
+    RouteDef(Routes.createPostShareRoomView, page: CreatePostShareRoomView),
+    RouteDef(Routes.createPostFindingPartnerView,
+        page: CreatePostFindingPartnerView),
     RouteDef(Routes.locationChangeView, page: LocationChangeView),
     RouteDef(Routes.locationChangeMapView, page: LocationChangeMapView),
     RouteDef(Routes.postDetailView, page: PostDetailView),
@@ -216,13 +220,18 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    CreatePostView: (data) {
-      var args = data.getArgs<CreatePostViewArguments>(nullOk: false);
+    CreatePostShareRoomView: (data) {
+      var args = data.getArgs<CreatePostShareRoomViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => CreatePostView(
+        builder: (context) => CreatePostShareRoomView(
           key: args.key,
-          type: args.type,
         ),
+        settings: data,
+      );
+    },
+    CreatePostFindingPartnerView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const CreatePostFindingPartnerView(),
         settings: data,
       );
     },
@@ -355,10 +364,9 @@ class StackedRouter extends RouterBase {
 /// *************************************************************************
 
 /// CreatePostView arguments holder class
-class CreatePostViewArguments {
+class CreatePostShareRoomViewArguments {
   final Key? key;
-  final PostType type;
-  CreatePostViewArguments({this.key, required this.type});
+  CreatePostShareRoomViewArguments({this.key});
 }
 
 /// CreatePostView arguments holder class
@@ -691,9 +699,8 @@ extension NavigatorStateExtension on NavigationService {
     );
   }
 
-  Future<dynamic> navigateToCreatePostView({
+  Future<dynamic> navigateToCreatePostShareRoomView({
     Key? key,
-    required PostType type,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -701,8 +708,8 @@ extension NavigatorStateExtension on NavigationService {
         transition,
   }) async {
     return navigateTo(
-      Routes.createPostView,
-      arguments: CreatePostViewArguments(key: key, type: type),
+      Routes.createPostShareRoomView,
+      arguments: CreatePostShareRoomViewArguments(key: key),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

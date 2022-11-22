@@ -90,7 +90,6 @@ class Application {
     await ThemeManager.initialise();
 
     _setupSnackbarUi();
-    _setupCustomDialogs();
   }
 
   static void _setupSnackbarUi() {
@@ -103,24 +102,6 @@ class Application {
       messageColor: AppColors.chineseBlack,
       mainButtonTextColor: Colors.black,
     ));
-  }
-
-  static void _setupCustomDialogs() {
-    // final dialogService = locator<DialogService>();
-    final bottomSheetService = locator<BottomSheetService>();
-
-    // final dialogBuilders = {
-    //   CustomDialogType.manualScanner: (context, dialogRequest, response) =>
-    //       ManualScannerView(dialogRequest: dialogRequest, response: response)
-    // };
-
-    final bottomSheetBuilders = {
-      BottomSheetType.postCreate: (context, sheetRequest, completer) =>
-          PostTypeSelectionView(request: sheetRequest, completer: completer)
-    };
-
-    // dialogService.registerCustomDialogBuilders(dialogBuilders);
-    bottomSheetService.setCustomSheetBuilders(bottomSheetBuilders);
   }
 }
 

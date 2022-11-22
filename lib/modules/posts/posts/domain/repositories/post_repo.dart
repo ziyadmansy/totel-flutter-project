@@ -10,7 +10,7 @@ abstract class PostRepo {
       {List<XFile> files = const []});
 
   Future<void> createFindingPost(
-    CreateFindingPostParams entity,
+    CreateFindingPartnerPostParams entity,
   );
 
   Future<PostsEntity> getAllPosts();

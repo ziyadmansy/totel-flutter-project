@@ -62,19 +62,19 @@ class BookingItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                PopupMenuButton<String>(
-                  elevation: 16,
-                  color: AppColors.soap,
-                  itemBuilder: (context) {
-                    return [
-                      if (onPress != null)
+                if (onPress != null)
+                  PopupMenuButton<String>(
+                    elevation: 16,
+                    color: AppColors.soap,
+                    itemBuilder: (context) {
+                      return [
                         PopupMenuItem(
                           child: Text('View'),
                           onTap: onPress,
                         ),
-                    ];
-                  },
-                ),
+                      ];
+                    },
+                  ),
               ],
             ),
             SizedBox(height: 8),

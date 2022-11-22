@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:reactive_date_range_picker/reactive_date_range_picker.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:cheffy/core/enums/post_type.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 import 'package:cheffy/modules/widgets/app_form_field.dart';
@@ -16,22 +15,20 @@ import 'package:cheffy/modules/widgets/progress/background_progress.dart';
 import 'create_post_view_model.dart';
 import 'image_item_view.dart';
 
-class CreatePostView extends StatelessWidget {
-  final PostType type;
-
-  const CreatePostView({super.key, required this.type});
+class CreatePostShareRoomView extends StatelessWidget {
+  const CreatePostShareRoomView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<CreatePostViewModel>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Travel Details'),
+        title: const Text('Room details'),
       ),
       body: BackgroundProgress<CreatePostViewModel>(
         child: SingleChildScrollView(
           child: ReactiveForm(
-            formGroup: viewModel.form,
+            formGroup: viewModel.shareRoomForm,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Column(
@@ -134,9 +131,7 @@ class CreatePostView extends StatelessWidget {
                           useMaterial3: false,
                         ),
                     child: AppFormField(
-                      label: type == PostType.booked
-                          ? 'When are you going'
-                          : 'When do you wanna go',
+                      label: 'When are you going',
                       field: ReactiveDateRangePicker(
                         formControlName: viewModel.controls.date,
                       ),
@@ -184,9 +179,7 @@ class CreatePostView extends StatelessWidget {
                   //endregion
                   //region price
                   AppFormField(
-                    label: type == PostType.booked
-                        ? 'How much you pay for one night stay'
-                        : 'Your budget for hotel (optional)',
+                    label: 'How much you pay for one night stay',
                     field: ReactiveTextField(
                       formControlName: viewModel.controls.price,
                       keyboardType: TextInputType.number,
@@ -259,7 +252,7 @@ class CreatePostView extends StatelessWidget {
                   SharedWidgets.buildRoundedElevatedButton(
                     btnChild: const Text('Post'),
                     onPress: () async {
-                      await viewModel.onSubmit(type);
+                      await viewModel.onFindingPartnerPostSubmit();
                     },
                   ),
                 ],

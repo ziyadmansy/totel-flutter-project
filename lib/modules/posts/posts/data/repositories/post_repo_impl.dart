@@ -74,20 +74,12 @@ class PostRepoImpl implements PostRepo {
   }
 
   @override
-  Future<void> createFindingPost(CreateFindingPostParams entity) async {
-    print(entity.toMap());
+  Future<void> createFindingPost(CreateFindingPartnerPostParams entity) async {
+    final data = entity.toMap();
 
-    final formData = FormData.fromMap(entity.toMap());
-
-    final res = await _apiClient.post(
+    await _apiClient.post(
       ApiRoutes.posts,
-      data: formData,
-      options: Options(
-        headers: {
-          'Content-type': 'multipart/form-data',
-          "Accept": "*/*",
-        },
-      ),
+      data: data,
     );
   }
 
