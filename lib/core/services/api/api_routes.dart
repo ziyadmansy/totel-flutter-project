@@ -22,6 +22,9 @@ class ApiRoutes {
   // Bookings
   static const String userBookings = 'booking/user';
 
+  // Drawer Menu
+  static const String help = 'help-menu';
+
   // Hotels
   static String filteredHotels({
     String name = '',

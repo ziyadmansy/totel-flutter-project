@@ -1,3 +1,5 @@
+import 'package:cheffy/modules/app_drawer/data/repositories/app_drawer_repo_impl.dart';
+import 'package:cheffy/modules/app_drawer/domain/repositories/app_drawer_repo.dart';
 import 'package:cheffy/modules/auth/auth/data/repositories/auth_repo_impl.dart';
 import 'package:cheffy/modules/auth/auth/domain/repositories/auth_repo.dart';
 import 'package:cheffy/modules/notifications/data/repositories/notifications_repo_impl.dart';
@@ -26,11 +28,12 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => ApiClient());
   locator.registerLazySingleton(() => AuthenticationService());
 
-  locator
-      .registerLazySingleton<ProfileRepo>(() => ProfileRepoImpl());
+  locator.registerLazySingleton<ProfileRepo>(() => ProfileRepoImpl());
 
   locator.registerLazySingleton<AuthRepo>(() => AuthRepoImpl());
   locator.registerLazySingleton<PostRepo>(() => PostRepoImpl(locator.get()));
+  locator.registerLazySingleton<AppDrawerRepo>(
+      () => AppDrawerRepoImpl(locator.get()));
   locator.registerLazySingleton<NotificationsRepo>(
       () => NotificationsRepoImpl(locator.get()));
 

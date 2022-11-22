@@ -18,7 +18,7 @@ import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
-import 'package:cheffy/modules/settings/presentation/help_view.dart';
+import 'package:cheffy/modules/app_drawer/presentation/help_view.dart';
 import 'package:cheffy/modules/splash/presentation/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
