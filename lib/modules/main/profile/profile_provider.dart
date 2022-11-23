@@ -19,7 +19,7 @@ class ProfileProvider extends BaseViewModel {
   final BottomSheetService _bottomSheetService = locator.get();
   final SnackbarService _snackbarService = locator.get();
   final SecureStorageService _secureStorageService = locator.get();
-  PostsEntity? postEntity;
+  FindingPartnerPostsEntity? postEntity;
 
   bool isLoading = false;
 

@@ -6,12 +6,12 @@ import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 
-class PostListingItemVerticalLayoutView extends StatelessWidget {
-  final Post post;
+class FindingPartnerPostListingItemView extends StatelessWidget {
+  final FindingPartnerPost post;
   final VoidCallback? onPress;
   final VoidCallback? onDelete;
 
-  const PostListingItemVerticalLayoutView({
+  const FindingPartnerPostListingItemView({
     super.key,
     required this.post,
     this.onPress,

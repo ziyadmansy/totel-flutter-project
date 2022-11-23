@@ -9,7 +9,7 @@ import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 abstract class ProfileRepo {
   Future<UserEntity> get();
 
-  Future<PostsEntity> getUserPosts();
+  Future<FindingPartnerPostsEntity> getUserPosts();
   Future<List<ReviewEntity>> getUserReviews();
   Future<List<BookingEntity>> getUserBookings();
 

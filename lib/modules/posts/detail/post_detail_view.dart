@@ -19,7 +19,7 @@ import 'post_detail_view_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PostDetailView extends StatefulWidget {
-  final Post post;
+  final FindingPartnerPost post;
   const PostDetailView({super.key, required this.post});
 
   @override
@@ -33,7 +33,8 @@ class _PostDetailViewState extends State<PostDetailView> {
   void initState() {
     super.initState();
     cameraPosition = CameraPosition(
-      target: LatLng(widget.post.booking.hotel.latitude, widget.post.booking.hotel.longitude),
+      target: LatLng(widget.post.booking.hotel.latitude,
+          widget.post.booking.hotel.longitude),
       zoom: 16,
     );
     Future.delayed(

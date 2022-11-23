@@ -5,8 +5,12 @@ class ApiRoutes {
   static const String logout = 'auth/logout';
 
   // Posts
-  static const String posts = 'posting';
-  static const String postsByCurrentUser = 'posting/user';
+  static const String findingPartnerPosts = 'posting';
+  static const String shareRoomPosts = 'posting/share-room';
+
+  static const String findingPartnerPostsByCurrentUser = 'posting/user';
+  static const String shareRoomPostsByCurrentUser =
+      'posting/user-room-listings';
   static String deleteCurrentUserPost(int postId) => 'posting/user/$postId';
 
   // Notifications

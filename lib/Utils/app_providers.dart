@@ -6,7 +6,7 @@ import 'package:cheffy/modules/payment/presentation/payment_view_model.dart';
 import 'package:cheffy/modules/main/profile/profile_provider.dart';
 import 'package:cheffy/modules/posts/create/create_post_view_model.dart';
 import 'package:cheffy/modules/posts/detail/post_detail_view_model.dart';
-import 'package:cheffy/modules/posts/posts/posts_provider.dart';
+import 'package:cheffy/modules/posts/posts/presentation/providers/posts_provider.dart';
 import 'package:provider/provider.dart';
 
 final appProviders = [

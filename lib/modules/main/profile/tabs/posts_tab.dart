@@ -1,5 +1,5 @@
 import 'package:cheffy/modules/main/profile/profile_provider.dart';
-import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_vertical_layout_view.dart';
+import 'package:cheffy/modules/widgets/post_listing_item/finding_partner_post_listing_item_view.dart';
 import 'package:cheffy/modules/widgets/progress/provider_progress_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +28,8 @@ class _PostsTabState extends State<PostsTab> {
     final profileProvider = context.watch<ProfileProvider>();
     return ProviderProgressLoader(
       isLoading: profileProvider.busy(profileProvider.postEntity),
-      child: profileProvider.postEntity == null || profileProvider.postEntity!.posts.isEmpty
+      child: profileProvider.postEntity == null ||
+              profileProvider.postEntity!.posts.isEmpty
           ? Center(
               child: Text(
                 'No posts available. Try adding new posts!',
@@ -41,7 +42,7 @@ class _PostsTabState extends State<PostsTab> {
               itemCount: profileProvider.postEntity!.posts.length,
               itemBuilder: (context, i) {
                 final post = profileProvider.postEntity!.posts[i];
-                return PostListingItemVerticalLayoutView(
+                return FindingPartnerPostListingItemView(
                   post: post,
                   onDelete: () async {
                     await profileProvider.deletePost(post.id);

@@ -8,17 +8,17 @@ import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 
-class PostsEntity {
-  List<Post> posts;
+class FindingPartnerPostsEntity {
+  List<FindingPartnerPost> posts;
 
-  PostsEntity({
+  FindingPartnerPostsEntity({
     required this.posts,
   });
 
-  PostsEntity copyWith({
-    List<Post>? posts,
+  FindingPartnerPostsEntity copyWith({
+    List<FindingPartnerPost>? posts,
   }) {
-    return PostsEntity(
+    return FindingPartnerPostsEntity(
       posts: posts ?? this.posts,
     );
   }
@@ -29,11 +29,11 @@ class PostsEntity {
     };
   }
 
-  factory PostsEntity.fromMap(Map<String, dynamic> map) {
-    return PostsEntity(
-      posts: List<Post>.from(
-        (map['posts'] as List).map<Post>(
-          (x) => Post.fromMap(x as Map<String, dynamic>),
+  factory FindingPartnerPostsEntity.fromMap(Map<String, dynamic> map) {
+    return FindingPartnerPostsEntity(
+      posts: List<FindingPartnerPost>.from(
+        (map['posts'] as List).map<FindingPartnerPost>(
+          (x) => FindingPartnerPost.fromMap(x as Map<String, dynamic>),
         ),
       ),
     );
@@ -41,14 +41,15 @@ class PostsEntity {
 
   String toJson() => json.encode(toMap());
 
-  factory PostsEntity.fromJson(String source) =>
-      PostsEntity.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory FindingPartnerPostsEntity.fromJson(String source) =>
+      FindingPartnerPostsEntity.fromMap(
+          json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'PostEntity(posts: $posts)';
 
   @override
-  bool operator ==(covariant PostsEntity other) {
+  bool operator ==(covariant FindingPartnerPostsEntity other) {
     if (identical(this, other)) return true;
 
     return listEquals(other.posts, posts);
@@ -58,7 +59,7 @@ class PostsEntity {
   int get hashCode => posts.hashCode;
 }
 
-class Post {
+class FindingPartnerPost {
   final int id;
   final String postingType;
   final String messageToPartner;
@@ -68,7 +69,7 @@ class Post {
   final UserEntity user;
   final BookingEntity booking;
 
-  Post({
+  FindingPartnerPost({
     required this.id,
     required this.postingType,
     required this.messageToPartner,
@@ -79,7 +80,7 @@ class Post {
     required this.booking,
   });
 
-  Post copyWith({
+  FindingPartnerPost copyWith({
     int? id,
     String? postingType,
     String? messageToPartner,
@@ -90,7 +91,7 @@ class Post {
     HotelEntity? hotel,
     BookingEntity? booking,
   }) {
-    return Post(
+    return FindingPartnerPost(
       id: id ?? this.id,
       postingType: postingType ?? this.postingType,
       messageToPartner: messageToPartner ?? this.messageToPartner,
@@ -115,22 +116,23 @@ class Post {
     };
   }
 
-  factory Post.fromMap(Map<String, dynamic> map) {
-    return Post(
+  factory FindingPartnerPost.fromMap(Map<String, dynamic> map) {
+    return FindingPartnerPost(
       id: map['id'] as int,
       postingType: map['postingType'] as String,
       messageToPartner: map['messageToPartner'] as String,
       partnerGender: map['partnerGender'] as String,
       createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
       updatedAt: map['updatedAt'] != null ? map['updatedAt'] as String : null,
-      user: UserEntity.fromJson(map['user'] as Map<String,dynamic>),
-      booking: BookingEntity.fromMap(map['booking'] as Map<String,dynamic>),
+      user: UserEntity.fromJson(map['user'] as Map<String, dynamic>),
+      booking: BookingEntity.fromMap(map['booking'] as Map<String, dynamic>),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Post.fromJson(String source) => Post.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory FindingPartnerPost.fromJson(String source) =>
+      FindingPartnerPost.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -138,29 +140,28 @@ class Post {
   }
 
   @override
-  bool operator ==(covariant Post other) {
+  bool operator ==(covariant FindingPartnerPost other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.postingType == postingType &&
-      other.messageToPartner == messageToPartner &&
-      other.partnerGender == partnerGender &&
-      other.createdAt == createdAt &&
-      other.updatedAt == updatedAt &&
-      other.user == user &&
-      other.booking == booking;
+
+    return other.id == id &&
+        other.postingType == postingType &&
+        other.messageToPartner == messageToPartner &&
+        other.partnerGender == partnerGender &&
+        other.createdAt == createdAt &&
+        other.updatedAt == updatedAt &&
+        other.user == user &&
+        other.booking == booking;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      postingType.hashCode ^
-      messageToPartner.hashCode ^
-      partnerGender.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode ^
-      user.hashCode ^
-      booking.hashCode;
+        postingType.hashCode ^
+        messageToPartner.hashCode ^
+        partnerGender.hashCode ^
+        createdAt.hashCode ^
+        updatedAt.hashCode ^
+        user.hashCode ^
+        booking.hashCode;
   }
 }

@@ -4,7 +4,7 @@ import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/day_night_enum.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
-import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_vertical_layout_view.dart';
+import 'package:cheffy/modules/widgets/post_listing_item/finding_partner_post_listing_item_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';

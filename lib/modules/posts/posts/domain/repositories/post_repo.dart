@@ -3,6 +3,7 @@ import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_p
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_booked_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
 import 'package:image_picker/image_picker.dart';
 
 abstract class PostRepo {
@@ -13,7 +14,8 @@ abstract class PostRepo {
     CreateFindingPartnerPostParams entity,
   );
 
-  Future<PostsEntity> getAllPosts();
+  Future<FindingPartnerPostsEntity> getAllFindingPartnerPosts();
+  Future<ShareRoomPostEntity> getAllShareRoomPosts();
 
   Future<List<HotelEntity>> getFilteredHotels(String name);
 

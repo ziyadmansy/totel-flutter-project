@@ -4,7 +4,7 @@ import 'package:cheffy/app/constants/error_messages.dart';
 import 'package:cheffy/modules/widgets/error_view.dart';
 
 import 'post_listing_item_horizontal_layout_view.dart';
-import 'post_listing_item_vertical_layout_view.dart';
+import 'finding_partner_post_listing_item_view.dart';
 
 class PostListingItemView extends StatelessWidget {
   final int layoutType;

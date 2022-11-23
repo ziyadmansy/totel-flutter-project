@@ -34,7 +34,7 @@ import '../modules/location_change_map/location_change_map_view.dart';
 import '../modules/main/chat/chat_view.dart';
 import '../modules/main/main_view.dart';
 import '../modules/main/map/map_view.dart';
-import '../modules/posts/post_view.dart';
+import '../modules/posts/posts/presentation/post_view.dart';
 import '../modules/on_boarding/on_boarding_view.dart';
 import '../modules/payment/presentation/add_card/payment_add_cart_view.dart';
 import '../modules/payment/presentation/options/payment_options_view.dart';
@@ -372,7 +372,7 @@ class CreatePostShareRoomViewArguments {
 /// CreatePostView arguments holder class
 class PostDetailViewArguments {
   final Key? key;
-  final Post post;
+  final FindingPartnerPost post;
   PostDetailViewArguments({this.key, required this.post});
 }
 

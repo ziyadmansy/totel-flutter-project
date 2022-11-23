@@ -35,12 +35,13 @@ class ProfileRepoImpl extends ProfileRepo {
   }
 
   @override
-  Future<PostsEntity> getUserPosts() async {
+  Future<FindingPartnerPostsEntity> getUserPosts() async {
     try {
-      final result = await _apiClient.get(ApiRoutes.postsByCurrentUser);
+      final result =
+          await _apiClient.get(ApiRoutes.findingPartnerPostsByCurrentUser);
       final resultData = result.data;
 
-      return PostsEntity.fromMap(resultData);
+      return FindingPartnerPostsEntity.fromMap(resultData);
     } on DioError catch (e) {
       throw e;
     } catch (e) {
@@ -62,7 +63,7 @@ class ProfileRepoImpl extends ProfileRepo {
       throw e;
     }
   }
-  
+
   Future<List<BookingEntity>> getUserBookings() async {
     try {
       final result = await _apiClient.get(ApiRoutes.userBookings);

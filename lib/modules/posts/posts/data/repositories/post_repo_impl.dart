@@ -4,6 +4,7 @@ import 'package:cheffy/core/services/api/api_client.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
@@ -38,9 +39,15 @@ class PostRepoImpl implements PostRepo {
   }
 
   @override
-  Future<PostsEntity> getAllPosts() async {
-    final res = await _apiClient.get(ApiRoutes.posts);
-    return PostsEntity.fromMap(res.data);
+  Future<FindingPartnerPostsEntity> getAllFindingPartnerPosts() async {
+    final res = await _apiClient.get(ApiRoutes.findingPartnerPosts);
+    return FindingPartnerPostsEntity.fromMap(res.data);
+  }
+
+  @override
+  Future<ShareRoomPostEntity> getAllShareRoomPosts() async {
+    final res = await _apiClient.get(ApiRoutes.shareRoomPosts);
+    return ShareRoomPostEntity.fromMap(res.data);
   }
 
   @override
@@ -78,7 +85,7 @@ class PostRepoImpl implements PostRepo {
     final data = entity.toMap();
 
     await _apiClient.post(
-      ApiRoutes.posts,
+      ApiRoutes.findingPartnerPosts,
       data: data,
     );
   }
