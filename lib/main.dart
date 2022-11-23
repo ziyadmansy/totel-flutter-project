@@ -7,6 +7,14 @@ import 'app/app.dart';
 import 'app/app.router.dart';
 import 'modules/theme/theme.dart';
 
+/*
+The owner of this company didn't pay me (the flutter dev) 
+who has worked on this whole project for more than 1 month
+
+This is a warning for the next flutter developer 
+to know that they will steal him and dump him later
+*/
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
