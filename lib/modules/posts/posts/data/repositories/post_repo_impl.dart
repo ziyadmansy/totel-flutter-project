@@ -8,7 +8,7 @@ import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entit
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
-import 'package:cheffy/modules/posts/posts/domain/entities/create_booked_post_params.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/create_share_room_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/attachment_entity.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,19 +18,15 @@ class PostRepoImpl implements PostRepo {
   final ApiClient _apiClient;
 
   @override
-  Future<void> createBookedPost(CreateBookedPostParams params,
-      {List<XFile> files = const []}) async {
+  Future<void> createShareRoomPost(CreateSharedRoomPostParams params) async {
     try {
-      final List<int> attachments = [];
+      final body = params.toJson();
 
-      if (files.isNotEmpty) {
-        attachments.addAll(await _uploadAttachments(files));
-      }
-      final body = params.copyWith(attachments: attachments).toJson();
-
-      print(jsonEncode(body));
-      final res = await _apiClient.post('post', data: body);
-      return;
+      print(body);
+      final res = await _apiClient.post(
+        ApiRoutes.shareRoomPosts,
+        data: body,
+      );
     } on DioError catch (e) {
       rethrow;
     } catch (e) {

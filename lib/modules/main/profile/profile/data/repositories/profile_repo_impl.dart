@@ -10,6 +10,7 @@ import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_enti
 import 'package:cheffy/modules/main/profile/profile/domain/entities/review_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:cheffy/core/failures/failures.dart';
 import 'package:cheffy/modules/auth/auth/domain/entities/user_entity.dart';
@@ -35,13 +36,28 @@ class ProfileRepoImpl extends ProfileRepo {
   }
 
   @override
-  Future<FindingPartnerPostsEntity> getUserPosts() async {
+  Future<FindingPartnerPostsEntity> getUserFindingPartnerPosts() async {
     try {
       final result =
           await _apiClient.get(ApiRoutes.findingPartnerPostsByCurrentUser);
       final resultData = result.data;
 
       return FindingPartnerPostsEntity.fromMap(resultData);
+    } on DioError catch (e) {
+      throw e;
+    } catch (e) {
+      throw e;
+    }
+  }
+  
+  @override
+  Future<ShareRoomPostEntity> getUserShareRoomPosts() async {
+    try {
+      final result =
+          await _apiClient.get(ApiRoutes.shareRoomPostsByCurrentUser);
+      final resultData = result.data;
+
+      return ShareRoomPostEntity.fromMap(resultData);
     } on DioError catch (e) {
       throw e;
     } catch (e) {

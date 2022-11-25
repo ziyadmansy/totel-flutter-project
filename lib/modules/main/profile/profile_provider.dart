@@ -7,6 +7,7 @@ import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_enti
 import 'package:cheffy/modules/main/profile/profile/domain/entities/review_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/repositories/profile_repo.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_image_picker/image_file.dart';
 import 'package:stacked/stacked.dart';
@@ -19,7 +20,8 @@ class ProfileProvider extends BaseViewModel {
   final BottomSheetService _bottomSheetService = locator.get();
   final SnackbarService _snackbarService = locator.get();
   final SecureStorageService _secureStorageService = locator.get();
-  FindingPartnerPostsEntity? postEntity;
+  FindingPartnerPostsEntity? findingPartnerPostEntity;
+  ShareRoomPostEntity? shareRoomPostEntity;
 
   bool isLoading = false;
 
@@ -185,10 +187,10 @@ class ProfileProvider extends BaseViewModel {
     }
   }
 
-  Future<void> getUserPosts() async {
+  Future<void> getUserFindingPartnerPosts() async {
     try {
-      setBusyForObject(postEntity, true);
-      postEntity = await profileRepo.getUserPosts();
+      setBusyForObject(findingPartnerPostEntity, true);
+      findingPartnerPostEntity = await profileRepo.getUserFindingPartnerPosts();
       notifyListeners();
     } catch (e) {
       print(e);
@@ -197,17 +199,34 @@ class ProfileProvider extends BaseViewModel {
         message: 'Something went wrong, please try again',
       );
     } finally {
-      setBusyForObject(postEntity, false);
+      setBusyForObject(findingPartnerPostEntity, false);
+    }
+  }
+
+  Future<void> getUserShareRoomPosts() async {
+    try {
+      setBusyForObject(shareRoomPostEntity, true);
+      shareRoomPostEntity = await profileRepo.getUserShareRoomPosts();
+      notifyListeners();
+    } catch (e) {
+      print(e);
+      _snackbarService.showSnackbar(
+        title: 'Error',
+        message: 'Something went wrong, please try again',
+      );
+    } finally {
+      setBusyForObject(shareRoomPostEntity, false);
     }
   }
 
   Future<void> deletePost(int postId) async {
     try {
-      setBusyForObject(postEntity, true);
+      setBusyForObject(findingPartnerPostEntity, true);
       await profileRepo.deletePostById(postId);
 
       // Remove the deleted post
-      postEntity!.posts.removeWhere((element) => element.id == postId);
+      findingPartnerPostEntity!.posts
+          .removeWhere((element) => element.id == postId);
 
       _snackbarService.showSnackbar(message: 'Post deleted successfully');
 
@@ -219,7 +238,7 @@ class ProfileProvider extends BaseViewModel {
         message: 'Something went wrong, post couldn\'t be deleted',
       );
     } finally {
-      setBusyForObject(postEntity, false);
+      setBusyForObject(findingPartnerPostEntity, false);
     }
   }
 

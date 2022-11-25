@@ -2,6 +2,7 @@ import 'package:cheffy/Utils/Utils.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/room_facility_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -30,19 +31,124 @@ class CreatePostViewModel extends BaseViewModel {
   bool _isMalePartner = false;
   bool _isFemalePartner = false;
 
-  List<HotelEntity> filteredHotels = [];
-  HotelEntity? selectedHotel;
+  // List<HotelEntity> filteredHotels = [];
+  // HotelEntity? selectedHotel;
 
-  BookingEntity? selectedBooking;
+  BookingEntity? selectedBookingHotel;
+
+  // Check boxes of Facilities
+  List<RoomFacilityEntity> generalFacilities = [
+    RoomFacilityEntity(
+      name: 'Air conditioning',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Heating',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Free Wifi',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Electric vehicle charging station',
+      isChecked: false,
+    ),
+  ];
+  List<RoomFacilityEntity> cookingAndCleaningFacilities = [
+    RoomFacilityEntity(
+      name: 'Kitchen',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Kitchenette',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Washing Machine',
+      isChecked: false,
+    ),
+  ];
+  List<RoomFacilityEntity> entertainmentFacilities = [
+    RoomFacilityEntity(
+      name: 'Flat-Screen TV',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Swimming Pool',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Hot tub',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Mini bar',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Sauna',
+      isChecked: false,
+    ),
+  ];
+  List<RoomFacilityEntity> outsideAndViewFacilities = [
+    RoomFacilityEntity(
+      name: 'Balcony',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Garden View',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Terrace',
+      isChecked: false,
+    ),
+  ];
+  List<RoomFacilityEntity> houseRulesFacilities = [
+    RoomFacilityEntity(
+      name: 'Smoking allowed',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Pets allowed',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Children allowed',
+      isChecked: false,
+    ),
+    RoomFacilityEntity(
+      name: 'Parties/Events allowed',
+      isChecked: false,
+    ),
+  ];
 
   CreatePostViewModel(this._postsRepo) {
     shareRoomForm = FormGroup({
-      controls.attachments: FormControl(validators: [_validatorAttachments]),
-      controls.date:
-          FormControl<DateTimeRange>(validators: [Validators.required]),
-      controls.price: FormControl<double>(validators: [Validators.required]),
       controls.message: FormControl<String>(validators: [Validators.required]),
-      controls.hourly: FormControl<bool>(),
+      controls.hourlyOrDaily: FormControl<bool>(),
+      controls.nameOfProperty:
+          FormControl<String>(validators: [Validators.required]),
+      controls.country: FormControl<String>(validators: [Validators.required]),
+      controls.address: FormControl<String>(validators: [Validators.required]),
+      controls.latitude: FormControl<double>(validators: [Validators.required]),
+      controls.longitude:
+          FormControl<double>(validators: [Validators.required]),
+      controls.checkInTimeFrom:
+          FormControl<DateTime>(validators: [Validators.required]),
+      controls.checkInTimeTo:
+          FormControl<DateTime>(validators: [Validators.required]),
+      controls.roomSetup:
+          FormControl<String>(validators: [Validators.required]),
+      controls.noOfGuestsAllowed:
+          FormControl<int>(validators: [Validators.required]),
+      controls.noOfBathrooms:
+          FormControl<int>(validators: [Validators.required]),
+      controls.pricePerGroupSize:
+          FormControl<double>(validators: [Validators.required]),
+      controls.chargePerNight:
+          FormControl<double>(validators: [Validators.required]),
     });
 
     findingPartnerForm = FormGroup({
@@ -50,10 +156,14 @@ class CreatePostViewModel extends BaseViewModel {
         validators: [Validators.required],
       ),
       controls.selectedBooking: FormControl(
-        validators: [_validatorSelectedBooking],
+        validators: [
+          // _validatorSelectedBooking,
+        ],
       ),
       controls.partnerGender: FormControl(
-        validators: [_validatorPartnerGender],
+        validators: [
+          // _validatorPartnerGender,
+        ],
       ),
     });
   }
@@ -95,7 +205,9 @@ class CreatePostViewModel extends BaseViewModel {
   /// Validates the booking if it is selected
   Map<String, dynamic>? _validatorSelectedBooking(
       AbstractControl<dynamic> control) {
-    return (selectedBooking != null) ? null : {'Select a booked hotel': true};
+    return (selectedBookingHotel != null)
+        ? null
+        : {'Select a booked hotel': true};
   }
 
   /// Validates the booking partner gender to be at least one is selected
@@ -107,8 +219,10 @@ class CreatePostViewModel extends BaseViewModel {
   }
 
   double get partnerAmount =>
-      (double.tryParse(
-              shareRoomForm.control(controls.price).value.toString()) ??
+      (double.tryParse(shareRoomForm
+              .control(controls.chargePerNight)
+              .value
+              .toString()) ??
           0) /
       2;
 
@@ -117,69 +231,25 @@ class CreatePostViewModel extends BaseViewModel {
   void onTapFemalePartner(bool? val) => isFemalePartner = val!;
 
   void resetPostingFields() {
-    selectedBooking = null;
-    selectedHotel = null;
+    selectedBookingHotel = null;
+    // selectedHotel = null;
     isMalePartner = false;
     isFemalePartner = false;
     notifyListeners();
   }
 
   Future<void> onFindingPartnerPostSubmit() async {
-    if (findingPartnerForm.valid) {
+    if (findingPartnerForm.valid && selectedBookingHotel != null) {
       setBusy(true);
       try {
         await _postsRepo.createFindingPost(
           CreateFindingPartnerPostParams(
-            bookingId: selectedBooking!.id,
+            bookingId: selectedBookingHotel!.id,
             partnerGender: _getGender(),
             messageToPartner:
                 findingPartnerForm.control(controls.messageToPartner).value,
           ),
         );
-
-        /*switch (type) {
-          case PostType.booked:
-            final selectedAttachments = attachments
-                .where((element) => element != null)
-                .map((e) => e!)
-                .toList(growable: false);
-
-            await _postsRepo.createBookedPost(
-              CreateBookedPostParams(
-                bidEnds: form.control(controls.date).value!.end,
-                bidStart: form.control(controls.date).value!.start,
-                hotel: form.control(controls.hotel).value,
-                checkIn: 'form.control(controls.date).value!.start',
-                checkout: 'form.control(controls.date).value!.end',
-                lat: _selectedLocation!.latitude,
-                long: _selectedLocation!.longitude,
-                name: form.control(controls.hotel).value,
-                gender: _getGender(),
-                overview: form.control(controls.message).value,
-                location: _selectedLocation!.id.toString(),
-                notes: form.control(controls.message).value,
-                partnerAmount: form.control(controls.price).value as double,
-                rate: form.control(controls.rating).value as double,
-                dateFrom: form.control(controls.date).value.start,
-                dateTo: form.control(controls.date).value.end,
-              ),
-              files: selectedAttachments,
-            );
-            break;
-          case PostType.finding:
-            await _postsRepo.createFindingPost(
-              CreateFindingPostParams(
-                gender: _getGender(),
-                location: _selectedLocation!.id.toString(),
-                notes: form.control(controls.message).value,
-                partnerAmount: form.control(controls.price).value,
-                startDate: form.control(controls.date).value.start,
-                endDate: form.control(controls.date).value.end,
-                isAcceptHourly: form.control(controls.hourly).value,
-              ),
-            );
-            break;
-        }*/
 
         await _dialogService.showDialog(
           title: 'Success',
@@ -189,35 +259,70 @@ class CreatePostViewModel extends BaseViewModel {
         _navigationService.back();
         resetPostingFields();
       } catch (e) {
-        _snackbarService.showSnackbar(message: e.toString());
+        print(e);
+        _snackbarService.showSnackbar(
+          title: 'Error',
+          message: 'Something went wrong, please try again',
+        );
         rethrow;
       } finally {
         setBusy(false);
       }
     } else {
       findingPartnerForm.markAllAsTouched();
+      if (selectedBookingHotel == null) {
+        _snackbarService.showSnackbar(message: 'Select you booked hotel');
+      }
     }
   }
 
-  Future<void> getFilteredHotels(String searchQuery) async {
-    EasyDebounce.debounce(
-      DebounceTags.hotelsDebouncer,
-      Duration(milliseconds: DebounceTags.debouncerDurationInMillis),
-      () async {
-        if (searchQuery.isNotEmpty) {
-          try {
-            setBusyForObject(filteredHotels, true);
-            filteredHotels = await _postsRepo.getFilteredHotels(searchQuery);
-            notifyListeners();
-          } catch (e) {
-            print(e);
-          } finally {
-            setBusyForObject(filteredHotels, false);
-          }
-        }
-      },
-    );
+  Future<void> onShareRoomPostSubmit() async {
+    if (shareRoomForm.valid) {
+      setBusy(true);
+      try {
+        // await _postsRepo.createBookedPost();
+
+        await _dialogService.showDialog(
+          title: 'Success',
+          description: 'Your post has been created successfully.',
+        );
+
+        _navigationService.back();
+        resetPostingFields();
+      } catch (e) {
+        print(e);
+        _snackbarService.showSnackbar(
+          title: 'Error',
+          message: 'Something went wrong, please try again',
+        );
+        rethrow;
+      } finally {
+        setBusy(false);
+      }
+    } else {
+      shareRoomForm.markAllAsTouched();
+    }
   }
+
+  // Future<void> getFilteredHotels(String searchQuery) async {
+  //   EasyDebounce.debounce(
+  //     DebounceTags.hotelsDebouncer,
+  //     Duration(milliseconds: DebounceTags.debouncerDurationInMillis),
+  //     () async {
+  //       if (searchQuery.isNotEmpty) {
+  //         try {
+  //           setBusyForObject(filteredHotels, true);
+  //           filteredHotels = await _postsRepo.getFilteredHotels(searchQuery);
+  //           notifyListeners();
+  //         } catch (e) {
+  //           print(e);
+  //         } finally {
+  //           setBusyForObject(filteredHotels, false);
+  //         }
+  //       }
+  //     },
+  //   );
+  // }
 
   String _getGender() {
     if (_isMalePartner && _isFemalePartner) {
@@ -229,67 +334,81 @@ class CreatePostViewModel extends BaseViewModel {
     }
   }
 
-  void onPressedRemove(int index) {
-    attachments.removeAt(index);
+  // void onPressedRemove(int index) {
+  //   attachments.removeAt(index);
 
-    shareRoomForm.control(controls.attachments).value = attachments;
-    notifyListeners();
-  }
+  //   shareRoomForm.control(controls.attachments).value = attachments;
+  //   notifyListeners();
+  // }
 
-  void onPressedAdd() async {
-    if (attachments.length < 3) {
-      var res = await _imagePicker.pickMultiImage();
+  // void onPressedAdd() async {
+  //   if (attachments.length < 3) {
+  //     var res = await _imagePicker.pickMultiImage();
 
-      if (res.isListNotEmptyOrNull) {
-        int remaining = 3 - attachments.length;
-        attachments.addAll(res.take(remaining));
-      }
-    } else {
-      var res = await _imagePicker.pickImage(source: ImageSource.gallery);
+  //     if (res.isListNotEmptyOrNull) {
+  //       int remaining = 3 - attachments.length;
+  //       attachments.addAll(res.take(remaining));
+  //     }
+  //   } else {
+  //     var res = await _imagePicker.pickImage(source: ImageSource.gallery);
 
-      if (res != null) {
-        attachments.removeLast();
-        attachments.add(res);
-      }
-    }
+  //     if (res != null) {
+  //       attachments.removeLast();
+  //       attachments.add(res);
+  //     }
+  //   }
 
-    shareRoomForm.control(controls.attachments).value = attachments;
+  //   shareRoomForm.control(controls.attachments).value = attachments;
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 
   void onAddHotelPress() {
     _navigationService.navigateTo(Routes.hotelsSelectionView);
   }
 
   Future<void> onAddBookingPress() async {
-    selectedBooking = await _navigationService.navigateTo(Routes.bookingsView)
-        as BookingEntity?;
+    selectedBookingHotel = await _navigationService
+        .navigateTo(Routes.bookingsView) as BookingEntity?;
     notifyListeners();
-    print('selected booking: $selectedBooking');
+    print('selected booking: $selectedBookingHotel');
   }
 
-  void onSearchedHotelSelection(HotelEntity? selectedSearchedHotel) {
-    if (selectedSearchedHotel != null) {
-      _navigationService.back();
-      selectedHotel = selectedSearchedHotel;
-      notifyListeners();
-    }
-  }
+  // void onSearchedHotelSelection(HotelEntity? selectedSearchedHotel) {
+  //   if (selectedSearchedHotel != null) {
+  //     _navigationService.back();
+  //     selectedHotel = selectedSearchedHotel;
+  //     notifyListeners();
+  //   }
+  // }
 }
 
 class _Controls {
-  String get date => 'date';
-
-  String get price => 'price';
-
   String get message => 'message';
 
-  String get hourly => 'hourly';
-
-  String get attachments => 'attachments';
+  String get hourlyOrDaily => 'hourly';
 
   String get selectedBooking => 'selectedBooking';
   String get messageToPartner => 'messageToPartner';
   String get partnerGender => 'partnerGender';
+
+  // Share room controls
+  String get nameOfProperty => 'nameOfProperty';
+  String get country => 'country';
+  String get address => 'address';
+  String get latitude => 'latitude';
+  String get longitude => 'longitude';
+  String get checkInTimeFrom => 'checkInTimeFrom';
+  String get checkInTimeTo => 'checkInTimeTo';
+  String get roomSetup => 'roomSetup';
+  String get noOfGuestsAllowed => 'noOfGuestsAllowed';
+  String get noOfBathrooms => 'noOfBathrooms';
+  String get generalFacilities => 'generalFacilities';
+  String get cookingCleaningFacilities => 'cookingCleaningFacilities';
+  String get entertainmentFacilities => 'entertainmentFacilities';
+  String get parking => 'parking';
+  String get houseRules => 'houseRules';
+  String get pricePerGroupSize => 'pricePerGroupSize';
+  String get chargePerNight => 'chargePerNight';
+  String get isChargeHourly => 'isChargeHourly';
 }

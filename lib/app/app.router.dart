@@ -154,7 +154,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.settingsView, page: SettingsMainScreen),
     RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
     RouteDef(Routes.helpView, page: HelpView),
-    RouteDef(Routes.hotelsSelectionView, page: HotelsSelectionView),
+    // RouteDef(Routes.hotelsSelectionView, page: HotelsSelectionView),
     RouteDef(Routes.bookingsView, page: BookingScreen),
   ];
   @override
@@ -344,12 +344,12 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    HotelsSelectionView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => HotelsSelectionView(),
-        settings: data,
-      );
-    },
+    // HotelsSelectionView: (data) {
+    //   return buildAdaptivePageRoute<dynamic>(
+    //     builder: (context) => HotelsSelectionView(),
+    //     settings: data,
+    //   );
+    // },
     BookingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => BookingScreen(),

@@ -94,7 +94,7 @@ class CreatePostFindingPartnerView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(9),
                             ),
                             padding: const EdgeInsets.all(16),
-                            child: viewModel.selectedBooking == null
+                            child: viewModel.selectedBookingHotel == null
                                 ? const Center(
                                     child: Text(
                                       'No booking selected yet',
@@ -104,7 +104,8 @@ class CreatePostFindingPartnerView extends StatelessWidget {
                                     ),
                                   )
                                 : BookingItem(
-                                    bookingEntity: viewModel.selectedBooking!,
+                                    bookingEntity:
+                                        viewModel.selectedBookingHotel!,
                                   ),
                           ),
                           if (state.errorText.isNotNullOrEmpty) ...[

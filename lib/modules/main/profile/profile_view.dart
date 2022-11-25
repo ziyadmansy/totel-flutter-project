@@ -1,17 +1,14 @@
 import 'package:cheffy/modules/main/profile/tabs/booking_tab.dart';
-import 'package:cheffy/modules/main/profile/tabs/posts_tab.dart';
+import 'package:cheffy/modules/main/profile/tabs/finding_partner_user_posts_tab.dart';
 import 'package:cheffy/modules/main/profile/tabs/reviews_tab.dart';
+import 'package:cheffy/modules/main/profile/tabs/share_room_user_posts_tab.dart';
 import 'package:cheffy/modules/widgets/progress/background_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stacked/stacked.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/main/profile/profile_header_view.dart';
 import 'package:cheffy/modules/widgets/app_bar_action_button.dart';
-import 'package:cheffy/modules/widgets/booking_listing_item/booking_listing_item_view.dart';
-import 'package:cheffy/modules/widgets/post_listing_item/post_listing_item_view.dart';
-import 'package:cheffy/modules/widgets/review_listing_item/review_listing_item_view.dart';
 
 import 'profile_provider.dart';
 
@@ -37,7 +34,7 @@ class _ProfileViewState extends State<ProfileView> {
     final profileProvider = context.watch<ProfileProvider>();
     return BackgroundProgress<ProfileProvider>(
       child: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Material(
           child: NestedScrollView(
             headerSliverBuilder: (context, _) => [
@@ -54,9 +51,13 @@ class _ProfileViewState extends State<ProfileView> {
                   child: Container(
                     color: Colors.white,
                     child: const TabBar(
+                      isScrollable: true,
                       tabs: [
                         Tab(
-                          text: "Posts",
+                          text: "Partner Posts",
+                        ),
+                        Tab(
+                          text: "Room Posts",
                         ),
                         Tab(
                           text: "Bookings",
@@ -84,7 +85,8 @@ class _ProfileViewState extends State<ProfileView> {
             ],
             body: TabBarView(
               children: [
-                PostsTab(),
+                FindingPartnerUserPostsTab(),
+                ShareRoomUserPostsTab(),
                 BookingsTab(),
                 ReviewsTab(),
               ],

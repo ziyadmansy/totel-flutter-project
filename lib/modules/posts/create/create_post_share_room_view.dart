@@ -6,6 +6,7 @@ import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_date_range_picker/reactive_date_range_picker.dart';
+import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:cheffy/modules/theme/color.dart';
@@ -34,160 +35,135 @@ class CreatePostShareRoomView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  ReactiveFormField(
-                    formControlName: viewModel.controls.attachments,
-                    builder: (state) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SharedWidgets.buildListTileTitle(
-                              title: 'Attachments'),
-                          viewModel.attachments.isEmpty
-                              ? SizedBox(
-                                  height: 100,
-                                  child: InkWell(
-                                    onTap: viewModel.onPressedAdd,
-                                    borderRadius: BorderRadius.circular(9),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: AppColors.soap),
-                                        borderRadius: BorderRadius.circular(9),
-                                      ),
-                                      child: const Icon(Icons.add),
-                                    ),
-                                  ),
-                                )
-                              : SizedBox(
-                                  height: 100,
-                                  child: ListView.builder(
-                                    itemBuilder: (context, index) {
-                                      return ImageItemView(
-                                        image: viewModel.attachments[index],
-                                        onPressedAdd: () =>
-                                            viewModel.onPressedAdd(),
-                                        onPressedRemove: () =>
-                                            viewModel.onPressedRemove(index),
-                                      );
-                                    },
-                                    itemCount: viewModel.attachments.length,
-                                    scrollDirection: Axis.horizontal,
-                                  ),
-                                ),
-                          if (state.errorText.isNotNullOrEmpty) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              '${state.errorText}',
-                              style: AppStyle.of(context).b5.wCError,
-                            ),
-                          ],
-                          const SizedBox(height: 8),
-                          SharedWidgets.buildIconTextButton(
-                            btnText: 'Add Attachments',
-                            btnIcon: Icons.add,
-                            onPress: viewModel.onPressedAdd,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                  //endregion
-                  //region hotel
-                  SharedWidgets.buildListTileTitle(title: 'Hotel'),
-                  viewModel.selectedHotel == null
-                      ? SizedBox(
-                          height: 100,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.soap),
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'No hotel selected yet',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      : SearchedHotelItem(
-                          hotel: viewModel.selectedHotel!,
-                        ),
-                  const SizedBox(height: 8),
-                  SharedWidgets.buildIconTextButton(
-                    btnText: 'Select Hotel',
-                    btnIcon: FontAwesomeIcons.hotel,
-                    onPress: viewModel.onAddHotelPress,
-                  ),
-                  const SizedBox(height: 24),
-                  //endregion
-                  //region date
-                  Theme(
-                    // (SAVE) button disappears with (useMaterial3)
-                    data: AppTheme.of(context).light.copyWith(
-                          useMaterial3: false,
-                        ),
-                    child: AppFormField(
-                      label: 'When are you going',
-                      field: ReactiveDateRangePicker(
-                        formControlName: viewModel.controls.date,
-                      ),
+                  AppFormField(
+                    label: 'Name of property',
+                    field: ReactiveTextField(
+                      formControlName: viewModel.controls.nameOfProperty,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      validationMessages: {
+                        ValidationMessage.required: (error) =>
+                            'Enter the name of property',
+                      },
                     ),
                   ),
-                  const SizedBox(height: 24),
-                  //endregion
-                  //region rate
-                  // if (type == PostType.booked) ...[
-                  //   AppFormField(
-                  //     label: 'Hotel Rating',
-                  //     field: ReactiveRatingBar<double>(
-                  //       formControlName: viewModel.controls.rating,
-                  //       allowHalfRating: true,
-                  //       decoration: const InputDecoration(
-                  //         filled: false,
-                  //         isDense: true,
-                  //         isCollapsed: true,
-                  //         border: InputBorder.none,
-                  //         errorBorder: InputBorder.none,
-                  //         focusedBorder: InputBorder.none,
-                  //         focusedErrorBorder: InputBorder.none,
-                  //         disabledBorder: InputBorder.none,
-                  //         enabledBorder: InputBorder.none,
-                  //         contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  //       ),
-                  //       ratingWidget: RatingWidget(
-                  //         full: Icon(
-                  //           Icons.star_rounded,
-                  //           color: AppColors.plumpPurplePrimary,
-                  //         ),
-                  //         half: Icon(
-                  //           Icons.star_half_rounded,
-                  //           color: AppColors.plumpPurplePrimary,
-                  //         ),
-                  //         empty: Icon(
-                  //           Icons.star_border_rounded,
-                  //           color: AppColors.plumpPurplePrimary,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   const SizedBox(height: 24),
-                  // ],
-                  //endregion
-                  //region price
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Country',
+                    field: ReactiveTextField(
+                      formControlName: viewModel.controls.country,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      validationMessages: {
+                        ValidationMessage.required: (error) =>
+                            'Enter the country',
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Address',
+                    field: ReactiveTextField(
+                      formControlName: viewModel.controls.address,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      validationMessages: {
+                        ValidationMessage.required: (error) =>
+                            'Enter the address',
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Room setup',
+                    field: ReactiveTextField(
+                      formControlName: viewModel.controls.roomSetup,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      validationMessages: {
+                        ValidationMessage.required: (error) =>
+                            'Enter the room setup',
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppFormField(
+                          label: 'No. of guests',
+                          field: ReactiveTextField(
+                            formControlName:
+                                viewModel.controls.noOfGuestsAllowed,
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            validationMessages: {
+                              ValidationMessage.required: (error) =>
+                                  'Enter no. of guests',
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: AppFormField(
+                          label: 'No. of bathrooms',
+                          field: ReactiveTextField(
+                            formControlName: viewModel.controls.noOfBathrooms,
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            validationMessages: {
+                              ValidationMessage.required: (error) =>
+                                  'Enter no. of bathrooms',
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Price per group',
+                    field: ReactiveTextField(
+                      formControlName: viewModel.controls.pricePerGroupSize,
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      textInputAction: TextInputAction.next,
+                      validationMessages: {
+                        ValidationMessage.required: (error) =>
+                            'Enter price per group',
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   AppFormField(
                     label: 'How much you pay for one night stay',
                     field: ReactiveTextField(
-                      formControlName: viewModel.controls.price,
-                      keyboardType: TextInputType.number,
+                      formControlName: viewModel.controls.chargePerNight,
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
                       decoration: const InputDecoration(prefixText: '\$'),
                       textInputAction: TextInputAction.next,
+                      validationMessages: {
+                        ValidationMessage.required: (error) =>
+                            'Enter charge per night',
+                      },
                     ),
                   ),
-                  const SizedBox(height: 4),
                   ReactiveFormConsumer(
                     builder: (context, form, child) => Text.rich(
                       TextSpan(children: [
@@ -201,18 +177,75 @@ class CreatePostShareRoomView extends StatelessWidget {
                       style: AppStyle.of(context).b5.wCRhythm,
                     ),
                   ),
-                  //endregion
-                  const SizedBox(height: 24),
-                  //region message
+                  SizedBox(
+                    height: 10,
+                  ),
                   AppFormField(
-                    label: 'Message for your partner',
-                    field: ReactiveTextField(
-                      formControlName: viewModel.controls.message,
+                    label: 'Check in',
+                    field: Row(
+                      children: [
+                        Expanded(
+                          child: ReactiveDateTimePicker(
+                            formControlName: viewModel.controls.checkInTimeFrom,
+                            type: ReactiveDatePickerFieldType.time,
+                            decoration: const InputDecoration(
+                              labelText: 'From',
+                              suffixIcon: Icon(Icons.calendar_today),
+                            ),
+                            validationMessages: {
+                              ValidationMessage.required: (error) =>
+                                  'Enter check In start',
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Expanded(
+                          child: ReactiveDateTimePicker(
+                            formControlName: viewModel.controls.checkInTimeTo,
+                            type: ReactiveDatePickerFieldType.time,
+                            decoration: const InputDecoration(
+                              labelText: 'To',
+                              suffixIcon: Icon(Icons.calendar_today),
+                            ),
+                            validationMessages: {
+                              ValidationMessage.required: (error) =>
+                                  'Enter check In end',
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  //endregion
-                  const SizedBox(height: 24),
-                  //region partner
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Message to partner',
+                    field: ReactiveTextField(
+                      formControlName: viewModel.controls.message,
+                      keyboardType: TextInputType.text,
+                      maxLines: 3,
+                      validationMessages: {
+                        ValidationMessage.required: (error) =>
+                            'Enter your message',
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  AppFormField(
+                    field: ReactiveSwitchListTile.adaptative(
+                      formControlName: viewModel.controls.hourlyOrDaily,
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                        'Available Hourly?',
+                        style: AppStyle.of(context).b4.wCRhythm,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Divider(),
                   AppFormField(
                     label: 'Gender of travel partner looking for',
                     field: Column(
@@ -236,23 +269,116 @@ class CreatePostShareRoomView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //endregion
-                  const SizedBox(height: 24),
+                  Divider(),
+                  SizedBox(
+                    height: 10,
+                  ),
                   AppFormField(
-                    field: ReactiveSwitchListTile.adaptative(
-                      formControlName: viewModel.controls.hourly,
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        'Available Hourly?',
-                        style: AppStyle.of(context).b4.wCRhythm,
-                      ),
+                    label: 'General',
+                    field: Column(
+                      children: viewModel.generalFacilities
+                          .map((fac) => CheckboxListTile(
+                                value: fac.isChecked,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                title: Text(fac.name),
+                                onChanged: (value) {
+                                  fac.switchCheck(value);
+                                  viewModel.notifyListeners();
+                                },
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Cooking and Cleaning',
+                    field: Column(
+                      children: viewModel.cookingAndCleaningFacilities
+                          .map((fac) => CheckboxListTile(
+                                value: fac.isChecked,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                title: Text(fac.name),
+                                onChanged: (value) {
+                                  fac.switchCheck(value);
+                                  viewModel.notifyListeners();
+                                },
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Entertainment',
+                    field: Column(
+                      children: viewModel.entertainmentFacilities
+                          .map((fac) => CheckboxListTile(
+                                value: fac.isChecked,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                title: Text(fac.name),
+                                onChanged: (value) {
+                                  fac.switchCheck(value);
+                                  viewModel.notifyListeners();
+                                },
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Outside and View',
+                    field: Column(
+                      children: viewModel.outsideAndViewFacilities
+                          .map((fac) => CheckboxListTile(
+                                value: fac.isChecked,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                title: Text(fac.name),
+                                onChanged: (value) {
+                                  fac.switchCheck(value);
+                                  viewModel.notifyListeners();
+                                },
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'House rules',
+                    field: Column(
+                      children: viewModel.houseRulesFacilities
+                          .map((fac) => CheckboxListTile(
+                                value: fac.isChecked,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                title: Text(fac.name),
+                                onChanged: (value) {
+                                  fac.switchCheck(value);
+                                  viewModel.notifyListeners();
+                                },
+                              ))
+                          .toList(),
                     ),
                   ),
                   const SizedBox(height: 24),
                   SharedWidgets.buildRoundedElevatedButton(
                     btnChild: const Text('Post'),
                     onPress: () async {
-                      await viewModel.onFindingPartnerPostSubmit();
+                      await viewModel.onShareRoomPostSubmit();
                     },
                   ),
                 ],
