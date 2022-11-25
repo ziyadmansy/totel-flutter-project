@@ -1,4 +1,5 @@
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/category_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_share_room_post_params.dart';
@@ -17,6 +18,7 @@ abstract class PostRepo {
   Future<ShareRoomPostEntity> getAllShareRoomPosts();
 
   Future<List<HotelEntity>> getFilteredHotels(String name);
+  Future<List<CategoryEntity>> getCategories();
 
   Future<AttachmentEntity> uploadAttachment(String path, String fileName);
 }

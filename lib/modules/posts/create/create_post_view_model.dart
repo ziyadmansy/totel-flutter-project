@@ -1,12 +1,18 @@
 import 'package:cheffy/Utils/Utils.dart';
+import 'package:cheffy/Utils/shared_core.dart';
+import 'package:cheffy/core/exceptions/location_exception.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/main/profile/profile/domain/entities/booking_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/category_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/create_share_room_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/room_facility_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -126,15 +132,16 @@ class CreatePostViewModel extends BaseViewModel {
 
   CreatePostViewModel(this._postsRepo) {
     shareRoomForm = FormGroup({
+      controls.category: FormControl<int>(
+        validators: [Validators.required],
+      ),
       controls.message: FormControl<String>(validators: [Validators.required]),
       controls.hourlyOrDaily: FormControl<bool>(),
       controls.nameOfProperty:
           FormControl<String>(validators: [Validators.required]),
       controls.country: FormControl<String>(validators: [Validators.required]),
       controls.address: FormControl<String>(validators: [Validators.required]),
-      controls.latitude: FormControl<double>(validators: [Validators.required]),
-      controls.longitude:
-          FormControl<double>(validators: [Validators.required]),
+      controls.parking: FormControl<String>(validators: [Validators.required]),
       controls.checkInTimeFrom:
           FormControl<DateTime>(validators: [Validators.required]),
       controls.checkInTimeTo:
@@ -190,8 +197,6 @@ class CreatePostViewModel extends BaseViewModel {
     _attachments = attachments;
     notifyListeners();
   }
-
-  //endregion
 
   /// Validates that attachment control's attachment count should
   /// be minimum 1 or maximum 3
@@ -251,12 +256,13 @@ class CreatePostViewModel extends BaseViewModel {
           ),
         );
 
-        await _dialogService.showDialog(
+        _navigationService.back();
+
+        _snackbarService.showSnackbar(
           title: 'Success',
-          description: 'Your post has been created successfully.',
+          message: 'Post created successfully',
         );
 
-        _navigationService.back();
         resetPostingFields();
       } catch (e) {
         print(e);
@@ -271,23 +277,95 @@ class CreatePostViewModel extends BaseViewModel {
     } else {
       findingPartnerForm.markAllAsTouched();
       if (selectedBookingHotel == null) {
-        _snackbarService.showSnackbar(message: 'Select you booked hotel');
+        _snackbarService.showSnackbar(message: 'Select your booked hotel');
       }
+    }
+  }
+
+  Future<LatLng> getLocation() async {
+    try {
+      await SharedCore.checkLocationPermissions();
+      LocationData position = await SharedCore.getLocationData();
+
+      print(position.longitude);
+      print(position.latitude);
+
+      print('initial Location Got successfully');
+
+      return LatLng(position.latitude!, position.longitude!);
+    } on LocationException catch (e) {
+      _snackbarService.showSnackbar(
+        message:
+            'Location is not enabled, please accept the permission and enable then try again',
+      );
+      rethrow;
+    } catch (e) {
+      rethrow;
     }
   }
 
   Future<void> onShareRoomPostSubmit() async {
     if (shareRoomForm.valid) {
       setBusy(true);
+      final latLng = await getLocation();
       try {
-        // await _postsRepo.createBookedPost();
-
-        await _dialogService.showDialog(
-          title: 'Success',
-          description: 'Your post has been created successfully.',
+        await _postsRepo.createShareRoomPost(
+          CreateSharedRoomPostParams(
+            categoryId: shareRoomForm.control(controls.category).value,
+            nameOfProperty:
+                shareRoomForm.control(controls.nameOfProperty).value,
+            country: shareRoomForm.control(controls.country).value,
+            address: shareRoomForm.control(controls.address).value,
+            longitude: latLng.longitude,
+            latitude: latLng.latitude,
+            checkInFrom: UniversalVariables.timeFormat24.format(shareRoomForm
+                .control(controls.checkInTimeFrom)
+                .value as DateTime),
+            checkInTo: UniversalVariables.timeFormat24.format(shareRoomForm
+                .control(controls.checkInTimeTo)
+                .value as DateTime),
+            roomSetup: shareRoomForm.control(controls.roomSetup).value,
+            parking: 'Free Parking',
+            // parking: shareRoomForm.control(controls.parking).value,
+            message: shareRoomForm.control(controls.message).value,
+            noOfAllowedGuests:
+                shareRoomForm.control(controls.noOfGuestsAllowed).value,
+            noOfBathrooms: shareRoomForm.control(controls.noOfBathrooms).value,
+            generalFacilities: generalFacilities
+                .where((fac) => fac.isChecked)
+                .map((fac) => fac.name)
+                .toList(),
+            cookingCleaningFacilities: cookingAndCleaningFacilities
+                .where((fac) => fac.isChecked)
+                .map((fac) => fac.name)
+                .toList(),
+            entertainmentFacilities: entertainmentFacilities
+                .where((fac) => fac.isChecked)
+                .map((fac) => fac.name)
+                .toList(),
+            outsideViewFacilities: outsideAndViewFacilities
+                .where((fac) => fac.isChecked)
+                .map((fac) => fac.name)
+                .toList(),
+            houseRulesFacilities: houseRulesFacilities
+                .where((fac) => fac.isChecked)
+                .map((fac) => fac.name)
+                .toList(),
+            pricePerGroupSize:
+                shareRoomForm.control(controls.pricePerGroupSize).value,
+            chargePerNight:
+                shareRoomForm.control(controls.chargePerNight).value,
+            isChargeHourly: shareRoomForm.control(controls.hourlyOrDaily).value,
+          ),
         );
 
         _navigationService.back();
+
+        _snackbarService.showSnackbar(
+          title: 'Success',
+          message: 'Post created successfully',
+        );
+
         resetPostingFields();
       } catch (e) {
         print(e);
@@ -393,6 +471,7 @@ class _Controls {
   String get partnerGender => 'partnerGender';
 
   // Share room controls
+  String get category => 'category';
   String get nameOfProperty => 'nameOfProperty';
   String get country => 'country';
   String get address => 'address';
@@ -410,5 +489,4 @@ class _Controls {
   String get houseRules => 'houseRules';
   String get pricePerGroupSize => 'pricePerGroupSize';
   String get chargePerNight => 'chargePerNight';
-  String get isChargeHourly => 'isChargeHourly';
 }

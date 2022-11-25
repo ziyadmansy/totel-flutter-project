@@ -1,5 +1,4 @@
 import 'package:cheffy/modules/settings/presentation/ChangePassword.dart';
-import 'package:cheffy/modules/settings/presentation/edit_profile_screen.dart';
 import 'package:cheffy/modules/settings/presentation/Notification.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +7,10 @@ class SettingsMainScreen extends StatelessWidget {
   final List<String> _settingsList = [
     'Notifications',
     'Change Password',
-    'Edit Profile',
   ];
   final List<Widget> settingsScreens = [
     NotificationScreen(),
     ChangePasswordScreen(),
-    EditProfileScreen(),
   ];
 
   @override

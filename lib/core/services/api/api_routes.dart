@@ -5,8 +5,10 @@ class ApiRoutes {
   static const String logout = 'auth/logout';
 
   // Posts
+  static const String getFindingPartnerPosts = 'posting/';
   static const String findingPartnerPosts = 'posting/find-partner';
   static const String shareRoomPosts = 'posting/share-room';
+  static const String getCategories = 'category';
 
   static const String findingPartnerPostsByCurrentUser = 'posting/user';
   static const String shareRoomPostsByCurrentUser =

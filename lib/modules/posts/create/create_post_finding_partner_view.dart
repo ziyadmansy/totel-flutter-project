@@ -1,4 +1,5 @@
 import 'package:cheffy/modules/posts/create/create_post_view_model.dart';
+import 'package:cheffy/modules/posts/posts/presentation/providers/posts_provider.dart';
 import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/modules/theme/styles.dart';
 import 'package:cheffy/modules/widgets/app_form_field.dart';
@@ -135,6 +136,9 @@ class CreatePostFindingPartnerView extends StatelessWidget {
                       btnChild: const Text('Post'),
                       onPress: () async {
                         await viewModel.onFindingPartnerPostSubmit();
+                        await context
+                            .read<PostsProvider>()
+                            .getFindingPartnerPosts();
                       },
                     ),
                   ),

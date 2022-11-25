@@ -1,5 +1,6 @@
 import 'package:cheffy/Utils/app_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
@@ -11,6 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Application.init(Flavor.dev);
+
+  await Location().requestPermission();
 
   // if (kDebugMode) {
   runApp(const App());

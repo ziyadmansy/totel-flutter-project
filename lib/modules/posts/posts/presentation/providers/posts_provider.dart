@@ -1,5 +1,6 @@
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/app/app.router.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/category_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
@@ -15,6 +16,20 @@ class PostsProvider extends BaseViewModel {
 
   FindingPartnerPostsEntity? findingPartnerPostEntity;
   ShareRoomPostEntity? shareRoomPostEntity;
+
+  List<CategoryEntity> categories = [];
+
+   Future<void> getCategories() async {
+    try {
+      setBusyForObject(categories, true);
+      categories = await postRepo.getCategories();
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    } finally {
+      setBusyForObject(categories, false);
+    }
+  }
 
   Future<void> getFindingPartnerPosts() async {
     try {

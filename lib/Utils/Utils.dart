@@ -6,7 +6,8 @@ class UniversalVariables {
   static final dateFormat = DateFormat('MM-dd-yyyy');
   static final monthlyDateFormat = DateFormat('MMM, yyyy');
   static final dayMonthDateFormat = DateFormat('dd MMM');
-  static final timeFormat = DateFormat.jm();
+  static final timeFormat = DateFormat.jm(); // 5:08 PM
+  static final timeFormat24 = DateFormat.Hm(); // 17:08
   static final dateTimeFormat = DateFormat('MM-dd-yyyy').add_jm();
 
   static final Color blueColor = Color(0xff2b9ed4);

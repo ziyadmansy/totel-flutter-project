@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cheffy/core/services/api/api_client.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/category_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/create_finding_post_params.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/repositories/post_repo.dart';
@@ -34,9 +35,16 @@ class PostRepoImpl implements PostRepo {
     }
   }
 
+  Future<List<CategoryEntity>> getCategories() async {
+    final res = await _apiClient.get(ApiRoutes.getCategories);
+    return (res.data as List)
+        .map((cat) => CategoryEntity.fromMap(cat))
+        .toList();
+  }
+
   @override
   Future<FindingPartnerPostsEntity> getAllFindingPartnerPosts() async {
-    final res = await _apiClient.get(ApiRoutes.findingPartnerPosts);
+    final res = await _apiClient.get(ApiRoutes.getFindingPartnerPosts);
     return FindingPartnerPostsEntity.fromMap(res.data);
   }
 

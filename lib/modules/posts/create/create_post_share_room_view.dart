@@ -1,9 +1,14 @@
+import 'package:cheffy/Utils/shared_core.dart';
 import 'package:cheffy/Utils/theme/theme.dart';
+import 'package:cheffy/core/exceptions/location_exception.dart';
+import 'package:cheffy/modules/posts/posts/presentation/providers/posts_provider.dart';
+import 'package:cheffy/modules/widgets/progress/provider_progress_loader.dart';
 import 'package:cheffy/widgets/hotels/searched_hotel_item.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_support_pack/flutter_support_pack.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_date_range_picker/reactive_date_range_picker.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
@@ -16,12 +21,34 @@ import 'package:cheffy/modules/widgets/progress/background_progress.dart';
 import 'create_post_view_model.dart';
 import 'image_item_view.dart';
 
-class CreatePostShareRoomView extends StatelessWidget {
+class CreatePostShareRoomView extends StatefulWidget {
   const CreatePostShareRoomView({super.key});
+
+  @override
+  State<CreatePostShareRoomView> createState() =>
+      _CreatePostShareRoomViewState();
+}
+
+class _CreatePostShareRoomViewState extends State<CreatePostShareRoomView> {
+  @override
+  void initState() {
+    super.initState();
+    getCategories();
+  }
+
+  void getCategories() {
+    Future.delayed(Duration.zero, () async {
+      await context.read<PostsProvider>().getCategories();
+      final viewModel = context.read<CreatePostViewModel>();
+      setState(() {});
+      viewModel.notifyListeners();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<CreatePostViewModel>();
+    final postsProvider = context.watch<PostsProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Room details'),
@@ -35,6 +62,28 @@ class CreatePostShareRoomView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  AppFormField(
+                    label: 'Category',
+                    field: ReactiveDropdownField(
+                      formControlName: viewModel.controls.category,
+                      hint: Text('Category'),
+                      validationMessages: {
+                        ValidationMessage.required: (val) =>
+                            'Enter your category',
+                      },
+                      items: postsProvider.categories
+                          .map(
+                            (occ) => DropdownMenuItem<int>(
+                              value: occ.id,
+                              child: Text(occ.name),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   AppFormField(
                     label: 'Name of property',
                     field: ReactiveTextField(
@@ -89,6 +138,21 @@ class CreatePostShareRoomView extends StatelessWidget {
                       validationMessages: {
                         ValidationMessage.required: (error) =>
                             'Enter the room setup',
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'What is parking type? free or paid?',
+                    field: ReactiveTextField(
+                      formControlName: viewModel.controls.parking,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      validationMessages: {
+                        ValidationMessage.required: (error) =>
+                            'Enter parking availability',
                       },
                     ),
                   ),
@@ -379,6 +443,7 @@ class CreatePostShareRoomView extends StatelessWidget {
                     btnChild: const Text('Post'),
                     onPress: () async {
                       await viewModel.onShareRoomPostSubmit();
+                      await postsProvider.getShareRoomPosts();
                     },
                   ),
                 ],
