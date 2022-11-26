@@ -87,7 +87,7 @@ class LoginViewModel extends BaseViewModel {
         // Goes to Main Screen
         _navigationService.clearStackAndShow(Routes.mainView);
 
-        setBusy(false);
+        
       } else {
         form.markAllAsTouched();
       }
@@ -96,6 +96,8 @@ class LoginViewModel extends BaseViewModel {
         title: 'Wrong Credentials',
         message: 'E-mail or password is wrong',
       );
+    } finally {
+      setBusy(false);
     }
   }
 
