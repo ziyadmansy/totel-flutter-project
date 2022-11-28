@@ -27,7 +27,7 @@ class LocationChangeMapViewModel extends BaseViewModel {
   }
 
   void _navigateToCurrent() {
-    _locationService.determinePosition().then((value) {
+    _locationService.getLocation().then((value) {
       _controller.animateCamera(CameraUpdate.newLatLngZoom(
           LatLng(value.latitude, value.longitude), 14));
     },

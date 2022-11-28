@@ -1,3 +1,4 @@
+import 'package:cheffy/Utils/constants.dart';
 import 'package:cheffy/Utils/shared_core.dart';
 import 'package:cheffy/Utils/theme/theme.dart';
 import 'package:cheffy/core/exceptions/location_exception.dart';
@@ -145,15 +146,22 @@ class _CreatePostShareRoomViewState extends State<CreatePostShareRoomView> {
                     height: 10,
                   ),
                   AppFormField(
-                    label: 'What is parking type? free or paid?',
-                    field: ReactiveTextField(
+                    label: 'What is parking type?',
+                    field: ReactiveDropdownField(
                       formControlName: viewModel.controls.parking,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
+                      hint: Text('Parking availability'),
                       validationMessages: {
-                        ValidationMessage.required: (error) =>
+                        ValidationMessage.required: (val) =>
                             'Enter parking availability',
                       },
+                      items: parkingOptions
+                          .map(
+                            (park) => DropdownMenuItem<String>(
+                              value: park,
+                              child: Text(park),
+                            ),
+                          )
+                          .toList(),
                     ),
                   ),
                   SizedBox(

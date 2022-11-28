@@ -24,7 +24,7 @@ class PostTypeSelectionView extends StatelessWidget {
         topRight: Radius.circular(30),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(32, 24, 32, 32),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
@@ -35,7 +35,7 @@ class PostTypeSelectionView extends StatelessWidget {
               child: _typeShareRoomButton(context),
             ),
             SizedBox(
-              height: 16,
+              height: 32,
             ),
             GestureDetector(
               onTap: onFindingPartnerPressed,
@@ -49,7 +49,7 @@ class PostTypeSelectionView extends StatelessWidget {
 
   Widget _typeShareRoomButton(BuildContext context) {
     return SizedBox(
-      height: 170,
+      height: 200,
       child: Stack(
         children: [
           Positioned(
@@ -114,7 +114,7 @@ class PostTypeSelectionView extends StatelessWidget {
 
   Widget _typeFindingPartnerButton(BuildContext context) {
     return SizedBox(
-      height: 170,
+      height: 200,
       child: Stack(
         children: [
           Positioned(

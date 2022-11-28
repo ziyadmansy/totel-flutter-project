@@ -62,6 +62,7 @@ class _MainViewState extends State<MainView> {
 
             showModalBottomSheet(
               context: context,
+              isScrollControlled: true,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),

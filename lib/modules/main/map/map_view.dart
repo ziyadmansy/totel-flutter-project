@@ -1,6 +1,9 @@
+import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/modules/main/main_view_model.dart';
 import 'package:cheffy/modules/main/profile/profile_provider.dart';
 import 'package:cheffy/widgets/app_drawer.dart';
+import 'package:cheffy/widgets/hotels/hotel_card_item.dart';
+import 'package:cheffy/widgets/hotels/searched_hotel_item.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -31,57 +34,35 @@ class MapPageView extends ViewModelBuilderWidget<MapViewModel> {
       drawer: AppDrawer(),
       body: Stack(
         children: [
-          Column(
+          Stack(
             children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      bottom: 0,
-                      child: GoogleMap(
-                        initialCameraPosition: _kGooglePlex,
-                        onMapCreated: viewModel.onMapCreated,
-                      ),
-                    ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 75,
-                      child: SizedBox(
-                        height: 282,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            const SizedBox(width: 8),
-                            PostListingItemView(
-                              layoutType: 1,
-                              image: R.image.img_ad_1(),
-                              dateRange: '4 Jun - 6 Jun',
-                              title: 'Hilton Miami Downtown',
-                              by: 'Albert Flores',
-                              price: '\$90',
-                              period: 'Day',
-                              onTap: () => viewModel.onTapPost(context),
-                            ),
-                            PostListingItemView(
-                              layoutType: 1,
-                              image: R.image.img_ad_2(),
-                              dateRange: '4 Jun - 6 Jun',
-                              title: 'Radisson RED Miami Airport',
-                              by: 'Albert Flores',
-                              price: '\$90',
-                              period: 'Day',
-                              onTap: () => viewModel.onTapPost(context),
-                            ),
-                            const SizedBox(width: 8),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+              Positioned(
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: GoogleMap(
+                  initialCameraPosition: _kGooglePlex,
+                  onMapCreated: viewModel.onMapCreated,
+                ),
+              ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 75,
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height / 3.75,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: viewModel.filteredHotels.length,
+                    itemBuilder: (context, i) {
+                      final hotelItem = viewModel.filteredHotels[i];
+                      return HotelCardItem(
+                        hotel: hotelItem,
+                        onPress: () => viewModel.onTapPost(hotelItem),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
@@ -92,5 +73,11 @@ class MapPageView extends ViewModelBuilderWidget<MapViewModel> {
   }
 
   @override
-  MapViewModel viewModelBuilder(BuildContext context) => MapViewModel();
+  void onViewModelReady(MapViewModel viewModel) {
+    super.onViewModelReady(viewModel);
+  }
+
+  @override
+  MapViewModel viewModelBuilder(BuildContext context) =>
+      MapViewModel(locator.get());
 }

@@ -32,6 +32,9 @@ class ApiRoutes {
   static const String help = 'help-menu';
 
   // Hotels
+  static String hotelsByCoordinates(
+          {required double lat, required double lon}) =>
+      'hotel?latitude=$lat&longitude=$lon';
   static String filteredHotels({
     String name = '',
     String city = '',

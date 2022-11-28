@@ -325,8 +325,7 @@ class CreatePostViewModel extends BaseViewModel {
                 .control(controls.checkInTimeTo)
                 .value as DateTime),
             roomSetup: shareRoomForm.control(controls.roomSetup).value,
-            parking: 'Free Parking',
-            // parking: shareRoomForm.control(controls.parking).value,
+            parking: shareRoomForm.control(controls.parking).value,
             message: shareRoomForm.control(controls.message).value,
             noOfAllowedGuests:
                 shareRoomForm.control(controls.noOfGuestsAllowed).value,
