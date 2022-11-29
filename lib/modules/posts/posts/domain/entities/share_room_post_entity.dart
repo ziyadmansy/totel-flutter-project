@@ -61,8 +61,8 @@ class ShareRoomPost {
   final String postingType;
   final String country;
   final String address;
-  final String latitude;
-  final String longitude;
+  final double latitude;
+  final double longitude;
   final String checkinTimeFrom;
   final String checkinTimeTo;
   final String roomSetup;
@@ -144,8 +144,8 @@ class ShareRoomPost {
       postingType: map['postingType'],
       country: map['country'],
       address: map['address'],
-      latitude: map['latitude'],
-      longitude: map['longitude'],
+      latitude: double.parse(map['latitude'].toString()),
+      longitude: double.parse(map['longitude'].toString()),
       checkinTimeFrom: map['checkin_time_from'],
       checkinTimeTo: map['checkin_time_to'],
       roomSetup: map['room_setup'],

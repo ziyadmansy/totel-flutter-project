@@ -142,22 +142,8 @@ class ProfileHeaderView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                // if (!viewModel.isMyProfile)
-                AppBarActionButton(
-                  child: Icon(Icons.message),
-                  onPressed: profileProvider.onMessage,
-                ),
-                // if (viewModel.isMyProfile)
                 AppBarActionButton(
                   child: Icon(Icons.edit),
-                  onPressed: profileProvider.onEdit,
-                ),
-                const SizedBox(width: 16),
-                AppBarActionButton(
-                  child: Image(
-                    image: R.svg.ic_bookmark_filled(width: 24, height: 24),
-                  ),
-                  backgroundColor: AppColors.plumpPurplePrimary,
                   onPressed: profileProvider.onEdit,
                 ),
               ],

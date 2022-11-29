@@ -64,28 +64,6 @@ class _CreatePostShareRoomViewState extends State<CreatePostShareRoomView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   AppFormField(
-                    label: 'Category',
-                    field: ReactiveDropdownField(
-                      formControlName: viewModel.controls.category,
-                      hint: Text('Category'),
-                      validationMessages: {
-                        ValidationMessage.required: (val) =>
-                            'Enter your category',
-                      },
-                      items: postsProvider.categories
-                          .map(
-                            (occ) => DropdownMenuItem<int>(
-                              value: occ.id,
-                              child: Text(occ.name),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  AppFormField(
                     label: 'Name of property',
                     field: ReactiveTextField(
                       formControlName: viewModel.controls.nameOfProperty,
@@ -140,6 +118,28 @@ class _CreatePostShareRoomViewState extends State<CreatePostShareRoomView> {
                         ValidationMessage.required: (error) =>
                             'Enter the room setup',
                       },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  AppFormField(
+                    label: 'Category',
+                    field: ReactiveDropdownField(
+                      formControlName: viewModel.controls.category,
+                      hint: Text('Category'),
+                      validationMessages: {
+                        ValidationMessage.required: (val) =>
+                            'Enter your category',
+                      },
+                      items: postsProvider.categories
+                          .map(
+                            (occ) => DropdownMenuItem<int>(
+                              value: occ.id,
+                              child: Text(occ.name),
+                            ),
+                          )
+                          .toList(),
                     ),
                   ),
                   SizedBox(

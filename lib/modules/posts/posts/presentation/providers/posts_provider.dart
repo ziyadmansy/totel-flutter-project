@@ -19,7 +19,7 @@ class PostsProvider extends BaseViewModel {
 
   List<CategoryEntity> categories = [];
 
-   Future<void> getCategories() async {
+  Future<void> getCategories() async {
     try {
       setBusyForObject(categories, true);
       categories = await postRepo.getCategories();
@@ -57,15 +57,15 @@ class PostsProvider extends BaseViewModel {
 
   void onTapFindingPartnerPost(FindingPartnerPost selectedPost) {
     _navigationService.navigateTo(
-      Routes.postDetailView,
-      arguments: PostDetailViewArguments(post: selectedPost),
+      Routes.postFindingPartnerDetailView,
+      arguments: PostFindingPartnerDetailViewArguments(post: selectedPost),
     );
   }
 
   void onTapShareRoomPost(ShareRoomPost selectedPost) {
     _navigationService.navigateTo(
       Routes.postDetailView,
-      // arguments: PostDetailViewArguments(post: selectedPost),
+      arguments: PostShareRoomDetailViewArguments(post: selectedPost),
     );
   }
 }

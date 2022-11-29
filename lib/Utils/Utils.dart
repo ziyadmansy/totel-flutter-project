@@ -62,7 +62,6 @@ class ReactiveFormControls {
   static String avatar = 'avatar';
   static String occupation = 'occupation';
   static String bio = 'bio';
-  static String gender = 'gender';
 }
 
 class DebounceTags {

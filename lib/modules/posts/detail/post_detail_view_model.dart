@@ -1,3 +1,4 @@
+import 'package:cheffy/Utils/constants.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -39,10 +40,15 @@ class PostDetailViewModel extends BaseViewModel {
   }
 
   void onSendMessage() {}
-  
+
   void onMapCreated(GoogleMapController controller) {
     _controller = controller;
-    // _navigateToCurrent();
+    // _controller.animateCamera(
+    //   CameraUpdate.newLatLngZoom(
+    //     location,
+    //     mapZoomValue,
+    //   ),
+    // );
   }
 
   // void _navigateToCurrent() {

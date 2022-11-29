@@ -11,7 +11,8 @@ import 'package:provider/provider.dart';
 
 final appProviders = [
   ChangeNotifierProvider<PaymentViewModel>(create: (_) => PaymentViewModel()),
-  ChangeNotifierProvider<SearchProvider>(create: (_) => SearchProvider()),
+  ChangeNotifierProvider<SearchProvider>(
+      create: (_) => SearchProvider(locator.get())),
   ChangeNotifierProvider<AppDrawerProvider>(
       create: (_) => AppDrawerProvider(locator.get())),
   ChangeNotifierProvider<CreatePostViewModel>(

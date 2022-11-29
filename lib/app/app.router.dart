@@ -14,7 +14,9 @@ import 'package:cheffy/modules/main/discover/presentation/pages/search_location_
 import 'package:cheffy/modules/main/discover/presentation/pages/search_filter_page.dart';
 import 'package:cheffy/modules/posts/create/create_post_finding_partner_view.dart';
 import 'package:cheffy/modules/posts/create/hotels_selection_view.dart';
+import 'package:cheffy/modules/posts/detail/post_finding_partner_details_view.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
+import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
 import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
@@ -40,7 +42,7 @@ import '../modules/payment/presentation/add_card/payment_add_cart_view.dart';
 import '../modules/payment/presentation/options/payment_options_view.dart';
 import '../modules/payment/presentation/summary/payment_summary_view.dart';
 import '../modules/posts/create/create_post_share_room_view.dart';
-import '../modules/posts/detail/post_detail_view.dart';
+import '../modules/posts/detail/post_share_room_detail_view.dart';
 import '../modules/main/profile/edit/edit_profile_view.dart';
 import '../modules/main/profile/profile_view.dart';
 import '../modules/request/request_view.dart';
@@ -61,6 +63,8 @@ class Routes {
   static const String locationChangeView = '/location-change-view';
   static const String locationChangeMapView = '/location-change-map-view';
   static const String postDetailView = '/post-detail-view';
+  static const String postFindingPartnerDetailView =
+      '/post-finding-partner-detail-view';
   static const String profileView = '/profile-view';
   static const String editProfileView = '/edit-profile-view';
   static const String walletView = '/wallet-view';
@@ -93,6 +97,7 @@ class Routes {
     locationChangeView,
     locationChangeMapView,
     postDetailView,
+    postFindingPartnerDetailView,
     profileView,
     editProfileView,
     walletView,
@@ -139,7 +144,9 @@ class StackedRouter extends RouterBase {
         page: CreatePostFindingPartnerView),
     RouteDef(Routes.locationChangeView, page: LocationChangeView),
     RouteDef(Routes.locationChangeMapView, page: LocationChangeMapView),
-    RouteDef(Routes.postDetailView, page: PostDetailView),
+    RouteDef(Routes.postDetailView, page: PostShareRoomDetailView),
+    RouteDef(Routes.postFindingPartnerDetailView,
+        page: PostFindingPartnerDetailView),
     RouteDef(Routes.profileView, page: ProfileView),
     RouteDef(Routes.editProfileView, page: EditProfileView),
     RouteDef(Routes.walletView, page: WalletView),
@@ -247,10 +254,21 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    PostDetailView: (data) {
-      var args = data.getArgs<PostDetailViewArguments>(nullOk: false);
+    PostShareRoomDetailView: (data) {
+      var args = data.getArgs<PostShareRoomDetailViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => PostDetailView(
+        builder: (context) => PostShareRoomDetailView(
+          key: args.key,
+          post: args.post,
+        ),
+        settings: data,
+      );
+    },
+    PostFindingPartnerDetailView: (data) {
+      var args =
+          data.getArgs<PostFindingPartnerDetailViewArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => PostFindingPartnerDetailView(
           key: args.key,
           post: args.post,
         ),
@@ -370,10 +388,16 @@ class CreatePostShareRoomViewArguments {
 }
 
 /// CreatePostView arguments holder class
-class PostDetailViewArguments {
+class PostShareRoomDetailViewArguments {
+  final Key? key;
+  final ShareRoomPost post;
+  PostShareRoomDetailViewArguments({this.key, required this.post});
+}
+
+class PostFindingPartnerDetailViewArguments {
   final Key? key;
   final FindingPartnerPost post;
-  PostDetailViewArguments({this.key, required this.post});
+  PostFindingPartnerDetailViewArguments({this.key, required this.post});
 }
 
 /// ProfileView arguments holder class

@@ -26,8 +26,9 @@ class _EditProfileViewState extends State<EditProfileView> {
   void initState() {
     super.initState();
     final profileProvider = context.read<ProfileProvider>();
-    Future.delayed(Duration.zero, () {
-      profileProvider.getOccupations();
+    Future.delayed(Duration.zero, () async {
+      await profileProvider.getOccupations();
+      profileProvider.initEditProfileFields();
     });
   }
 

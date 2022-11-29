@@ -12,41 +12,6 @@ import 'package:reactive_forms/reactive_forms.dart';
 class SearchLocationPage extends StatelessWidget {
   SearchLocationPage({super.key});
 
-  Widget buildRecentSearchCard({required String title, required String body}) {
-    return Card(
-      elevation: 0,
-      color: Colors.grey[100],
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: Colors.black54,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Expanded(
-              child: Center(
-                child: Text(
-                  body,
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final searchProvider = context.watch<SearchProvider>();
@@ -97,29 +62,7 @@ class SearchLocationPage extends StatelessWidget {
                   },
                 ),
                 SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Recent Search',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(
-                  height: 100,
-                  child: ListView.builder(
-                    itemCount: 4,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, i) {
-                      return buildRecentSearchCard(
-                        title: 'Osage Beach, ,Missouri',
-                        body: '204 Foxrun st. Davison, MI 48423.\nViginia, USA',
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 100,
+                  height: 50,
                 ),
                 SharedWidgets.buildRoundedElevatedButton(
                   btnChild: Text('Search'),

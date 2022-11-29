@@ -22,6 +22,7 @@ class HotelCardItem extends StatelessWidget {
       width: width / 1.25,
       child: Card(
         child: InkWell(
+          borderRadius: BorderRadius.circular(12),
           onTap: onPress,
           child: Padding(
             padding: const EdgeInsets.all(16.0),

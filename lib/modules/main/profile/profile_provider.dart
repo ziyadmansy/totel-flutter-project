@@ -19,16 +19,12 @@ class ProfileProvider extends BaseViewModel {
   final NavigationService _navigationService = locator.get();
   final BottomSheetService _bottomSheetService = locator.get();
   final SnackbarService _snackbarService = locator.get();
-  final SecureStorageService _secureStorageService = locator.get();
   FindingPartnerPostsEntity? findingPartnerPostEntity;
   ShareRoomPostEntity? shareRoomPostEntity;
 
   bool isLoading = false;
 
   late final FormGroup editProfileForm;
-
-  bool _isMalePartner = true;
-  bool _isFemalePartner = true;
 
   final ProfileRepo profileRepo;
 
@@ -55,9 +51,6 @@ class ProfileProvider extends BaseViewModel {
       ReactiveFormControls.bio: FormControl(
         validators: [Validators.required],
       ),
-      ReactiveFormControls.gender: FormControl(
-        validators: [Validators.required],
-      ),
     });
   }
 
@@ -70,6 +63,20 @@ class ProfileProvider extends BaseViewModel {
       maleFemaleEnum = selMaleFemaleEnum;
       notifyListeners();
     }
+  }
+
+  void initEditProfileFields() {
+    editProfileForm.control(ReactiveFormControls.firstName).value =
+        profileEntity?.firstName ?? '';
+    editProfileForm.control(ReactiveFormControls.lastName).value =
+        profileEntity?.lastName ?? '';
+    editProfileForm.control(ReactiveFormControls.native).value =
+        profileEntity?.native ?? '';
+    editProfileForm.control(ReactiveFormControls.occupation).value =
+        profileEntity?.occupation?.id;
+    editProfileForm.control(ReactiveFormControls.bio).value =
+        profileEntity?.bio ?? '';
+    notifyListeners();
   }
 
   //endregion

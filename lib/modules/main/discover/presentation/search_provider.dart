@@ -4,6 +4,7 @@ import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/day_night_enum.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
+import 'package:cheffy/modules/main/discover/domain/repositories/search_repo.dart';
 import 'package:cheffy/modules/widgets/post_listing_item/finding_partner_post_listing_item_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,11 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class SearchProvider extends BaseViewModel {
+  final SearchRepo searchRepo;
   final NavigationService _navigationService = locator.get();
   final BottomSheetService _bottomSheetService = locator.get();
+
+  List<HotelEntity> filteredHotels = [];
 
   bool isLoading = false;
 
@@ -46,7 +50,7 @@ class SearchProvider extends BaseViewModel {
   double maxPrice = 1000.0;
   late RangeValues priceRange;
 
-  SearchProvider() {
+  SearchProvider(this.searchRepo) {
     // Initializes price range slider
     priceRange = RangeValues(minPrice, maxPrice);
 
@@ -111,22 +115,28 @@ class SearchProvider extends BaseViewModel {
     notifyListeners();
   }
 
-  void onAdvancedSearchLocationSubmit() {
+  Future<void> onNormalSearchLocationSubmit() async {
+    // Skip the process of searching and typing location
+    // and go to all Hotels List
+    try {
+      _navigationService.navigateTo(Routes.searchHotelsView);
+      setBusyForObject(filteredHotels, true);
+      filteredHotels = await searchRepo.getAllHotels();
+
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    } finally {
+      setBusyForObject(filteredHotels, false);
+    }
+  }
+
+  Future<void> onAdvancedSearchLocationSubmit() async {
     if (searchLocationForm.valid) {
       // Continue the process of searching to filtering
       _navigationService.navigateTo(Routes.searchFilterView);
     } else {
-      print('Not valid (onLocationSubmit)');
-      searchLocationForm.markAllAsTouched();
-    }
-  }
-
-  void onNormalSearchLocationSubmit() {
-    if (searchLocationForm.valid) {
-      // Skip the process of searching and go to Hotels List
-      _navigationService.navigateTo(Routes.searchHotelsView);
-    } else {
-      print('Not valid (onLocationSubmit)');
+      print('Not valid (onAdvancedSearchLocationSubmit)');
       searchLocationForm.markAllAsTouched();
     }
   }

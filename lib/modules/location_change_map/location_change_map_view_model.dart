@@ -1,3 +1,4 @@
+import 'package:cheffy/Utils/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -28,8 +29,12 @@ class LocationChangeMapViewModel extends BaseViewModel {
 
   void _navigateToCurrent() {
     _locationService.getLocation().then((value) {
-      _controller.animateCamera(CameraUpdate.newLatLngZoom(
-          LatLng(value.latitude, value.longitude), 14));
+      _controller.animateCamera(
+        CameraUpdate.newLatLngZoom(
+          LatLng(value.latitude, value.longitude),
+          mapZoomValue,
+        ),
+      );
     },
         onError: (error) =>
             _dialogService.showDialog(description: error.toString()));

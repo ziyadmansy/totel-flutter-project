@@ -70,16 +70,16 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
                 actions: [
-                  AppBarActionButton(
-                    onPressed: profileProvider.onShare,
-                    showElevation: true,
-                    child: Image(image: R.svg.ic_share(width: 20, height: 20)),
-                  ),
-                  AppBarActionButton(
-                    onPressed: profileProvider.onWallet,
-                    backgroundColor: AppColors.plumpPurplePrimary,
-                    child: Image(image: R.svg.ic_wallet(width: 17, height: 17)),
-                  ),
+                  // AppBarActionButton(
+                  //   onPressed: profileProvider.onShare,
+                  //   showElevation: true,
+                  //   child: Image(image: R.svg.ic_share(width: 20, height: 20)),
+                  // ),
+                  // AppBarActionButton(
+                  //   onPressed: profileProvider.onWallet,
+                  //   backgroundColor: AppColors.plumpPurplePrimary,
+                  //   child: Image(image: R.svg.ic_wallet(width: 17, height: 17)),
+                  // ),
                 ],
               )
             ],
