@@ -19,14 +19,14 @@ class Application {
 
   static const String appName = 'Totel';
 
-  // This is temporary till backend fixes it
-  static String imgBaseUrl = 'https://metoospace.herokuapp.com';
-
   static late Flavor flavor;
   static late String baseUrl;
+  static late String baseUrlBooking;
   static late String? encAlgorithm;
   static late String encKey;
   static late String? authKey;
+  static late String rapidApiKey;
+  static late String rapidApiHost;
 
   static bool authHeader = false;
   static bool authBody = false;
@@ -39,27 +39,39 @@ class Application {
     switch (flavor) {
       case Flavor.dev:
         baseUrl = 'https://metoospace.herokuapp.com/api/v1/';
+        baseUrlBooking = 'https://booking-com.p.rapidapi.com/';
         encKey = '7#6s5S\$Esb9M3v43';
         encAlgorithm = 'HmacSHA1';
         authKey = 'd742f4dc-425d-45ff-bd9d-06134940f559';
+        rapidApiKey = 'f1e356a9f1mshcb5f1e0a4b5a5e0p1f208fjsn981ee97f7026';
+        rapidApiHost = 'booking-com.p.rapidapi.com';
         break;
       case Flavor.qa:
         baseUrl = 'https://metoospace.herokuapp.com/api/v1/';
+        baseUrlBooking = 'https://booking-com.p.rapidapi.com/';
         encKey = '7#6s5S\$Esb9M3v43';
         encAlgorithm = 'HmacSHA1';
         authKey = 'd742f4dc-425d-45ff-bd9d-06134940f559';
+        rapidApiKey = 'f1e356a9f1mshcb5f1e0a4b5a5e0p1f208fjsn981ee97f7026';
+        rapidApiHost = 'booking-com.p.rapidapi.com';
         break;
       case Flavor.uat:
         baseUrl = 'https://metoospace.herokuapp.com/api/v1/';
+        baseUrlBooking = 'https://booking-com.p.rapidapi.com/';
         encKey = '7#6s5S\$Esb9M3v43';
         encAlgorithm = 'HmacSHA1';
         authKey = 'd742f4dc-425d-45ff-bd9d-06134940f559';
+        rapidApiKey = 'f1e356a9f1mshcb5f1e0a4b5a5e0p1f208fjsn981ee97f7026';
+        rapidApiHost = 'booking-com.p.rapidapi.com';
         break;
       case Flavor.prod:
         baseUrl = 'https://metoospace.herokuapp.com/api/v1/';
+        baseUrlBooking = 'https://booking-com.p.rapidapi.com/';
         encKey = '7#6s5S\$Esb9M3v43';
         encAlgorithm = 'HmacSHA1';
         authKey = 'd742f4dc-425d-45ff-bd9d-06134940f559';
+        rapidApiKey = 'f1e356a9f1mshcb5f1e0a4b5a5e0p1f208fjsn981ee97f7026';
+        rapidApiHost = 'booking-com.p.rapidapi.com';
         break;
     }
 

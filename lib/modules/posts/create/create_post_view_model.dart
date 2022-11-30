@@ -381,26 +381,6 @@ class CreatePostViewModel extends BaseViewModel {
     }
   }
 
-  // Future<void> getFilteredHotels(String searchQuery) async {
-  //   EasyDebounce.debounce(
-  //     DebounceTags.hotelsDebouncer,
-  //     Duration(milliseconds: DebounceTags.debouncerDurationInMillis),
-  //     () async {
-  //       if (searchQuery.isNotEmpty) {
-  //         try {
-  //           setBusyForObject(filteredHotels, true);
-  //           filteredHotels = await _postsRepo.getFilteredHotels(searchQuery);
-  //           notifyListeners();
-  //         } catch (e) {
-  //           print(e);
-  //         } finally {
-  //           setBusyForObject(filteredHotels, false);
-  //         }
-  //       }
-  //     },
-  //   );
-  // }
-
   String _getGender() {
     if (_isMalePartner && _isFemalePartner) {
       return 'Male/Female';
@@ -411,53 +391,12 @@ class CreatePostViewModel extends BaseViewModel {
     }
   }
 
-  // void onPressedRemove(int index) {
-  //   attachments.removeAt(index);
-
-  //   shareRoomForm.control(controls.attachments).value = attachments;
-  //   notifyListeners();
-  // }
-
-  // void onPressedAdd() async {
-  //   if (attachments.length < 3) {
-  //     var res = await _imagePicker.pickMultiImage();
-
-  //     if (res.isListNotEmptyOrNull) {
-  //       int remaining = 3 - attachments.length;
-  //       attachments.addAll(res.take(remaining));
-  //     }
-  //   } else {
-  //     var res = await _imagePicker.pickImage(source: ImageSource.gallery);
-
-  //     if (res != null) {
-  //       attachments.removeLast();
-  //       attachments.add(res);
-  //     }
-  //   }
-
-  //   shareRoomForm.control(controls.attachments).value = attachments;
-
-  //   notifyListeners();
-  // }
-
-  void onAddHotelPress() {
-    _navigationService.navigateTo(Routes.hotelsSelectionView);
-  }
-
   Future<void> onAddBookingPress() async {
     selectedBookingHotel = await _navigationService
         .navigateTo(Routes.bookingsView) as BookingEntity?;
     notifyListeners();
     print('selected booking: $selectedBookingHotel');
   }
-
-  // void onSearchedHotelSelection(HotelEntity? selectedSearchedHotel) {
-  //   if (selectedSearchedHotel != null) {
-  //     _navigationService.back();
-  //     selectedHotel = selectedSearchedHotel;
-  //     notifyListeners();
-  //   }
-  // }
 }
 
 class _Controls {

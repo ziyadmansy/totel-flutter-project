@@ -10,10 +10,10 @@ import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
 import 'package:cheffy/modules/main/profile/booking_screen.dart';
 import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
 import 'package:cheffy/modules/main/discover/presentation/pages/search_hotels_page.dart';
-import 'package:cheffy/modules/main/discover/presentation/pages/search_location_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/pages/search_main_page.dart';
 import 'package:cheffy/modules/main/discover/presentation/pages/search_filter_page.dart';
 import 'package:cheffy/modules/posts/create/create_post_finding_partner_view.dart';
-import 'package:cheffy/modules/posts/create/hotels_selection_view.dart';
+import 'package:cheffy/modules/main/discover/presentation/hotels_location_selection_view.dart';
 import 'package:cheffy/modules/posts/detail/post_finding_partner_details_view.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
@@ -79,7 +79,7 @@ class Routes {
   static const String settingsView = '/settings-view';
   static const String resetPasswordView = '/reset-password-view';
   static const String helpView = '/help-view';
-  static const String searchFilterView = '/search-filter-view';
+  // static const String searchFilterView = '/search-filter-view';
   static const String searchHotelsView = '/search-hotels-view';
   static const String hotelsSelectionView = '/hotels-selection-view';
   static const String bookingsView = '/bookings-view';
@@ -111,7 +111,7 @@ class Routes {
     settingsView,
     resetPasswordView,
     helpView,
-    searchFilterView,
+    // searchFilterView,
     searchHotelsView,
     hotelsSelectionView,
     bookingsView,
@@ -125,7 +125,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.splashView, page: SplashView),
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
     RouteDef(Routes.loginView, page: LoginView),
-    RouteDef(Routes.searchFilterView, page: SearchFilterPage),
+    // RouteDef(Routes.searchFilterView, page: SearchFilterPage),
     RouteDef(Routes.searchHotelsView, page: SearchHotelsPage),
     RouteDef(
       Routes.registerView,
@@ -161,7 +161,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.settingsView, page: SettingsMainScreen),
     RouteDef(Routes.resetPasswordView, page: ResetPasswordView),
     RouteDef(Routes.helpView, page: HelpView),
-    // RouteDef(Routes.hotelsSelectionView, page: HotelsSelectionView),
+    RouteDef(Routes.hotelsSelectionView, page: HotelLocationSelectionView),
     RouteDef(Routes.bookingsView, page: BookingScreen),
   ];
   @override
@@ -197,12 +197,12 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    SearchFilterPage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SearchFilterPage(),
-        settings: data,
-      );
-    },
+    // SearchFilterPage: (data) {
+    //   return buildAdaptivePageRoute<dynamic>(
+    //     builder: (context) => SearchFilterPage(),
+    //     settings: data,
+    //   );
+    // },
     SearchHotelsPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => SearchHotelsPage(),
@@ -362,12 +362,12 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    // HotelsSelectionView: (data) {
-    //   return buildAdaptivePageRoute<dynamic>(
-    //     builder: (context) => HotelsSelectionView(),
-    //     settings: data,
-    //   );
-    // },
+    HotelLocationSelectionView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => HotelLocationSelectionView(),
+        settings: data,
+      );
+    },
     BookingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => BookingScreen(),

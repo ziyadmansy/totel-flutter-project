@@ -1,3 +1,6 @@
+import 'package:cheffy/Utils/constants.dart';
+import 'package:cheffy/modules/main/discover/domain/entities/hotel_location_entity.dart';
+
 class ApiRoutes {
   // Auth
   static const String register = 'auth/register';
@@ -32,19 +35,19 @@ class ApiRoutes {
   static const String help = 'help-menu';
 
   // Hotels
-  static String allHotels = 'hotel/';
+  static String searchHotelsLocationByName({required String name}) =>
+      'v1/hotels/locations?name=$name&locale=$rapidApiLocale';
+
   static String hotelsByCoordinates(
           {required double lat, required double lon}) =>
       'hotel?latitude=$lat&longitude=$lon';
+
   static String filteredHotels({
-    String name = '',
-    String city = '',
-    String type = '',
-    String minPrice = '',
-    String maxPrice = '',
-    String rating = '',
-    String latitude = '',
-    String longitude = '',
+    required String checkInDate,
+    required String checkOutDate,
+    required int adultsNo,
+    required int roomsNo,
+    required HotelLocationEntity hotelLocation,
   }) =>
-      'hotel?city=$city&type=$type&min_price=$minPrice&max_price=$maxPrice&rating=$rating&latitude=$latitude&longitude=$longitude&name=$name';
+      'v2/hotels/search?checkin_date=$checkInDate&checkout_date=$checkOutDate&adults_number=$adultsNo&room_number=$roomsNo&dest_type=${hotelLocation.destType}&dest_id=${hotelLocation.destId}&filter_by_currency=$filterCurrency&order_by=$rapidApiOrder&locale=$rapidApiLocale&units=$rapidApiMeasuringUnit&include_adjacency=$includeNearbyPlaces';
 }

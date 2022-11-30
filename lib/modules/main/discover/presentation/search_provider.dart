@@ -4,8 +4,10 @@ import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/day_night_enum.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
+import 'package:cheffy/modules/main/discover/domain/entities/hotel_location_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/repositories/search_repo.dart';
 import 'package:cheffy/modules/widgets/post_listing_item/finding_partner_post_listing_item_view.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -17,6 +19,9 @@ class SearchProvider extends BaseViewModel {
   final NavigationService _navigationService = locator.get();
   final BottomSheetService _bottomSheetService = locator.get();
 
+  HotelLocationEntity? selectedLocationEntity;
+
+  List<HotelLocationEntity> filteredHotelLocations = [];
   List<HotelEntity> filteredHotels = [];
 
   bool isLoading = false;
@@ -25,7 +30,7 @@ class SearchProvider extends BaseViewModel {
   late final FormGroup searchLocationForm;
 
   // Search Time Page Form
-  late final FormGroup timeSearchForm;
+  // late final FormGroup filterSearchForm;
 
   // Whether the switch button is
   // Hourly Basis: false
@@ -44,8 +49,6 @@ class SearchProvider extends BaseViewModel {
   bool isBedAndBreakfast = false;
   bool isRoomOnly = false;
 
-  int maxRoomsNumber = 5;
-
   double minPrice = 0.0;
   double maxPrice = 1000.0;
   late RangeValues priceRange;
@@ -60,24 +63,16 @@ class SearchProvider extends BaseViewModel {
           Validators.required,
         ],
       ),
-    });
-
-    timeSearchForm = FormGroup({
       ReactiveFormControls.searchRoomsNumber: FormControl<int>(
         validators: [
           Validators.required,
           Validators.number,
-          Validators.max<int>(maxRoomsNumber),
         ],
       ),
-      ReactiveFormControls.searchHourRangeStart: FormControl<int>(
+      ReactiveFormControls.searchAdultsNumber: FormControl<int>(
         validators: [
           Validators.required,
-        ],
-      ),
-      ReactiveFormControls.searchHourRangeEnd: FormControl<int>(
-        validators: [
-          Validators.required,
+          Validators.number,
         ],
       ),
       ReactiveFormControls.searchCheckInDate: FormControl<DateTime>(
@@ -90,17 +85,47 @@ class SearchProvider extends BaseViewModel {
           Validators.required,
         ],
       ),
-      ReactiveFormControls.searchStartTime: FormControl<DateTime>(
-        validators: [
-          Validators.required,
-        ],
-      ),
-      ReactiveFormControls.searchEndTime: FormControl<DateTime>(
-        validators: [
-          Validators.required,
-        ],
-      ),
     });
+
+    // filterSearchForm = FormGroup({
+    //   ReactiveFormControls.searchRoomsNumber: FormControl<int>(
+    //     validators: [
+    //       Validators.required,
+    //       Validators.number,
+    //       Validators.max<int>(maxRoomsNumber),
+    //     ],
+    //   ),
+    //   ReactiveFormControls.searchHourRangeStart: FormControl<int>(
+    //     validators: [
+    //       Validators.required,
+    //     ],
+    //   ),
+    //   ReactiveFormControls.searchHourRangeEnd: FormControl<int>(
+    //     validators: [
+    //       Validators.required,
+    //     ],
+    //   ),
+    //   ReactiveFormControls.searchCheckInDate: FormControl<DateTime>(
+    //     validators: [
+    //       Validators.required,
+    //     ],
+    //   ),
+    //   ReactiveFormControls.searchCheckOutDate: FormControl<DateTime>(
+    //     validators: [
+    //       Validators.required,
+    //     ],
+    //   ),
+    //   ReactiveFormControls.searchStartTime: FormControl<DateTime>(
+    //     validators: [
+    //       Validators.required,
+    //     ],
+    //   ),
+    //   ReactiveFormControls.searchEndTime: FormControl<DateTime>(
+    //     validators: [
+    //       Validators.required,
+    //     ],
+    //   ),
+    // });
   }
 
   void switchHourlyBasisOrFullDay(bool? isOn) {
@@ -115,28 +140,71 @@ class SearchProvider extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> onNormalSearchLocationSubmit() async {
-    // Skip the process of searching and typing location
-    // and go to all Hotels List
-    try {
-      _navigationService.navigateTo(Routes.searchHotelsView);
-      setBusyForObject(filteredHotels, true);
-      filteredHotels = await searchRepo.getAllHotels();
+  void onSearchHotels() {
+    _navigationService.navigateTo(Routes.hotelsSelectionView);
+  }
 
+  void onSearchedLocationSelection(
+      HotelLocationEntity? selectedSearchedLocation) {
+    if (selectedSearchedLocation != null) {
+      _navigationService.back();
+      selectedLocationEntity = selectedSearchedLocation;
+      searchLocationForm.control(ReactiveFormControls.searchLocation).value =
+          selectedSearchedLocation.label;
       notifyListeners();
-    } catch (e) {
-      print(e);
-    } finally {
-      setBusyForObject(filteredHotels, false);
     }
   }
 
-  Future<void> onAdvancedSearchLocationSubmit() async {
+  Future<void> getHotelsLocation(String searchQuery) async {
+    EasyDebounce.debounce(
+      DebounceTags.hotelsDebouncer,
+      Duration(milliseconds: DebounceTags.debouncerDurationInMillis),
+      () async {
+        if (searchQuery.isNotEmpty) {
+          try {
+            setBusyForObject(filteredHotelLocations, true);
+            filteredHotelLocations =
+                await searchRepo.getHotelsLocationByName(searchQuery);
+            notifyListeners();
+          } catch (e) {
+            print(e);
+          } finally {
+            setBusyForObject(filteredHotelLocations, false);
+          }
+        }
+      },
+    );
+  }
+
+  Future<void> onSearchLocationSubmit() async {
     if (searchLocationForm.valid) {
-      // Continue the process of searching to filtering
-      _navigationService.navigateTo(Routes.searchFilterView);
+      try {
+        setBusyForObject(filteredHotels, true);
+        filteredHotels = await searchRepo.getFilteredHotels(
+          hotelLocation: selectedLocationEntity!,
+          checkInDate: UniversalVariables.bookingApiDateFormat.format(
+              searchLocationForm
+                  .control(ReactiveFormControls.searchCheckInDate)
+                  .value as DateTime),
+          checkOutDate: UniversalVariables.bookingApiDateFormat.format(
+              searchLocationForm
+                  .control(ReactiveFormControls.searchCheckOutDate)
+                  .value as DateTime),
+          roomsNo: searchLocationForm
+              .control(ReactiveFormControls.searchRoomsNumber)
+              .value,
+          adultsNo: searchLocationForm
+              .control(ReactiveFormControls.searchAdultsNumber)
+              .value,
+        );
+        _navigationService.navigateTo(Routes.searchHotelsView);
+      } catch (e) {
+        print(e);
+      } finally {
+        setBusyForObject(filteredHotels, false);
+      }
     } else {
-      print('Not valid (onAdvancedSearchLocationSubmit)');
+      print('Not valid (onSearchLocationSubmit)');
       searchLocationForm.markAllAsTouched();
     }
   }

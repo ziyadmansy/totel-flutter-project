@@ -1,3 +1,4 @@
+import 'package:cheffy/core/services/api/booking_api_client.dart';
 import 'package:cheffy/modules/app_drawer/data/repositories/app_drawer_repo_impl.dart';
 import 'package:cheffy/modules/app_drawer/domain/repositories/app_drawer_repo.dart';
 import 'package:cheffy/modules/auth/auth/data/repositories/auth_repo_impl.dart';
@@ -30,6 +31,7 @@ Future<void> setupLocator(
 
 // Register dependencies
   locator.registerLazySingleton(() => ApiClient());
+  locator.registerLazySingleton(() => BookingApiClient());
   locator.registerLazySingleton(() => AuthenticationService());
 
   locator.registerLazySingleton<ProfileRepo>(() => ProfileRepoImpl());

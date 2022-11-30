@@ -93,12 +93,4 @@ class PostRepoImpl implements PostRepo {
       data: data,
     );
   }
-
-  @override
-  Future<List<HotelEntity>> getFilteredHotels(String name) async {
-    final res = await _apiClient.get(ApiRoutes.filteredHotels(name: name));
-    final List<HotelEntity> hotels =
-        (res.data as List).map((e) => HotelEntity.fromMap(e)).toList();
-    return hotels;
-  }
 }

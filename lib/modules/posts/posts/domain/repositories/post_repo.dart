@@ -17,7 +17,6 @@ abstract class PostRepo {
   Future<FindingPartnerPostsEntity> getAllFindingPartnerPosts();
   Future<ShareRoomPostEntity> getAllShareRoomPosts();
 
-  Future<List<HotelEntity>> getFilteredHotels(String name);
   Future<List<CategoryEntity>> getCategories();
 
   Future<AttachmentEntity> uploadAttachment(String path, String fileName);

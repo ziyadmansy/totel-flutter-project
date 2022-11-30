@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class UniversalVariables {
   // American date format starts with the month
   static final dateFormat = DateFormat('MM-dd-yyyy');
+  static final bookingApiDateFormat = DateFormat('yyyy-MM-dd');
   static final monthlyDateFormat = DateFormat('MMM, yyyy');
   static final dayMonthDateFormat = DateFormat('dd MMM');
   static final timeFormat = DateFormat.jm(); // 5:08 PM
@@ -45,6 +46,7 @@ class UniversalVariables {
 class ReactiveFormControls {
   static const String searchLocation = 'search_location';
   static const String searchRoomsNumber = 'search_rooms_number';
+  static const String searchAdultsNumber = 'search_adults_number';
 
   static const String searchCheckInDate = 'search_check_in_date';
   static const String searchCheckOutDate = 'search_check_out_date';

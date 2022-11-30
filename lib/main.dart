@@ -11,7 +11,7 @@ import 'modules/theme/theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Application.init(Flavor.dev);
+  await Application.init(Flavor.prod);
 
   await Location().requestPermission();
 
