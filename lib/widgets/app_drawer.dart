@@ -17,17 +17,7 @@ class AppDrawer extends ViewModelWidget<MainViewModel> {
             icon: FontAwesomeIcons.hotel,
             onPress: mainViewModel.onDrawerItemPressedBookings,
           ),
-          DrawerItem(
-            title: 'Bookmarks',
-            icon: FontAwesomeIcons.bookBookmark,
-            onPress: () {},
-          ),
           Divider(),
-          DrawerItem(
-            title: 'How it works',
-            icon: FontAwesomeIcons.book,
-            onPress: () {},
-          ),
           DrawerItem(
             title: 'Help',
             icon: FontAwesomeIcons.solidCircleQuestion,
@@ -38,11 +28,11 @@ class AppDrawer extends ViewModelWidget<MainViewModel> {
             icon: FontAwesomeIcons.circleInfo,
             onPress: mainViewModel.onDrawerItemPressedAbout,
           ),
-          DrawerItem(
-            title: 'Settings',
-            icon: FontAwesomeIcons.gear,
-            onPress: mainViewModel.onDrawerItemPressedSettings,
-          ),
+          // DrawerItem(
+          //   title: 'Settings',
+          //   icon: FontAwesomeIcons.gear,
+          //   onPress: mainViewModel.onDrawerItemPressedSettings,
+          // ),
           Divider(),
           DrawerItem(
             title: 'Logout',

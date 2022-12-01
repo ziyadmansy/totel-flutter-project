@@ -13,7 +13,7 @@ class UserEntity {
   final DateTime? dateOfBrith;
   final String? avatar;
   final String? city;
-  final int rating;
+  final int? rating;
   final String? gender;
   final DateTime? createdAt;
   final DateTime? updatedAt;

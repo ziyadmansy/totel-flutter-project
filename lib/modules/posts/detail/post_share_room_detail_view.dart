@@ -186,7 +186,8 @@ class _PostShareRoomDetailViewState extends State<PostShareRoomDetailView> {
                         Row(
                           children: [
                             Text(
-                              widget.post.user.rating.toStringAsFixed(1),
+                              widget.post.user.rating?.toStringAsFixed(1) ??
+                                  '0.0',
                               style: AppStyle.of(context).b5.wCRhythm,
                             ),
                             SizedBox(

@@ -36,7 +36,7 @@ class ReviewListingItemView extends StatelessWidget {
             children: [
               Chip(
                 label: Text(
-                  review.user.rating.toStringAsFixed(1),
+                  review.user.rating?.toStringAsFixed(1) ?? '0.0',
                   style: AppStyle.of(context).b5M,
                 ),
                 avatar: Image(

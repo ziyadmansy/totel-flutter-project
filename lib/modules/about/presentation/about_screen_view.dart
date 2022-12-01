@@ -33,12 +33,12 @@ class AboutScreenView extends ViewModelBuilderWidget<AboutViewModel> {
           buildAboutListTile(
             title: 'Privacy Policy',
             icon: Icons.policy,
-            onPress: () {},
+            onPress: viewModel.onPrivacyPolicyClick,
           ),
           buildAboutListTile(
             title: 'Terms of use',
             icon: Icons.report_outlined,
-            onPress: () {},
+            onPress: viewModel.onTermsAndConditionsClick,
           ),
           buildAboutListTile(
             title: 'Rate us',

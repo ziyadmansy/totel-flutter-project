@@ -10,7 +10,7 @@ class BookingEntity {
   final String currency;
   final DateTime checkInDate;
   final DateTime checkOutDate;
-  final int noOfRooms;
+  final int? noOfRooms;
   final String roomType;
   final String paymentOption;
   final String bookingStatus;
@@ -82,7 +82,7 @@ class BookingEntity {
       currency: map['currency'] as String,
       checkInDate: DateTime.parse(map['check_in_date']),
       checkOutDate: DateTime.parse(map['check_out_date']),
-      noOfRooms: map['no_of_rooms'] as int,
+      noOfRooms: map['no_of_rooms'],
       roomType: map['room_type'] as String,
       paymentOption: map['payment_option'] as String,
       bookingStatus: map['booking_status'] as String,

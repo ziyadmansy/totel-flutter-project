@@ -6,6 +6,8 @@
 
 // ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
+import 'package:cheffy/modules/about/presentation/policy_details_view.dart';
+import 'package:cheffy/modules/about/presentation/terms_details_view.dart';
 import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
 import 'package:cheffy/modules/main/profile/booking_screen.dart';
 import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
@@ -83,6 +85,9 @@ class Routes {
   static const String searchHotelsView = '/search-hotels-view';
   static const String hotelsSelectionView = '/hotels-selection-view';
   static const String bookingsView = '/bookings-view';
+  static const String privacyPolicyDetailsView = '/privacy_policy_details-view';
+  static const String termsAndConditionsView =
+      '/terms_and_conditions_details-view';
   static const all = <String>{
     splashView,
     onBoardingView,
@@ -115,6 +120,8 @@ class Routes {
     searchHotelsView,
     hotelsSelectionView,
     bookingsView,
+    privacyPolicyDetailsView,
+    termsAndConditionsView,
   };
 }
 
@@ -163,6 +170,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.helpView, page: HelpView),
     RouteDef(Routes.hotelsSelectionView, page: HotelLocationSelectionView),
     RouteDef(Routes.bookingsView, page: BookingScreen),
+    RouteDef(Routes.privacyPolicyDetailsView, page: PrivacyPolicyDetailsView),
+    RouteDef(Routes.termsAndConditionsView, page: TermsDetailsView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -371,6 +380,18 @@ class StackedRouter extends RouterBase {
     BookingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => BookingScreen(),
+        settings: data,
+      );
+    },
+    PrivacyPolicyDetailsView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => PrivacyPolicyDetailsView(),
+        settings: data,
+      );
+    },
+    TermsDetailsView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => TermsDetailsView(),
         settings: data,
       );
     },
