@@ -38,6 +38,7 @@ class ApiRoutes {
   static String searchHotelsLocationByName({required String name}) =>
       'v1/hotels/locations?name=$name&locale=$rapidApiLocale';
 
+  // TODO: Not refactored yet
   static String hotelsByCoordinates(
           {required double lat, required double lon}) =>
       'hotel?latitude=$lat&longitude=$lon';
@@ -50,4 +51,7 @@ class ApiRoutes {
     required HotelLocationEntity hotelLocation,
   }) =>
       'v2/hotels/search?checkin_date=$checkInDate&checkout_date=$checkOutDate&adults_number=$adultsNo&room_number=$roomsNo&dest_type=${hotelLocation.destType}&dest_id=${hotelLocation.destId}&filter_by_currency=$filterCurrency&order_by=$rapidApiOrder&locale=$rapidApiLocale&units=$rapidApiMeasuringUnit&include_adjacency=$includeNearbyPlaces';
+
+  static String getHotelData(int hotelId) =>
+      'v1/hotels/data?locale=$rapidApiLocale&hotel_id=$hotelId';
 }

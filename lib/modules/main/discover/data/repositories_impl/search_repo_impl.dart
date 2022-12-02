@@ -1,6 +1,8 @@
 import 'package:cheffy/core/services/api/api_client.dart';
 import 'package:cheffy/core/services/api/api_routes.dart';
 import 'package:cheffy/core/services/api/booking_api_client.dart';
+import 'package:cheffy/modules/main/discover/domain/entities/booking_hotel_entity.dart';
+import 'package:cheffy/modules/main/discover/domain/entities/hotel_details.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_location_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/repositories/search_repo.dart';
@@ -21,7 +23,7 @@ class SearchRepoImpl implements SearchRepo {
   }
 
   @override
-  Future<List<HotelEntity>> getFilteredHotels({
+  Future<List<BookingHotelEntity>> getFilteredHotels({
     required String checkInDate,
     required String checkOutDate,
     required int adultsNo,
@@ -35,8 +37,14 @@ class SearchRepoImpl implements SearchRepo {
       adultsNo: adultsNo,
       roomsNo: roomsNo,
     ));
-    final List<HotelEntity> hotels =
-        (res.data as List).map((e) => HotelEntity.fromMap(e)).toList();
+    final List<BookingHotelEntity> hotels = (res.data['result'] as List)
+        .map((e) => BookingHotelEntity.fromMap(e))
+        .toList();
     return hotels;
+  }
+
+  Future<BookingHotelDetailsEntity> getHotelDetailsById(int id) async {
+    final res = await _apiClient.get(ApiRoutes.getHotelData(id));
+    return BookingHotelDetailsEntity.fromMap(res.data);
   }
 }

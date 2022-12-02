@@ -11,12 +11,13 @@ class OnBoardingViewModel extends BaseViewModel {
 
   void onPressedSkip() async {
     await _authenticationService.initEnvironment();
+    _navigationService.replaceWith(Routes.mainView);
 
-    if (_authenticationService.authState ==
-        AuthenticationStatus.authenticated) {
-      _navigationService.replaceWith(Routes.mainView);
-    } else {
-      _navigationService.replaceWith(Routes.loginView);
-    }
+    // if (_authenticationService.authState ==
+    //     AuthenticationStatus.authenticated) {
+    //   _navigationService.replaceWith(Routes.mainView);
+    // } else {
+    //   _navigationService.replaceWith(Routes.loginView);
+    // }
   }
 }

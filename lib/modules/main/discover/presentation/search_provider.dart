@@ -1,8 +1,11 @@
 import 'package:cheffy/Utils/Utils.dart';
+import 'package:cheffy/Utils/constants.dart';
 import 'package:cheffy/app/app.locator.dart';
 import 'package:cheffy/app/app.router.dart';
 import 'package:cheffy/core/enums/day_night_enum.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
+import 'package:cheffy/modules/main/discover/domain/entities/booking_hotel_entity.dart';
+import 'package:cheffy/modules/main/discover/domain/entities/hotel_details.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_location_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/repositories/search_repo.dart';
@@ -10,6 +13,7 @@ import 'package:cheffy/modules/widgets/post_listing_item/finding_partner_post_li
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -22,7 +26,7 @@ class SearchProvider extends BaseViewModel {
   HotelLocationEntity? selectedLocationEntity;
 
   List<HotelLocationEntity> filteredHotelLocations = [];
-  List<HotelEntity> filteredHotels = [];
+  List<BookingHotelEntity> filteredHotels = [];
 
   bool isLoading = false;
 
@@ -52,6 +56,10 @@ class SearchProvider extends BaseViewModel {
   double minPrice = 0.0;
   double maxPrice = 1000.0;
   late RangeValues priceRange;
+
+  // Hotel Details Screen
+  late final GoogleMapController _controller;
+  BookingHotelDetailsEntity? hotelDetails;
 
   SearchProvider(this.searchRepo) {
     // Initializes price range slider
@@ -250,4 +258,44 @@ class SearchProvider extends BaseViewModel {
     }
     notifyListeners();
   }
+
+  void onSearchedHotelPress(BookingHotelEntity bookingHotel) {
+    _navigationService.navigateTo(
+      Routes.hotelDetailsView,
+      arguments: HotelDetailsViewArguments(hotelId: bookingHotel.hotelId),
+    );
+  }
+
+  // Hotel Details Screen
+  Future<void> getHotelDetails(int hotelId) async {
+    try {
+      setBusyForObject(hotelDetails, true);
+      hotelDetails = await searchRepo.getHotelDetailsById(hotelId);
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    } finally {
+      setBusyForObject(hotelDetails, false);
+    }
+  }
+
+  void onHotelDetailsPressedBack() {
+    _navigationService.back();
+    _controller.dispose();
+  }
+
+  void onMapCreated(GoogleMapController controller) {
+    _controller = controller;
+  }
+
+  Future<void> animateCamera(LatLng latLng) async {
+    await _controller.animateCamera(
+      CameraUpdate.newLatLngZoom(
+        latLng,
+        mapZoomValue,
+      ),
+    );
+  }
+
+  Future<void> onTapBookNow() async {}
 }

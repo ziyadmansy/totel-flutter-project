@@ -27,6 +27,10 @@ class SearchHotelsPage extends StatelessWidget {
               itemBuilder: (context, i) {
                 return SearchedHotelItem(
                   hotel: searchProvider.filteredHotels[i],
+                  onPress: () {
+                    searchProvider
+                        .onSearchedHotelPress(searchProvider.filteredHotels[i]);
+                  },
                 );
               },
               separatorBuilder: (context, i) {

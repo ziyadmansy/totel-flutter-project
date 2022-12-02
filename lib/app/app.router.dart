@@ -1,3 +1,4 @@
+// ignore_for_file:  sort_constructors_first
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -6,27 +7,30 @@
 
 // ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
+import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+
+import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
 import 'package:cheffy/modules/about/presentation/policy_details_view.dart';
 import 'package:cheffy/modules/about/presentation/terms_details_view.dart';
+import 'package:cheffy/modules/app_drawer/presentation/help_view.dart';
 import 'package:cheffy/modules/auth/reset_password/reset_password_view.dart';
-import 'package:cheffy/modules/main/profile/booking_screen.dart';
-import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
-import 'package:cheffy/modules/main/discover/presentation/pages/search_hotels_page.dart';
-import 'package:cheffy/modules/main/discover/presentation/pages/search_main_page.dart';
-import 'package:cheffy/modules/main/discover/presentation/pages/search_filter_page.dart';
-import 'package:cheffy/modules/posts/create/create_post_finding_partner_view.dart';
+import 'package:cheffy/modules/main/discover/presentation/hotel_details_page.dart';
 import 'package:cheffy/modules/main/discover/presentation/hotels_location_selection_view.dart';
+import 'package:cheffy/modules/main/discover/presentation/search_filter_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/search_hotels_page.dart';
+import 'package:cheffy/modules/main/discover/presentation/search_main_page.dart';
+import 'package:cheffy/modules/main/profile/booking_screen.dart';
+import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
+import 'package:cheffy/modules/payment/presentation/options/payment_percentage_view.dart';
+import 'package:cheffy/modules/posts/create/create_post_finding_partner_view.dart';
 import 'package:cheffy/modules/posts/detail/post_finding_partner_details_view.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/post_entity.dart';
 import 'package:cheffy/modules/posts/posts/domain/entities/share_room_post_entity.dart';
 import 'package:cheffy/modules/settings/presentation/SettingsMain.dart';
-import 'package:cheffy/modules/about/presentation/about_screen_view.dart';
-import 'package:cheffy/modules/notifications/presentation/NotificationListScreen.dart';
-import 'package:cheffy/modules/app_drawer/presentation/help_view.dart';
 import 'package:cheffy/modules/splash/presentation/splash_view.dart';
-import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
+
 import '../modules/auth/login/login_view.dart';
 import '../modules/auth/otp/otp_view.dart';
 import '../modules/auth/register/register_form_view.dart';
@@ -38,15 +42,15 @@ import '../modules/location_change_map/location_change_map_view.dart';
 import '../modules/main/chat/chat_view.dart';
 import '../modules/main/main_view.dart';
 import '../modules/main/map/map_view.dart';
-import '../modules/posts/posts/presentation/post_view.dart';
+import '../modules/main/profile/edit/edit_profile_view.dart';
+import '../modules/main/profile/profile_view.dart';
 import '../modules/on_boarding/on_boarding_view.dart';
 import '../modules/payment/presentation/add_card/payment_add_cart_view.dart';
 import '../modules/payment/presentation/options/payment_options_view.dart';
 import '../modules/payment/presentation/summary/payment_summary_view.dart';
 import '../modules/posts/create/create_post_share_room_view.dart';
 import '../modules/posts/detail/post_share_room_detail_view.dart';
-import '../modules/main/profile/edit/edit_profile_view.dart';
-import '../modules/main/profile/profile_view.dart';
+import '../modules/posts/posts/presentation/post_view.dart';
 import '../modules/request/request_view.dart';
 import '../modules/wallet/wallet_view.dart';
 
@@ -85,6 +89,7 @@ class Routes {
   static const String searchHotelsView = '/search-hotels-view';
   static const String hotelsSelectionView = '/hotels-selection-view';
   static const String bookingsView = '/bookings-view';
+  static const String hotelDetailsView = '/hotel_details-view';
   static const String privacyPolicyDetailsView = '/privacy_policy_details-view';
   static const String termsAndConditionsView =
       '/terms_and_conditions_details-view';
@@ -122,6 +127,7 @@ class Routes {
     bookingsView,
     privacyPolicyDetailsView,
     termsAndConditionsView,
+    hotelDetailsView,
   };
 }
 
@@ -172,6 +178,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.bookingsView, page: BookingScreen),
     RouteDef(Routes.privacyPolicyDetailsView, page: PrivacyPolicyDetailsView),
     RouteDef(Routes.termsAndConditionsView, page: TermsDetailsView),
+    RouteDef(Routes.hotelDetailsView, page: HotelDetailsPage),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -395,6 +402,14 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    HotelDetailsPage: (data) {
+      var args =
+          data.getArgs<HotelDetailsViewArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => HotelDetailsPage(hotelId: args.hotelId),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -432,6 +447,15 @@ class ProfileViewArguments {
 class EditProfileViewArguments {
   final Key? key;
   EditProfileViewArguments({this.key});
+}
+
+class HotelDetailsViewArguments {
+  final Key? key;
+  final int hotelId;
+  HotelDetailsViewArguments({
+    this.key,
+    required this.hotelId,
+  });
 }
 
 class RegisterViewRoutes {

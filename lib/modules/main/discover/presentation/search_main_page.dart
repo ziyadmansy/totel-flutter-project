@@ -77,7 +77,8 @@ class SearchLocationPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ReactiveDateTimePicker(
-                          formControlName: ReactiveFormControls.searchCheckInDate,
+                          formControlName:
+                              ReactiveFormControls.searchCheckInDate,
                           decoration: const InputDecoration(
                             labelText: 'Check in',
                             suffixIcon: Icon(Icons.calendar_today),
@@ -108,7 +109,8 @@ class SearchLocationPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ReactiveTextField(
-                          formControlName: ReactiveFormControls.searchRoomsNumber,
+                          formControlName:
+                              ReactiveFormControls.searchRoomsNumber,
                           decoration: InputDecoration(
                             labelText: 'Rooms',
                             hintText: 'How many rooms',
@@ -149,7 +151,10 @@ class SearchLocationPage extends StatelessWidget {
                   ),
                   SharedWidgets.buildRoundedElevatedButton(
                     btnChild: Text('Search'),
-                    onPress: searchProvider.onSearchLocationSubmit,
+                    onPress: () {
+                      FocusScope.of(context).unfocus();
+                      searchProvider.onSearchLocationSubmit();
+                    },
                     btnColor: AppColors.darkGunmetal,
                   ),
                 ],
