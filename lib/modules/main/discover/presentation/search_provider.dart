@@ -6,12 +6,9 @@ import 'package:cheffy/core/enums/day_night_enum.dart';
 import 'package:cheffy/core/enums/day_week_enum.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/booking_hotel_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_details.dart';
-import 'package:cheffy/modules/main/discover/domain/entities/hotel_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/entities/hotel_location_entity.dart';
 import 'package:cheffy/modules/main/discover/domain/repositories/search_repo.dart';
-import 'package:cheffy/modules/widgets/post_listing_item/finding_partner_post_listing_item_view.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -262,7 +259,7 @@ class SearchProvider extends BaseViewModel {
   void onSearchedHotelPress(BookingHotelEntity bookingHotel) {
     _navigationService.navigateTo(
       Routes.hotelDetailsView,
-      arguments: HotelDetailsViewArguments(hotelId: bookingHotel.hotelId),
+      arguments: HotelDetailsViewArguments(hotel: bookingHotel),
     );
   }
 
@@ -270,6 +267,7 @@ class SearchProvider extends BaseViewModel {
   Future<void> getHotelDetails(int hotelId) async {
     try {
       setBusyForObject(hotelDetails, true);
+      hotelDetails = null; // Reset the old value
       hotelDetails = await searchRepo.getHotelDetailsById(hotelId);
       notifyListeners();
     } catch (e) {
@@ -285,7 +283,14 @@ class SearchProvider extends BaseViewModel {
   }
 
   void onMapCreated(GoogleMapController controller) {
+    // It will only be called when the request is done successfully
     _controller = controller;
+    animateCamera(
+      LatLng(
+        hotelDetails!.location!.lat,
+        hotelDetails!.location!.lon,
+      ),
+    );
   }
 
   Future<void> animateCamera(LatLng latLng) async {
@@ -297,5 +302,8 @@ class SearchProvider extends BaseViewModel {
     );
   }
 
-  Future<void> onTapBookNow() async {}
+  Future<void> onTapBookNow({
+    required BookingHotelEntity hotel,
+    required BookingHotelDetailsEntity hotelDetails,
+  }) async {}
 }

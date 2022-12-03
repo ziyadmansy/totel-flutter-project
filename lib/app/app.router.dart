@@ -7,6 +7,7 @@
 
 // ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
+import 'package:cheffy/modules/main/discover/domain/entities/booking_hotel_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -406,7 +407,7 @@ class StackedRouter extends RouterBase {
       var args =
           data.getArgs<HotelDetailsViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => HotelDetailsPage(hotelId: args.hotelId),
+        builder: (context) => HotelDetailsPage(hotel: args.hotel),
         settings: data,
       );
     },
@@ -451,10 +452,10 @@ class EditProfileViewArguments {
 
 class HotelDetailsViewArguments {
   final Key? key;
-  final int hotelId;
+  final BookingHotelEntity hotel;
   HotelDetailsViewArguments({
     this.key,
-    required this.hotelId,
+    required this.hotel,
   });
 }
 

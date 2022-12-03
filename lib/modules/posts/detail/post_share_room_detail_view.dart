@@ -63,7 +63,7 @@ class _PostShareRoomDetailViewState extends State<PostShareRoomDetailView> {
     );
   }
 
-  Widget requiredQuestion(String title, List<dynamic> conditions) {
+  Widget requiredQuestion(String title, List<String> conditions) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,

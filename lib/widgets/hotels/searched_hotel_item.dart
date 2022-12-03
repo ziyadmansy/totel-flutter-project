@@ -5,6 +5,7 @@ import 'package:cheffy/modules/theme/color.dart';
 import 'package:cheffy/r.g.dart';
 import 'package:cheffy/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:super_banners/super_banners.dart';
 
 class SearchedHotelItem extends StatelessWidget {
@@ -71,7 +72,7 @@ class SearchedHotelItem extends StatelessWidget {
                             ),
                             SizedBox(height: 8),
                             Text(
-                              '${hotel.minTotalPrice} ${hotel.currencyCode}',
+                              '${hotel.minTotalPrice ?? '(Confidential Price)'} ${hotel.currencyCode}',
                               style: AppStyle.of(context).b4M.wCChineseBlack,
                             ),
                             SizedBox(height: 8),
@@ -136,8 +137,30 @@ class SearchedHotelItem extends StatelessWidget {
             left: 4,
             child: CornerBanner(
               bannerPosition: CornerBannerPosition.topLeft,
-              bannerColor: AppColors.plumpPurplePrimary,
-              child: Text(hotel.ribbonText!),
+              bannerColor: AppColors.soap,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text(hotel.ribbonText!),
+              ),
+            ),
+          ),
+        if (hotel.soldout == 1)
+          Positioned(
+            top: 4,
+            right: 4,
+            child: CornerBanner(
+              bannerPosition: CornerBannerPosition.topRight,
+              bannerColor: AppColors.pastelRedSecondary,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text(
+                  'SOLD OUT',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ),
       ],
