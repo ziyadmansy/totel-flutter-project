@@ -305,5 +305,55 @@ class SearchProvider extends BaseViewModel {
   Future<void> onTapBookNow({
     required BookingHotelEntity hotel,
     required BookingHotelDetailsEntity hotelDetails,
-  }) async {}
+  }) async {
+    // Book a hotel
+    try {
+      searchRepo.createBooking(
+        hotelId: hotel.hotelId,
+        district: hotelDetails.districtId!.toString(),
+        hotelName: hotelDetails.name ?? '',
+        country: hotelDetails.country ?? '',
+        city: hotelDetails.city ?? '',
+        isVacationRental: hotelDetails.isVacationRental ?? 0,
+        childrenNotAllowed: hotel.childrenNotAllowed ?? 0,
+        minrate: hotelDetails.minrate ?? 0,
+        maxrate: hotelDetails.maxrate ?? 0,
+        url: hotelDetails.url ?? '',
+        address: hotelDetails.address ?? '',
+        countrycode: hotelDetails.countrycode ?? '',
+        email: hotelDetails.email ?? '',
+        reviewScore: double.tryParse(hotelDetails.reviewScore ?? '0.0') ?? 0.0,
+        reviewScoreWord: hotelDetails.reviewScoreWord ?? '',
+        currencycode: hotelDetails.currencycode ?? '',
+        accommodationTypeName: hotel.accommodationTypeName ?? '',
+        distance: hotel.distanceToCcFormatted ?? '0.0',
+        isFreeCancellable: hotel.isFreeCancellable ?? 0,
+        mainPhotoUrl: hotel.mainPhotoUrl ?? '',
+        zip: hotelDetails.zip ?? '',
+        latitude: hotelDetails.location?.lat ?? 0.0,
+        longitude: hotelDetails.location?.lon ?? 0.0,
+        entrancePhotoUrl: hotelDetails.entrancePhotoUrl ?? '',
+        checkin: hotelDetails.checkin!,
+        checkout: hotelDetails.checkout!,
+        amount: hotel.minTotalPrice ?? 0.0, // TODO: Double check
+        currency: hotelDetails.currencycode ?? '',
+        checkInDate: UniversalVariables.bookingApiDateFormat.format(
+              searchLocationForm
+                  .control(ReactiveFormControls.searchCheckInDate)
+                  .value as DateTime),
+        checkOutDate: UniversalVariables.bookingApiDateFormat.format(
+              searchLocationForm
+                  .control(ReactiveFormControls.searchCheckOutDate)
+                  .value as DateTime),
+        noOfRooms: searchLocationForm
+              .control(ReactiveFormControls.searchRoomsNumber)
+              .value,
+        roomType: roomType,
+        paymentOption: hotelDetails,
+        bookingStatus: bookingStatus,
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
 }

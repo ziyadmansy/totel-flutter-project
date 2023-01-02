@@ -29,6 +29,7 @@ class ApiRoutes {
   static const String userReviews = 'review/user';
 
   // Bookings
+  static const String createBooking = 'booking';
   static const String userBookings = 'booking/user';
 
   // Drawer Menu

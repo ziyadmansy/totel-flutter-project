@@ -38,39 +38,39 @@ class Application {
 
     switch (flavor) {
       case Flavor.dev:
-        baseUrl = 'https://metoospace.herokuapp.com/api/v1/';
-        baseUrlBooking = 'https://booking-com.p.rapidapi.com/';
+        baseUrl = '';
+        baseUrlBooking = '';
         encKey = '7#6s5S\$Esb9M3v43';
         encAlgorithm = 'HmacSHA1';
-        authKey = 'd742f4dc-425d-45ff-bd9d-06134940f559';
-        rapidApiKey = 'f1e356a9f1mshcb5f1e0a4b5a5e0p1f208fjsn981ee97f7026';
+        authKey = '';
+        rapidApiKey = '';
         rapidApiHost = 'booking-com.p.rapidapi.com';
         break;
       case Flavor.qa:
-        baseUrl = 'https://metoospace.herokuapp.com/api/v1/';
-        baseUrlBooking = 'https://booking-com.p.rapidapi.com/';
+        baseUrl = '';
+        baseUrlBooking = '';
         encKey = '7#6s5S\$Esb9M3v43';
         encAlgorithm = 'HmacSHA1';
-        authKey = 'd742f4dc-425d-45ff-bd9d-06134940f559';
-        rapidApiKey = 'f1e356a9f1mshcb5f1e0a4b5a5e0p1f208fjsn981ee97f7026';
+        authKey = '';
+        rapidApiKey = '';
         rapidApiHost = 'booking-com.p.rapidapi.com';
         break;
       case Flavor.uat:
-        baseUrl = 'https://metoospace.herokuapp.com/api/v1/';
-        baseUrlBooking = 'https://booking-com.p.rapidapi.com/';
+        baseUrl = '';
+        baseUrlBooking = '';
         encKey = '7#6s5S\$Esb9M3v43';
         encAlgorithm = 'HmacSHA1';
-        authKey = 'd742f4dc-425d-45ff-bd9d-06134940f559';
-        rapidApiKey = 'f1e356a9f1mshcb5f1e0a4b5a5e0p1f208fjsn981ee97f7026';
+        authKey = '';
+        rapidApiKey = '';
         rapidApiHost = 'booking-com.p.rapidapi.com';
         break;
       case Flavor.prod:
-        baseUrl = 'https://metoospace.herokuapp.com/api/v1/';
-        baseUrlBooking = 'https://booking-com.p.rapidapi.com/';
+        baseUrl = '';
+        baseUrlBooking = '';
         encKey = '7#6s5S\$Esb9M3v43';
         encAlgorithm = 'HmacSHA1';
-        authKey = 'd742f4dc-425d-45ff-bd9d-06134940f559';
-        rapidApiKey = 'f1e356a9f1mshcb5f1e0a4b5a5e0p1f208fjsn981ee97f7026';
+        authKey = '';
+        rapidApiKey = '';
         rapidApiHost = 'booking-com.p.rapidapi.com';
         break;
     }

@@ -14,7 +14,7 @@ import '../../../app/constants/error_messages.dart';
 
 class BookingApiClient {
   // ignore: constant_identifier_names
-  static const String TAG = 'ApiClient';
+  static const String TAG = 'BookingApiClient';
 
   late final Dio _dio;
   late final Fresh<OAuth2Token> _fresh;

@@ -15,7 +15,7 @@ class CheckDetailsEntity {
     return <String, dynamic>{
       'from': from,
       'to': to,
-      'is24HourAvailable': is24HourAvailable,
+      '24_hour_available': is24HourAvailable,
     };
   }
 

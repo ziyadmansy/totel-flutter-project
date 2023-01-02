@@ -39,8 +39,10 @@ Future<void> setupLocator(
   locator.registerLazySingleton<AuthRepo>(() => AuthRepoImpl());
   locator.registerLazySingleton<PostRepo>(() => PostRepoImpl(locator.get()));
   locator.registerLazySingleton<MapsRepo>(() => MapsRepoImpl(locator.get()));
-  locator
-      .registerLazySingleton<SearchRepo>(() => SearchRepoImpl(locator.get()));
+  locator.registerLazySingleton<SearchRepo>(() => SearchRepoImpl(
+        locator.get(),
+        locator.get(),
+      ));
   locator.registerLazySingleton<AppDrawerRepo>(
       () => AppDrawerRepoImpl(locator.get()));
   locator.registerLazySingleton<NotificationsRepo>(
