@@ -15,9 +15,7 @@ To watch a full flow view preview of the app, kindly visit: [View App flow](http
 
 ## Screenshots
 
-![Home Page](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_1.png?raw=true)
-
-![Posts types](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_2.png?raw=true)
-![Hotels Search](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_3.png?raw=true)
-![Finding partner posts tab](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_4.png?raw=true)
-![Sharing rooms posts tab](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_5.png?raw=true)
+| ![Home Page](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_1.png?raw=true) | ![Hotels Search](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_3.png?raw=true) |
+|--|--|
+| ![Posts types](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_2.png?raw=true) | ![Finding partner posts tab](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_4.png?raw=true) |
+|![Sharing rooms posts tab](https://github.com/ziyadmansy/totel-flutter-project/blob/master/git_photos/Screenshot_5.png?raw=true)||
